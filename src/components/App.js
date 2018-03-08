@@ -4,18 +4,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Header from './Header';
 import LogbookForm from './LogbookForm';
-//
-// const mapStateToProps = function(state) {
-//   return {
-//     something: state.something,
-//   }
-// }
-//
-// const mapDispatchToProps = function(dispatch) {
-//   return bindActionCreators({
-//     getSomething: actionCreators.getSomething,
-//   }, dispatch);
-// }
 
 const showResults = values =>
   new Promise(resolve => {
