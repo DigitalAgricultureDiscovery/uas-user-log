@@ -4,11 +4,12 @@ import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
 import { Card }        from 'material-ui/Card';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
-import Welcome from './pages/Welcome';  // page 1
-import Mission from './pages/Mission';  // page 2
-import Crop    from './pages/Crop';     // page 3
-import General from './pages/General';  // page 4
-import Finish  from './pages/Finish';   // page 5
+import Welcome         from './pages/Welcome';          // page 1
+import Mission         from './pages/Mission';          // page 2
+import Crop            from './pages/Crop';             // page 3
+import General         from './pages/General';          // page 4
+import TeamInformation from './pages/TeamInformation';  // page 5
+import Finish          from './pages/Finish';           // page 6
 
 class LogbookForm extends React.Component {
   constructor(props) {
@@ -55,6 +56,9 @@ class LogbookForm extends React.Component {
               <StepLabel>General</StepLabel>
             </Step>
             <Step>
+              <StepLabel>Team Information</StepLabel>
+            </Step>
+            <Step>
               <StepLabel>Finish</StepLabel>
             </Step>
           </Stepper>
@@ -80,6 +84,12 @@ class LogbookForm extends React.Component {
                 />
               )}
               { pageIndex === 5 && (
+                <TeamInformation
+                  previousPage={ this.previousPage }
+                  onSubmit={ this.nextPage }
+                />
+              )}
+              { pageIndex === 6 && (
                 <Finish
                   previousPage={ this.previousPage }
                   onSubmit={ onSubmit }
