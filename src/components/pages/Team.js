@@ -1,10 +1,14 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+// material-ui elements
+import { TextField }                        from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton              from 'material-ui/FlatButton';
-import RaisedButton            from 'material-ui/RaisedButton';
-import PersonAdd              from 'material-ui/svg-icons/social/person-add';
-import { TextField } from 'redux-form-material-ui';
+import FlatButton                           from 'material-ui/FlatButton';
+import RaisedButton                         from 'material-ui/RaisedButton';
+// material-ui icons
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import PersonAdd  from 'material-ui/svg-icons/social/person-add';
+
 import validate from './utils/validate';
 
 class PICText extends React.Component {
@@ -83,7 +87,7 @@ class VOText extends React.Component {
   }
 }
 
-class TeamInformation extends React.Component {
+class Team extends React.Component {
   render() {
     const { handleSubmit, previousPage } = this.props;
 
@@ -122,4 +126,4 @@ export default reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
-})(TeamInformation);
+})(Team);

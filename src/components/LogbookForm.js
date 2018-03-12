@@ -8,8 +8,9 @@ import Welcome         from './pages/Welcome';          // page 1
 import Mission         from './pages/Mission';          // page 2
 import Crop            from './pages/Crop';             // page 3
 import General         from './pages/General';          // page 4
-import TeamInformation from './pages/TeamInformation';  // page 5
-import Finish          from './pages/Finish';           // page 6
+import Team from './pages/Team';  // page 5
+import Hardware from './pages/Hardware';  // page 6
+import Finish          from './pages/Finish';           // page 7
 
 class LogbookForm extends React.Component {
   constructor(props) {
@@ -56,7 +57,10 @@ class LogbookForm extends React.Component {
               <StepLabel>General</StepLabel>
             </Step>
             <Step>
-              <StepLabel>Team Information</StepLabel>
+              <StepLabel>Team</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Hardware</StepLabel>
             </Step>
             <Step>
               <StepLabel>Finish</StepLabel>
@@ -84,12 +88,18 @@ class LogbookForm extends React.Component {
                 />
               )}
               { pageIndex === 5 && (
-                <TeamInformation
+                <Team
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
               { pageIndex === 6 && (
+                <Hardware
+                  previousPage={ this.previousPage }
+                  onSubmit={ this.nextPage }
+                />
+              )}
+              { pageIndex === 7 && (
                 <Finish
                   previousPage={ this.previousPage }
                   onSubmit={ onSubmit }

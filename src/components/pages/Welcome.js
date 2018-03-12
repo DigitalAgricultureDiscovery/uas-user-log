@@ -1,7 +1,9 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
+// material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton                         from 'material-ui/RaisedButton';
+
 import validate from './utils/validate';
 
 class Welcome extends React.Component {
