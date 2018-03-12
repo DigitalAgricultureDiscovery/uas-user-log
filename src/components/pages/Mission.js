@@ -1,5 +1,6 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
 import { SelectField }                      from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
@@ -27,7 +28,7 @@ class CategorySelect extends React.Component {
   render() {
     return (
       <Field
-        name="selectCategory"
+        name="categorySelect"
         component={SelectField}
         floatingLabelText="Category"
         value={this.state.value}
@@ -58,7 +59,7 @@ class TypeSelect extends React.Component {
   render() {
     return (
       <Field
-        name="selectType"
+        name="typeSelect"
         component={SelectField}
         floatingLabelText="Type"
         value={this.state.value}
@@ -106,5 +107,9 @@ export default reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
+  initialValues: {
+    'categorySelect': 1,
+    'typeSelect': 1,
+  }
 })(Mission);
