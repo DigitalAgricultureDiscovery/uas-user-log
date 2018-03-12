@@ -8,9 +8,10 @@ import Welcome         from './pages/Welcome';          // page 1
 import Mission         from './pages/Mission';          // page 2
 import Crop            from './pages/Crop';             // page 3
 import General         from './pages/General';          // page 4
-import Team from './pages/Team';  // page 5
-import Hardware from './pages/Hardware';  // page 6
-import Finish          from './pages/Finish';           // page 7
+import Team            from './pages/Team';             // page 5
+import Hardware        from './pages/Hardware';         // page 6
+import Battery         from './pages/Battery'           // page 7
+import Finish          from './pages/Finish';           // page 8
 
 class LogbookForm extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class LogbookForm extends React.Component {
   }
 
   nextPage() {
-    this.setState({pageIndex: this.state.pageIndex + 1, finished: this.state.pageIndex >= 4});
+    this.setState({pageIndex: this.state.pageIndex + 1});
   };
 
   previousPage() {
@@ -63,6 +64,9 @@ class LogbookForm extends React.Component {
               <StepLabel>Hardware</StepLabel>
             </Step>
             <Step>
+              <StepLabel>Battery</StepLabel>
+            </Step>
+            <Step>
               <StepLabel>Finish</StepLabel>
             </Step>
           </Stepper>
@@ -100,6 +104,12 @@ class LogbookForm extends React.Component {
                 />
               )}
               { pageIndex === 7 && (
+                <Battery
+                  previousPage={ this.previousPage }
+                  onSubmit={ this.nextPage }
+                />
+              )}
+              { pageIndex === 8 && (
                 <Finish
                   previousPage={ this.previousPage }
                   onSubmit={ onSubmit }

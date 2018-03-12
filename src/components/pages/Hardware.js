@@ -81,7 +81,7 @@ class RemoteChargeStatusText extends React.Component {
   }
 }
 
-class GroundControlText extends React.Component {
+class GroundControlChargeStatusText extends React.Component {
   render() {
     return (
       <div>
@@ -126,7 +126,7 @@ class Hardware extends React.Component {
           <RemoteChargeStatusText />
           <br />
           <br />
-          <GroundControlText />
+          <GroundControlChargeStatusText />
         </CardText>
         <CardActions>
           <FlatButton
