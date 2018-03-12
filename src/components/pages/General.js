@@ -3,7 +3,6 @@ import { Field, FieldArray, reduxForm } from 'redux-form';
 // material-ui elements
 import { DatePicker, TextField, TimePicker } from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText }  from 'material-ui/Card';
-import Divider                               from 'material-ui/Divider';
 import FlatButton                            from 'material-ui/FlatButton';
 import IconButton                            from 'material-ui/IconButton';
 import RaisedButton                          from 'material-ui/RaisedButton';
@@ -19,9 +18,8 @@ import {
 import ActionFlightTakeoffIcon from 'material-ui/svg-icons/action/flight-takeoff';
 import DeleteForeverIcon       from 'material-ui/svg-icons/action/delete-forever';
 import MyLocationIcon          from 'material-ui/svg-icons/maps/my-location';
-import SaveIcon                from 'material-ui/svg-icons/content/save';
 // material-ui colors
-import {red500, lightGreen500} from 'material-ui/styles/colors';
+import {lightGreen500, red500} from 'material-ui/styles/colors';
 
 import validate from './utils/validate';
 import locationUtil from './utils/location';
@@ -52,7 +50,7 @@ class AddFlightButton extends React.Component {
   render() {
     return (
       <RaisedButton
-        label="Add Flight"
+        label="Add flight"
         labelPosition="before"
         backgroundColor={lightGreen500}
         icon={<ActionFlightTakeoffIcon />}
