@@ -1,5 +1,6 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
 import { DatePicker, SelectField, TextField } from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText }   from 'material-ui/Card';
@@ -10,27 +11,12 @@ import MenuItem                               from 'material-ui/MenuItem';
 import validate from './utils/validate';
 
 class LifeCycleSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 1,
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event, index, value) {
-    this.setState({value: value});
-    this.props.updateAnnual(value === 1 ? true : false);
-  }
-
   render() {
     return (
       <Field
         name="lifeCycleSelect"
         component={SelectField}
         floatingLabelText="Crop lifecycle"
-        value={this.state.value}
-        onChange={this.handleChange}
       >
         <MenuItem value={1} primaryText="Annual" />
         <MenuItem value={2} primaryText="Perennial" />
@@ -165,34 +151,20 @@ class PerennialTexts extends React.Component {
 }
 
 class Crop extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAnnual: true,
-    }
-    this.updateAnnual = this.updateAnnual.bind(this);
-  }
-
-  updateAnnual(isAnnual) {
-    this.setState({
-      isAnnual: isAnnual
-    });
-  }
-
   render() {
-    const isAnnual = this.state.isAnnual;
-    const { handleSubmit, previousPage } = this.props;
+    const { handleSubmit, previousPage, currentLifeCycle } = this.props;
+
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Crop" />
         <CardText>
-          <LifeCycleSelect updateAnnual={ this.updateAnnual }/>
+          <LifeCycleSelect />
           <br />
           <CropNameText />
           <br />
           <GrowthStageText />
           <br />
-          { isAnnual ? <PerennialTexts /> : <AnnualTexts /> }
+          { currentLifeCycle ? (currentLifeCycle === 1 ? <AnnualTexts /> : <PerennialTexts />) : null }
         </CardText>
         <CardActions>
           <FlatButton
@@ -212,9 +184,19 @@ class Crop extends React.Component {
   }
 }
 
-export default reduxForm({
+const myReduxForm = reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
 })(Crop);
+
+const selector = formValueSelector('logbook');
+export default connect(
+  state => {
+    const currentLifeCycle = selector(state, 'lifeCycleSelect');
+    return {
+      currentLifeCycle
+    }
+  }
+)(myReduxForm);

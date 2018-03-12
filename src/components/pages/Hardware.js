@@ -150,5 +150,8 @@ export default reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
+  initialValues: {
+    'droneTypeText': 'test'
+  }
 })(Hardware);

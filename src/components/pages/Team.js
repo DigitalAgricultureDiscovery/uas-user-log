@@ -14,44 +14,103 @@ import {lightGreen500, red500} from 'material-ui/styles/colors';
 
 import validate from './utils/validate';
 
-class PICText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="picText"
-        component={TextField}
-        floatingLabelText="Remote Pilot in Command (PIC)"
-      />
-    )
-  }
-}
-
-class LicenseText extends React.Component {
+class RemotePICText extends React.Component {
   render() {
     return (
       <Field
         name={this.props.fieldName}
         component={TextField}
-        floatingLabelText="Remote PIC License #"
+        floatingLabelText="Name"
       />
     )
   }
 }
 
-class AddPilotButton extends React.Component {
+class RemotePICLicenseText extends React.Component {
+  render() {
+    return (
+      <Field
+        name={this.props.fieldName}
+        component={TextField}
+        floatingLabelText="License #"
+      />
+    )
+  }
+}
+
+class AddRemotePICButton extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    this.props.addNewPilot();
+    this.props.addNewRemotePIC();
   }
 
   render() {
     return (
       <RaisedButton
-        label="Add pilot"
+        label="Add Remote PIC"
+        labelPosition="before"
+        tooltip="Add remote Pilot in Command (PIC)"
+        backgroundColor={lightGreen500}
+        icon={<PersonAddIcon />}
+        onClick={this.handleClick}
+      />
+    )
+  }
+}
+
+const renderRemotePICs = ({ fields, change }) => (
+  <div>
+    <ul style={{listStyleType: "none", padding: 0}}>
+      {fields.map((remotePic, index) =>
+        <li key={index}>
+          <strong>Remote PIC #{index + 1}</strong>
+          <IconButton
+            tooltip="Remove remote PIC"
+            onClick={() => fields.remove(index)}
+          >
+            <DeleteForeverIcon color={red500} />
+          </IconButton>
+          <br />
+          <RemotePICText fieldName={`${remotePic}.remotePicName`} />&nbsp;
+          <RemotePICLicenseText fieldName={`${remotePic}.remotePicLicense`} />
+          <br />
+        </li>
+      )}
+    </ul>
+    <AddRemotePICButton addNewRemotePIC={() => fields.push({})} />
+  </div>
+);
+
+class PICText extends React.Component {
+  render() {
+    return (
+      <Field
+        name={this.props.fieldName}
+        component={TextField}
+        floatingLabelText="Name"
+      />
+    )
+  }
+}
+
+class AddPICButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.addNewPIC();
+  }
+
+  render() {
+    return (
+      <RaisedButton
+        label="Add PIC"
         labelPosition="before"
         backgroundColor={lightGreen500}
         icon={<PersonAddIcon />}
@@ -61,28 +120,39 @@ class AddPilotButton extends React.Component {
   }
 }
 
-const renderPilots = ({ fields, change }) => (
+const renderPICs = ({ fields, change }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
-      {fields.map((pilot, index) =>
+      {fields.map((pic, index) =>
         <li key={index}>
           <strong>Pilot #{index + 1}</strong>
           <IconButton
-            tooltip="Remove pilot"
+            tooltip="Remove PIC"
             onClick={() => fields.remove(index)}
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
           <br />
-          <PilotText fieldName={`${pilot}.pilotName`} />&nbsp;
-          <LicenseText fieldName={`${pilot}.pilotPIC`} />
+          <PICText fieldName={`${pic}.picName`} />&nbsp;
           <br />
         </li>
       )}
     </ul>
-    <AddPilotButton addNewPilot={() => fields.push({})} />
+    <AddPICButton addNewPIC={() => fields.push({})} />
   </div>
 );
+
+class VOText extends React.Component {
+  render() {
+    return (
+      <Field
+        name={this.props.fieldName}
+        component={TextField}
+        floatingLabelText="VO instead of observer"
+      />
+    )
+  }
+}
 
 class AddVOButton extends React.Component {
   constructor(props) {
@@ -129,30 +199,6 @@ const renderVOs = ({ fields, change }) => (
   </div>
 );
 
-class PilotText extends React.Component {
-  render() {
-    return (
-      <Field
-        name={this.props.fieldName}
-        component={TextField}
-        floatingLabelText="Pilot, if other than PIC"
-      />
-    )
-  }
-}
-
-class VOText extends React.Component {
-  render() {
-    return (
-      <Field
-        name={this.props.fieldName}
-        component={TextField}
-        floatingLabelText="VO instead of observer"
-      />
-    )
-  }
-}
-
 class Team extends React.Component {
   render() {
     const { handleSubmit, previousPage } = this.props;
@@ -161,9 +207,9 @@ class Team extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Team Information" />
         <CardText>
-          <PICText />
+          <FieldArray name="remotePICs" component={renderRemotePICs} />
           <br />
-          <FieldArray name="pilots" component={renderPilots} />
+          <FieldArray name="pics" component={renderPICs} />
           <br />
           <FieldArray name="vos" component={renderVOs} />
         </CardText>
