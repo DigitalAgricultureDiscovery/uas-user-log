@@ -135,8 +135,7 @@ class Location extends React.Component {
           name={this.props.fieldLatName}
           component={TextField}
           floatingLabelText="Latitude"
-        />
-        <br />
+        />&nbsp;
         <Field
           name={this.props.fieldLonName}
           component={TextField}
