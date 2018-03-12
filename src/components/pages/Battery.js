@@ -135,7 +135,7 @@ class Battery extends React.Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <CardTitle title="Team Information" />
+        <CardTitle title="Battery" />
         <CardText>
           <BatteriesUsedText />
           <br />
