@@ -192,7 +192,7 @@ class Crop extends React.Component {
           <br />
           <GrowthStageText />
           <br />
-          { isAnnual ? <AnnualTexts /> : <PerennialTexts /> }
+          { isAnnual ? <PerennialTexts /> : <AnnualTexts /> }
         </CardText>
         <CardActions>
           <FlatButton
