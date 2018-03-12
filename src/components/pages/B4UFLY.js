@@ -1,10 +1,12 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
-import { SelectField, TextField }                      from 'redux-form-material-ui';
+import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
 import MenuItem                             from 'material-ui/MenuItem';
+import RadioButton                          from 'material-ui/RadioButton';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from './utils/validate';
@@ -34,32 +36,12 @@ class ControlTowerContactText extends React.Component {
 }
 
 class StatusSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 1,
-      showContactForm: false,
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event, index, value) {
-    this.setState({value: value});
-    if (value === 2) {
-      this.props.toggleContactFormOn();
-    } else {
-      this.props.toggleContactFormOff();
-    }
-  }
-
   render() {
     return (
       <Field
         name="statusSelect"
         component={SelectField}
         floatingLabelText="Status"
-        value={this.state.value}
-        onChange={this.handleChange}
       >
         <MenuItem value={1} primaryText="Proceed with caution" />
         <MenuItem value={2} primaryText="You are within 5 miles of an airport" />
@@ -68,35 +50,147 @@ class StatusSelect extends React.Component {
   }
 }
 
-class B4UFLY extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showContactForm: false,
-    }
-    this.toggleContactFormOn = this.toggleContactFormOn.bind(this);
-    this.toggleContactFormOff = this.toggleContactFormOff.bind(this);
-  }
-
-  toggleContactFormOn() {
-    this.setState({showContactForm: true})
-  }
-
-  toggleContactFormOff() {
-    this.setState({showContactForm: false})
-  }
-
+class NOTAMSCheckbox extends React.Component {
   render() {
-    const { handleSubmit, previousPage } = this.props;
+    return (
+      <Field
+        name="notamsCheckbox"
+        component={Checkbox}
+        label="Checked NOTAMS"
+      />
+    )
+  }
+}
+
+class FlightRestrictionsCheckbox extends React.Component {
+  render() {
+    return (
+      <Field
+        name="flightRestrictionsCheckbox"
+        component={Checkbox}
+        label="Checked flight restrictions"
+      />
+    )
+  }
+}
+
+class LocalRestrictionsCheckbox extends React.Component {
+  render() {
+    return (
+      <Field
+        name="localRestrictionsCheckbox"
+        component={Checkbox}
+        label="Checked local restrictions"
+      />
+    )
+  }
+}
+
+class UpcomingRestrictionsCheckbox extends React.Component {
+  render() {
+    return (
+      <Field
+        name="upcomingRestrictionsCheckbox"
+        component={Checkbox}
+        label="Checked upcoming restrictions"
+      />
+    )
+  }
+}
+
+class NationalParksCheckbox extends React.Component {
+  render() {
+    return (
+      <Field
+        name="nationalParksCheckbox"
+        component={Checkbox}
+        label="Checked national parks"
+      />
+    )
+  }
+}
+
+class B4UFLYCheckboxGroup extends React.Component {
+  render() {
+    return (
+      <div>
+        Select one or more options
+        <NOTAMSCheckbox />
+        <FlightRestrictionsCheckbox />
+        <LocalRestrictionsCheckbox />
+        <UpcomingRestrictionsCheckbox />
+        <NationalParksCheckbox />
+      </div>
+    )
+  }
+}
+
+class FAACertText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="faaCertText"
+        component={TextField}
+        floatingLabelText="FAA COW or COA used #"
+      />
+    )
+  }
+}
+
+class PreflightRadioButtonGroup extends React.Component {
+  render() {
+    return (
+        <Field
+          name="preflightRadioButtonGroup"
+          component={RadioButtonGroup}
+        >
+          <RadioButton value="no" label="No" />
+          <RadioButton value="yes" label="Yes" />
+        </Field>
+    )
+  }
+}
+
+class PermissionRadioButtonGroup extends React.Component {
+  render() {
+    return (
+      <Field
+        name="permissionRadioButtonGroup"
+        component={RadioButtonGroup}
+      >
+        <RadioButton value="notRequired" label="Not required" />
+        <RadioButton value="permitted" label="Permitted by" />
+      </Field>
+    )
+  }
+}
+
+class B4UFLY extends React.Component {
+  render() {
+    const { handleSubmit, previousPage, currentStatus, noResponse } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="B4UFLY Status" />
         <CardText>
-          <StatusSelect toggleContactFormOn={this.toggleContactFormOn} toggleContactFormOff={this.toggleContactFormOff}/>
-          {this.state.showContactForm &&
+          <StatusSelect />
+          {currentStatus > 1 &&
             <div>
-            <AirportOperatorContactText />
-            <ControlTowerContactText />
+              <AirportOperatorContactText />
+              <br />
+              <ControlTowerContactText />
+            </div>
+          }
+          <br />
+          <B4UFLYCheckboxGroup />
+          <FAACertText />
+          <br /><br />
+          Completed pre-flight checklist
+          <PreflightRadioButtonGroup />
+          {noResponse &&
+            <div>
+              <br />
+              Reason
+              <PermissionRadioButtonGroup />
             </div>
           }
         </CardText>
@@ -118,9 +212,21 @@ class B4UFLY extends React.Component {
   }
 }
 
-export default reduxForm({
+const myReduxForm = reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
 })(B4UFLY);
+
+const selector = formValueSelector('logbook');
+export default connect(
+  state => {
+    const currentStatus = selector(state, 'statusSelect');
+    const noResponse = selector(state, 'preflightRadioButtonGroup') === 'no' ? true : false;
+    return {
+      currentStatus,
+      noResponse
+    }
+  }
+)(myReduxForm);

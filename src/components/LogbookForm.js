@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
 import { Card }        from 'material-ui/Card';
-import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
 import Welcome         from './pages/Welcome';          // page 1
 import Mission         from './pages/Mission';          // page 2
@@ -47,35 +46,6 @@ class LogbookForm extends React.Component {
     return (
       <MuiThemeProvider>
         <div style={ divStyle }>
-          {/* <Stepper activeStep={ pageIndex - 1 }>
-            <Step>
-              <StepLabel>Welcome</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Mission</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Crop</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>General</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Team</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Hardware</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Battery</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Flight Operation</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Finish</StepLabel>
-            </Step>
-          </Stepper> */}
           <br />
           <div style={ contentStyle }>
             <Card>

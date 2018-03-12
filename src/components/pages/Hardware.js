@@ -1,21 +1,27 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 // material-ui elements
-import { TextField }           from 'redux-form-material-ui';
+import { SelectField, TextField }           from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
+import MenuItem                             from 'material-ui/MenuItem';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from './utils/validate';
 
-class DroneTypeText extends React.Component {
+// Select input for mission category
+class DroneTypeSelect extends React.Component {
   render() {
     return (
       <Field
-        name="droneTypeText"
-        component={TextField}
+        name="droneTypeSelect"
+        component={SelectField}
         floatingLabelText="Drone type"
-      />
+      >
+        <MenuItem value={1} primaryText="Fixed wing" />
+        <MenuItem value={2} primaryText="Multi-rotor" />
+        <MenuItem value={3} primaryText="Helicopter" />
+      </Field>
     )
   }
 }
@@ -67,14 +73,14 @@ class RemoteChargeStatusText extends React.Component {
           component={TextField}
           floatingLabelText="Target (%)"
           type="number"
-          step="0.001"
+          step="0.01"
         />&nbsp;
         <Field
           name="remoteChargeMinimumText"
           component={TextField}
           floatingLabelText="Minimum (%)"
           type="number"
-          step="0.001"
+          step="0.01"
         />
       </div>
     )
@@ -85,21 +91,21 @@ class GroundControlChargeStatusText extends React.Component {
   render() {
     return (
       <div>
-        <strong>Ground control stations battery status</strong>
+        <strong>Ground control station battery status</strong>
         <br />
         <Field
           name="groundControlChargeTargetText"
           component={TextField}
           floatingLabelText="Target (%)"
           type="number"
-          step="0.001"
+          step="0.01"
         />&nbsp;
         <Field
           name="groundControlChargeMinimumText"
           component={TextField}
           floatingLabelText="Minimum (%)"
           type="number"
-          step="0.001"
+          step="0.01"
         />
       </div>
     )
@@ -114,7 +120,7 @@ class Hardware extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Hardware" />
         <CardText>
-          <DroneTypeText />
+          <DroneTypeSelect />
           <br />
           <DroneMakeText />
           <br />
@@ -152,6 +158,6 @@ export default reduxForm({
   forceUnregisterOnUnmount: true,
   validate,
   initialValues: {
-    'droneTypeText': 'test'
+    'droneTypeSelect': 1,
   }
 })(Hardware);

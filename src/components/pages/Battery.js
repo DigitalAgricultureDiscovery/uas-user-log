@@ -79,8 +79,8 @@ const renderBatteries = ({ fields, change }) => (
           <BatteryWeightText fieldName={`${battery}.batteryWeight`} />
           <br />
           <BatteryChargeStatusText
-            fieldTargetName={`${battery}.batteryTarget`}
-            fieldMinimumName={`${battery}.batteryMinimum`}
+            fieldTargetName={`${battery}.batteryTargetText`}
+            fieldMinimumName={`${battery}.batteryMinimumText`}
           />
           <br />
         </li>
@@ -112,6 +112,7 @@ class BatteryChargeStatusText extends React.Component {
         <br />
         <Field
           name={this.props.fieldTargetName}
+          className="batteryTarget"
           component={TextField}
           floatingLabelText="Target (%)"
           type="number"
@@ -119,6 +120,7 @@ class BatteryChargeStatusText extends React.Component {
         />&nbsp;
         <Field
           name={this.props.fieldMinimumName}
+          className="batteryMinimum"
           component={TextField}
           floatingLabelText="Minimum (%)"
           type="number"

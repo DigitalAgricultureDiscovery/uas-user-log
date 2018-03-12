@@ -6,14 +6,6 @@ import { CardActions, CardTitle, CardText }  from 'material-ui/Card';
 import FlatButton                            from 'material-ui/FlatButton';
 import IconButton                            from 'material-ui/IconButton';
 import RaisedButton                          from 'material-ui/RaisedButton';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-}                                            from 'material-ui/Table';
 // material-ui icons
 import ActionFlightTakeoffIcon from 'material-ui/svg-icons/action/flight-takeoff';
 import DeleteForeverIcon       from 'material-ui/svg-icons/action/delete-forever';
@@ -150,37 +142,6 @@ class Location extends React.Component {
         />
       </div>
     )
-  }
-}
-
-class FlightTable extends React.Component {
-  render() {
-    const flightData = [
-      {id: 1, start: '9:00', end: '9:35', location: '45, 82'},
-      {id: 2, start: '1:30', end: '2:15', location: '45, 83'},
-      {id: 3, start: '3:00', end: '3:45', location: '44, 83'},
-    ];
-    return (
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderColumn>ID</TableHeaderColumn>
-            <TableHeaderColumn>Start time</TableHeaderColumn>
-            <TableHeaderColumn>End time</TableHeaderColumn>
-            <TableHeaderColumn>Location</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {flightData.map((row, i) =>
-            <TableRow key={row.id}>
-              <TableRowColumn>{row.start}</TableRowColumn>
-              <TableRowColumn>{row.end}</TableRowColumn>
-              <TableRowColumn>{row.location}</TableRowColumn>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    );
   }
 }
 
