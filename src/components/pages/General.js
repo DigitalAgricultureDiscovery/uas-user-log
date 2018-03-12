@@ -1,10 +1,13 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import MyLocation              from 'material-ui/svg-icons/maps/my-location';
-import FlatButton              from 'material-ui/FlatButton';
-import RaisedButton            from 'material-ui/RaisedButton';
+// material-ui elements
 import { DatePicker, TextField, TimePicker } from 'redux-form-material-ui';
+import { CardActions, CardTitle, CardText }  from 'material-ui/Card';
+import FlatButton                            from 'material-ui/FlatButton';
+import RaisedButton                          from 'material-ui/RaisedButton';
+// material-ui icons
+import MyLocation from 'material-ui/svg-icons/maps/my-location';
+
 import validate from './utils/validate';
 import locationUtil from './utils/location';
 

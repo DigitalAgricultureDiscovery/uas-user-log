@@ -1,10 +1,12 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import { SelectField, TextField } from 'redux-form-material-ui';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
+// material-ui elements
+import { DatePicker, SelectField, TextField } from 'redux-form-material-ui';
+import { CardActions, CardTitle, CardText }   from 'material-ui/Card';
+import FlatButton                             from 'material-ui/FlatButton';
+import RaisedButton                           from 'material-ui/RaisedButton';
+import MenuItem                               from 'material-ui/MenuItem';
+
 import validate from './utils/validate';
 
 class LifeCycleSelect extends React.Component {
@@ -26,7 +28,7 @@ class LifeCycleSelect extends React.Component {
       <Field
         name="lifeCycleSelect"
         component={SelectField}
-        floatingLabelText="Life Cycle"
+        floatingLabelText="Crop lifecycle"
         value={this.state.value}
         onChange={this.handleChange}
       >
@@ -37,25 +39,25 @@ class LifeCycleSelect extends React.Component {
   }
 }
 
+class CropNameText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="cropNameText"
+        component={TextField}
+        floatingLabelText="Crop name"
+      />
+    )
+  }
+}
+
 class GrowthStageText extends React.Component {
   render() {
     return (
       <Field
         name="growthStageText"
         component={TextField}
-        floatingLabelText="Growth Stage"
-      />
-    )
-  }
-}
-
-class TypeText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="typeText"
-        component={TextField}
-        floatingLabelText="Type"
+        floatingLabelText="Growth stage"
       />
     )
   }
@@ -67,7 +69,7 @@ class VarietyText extends React.Component {
       <Field
         name="varietyText"
         component={TextField}
-        floatingLabelText="Variety/Geneotype"
+        floatingLabelText="Variety/Genotype"
       />
     )
   }
@@ -92,20 +94,20 @@ class SeedStockText extends React.Component {
         name="seedStockText"
         component={TextField}
         floatingLabelText="Seed stock"
-        type="number"
       />
     )
   }
 }
 
-class YearText extends React.Component {
+class YearDatePicker extends React.Component {
   render() {
     return (
       <Field
-        name="yearText"
-        component={TextField}
+        name="yearDatePicker"
+        component={DatePicker}
+        format={null}
         floatingLabelText="Year of planting"
-        type="number"
+        openToYearSelection={true}
       />
     )
   }
@@ -139,8 +141,6 @@ class AnnualTexts extends React.Component {
   render() {
     return (
       <div>
-        <TypeText />
-        <br />
         <VarietyText />
         <br />
         <SeedSourceText />
@@ -155,10 +155,7 @@ class PerennialTexts extends React.Component {
   render() {
     return (
       <div>
-        <TypeText />
-        <br />
-        <YearText />
-        <br />
+        <YearDatePicker />
         <RootstockText />
         <br />
         <ScionText />
@@ -190,6 +187,8 @@ class Crop extends React.Component {
         <CardTitle title="Crop" />
         <CardText>
           <LifeCycleSelect updateAnnual={ this.updateAnnual }/>
+          <br />
+          <CropNameText />
           <br />
           <GrowthStageText />
           <br />

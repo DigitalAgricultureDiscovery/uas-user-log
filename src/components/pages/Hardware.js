@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 // material-ui elements
-import { SelectField }                      from 'redux-form-material-ui';
+import { SelectField, TextField }           from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
 import MenuItem                             from 'material-ui/MenuItem';
@@ -9,9 +9,7 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from './utils/validate';
 
-
-// Select input for mission category
-class CategorySelect extends React.Component {
+class DroneTypeSelect extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,62 +25,76 @@ class CategorySelect extends React.Component {
   render() {
     return (
       <Field
-        name="selectCategory"
+        name="selectDroneType"
         component={SelectField}
-        floatingLabelText="Category"
+        floatingLabelText="Drone type"
         value={this.state.value}
         onChange={this.handleChange}
       >
-        <MenuItem value={1} primaryText="Planning" />
-        <MenuItem value={2} primaryText="Payload" />
-        <MenuItem value={3} primaryText="Processed" />
+        <MenuItem value={1} primaryText="Fixed wing" />
+        <MenuItem value={2} primaryText="Multiple rotor" />
       </Field>
     )
   }
 }
 
-// Select input for mission type
-class TypeSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 1,
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event, index, value) {
-    this.setState({value: value});
-  }
-
+class DroneRegistrationText extends React.Component {
   render() {
     return (
       <Field
-        name="selectType"
-        component={SelectField}
-        floatingLabelText="Type"
-        value={this.state.value}
-        onChange={this.handleChange}
-      >
-        <MenuItem value={1} primaryText="Teaching/Demonstration" />
-        <MenuItem value={2} primaryText="Research - Remote Sensing" />
-        <MenuItem value={3} primaryText="Spray application" />
-      </Field>
+        name="droneRegistrationText"
+        component={TextField}
+        floatingLabelText="Drone registration # (required for work or business)"
+      />
     )
   }
 }
 
-// Mission card
-class Mission extends React.Component {
+class DroneModelText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="droneModelText"
+        component={TextField}
+        floatingLabelText="Drone model"
+      />
+    )
+  }
+}
+
+class BatteryStatusText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="batteryStatusText"
+        component={TextField}
+        floatingLabelText="Battery status"
+      />
+    )
+  }
+}
+
+class GroundControlText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="groundControlText"
+        component={TextField}
+        floatingLabelText="Ground control stations battery status"
+      />
+    )
+  }
+}
+
+class Hardware extends React.Component {
   render() {
     const { handleSubmit, previousPage } = this.props;
+
     return (
       <form onSubmit={handleSubmit}>
-        <CardTitle title="Mission" />
+        <CardTitle title="Hardware" />
         <CardText>
-          <CategorySelect />
-          <br />
-          <TypeSelect />
+          
         </CardText>
         <CardActions>
           <FlatButton
@@ -107,4 +119,4 @@ export default reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
-})(Mission);
+})(Hardware);
