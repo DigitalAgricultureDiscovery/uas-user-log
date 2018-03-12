@@ -11,7 +11,8 @@ import General         from './pages/General';          // page 4
 import Team            from './pages/Team';             // page 5
 import Hardware        from './pages/Hardware';         // page 6
 import Battery         from './pages/Battery'           // page 7
-import Finish          from './pages/Finish';           // page 8
+import FlightOperation from './pages/FlightOperation'   // page 8
+import Finish          from './pages/Finish';           // page 9
 
 class LogbookForm extends React.Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class LogbookForm extends React.Component {
     return (
       <MuiThemeProvider>
         <div style={ divStyle }>
-          <Stepper activeStep={ pageIndex - 1 }>
+          {/* <Stepper activeStep={ pageIndex - 1 }>
             <Step>
               <StepLabel>Welcome</StepLabel>
             </Step>
@@ -67,9 +68,13 @@ class LogbookForm extends React.Component {
               <StepLabel>Battery</StepLabel>
             </Step>
             <Step>
+              <StepLabel>Flight Operation</StepLabel>
+            </Step>
+            <Step>
               <StepLabel>Finish</StepLabel>
             </Step>
-          </Stepper>
+          </Stepper> */}
+          <br />
           <div style={ contentStyle }>
             <Card>
               { pageIndex === 1 && <Welcome onSubmit={this.nextPage} /> }
@@ -110,6 +115,12 @@ class LogbookForm extends React.Component {
                 />
               )}
               { pageIndex === 8 && (
+                <FlightOperation
+                  previousPage={ this.previousPage }
+                  onSubmit={ this.nextPage }
+                />
+              )}
+              { pageIndex === 9 && (
                 <Finish
                   previousPage={ this.previousPage }
                   onSubmit={ onSubmit }
