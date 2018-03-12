@@ -65,7 +65,7 @@ class TypeSelect extends React.Component {
         onChange={this.handleChange}
       >
         <MenuItem value={1} primaryText="Teaching/Demonstration" />
-        <MenuItem value={2} primaryText="Research - Remote Sensing" />
+        <MenuItem value={2} primaryText="Research" />
         <MenuItem value={3} primaryText="Spray application" />
       </Field>
     )
