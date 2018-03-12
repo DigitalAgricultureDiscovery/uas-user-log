@@ -12,7 +12,8 @@ import Team            from './pages/Team';             // page 5
 import Hardware        from './pages/Hardware';         // page 6
 import Battery         from './pages/Battery'           // page 7
 import FlightOperation from './pages/FlightOperation'   // page 8
-import Finish          from './pages/Finish';           // page 9
+import DataCollection  from './pages/DataCollection'    // page 9
+import Finish          from './pages/Finish';           // page 10
 
 class LogbookForm extends React.Component {
   constructor(props) {
@@ -121,6 +122,12 @@ class LogbookForm extends React.Component {
                 />
               )}
               { pageIndex === 9 && (
+                <DataCollection
+                  previousPage={ this.previousPage }
+                  onSubmit={ this.nextPage }
+                />
+              )}
+              { pageIndex === 10 && (
                 <Finish
                   previousPage={ this.previousPage }
                   onSubmit={ onSubmit }

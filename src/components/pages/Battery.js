@@ -18,7 +18,7 @@ class BatteriesUsedText extends React.Component {
   render() {
     return (
       <Field
-        name="BatteriesUsedText"
+        name="batteriesUsedText"
         component={TextField}
         floatingLabelText="Number of batteries used at a time"
         type="number"
