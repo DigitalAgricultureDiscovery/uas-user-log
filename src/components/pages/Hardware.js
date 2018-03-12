@@ -1,50 +1,32 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 // material-ui elements
-import { SelectField, TextField }           from 'redux-form-material-ui';
+import { TextField }           from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
-import MenuItem                             from 'material-ui/MenuItem';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from './utils/validate';
 
-class DroneTypeSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 1,
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event, index, value) {
-    this.setState({value: value});
-  }
-
+class DroneTypeText extends React.Component {
   render() {
     return (
       <Field
-        name="selectDroneType"
-        component={SelectField}
+        name="droneTypeText"
+        component={TextField}
         floatingLabelText="Drone type"
-        value={this.state.value}
-        onChange={this.handleChange}
-      >
-        <MenuItem value={1} primaryText="Fixed wing" />
-        <MenuItem value={2} primaryText="Multiple rotor" />
-      </Field>
+      />
     )
   }
 }
 
-class DroneRegistrationText extends React.Component {
+class DroneMakeText extends React.Component {
   render() {
     return (
       <Field
-        name="droneRegistrationText"
+        name="droneMakeText"
         component={TextField}
-        floatingLabelText="Drone registration # (required for work or business)"
+        floatingLabelText="Make"
       />
     )
   }
@@ -56,20 +38,45 @@ class DroneModelText extends React.Component {
       <Field
         name="droneModelText"
         component={TextField}
-        floatingLabelText="Drone model"
+        floatingLabelText="Model"
       />
     )
   }
 }
 
-class BatteryStatusText extends React.Component {
+class DroneRegistrationText extends React.Component {
   render() {
     return (
       <Field
-        name="batteryStatusText"
+        name="droneRegistrationText"
         component={TextField}
-        floatingLabelText="Battery status"
+        floatingLabelText="FAA registration #"
       />
+    )
+  }
+}
+
+class RemoteChargeStatusText extends React.Component {
+  render() {
+    return (
+      <div>
+        <strong>Remote charge status</strong>
+        <br />
+        <Field
+          name="remoteChargeTargetText"
+          component={TextField}
+          floatingLabelText="Target (%)"
+          type="number"
+          step="0.001"
+        />&nbsp;
+        <Field
+          name="remoteChargeMinimumText"
+          component={TextField}
+          floatingLabelText="Minimum (%)"
+          type="number"
+          step="0.001"
+        />
+      </div>
     )
   }
 }
@@ -77,11 +84,24 @@ class BatteryStatusText extends React.Component {
 class GroundControlText extends React.Component {
   render() {
     return (
-      <Field
-        name="groundControlText"
-        component={TextField}
-        floatingLabelText="Ground control stations battery status"
-      />
+      <div>
+        <strong>Ground control stations battery status</strong>
+        <br />
+        <Field
+          name="groundControlChargeTargetText"
+          component={TextField}
+          floatingLabelText="Target (%)"
+          type="number"
+          step="0.001"
+        />&nbsp;
+        <Field
+          name="groundControlChargeMinimumText"
+          component={TextField}
+          floatingLabelText="Minimum (%)"
+          type="number"
+          step="0.001"
+        />
+      </div>
     )
   }
 }
@@ -94,7 +114,19 @@ class Hardware extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Hardware" />
         <CardText>
-          
+          <DroneTypeText />
+          <br />
+          <DroneMakeText />
+          <br />
+          <DroneModelText />
+          <br />
+          <DroneRegistrationText />
+          <br />
+          <br />
+          <RemoteChargeStatusText />
+          <br />
+          <br />
+          <GroundControlText />
         </CardText>
         <CardActions>
           <FlatButton

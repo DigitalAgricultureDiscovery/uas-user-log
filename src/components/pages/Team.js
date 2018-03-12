@@ -20,7 +20,7 @@ class PICText extends React.Component {
       <Field
         name="picText"
         component={TextField}
-        floatingLabelText="PIC"
+        floatingLabelText="Remote Pilot in Command (PIC)"
       />
     )
   }
@@ -30,9 +30,9 @@ class LicenseText extends React.Component {
   render() {
     return (
       <Field
-        name="licenseText"
+        name={this.props.fieldName}
         component={TextField}
-        floatingLabelText="License"
+        floatingLabelText="Remote PIC License #"
       />
     )
   }
@@ -74,7 +74,8 @@ const renderPilots = ({ fields, change }) => (
             <DeleteForeverIcon color={red500} />
           </IconButton>
           <br />
-          <PilotText fieldName={`${pilot}.pilotName`} />
+          <PilotText fieldName={`${pilot}.pilotName`} />&nbsp;
+          <LicenseText fieldName={`${pilot}.pilotPIC`} />
           <br />
         </li>
       )}
@@ -161,8 +162,6 @@ class Team extends React.Component {
         <CardTitle title="Team Information" />
         <CardText>
           <PICText />
-          <br />
-          <LicenseText />
           <br />
           <FieldArray name="pilots" component={renderPilots} />
           <br />
