@@ -8,152 +8,128 @@ import IconButton                           from 'material-ui/IconButton';
 import RaisedButton                         from 'material-ui/RaisedButton';
 // material-ui icons
 import DeleteForeverIcon from 'material-ui/svg-icons/action/delete-forever';
-import PersonAddIcon     from 'material-ui/svg-icons/social/person-add';
+import BatteryFullIcon   from 'material-ui/svg-icons/device/battery-full';
 // material-ui colors
 import {lightGreen500, red500} from 'material-ui/styles/colors';
 
 import validate from './utils/validate';
 
-class PICText extends React.Component {
+class BatteriesUsedText extends React.Component {
   render() {
     return (
       <Field
-        name="picText"
+        name="BatteriesUsedText"
         component={TextField}
-        floatingLabelText="Remote Pilot in Command (PIC)"
+        floatingLabelText="Number of batteries used at a time"
+        type="number"
       />
     )
   }
 }
 
-class LicenseText extends React.Component {
+class BatteriesUASText extends React.Component {
   render() {
     return (
       <Field
-        name={this.props.fieldName}
+        name="BatteriesUASText"
         component={TextField}
-        floatingLabelText="Remote PIC License #"
+        floatingLabelText="Number of batteries on UAS"
+        type="number"
       />
     )
   }
 }
 
-class AddPilotButton extends React.Component {
+class AddBatteryButton extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    this.props.addNewPilot();
+    this.props.addNewBattery();
   }
 
   render() {
     return (
       <RaisedButton
-        label="Add pilot"
+        label="Add battery"
         labelPosition="before"
         backgroundColor={lightGreen500}
-        icon={<PersonAddIcon />}
+        icon={<BatteryFullIcon />}
         onClick={this.handleClick}
       />
     )
   }
 }
 
-const renderPilots = ({ fields, change }) => (
+const renderBatteries = ({ fields, change }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
-      {fields.map((pilot, index) =>
+      {fields.map((battery, index) =>
         <li key={index}>
-          <strong>Pilot #{index + 1}</strong>
+          <strong>Battery #{index + 1}</strong>
           <IconButton
-            tooltip="Remove pilot"
+            tooltip="Remove battery"
             onClick={() => fields.remove(index)}
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
           <br />
-          <PilotText fieldName={`${pilot}.pilotName`} />&nbsp;
-          <LicenseText fieldName={`${pilot}.pilotPIC`} />
+          <BatteryWeightText fieldName={`${battery}.batteryWeight`} />
+          <br />
+          <BatteryChargeStatusText
+            fieldTargetName={`${battery}.batteryTarget`}
+            fieldMinimumName={`${battery}.batteryMinimum`}
+          />
           <br />
         </li>
       )}
     </ul>
-    <AddPilotButton addNewPilot={() => fields.push({})} />
+    <AddBatteryButton addNewBattery={() => fields.push({})} />
   </div>
 );
 
-class AddVOButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    this.props.addNewVO();
-  }
-
-  render() {
-    return (
-      <RaisedButton
-        label="Add VO"
-        labelPosition="before"
-        backgroundColor={lightGreen500}
-        icon={<PersonAddIcon />}
-        onClick={this.handleClick}
-      />
-    )
-  }
-}
-
-const renderVOs = ({ fields, change }) => (
-  <div>
-    <ul style={{listStyleType: "none", padding: 0}}>
-      {fields.map((vo, index) =>
-        <li key={index}>
-          <strong>VO #{index + 1}</strong>
-          <IconButton
-            tooltip="Remove VO"
-            onClick={() => fields.remove(index)}
-          >
-            <DeleteForeverIcon color={red500} />
-          </IconButton>
-          <br />
-          <VOText fieldName={`${vo}.voName`} />
-          <br />
-        </li>
-      )}
-    </ul>
-    <AddVOButton addNewVO={() => fields.push({})} />
-  </div>
-);
-
-class PilotText extends React.Component {
+class BatteryWeightText extends React.Component {
   render() {
     return (
       <Field
         name={this.props.fieldName}
         component={TextField}
-        floatingLabelText="Pilot, if other than PIC"
+        floatingLabelText="Battery weight"
+        type="number"
       />
     )
   }
 }
 
-class VOText extends React.Component {
+class BatteryChargeStatusText extends React.Component {
   render() {
     return (
-      <Field
-        name={this.props.fieldName}
-        component={TextField}
-        floatingLabelText="VO instead of observer"
-      />
+      <div>
+        <br />
+        Charge status
+        <br />
+        <Field
+          name={this.props.fieldTargetName}
+          component={TextField}
+          floatingLabelText="Target (%)"
+          type="number"
+          step="0.001"
+        />&nbsp;
+        <Field
+          name={this.props.fieldMinimumName}
+          component={TextField}
+          floatingLabelText="Minimum (%)"
+          type="number"
+          step="0.001"
+        />
+      </div>
     )
   }
 }
 
-class Team extends React.Component {
+class Battery extends React.Component {
   render() {
     const { handleSubmit, previousPage } = this.props;
 
@@ -161,11 +137,11 @@ class Team extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Team Information" />
         <CardText>
-          <PICText />
+          <BatteriesUsedText />
           <br />
-          <FieldArray name="pilots" component={renderPilots} />
+          <BatteriesUASText />
           <br />
-          <FieldArray name="vos" component={renderVOs} />
+          <FieldArray name="batteries" component={renderBatteries} />
         </CardText>
         <CardActions>
           <FlatButton
@@ -190,4 +166,4 @@ export default reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
-})(Team);
+})(Battery);
