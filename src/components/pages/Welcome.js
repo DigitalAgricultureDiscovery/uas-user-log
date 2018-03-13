@@ -1,9 +1,10 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 // material-ui elements
-import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import Divider                              from 'material-ui/Divider';
-import RaisedButton                         from 'material-ui/RaisedButton';
+import { CardActions, CardTitle, CardText }           from 'material-ui/Card';
+import Divider                                        from 'material-ui/Divider';
+import RaisedButton                                   from 'material-ui/RaisedButton';
+import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
 
 import validate from './utils/validate';
 
@@ -32,25 +33,28 @@ class Welcome extends React.Component {
             Contributors - Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel Martin (USDA ARS),
             Dr. Luv Khot (Washington State University), and Dr. Seth Murray (Texas A&M University)
           </p>
-          <Divider />
-          <p style={{textAlign: "center"}}>
-            <span style={{marginRight: "50%"}}>
-              <a href="https://purdue.edu" target="_blank" rel="noopener noreferrer">
-                <img
-                  src="./images/logos/Purdue-Sig-Black-Gold-rgb.png"
-                  alt="Purdue logo"
-                  style={{height: 45}} />
-              </a>
-            </span>
-            <span>
-              <a href="https://saaesd.org/" target="_blank" rel="noopener noreferrer">
-                <img
-                  src="./images/logos/logo.png"
-                  alt="SAAESD logo"
-                  style={{height: 45}} />
-              </a>
-            </span>
-          </p>
+          <Table style={{marginTop: 15}}>
+            <TableBody displayRowCheckbox={false}>
+              <TableRow>
+                <TableRowColumn style={{textAlign: "center"}}>
+                  <a href="https://purdue.edu" target="_blank" rel="noopener noreferrer">
+                    <img
+                      src="./images/logos/Purdue-Sig-Black-Gold-rgb.png"
+                      alt="Purdue logo"
+                      style={{width: "auto", maxHeight: 50}} />
+                  </a>
+                </TableRowColumn>
+                <TableRowColumn style={{textAlign: "center"}}>
+                  <a href="https://saaesd.org/" target="_blank" rel="noopener noreferrer">
+                    <img
+                      src="./images/logos/logo.png"
+                      alt="SAAESD logo"
+                      style={{width: "auto", maxHeight: 50}} />
+                  </a>
+                </TableRowColumn>
+              </TableRow>
+            </TableBody>
+          </Table>
         </CardText>
         <CardActions>
           <RaisedButton
