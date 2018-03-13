@@ -18,7 +18,7 @@ class Welcome extends React.Component {
             The UASlog is an outcome of multistate teams working together
             to develop a common protocol for unmanned aircraft systems (UAS)
             operation for activities such as teaching/demonstration, research
-            and spray application. It relies on simple user interaction to
+            and spray application. It relies on simple user interactions to
             develop a record of your UAS missions and can serve to enhance
             your flight and maintenance experience.
           </p>
@@ -31,6 +31,25 @@ class Welcome extends React.Component {
           <p>
             Contributors - Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel Martin (USDA ARS),
             Dr. Luv Khot (Washington State University), and Dr. Seth Murray (Texas A&M University)
+          </p>
+          <Divider />
+          <p style={{textAlign: "center"}}>
+            <span style={{marginRight: "50%"}}>
+              <a href="https://purdue.edu" target="_blank" rel="noopener noreferrer">
+                <img
+                  src="./images/logos/Purdue-Sig-Black-Gold-rgb.png"
+                  alt="Purdue logo"
+                  style={{height: 45}} />
+              </a>
+            </span>
+            <span>
+              <a href="https://saaesd.org/" target="_blank" rel="noopener noreferrer">
+                <img
+                  src="./images/logos/logo_logbook.jpeg"
+                  alt="SAAESD logo"
+                  style={{height: 45}} />
+              </a>
+            </span>
           </p>
         </CardText>
         <CardActions>

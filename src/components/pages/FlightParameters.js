@@ -1,5 +1,6 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
 import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText }        from 'material-ui/Card';
@@ -39,12 +40,26 @@ class MinimumAGLText extends React.Component {
 }
 
 class AGLUnitSelect extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event, index, value) {
+    const convertedMaxAGL = (index === 0 ? this.props.currentMaxAGL * 3.28084 : this.props.currentMaxAGL * 0.3048);
+    const convertedMinAGL = (index === 0 && this.props.currentMinAGL ? this.props.currentMinAGL * 3.28084 : this.props.currentMinAGL * 0.3048);
+
+    this.props.change('maximumAGLText', convertedMaxAGL.toFixed(2));
+    this.props.change('minimumAGLText', convertedMinAGL.toFixed(2));
+  }
+
   render() {
     return (
       <Field
         name="aglUnitSelect"
         component={SelectField}
         floatingLabelText="Unit"
+        onChange={this.handleChange}
       >
         <MenuItem value={0} primaryText="ft" />
         <MenuItem value={1} primaryText="m" />
@@ -113,7 +128,7 @@ class ReturnHomeCheckbox extends React.Component {
 
 class FlightParameters extends React.Component {
   render() {
-    const { handleSubmit, previousPage } = this.props;
+    const { handleSubmit, previousPage, currentMaxAGL, currentMinAGL } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Flight Parameters" />
@@ -122,7 +137,11 @@ class FlightParameters extends React.Component {
           &nbsp;
           <MinimumAGLText />
           <br />
-          <AGLUnitSelect />
+          <AGLUnitSelect
+            currentMaxAGL={currentMaxAGL}
+            currentMinAGL={currentMinAGL}
+            change={this.props.change}
+          />
           <br /><br />
           <LookAngleRadioButtonGroup />
           <br />
@@ -149,9 +168,21 @@ class FlightParameters extends React.Component {
   }
 }
 
-export default reduxForm({
+const myReduxForm = reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
 })(FlightParameters);
+
+const selector = formValueSelector('logbook');
+export default connect(
+  state => {
+    const currentMaxAGL = selector(state, 'maximumAGLText');
+    const currentMinAGL = selector(state, 'minimumAGLText');
+    return {
+      currentMaxAGL,
+      currentMinAGL
+    }
+  }
+)(myReduxForm);
