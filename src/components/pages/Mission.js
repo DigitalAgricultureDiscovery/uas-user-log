@@ -81,7 +81,7 @@ export default reduxForm({
   validate,
   initialValues: {
     'categorySelect': 1,
-    'typeSelect': 1,
+    'typeSelect': 2,
     'lifeCycleSelect': 1,
     'droneTypeSelect': 1,
     'remoteChargeTargetText': 100.00,
@@ -93,8 +93,9 @@ export default reduxForm({
     'preflightRadioButtonGroup': 'yes',
     'permissionRadioButtonGroup': 'notRequired',
     'peoplePresentRadioButtonGroup': 'no',
+    'maximumAGLText': 400,
     'aglUnitSelect': 0,
     'lookAngleRadioButtonGroup': 'vertical',
-    'maximumGroundSpeedRadioButtonGroup': 'no'
+    'maximumGroundSpeedRadioButtonGroup': 'no',
   }
 })(Mission);
