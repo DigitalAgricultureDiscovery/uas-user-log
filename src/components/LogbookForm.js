@@ -9,12 +9,13 @@ import Crop            from './pages/Crop';             // page 3
 import General         from './pages/General';          // page 4
 import Team            from './pages/Team';             // page 5
 import Hardware        from './pages/Hardware';         // page 6
-import Battery         from './pages/Battery'           // page 7
-import FlightOperation from './pages/FlightOperation'   // page 8
-import DataCollection  from './pages/DataCollection'    // page 9
-import B4UFLY          from './pages/B4UFLY'            // page 10
-import Obstacles       from './pages/Obstacles'         // page 11
-import Finish          from './pages/Finish';           // page 12
+import Battery         from './pages/Battery';          // page 7
+import FlightOperation from './pages/FlightOperation';  // page 8
+import DataCollection  from './pages/DataCollection';   // page 9
+import B4UFLY          from './pages/B4UFLY';           // page 10
+import Obstacles       from './pages/Obstacles';        // page 11
+import People          from './pages/People';           // page 12
+import Finish          from './pages/Finish';           // page 13
 
 class LogbookForm extends React.Component {
   constructor(props) {
@@ -112,6 +113,12 @@ class LogbookForm extends React.Component {
                 />
               )}
               { pageIndex === 12 && (
+                <People
+                  previousPage={ this.previousPage }
+                  onSubmit={ this.nextPage }
+                />
+              )}
+              { pageIndex === 13 && (
                 <Finish
                   previousPage={ this.previousPage }
                   onSubmit={ onSubmit }

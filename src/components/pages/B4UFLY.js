@@ -180,7 +180,7 @@ class B4UFLY extends React.Component {
               <ControlTowerContactText />
             </div>
           }
-          <br />
+          <br /><br />
           <B4UFLYCheckboxGroup />
           <FAACertText />
           <br /><br />
