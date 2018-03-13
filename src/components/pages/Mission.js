@@ -92,6 +92,9 @@ export default reduxForm({
     'statusSelect': 1,
     'preflightRadioButtonGroup': 'yes',
     'permissionRadioButtonGroup': 'notRequired',
-    'peoplePresentRadioButtonGroup': 'no'
+    'peoplePresentRadioButtonGroup': 'no',
+    'aglUnitSelect': 0,
+    'lookAngleRadioButtonGroup': 'vertical',
+    'maximumGroundSpeedRadioButtonGroup': 'no'
   }
 })(Mission);
