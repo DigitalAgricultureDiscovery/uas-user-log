@@ -13,7 +13,7 @@ class Welcome extends React.Component {
     const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <CardTitle title="Welcome to UASlog" />
+        <CardTitle title="Welcome to UAS User Log" />
         <CardText>
           <p>
             The UAS User Log is a server-based, digital logbook that is
@@ -27,7 +27,7 @@ class Welcome extends React.Component {
           </p>
           <Divider />
           <p>
-            Released by Multistate Research Project - S1069 Research and Extension
+            Facilitated by Multistate Research Project - S1069 Research and Extension
             for Unmanned Aircraft Systems (UAS) Applications in U.S.
             Agriculture and Natural Resources
           </p>
