@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
-import { SelectField }                      from 'redux-form-material-ui';
+import { SelectField, TextField }           from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
 import MenuItem                             from 'material-ui/MenuItem';
@@ -20,6 +20,18 @@ const obstacles = [
   {value: 6, name: 'Signs/Signboards'},
   {value: 7, name: 'Other'}
 ];
+
+class ObstaclesOtherText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="obstacleOtherText"
+        component={TextField}
+        floatingLabelText="Other"
+      />
+    )
+  }
+}
 
 class ObstaclesSelect extends React.Component {
   selectionRenderer = (values) => {
@@ -63,11 +75,18 @@ class ObstaclesSelect extends React.Component {
 class Obstacles extends React.Component {
   render() {
     const { handleSubmit, previousPage, selectedObstacles } = this.props;
+    const otherIndex = 7;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Obstacles Present" />
         <CardText>
           <ObstaclesSelect selectedObstacles={selectedObstacles} />
+          {selectedObstacles.indexOf(otherIndex) > 0 &&
+            <div>
+              <br />
+              <ObstaclesOtherText />
+            </div>
+          }
         </CardText>
         <CardActions>
           <FlatButton
@@ -99,7 +118,7 @@ export default connect(
   state => {
     const selectedObstacles = selector(state, 'obstaclesSelect') ? selector(state, 'obstaclesSelect') : [];
     return {
-      selectedObstacles
+      selectedObstacles,
     }
   }
 )(myReduxForm);
