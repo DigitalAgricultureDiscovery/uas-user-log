@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Header from './Header';
+import Footer from './Footer';
 import LogbookForm from './LogbookForm';
 
 const showResults = values =>
@@ -24,6 +25,9 @@ class App extends React.Component {
               <Header />
             </MuiThemeProvider>
             <LogbookForm onSubmit={ showResults } />
+            {/* <MuiThemeProvider>
+              <Footer />
+            </MuiThemeProvider> */}
           </div>
         </BrowserRouter>
       </div>
