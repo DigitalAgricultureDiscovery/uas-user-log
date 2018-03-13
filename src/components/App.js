@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Header from './Header';
-import Footer from './Footer';
+// import Footer from './Footer';
 import LogbookForm from './LogbookForm';
 
 const showResults = values =>
