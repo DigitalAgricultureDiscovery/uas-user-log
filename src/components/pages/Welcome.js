@@ -11,11 +11,20 @@ class Welcome extends React.Component {
     const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <CardTitle title="Welcome" />
+        <CardTitle title="Welcome to UASlog" />
         <CardText>
-          <p>Welcome to Simple Logbook. Choose below if you
-          will be creating a new log or loading a previously saved
-          one.</p>
+          <p>
+            The UASlog is an outcome of multistate teams working together
+            to develop a common protocol for unmanned aircraft systems (UAS)
+            operation for activities such as teaching/demonstration, research
+            and spray application. It relies on simple user interaction to
+            develop a record of your UAS missions and can serve to enhance
+            your flight and maintenance experience.
+          </p>
+          <p>
+            Contributors - Dr. Dharmendra Saraswat, Dr. Daniel Martin,
+            Dr. Luv Khot, and Dr. Seth Murray
+          </p>
         </CardText>
         <CardActions>
           <RaisedButton
