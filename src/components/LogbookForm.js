@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
-import { Card }        from 'material-ui/Card';
+import { Card }                     from 'material-ui/Card';
 
 import Welcome         from './pages/Welcome';          // page 1
 import Mission         from './pages/Mission';          // page 2

@@ -18,7 +18,7 @@ const obstacles = [
   {value: 4, name: 'Buildings'},
   {value: 5, name: 'Trees'},
   {value: 6, name: 'Signs/Signboards'},
-  {value: 7, name: 'Other'}
+  {value: 7, name: 'Other'},
 ];
 
 class ObstaclesOtherText extends React.Component {
