@@ -1,5 +1,6 @@
 import React from 'react';
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
 import { SelectField, TextField }           from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
@@ -113,28 +114,32 @@ class OperationModeSelect extends React.Component {
   }
 }
 
-class EndLapText extends React.Component {
-  render() {
-    return (
-      <Field
-        name={this.props.fieldName}
-        component={TextField}
-        floatingLabelText="End lap (%)"
-        type="number"
-      />
-    )
+class LapText extends React.Component {
+  componentWillMount() {
+    if (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length < 1) {
+      this.props.change(this.props.fieldEndName, 80.00);
+      this.props.change(this.props.fieldSideName, 70.00);
+    }
   }
-}
-
-class SideLapText extends React.Component {
   render() {
     return (
-      <Field
-        name={this.props.fieldName}
-        component={TextField}
-        floatingLabelText="Side lap (%)"
-        type="number"
-      />
+      <div>
+        <Field
+          name={this.props.fieldEndName}
+          component={TextField}
+          floatingLabelText="End lap (%)"
+          type="number"
+          step="0.01"
+        />
+        &nbsp;
+        <Field
+          name={this.props.fieldSideName}
+          component={TextField}
+          floatingLabelText="Side lap (%)"
+          type="number"
+          step="0.01"
+        />
+      </div>
     )
   }
 }
@@ -194,7 +199,7 @@ class AddSensorButton extends React.Component {
   }
 }
 
-const renderSensors = ({ fields, change }) => (
+const renderSensors = ({ fields, change, currentSensors }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
       {fields.map((sensor, index) =>
@@ -215,9 +220,13 @@ const renderSensors = ({ fields, change }) => (
           <br />
           <OperationModeSelect fieldName={`${sensor}.operationMode`} />
           <br />
-          <EndLapText fieldName={`${sensor}.endLap`} />
-          &nbsp;
-          <SideLapText fieldName={`${sensor}.sideLap`} />
+          <LapText
+            fieldEndName={`${sensor}.endLap`}
+            fieldSideName={`${sensor}.sideLap`}
+            currentSensors={currentSensors}
+            change={change}
+            sensorIndex={index}
+          />
           <br />
           <DataFormatSelect fieldName={`${sensor}.dataFormat`} />
         </li>
@@ -229,7 +238,7 @@ const renderSensors = ({ fields, change }) => (
 
 class DataCollection extends React.Component {
   render() {
-    const { handleSubmit, previousPage } = this.props;
+    const { handleSubmit, previousPage, currentSensors } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -237,7 +246,11 @@ class DataCollection extends React.Component {
         <CardText>
           <SensorsUsedText />
           <br />
-          <FieldArray name="sensors" component={renderSensors} />
+          <FieldArray
+            name="sensors"
+            component={renderSensors}
+            change={this.props.change}
+            currentSensors={currentSensors} />
         </CardText>
         <CardActions>
           <FlatButton
@@ -257,9 +270,19 @@ class DataCollection extends React.Component {
   }
 }
 
-export default reduxForm({
+const myReduxForm = reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
 })(DataCollection);
+
+const selector = formValueSelector('logbook');
+export default connect(
+  state => {
+    const currentSensors = selector(state, 'sensors');
+    return {
+      currentSensors
+    }
+  }
+)(myReduxForm);

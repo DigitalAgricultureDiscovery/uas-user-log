@@ -64,7 +64,7 @@ class AddBatteryButton extends React.Component {
   }
 }
 
-const renderBatteries = ({ fields, change, hasBatteries }) => (
+const renderBatteries = ({ fields, change, currentBatteries }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
       {fields.map((battery, index) =>
@@ -84,7 +84,7 @@ const renderBatteries = ({ fields, change, hasBatteries }) => (
             fieldMinimumName={`${battery}.batteryMinimumText`}
             batteryIndex={index}
             change={change}
-            hasBatteries={hasBatteries}
+            currentBatteries={currentBatteries}
           />
           <br />
         </li>
@@ -109,7 +109,7 @@ class BatteryWeightText extends React.Component {
 
 class BatteryChargeStatusText extends React.Component {
   componentWillMount() {
-    if (Object.keys(this.props.hasBatteries[this.props.batteryIndex]).length < 1) {
+    if (Object.keys(this.props.currentBatteries[this.props.batteryIndex]).length < 1) {
       this.props.change(this.props.fieldTargetName, 100.00);
       this.props.change(this.props.fieldMinimumName, 30.00);
     }
@@ -144,7 +144,7 @@ class BatteryChargeStatusText extends React.Component {
 
 class Battery extends React.Component {
   render() {
-    const { handleSubmit, previousPage, batteries } = this.props;
+    const { handleSubmit, previousPage, currentBatteries } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Battery" />
@@ -153,7 +153,12 @@ class Battery extends React.Component {
           <br />
           <BatteriesUASText />
           <br />
-          <FieldArray name="batteries" component={renderBatteries} change={this.props.change} hasBatteries={batteries}/>
+          <FieldArray
+            name="batteries"
+            component={renderBatteries}
+            change={this.props.change}
+            currentBatteries={currentBatteries}
+          />
         </CardText>
         <CardActions>
           <FlatButton
@@ -183,9 +188,9 @@ const myReduxForm = reduxForm({
 const selector = formValueSelector('logbook');
 export default connect(
   state => {
-    const batteries = selector(state, 'batteries');
+    const currentBatteries = selector(state, 'batteries');
     return {
-      batteries
+      currentBatteries
     }
   }
 )(myReduxForm);
