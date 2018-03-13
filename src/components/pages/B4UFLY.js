@@ -151,16 +151,44 @@ class PreflightRadioButtonGroup extends React.Component {
   }
 }
 
-class PermissionRadioButtonGroup extends React.Component {
+class PermittedByText extends React.Component {
   render() {
     return (
       <Field
-        name="permissionRadioButtonGroup"
-        component={RadioButtonGroup}
-      >
-        <RadioButton value="notRequired" label="Not required" />
-        <RadioButton value="permitted" label="Permitted by" />
-      </Field>
+        name="permittedByText"
+        component={TextField}
+        floatingLabelText="Enter permission contact"
+      />
+    )
+  }
+}
+
+class PermissionRadioButtonGroup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showPermissionText: false,
+    }
+    this.toggleShowPermissionText = this.toggleShowPermissionText.bind(this);
+  }
+
+  toggleShowPermissionText(event, value) {
+    this.setState({'showPermissionText': !this.state.showPermissionText});
+  }
+
+  render() {
+    return (
+      <div>
+        <Field
+          name="permissionRadioButtonGroup"
+          component={RadioButtonGroup}
+          onChange={this.toggleShowPermissionText}
+        >
+          <RadioButton value="notRequired" label="Not required" />
+          <RadioButton value="permitted" label="Permitted by" />
+        </Field>
+        {this.state.showPermissionText ? <PermittedByText /> : null}
+      </div>
     )
   }
 }

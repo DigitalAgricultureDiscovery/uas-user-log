@@ -27,7 +27,7 @@ class ObstaclesOtherText extends React.Component {
       <Field
         name="obstacleOtherText"
         component={TextField}
-        floatingLabelText="Other"
+        floatingLabelText="Enter other obstacle"
       />
     )
   }
@@ -81,7 +81,7 @@ class Obstacles extends React.Component {
         <CardTitle title="Obstacles Present" />
         <CardText>
           <ObstaclesSelect selectedObstacles={selectedObstacles} />
-          {selectedObstacles.indexOf(otherIndex) > 0 &&
+          {selectedObstacles.indexOf(otherIndex) > -1 &&
             <div>
               <br />
               <ObstaclesOtherText />
