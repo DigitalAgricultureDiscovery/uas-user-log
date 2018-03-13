@@ -66,7 +66,7 @@ class RemoteChargeStatusText extends React.Component {
   render() {
     return (
       <div>
-        <strong>Remote charge status</strong>
+        Remote charge status
         <br />
         <Field
           name="remoteChargeTargetText"
@@ -91,7 +91,7 @@ class GroundControlChargeStatusText extends React.Component {
   render() {
     return (
       <div>
-        <strong>Ground control station battery status</strong>
+        Ground control station battery status
         <br />
         <Field
           name="groundControlChargeTargetText"

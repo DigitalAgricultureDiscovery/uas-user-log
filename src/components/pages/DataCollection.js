@@ -29,34 +29,57 @@ class SensorsUsedText extends React.Component {
   }
 }
 
-class SensorTypeSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 1,
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
+const sensors = [
+  {value: 0, name: 'RGB'},
+  {value: 1, name: 'Multispectral'},
+  {value: 2, name: 'Hyperspectral'},
+  {value: 3, name: 'LiDAR'},
+  {value: 4, name: 'Other'},
+];
 
-  handleChange(event, index, value) {
-    this.setState({value: value});
-  }
-
+class SensorOtherText extends React.Component {
   render() {
     return (
       <Field
         name={this.props.fieldName}
-        component={SelectField}
-        floatingLabelText="Type of sensor"
-        value={this.state.value}
-        onChange={this.handleChange}
-      >
-        <MenuItem value={1} primaryText="RGB" />
-        <MenuItem value={2} primaryText="Multispectral" />
-        <MenuItem value={3} primaryText="Hyperspectral" />
-        <MenuItem value={4} primaryText="LiDAR" />
-        <MenuItem value={5} primaryText="Other" />
-      </Field>
+        component={TextField}
+        floatingLabelText="Enter sensor type"
+      />
+    )
+  }
+}
+
+class SensorTypeSelect extends React.Component {
+  componentWillMount() {
+    if (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length < 1) {
+      this.props.change(this.props.fieldName, 0);
+    }
+  }
+
+  menuItems(sensors) {
+    return sensors.map((sensor) => (
+      <MenuItem
+        key={sensor.value}
+        value={sensor.value}
+        primaryText={sensor.name}
+      />
+    ));
+  }
+
+  render() {
+    const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].sensorType === 4 ? true : false);
+    return (
+      <div>
+        <Field
+          name={this.props.fieldTypeName}
+          component={SelectField}
+          floatingLabelText="Type of sensor"
+        >
+          {this.menuItems(sensors)}
+        </Field>
+        <br />
+        {otherSelected ? <SensorOtherText fieldName={this.props.fieldOtherName} /> : null}
+      </div>
     )
   }
 }
@@ -85,31 +108,56 @@ class SensorModelText extends React.Component {
   }
 }
 
-class OperationModeSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 1,
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
+const operations = [
+  {value: 0, name: 'Operated by mission planner'},
+  {value: 1, name: 'Time interval'},
+];
 
-  handleChange(event, index, value) {
-    this.setState({value: value});
-  }
-
+class TimeIntervalText extends React.Component {
   render() {
     return (
       <Field
         name={this.props.fieldName}
-        component={SelectField}
-        floatingLabelText="Operation mode"
-        value={this.state.value}
-        onChange={this.handleChange}
-      >
-        <MenuItem value={1} primaryText="Operated by mission planner" />
-        <MenuItem value={2} primaryText="Time interval" />
-      </Field>
+        component={TextField}
+        floatingLabelText="Enter time interval"
+        type="number"
+        step="0.01"
+      />
+    )
+  }
+}
+
+class OperationModeSelect extends React.Component {
+  componentWillMount() {
+    if (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length < 1) {
+      this.props.change(this.props.fieldName, 0);
+    }
+  }
+
+  menuItems(operations) {
+    return operations.map((operation) => (
+      <MenuItem
+        key={operation.value}
+        value={operation.value}
+        primaryText={operation.name}
+      />
+    ));
+  }
+
+  render() {
+    const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].operationMode === 1 ? true : false);
+    return (
+      <div>
+        <Field
+          name={this.props.fieldModeName}
+          component={SelectField}
+          floatingLabelText="Operation mode"
+        >
+          {this.menuItems(operations)}
+        </Field>
+        <br />
+        {otherSelected ? <TimeIntervalText fieldName={this.props.fieldTimeName} /> : null}
+      </div>
     )
   }
 }
@@ -144,34 +192,57 @@ class LapText extends React.Component {
   }
 }
 
-class DataFormatSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 1,
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
+const formats = [
+  {value: 0, name: 'Raw'},
+  {value: 1, name: 'Tiff'},
+  {value: 2, name: 'Jpeg'},
+  {value: 3, name: 'Video'},
+  {value: 4, name: 'Other'},
+];
 
-  handleChange(event, index, value) {
-    this.setState({value: value});
-  }
-
+class DataFormatOtherText extends React.Component {
   render() {
     return (
       <Field
         name={this.props.fieldName}
-        component={SelectField}
-        floatingLabelText="Data format"
-        value={this.state.value}
-        onChange={this.handleChange}
-      >
-        <MenuItem value={1} primaryText="Raw" />
-        <MenuItem value={2} primaryText="Tiff" />
-        <MenuItem value={3} primaryText="Jpeg" />
-        <MenuItem value={4} primaryText="Video" />
-        <MenuItem value={5} primaryText="Other" />
-      </Field>
+        component={TextField}
+        floatingLabelText="Enter data format"
+      />
+    )
+  }
+}
+
+class DataFormatSelect extends React.Component {
+  componentWillMount() {
+    if (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length < 1) {
+      this.props.change(this.props.fieldName, 0);
+    }
+  }
+
+  menuItems(formats) {
+    return formats.map((format) => (
+      <MenuItem
+        key={format.value}
+        value={format.value}
+        primaryText={format.name}
+      />
+    ));
+  }
+
+  render() {
+    const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].dataFormat === 4 ? true : false);
+    return (
+      <div>
+        <Field
+          name={this.props.fieldFormatName}
+          component={SelectField}
+          floatingLabelText="Data format"
+        >
+          {this.menuItems(formats)}
+        </Field>
+        <br />
+        {otherSelected ? <DataFormatOtherText fieldName={this.props.fieldOtherName} /> : null}
+      </div>
     )
   }
 }
@@ -212,13 +283,25 @@ const renderSensors = ({ fields, change, currentSensors }) => (
             <DeleteForeverIcon color={red500} />
           </IconButton>
           <br />
-          <SensorTypeSelect fieldName={`${sensor}.sensorType`} />
+          <SensorTypeSelect
+            fieldTypeName={`${sensor}.sensorType`}
+            fieldOtherName={`${sensor}.sensorOther`}
+            currentSensors={currentSensors}
+            sensorIndex={index}
+            change={change}
+          />
           <br />
           <SensorMakeText fieldName={`${sensor}.sensorMake`} />
           &nbsp;
           <SensorModelText fieldName={`${sensor}.sensorModel`} />
           <br />
-          <OperationModeSelect fieldName={`${sensor}.operationMode`} />
+          <OperationModeSelect
+            fieldModeName={`${sensor}.operationMode`}
+            fieldTimeName={`${sensor}.timeInterval`}
+            currentSensors={currentSensors}
+            sensorIndex={index}
+            change={change}
+          />
           <br />
           <LapText
             fieldEndName={`${sensor}.endLap`}
@@ -228,7 +311,13 @@ const renderSensors = ({ fields, change, currentSensors }) => (
             sensorIndex={index}
           />
           <br />
-          <DataFormatSelect fieldName={`${sensor}.dataFormat`} />
+          <DataFormatSelect
+            fieldFormatName={`${sensor}.dataFormat`}
+            fieldOtherName={`${sensor}.otherFormat`}
+            currentSensors={currentSensors}
+            change={change}
+            sensorIndex={index}
+          />
         </li>
       )}
     </ul>
