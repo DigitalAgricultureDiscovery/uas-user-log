@@ -45,7 +45,7 @@ class Welcome extends React.Component {
             <span>
               <a href="https://saaesd.org/" target="_blank" rel="noopener noreferrer">
                 <img
-                  src="./images/logos/logo_logbook.jpeg"
+                  src="./images/logos/logo.png"
                   alt="SAAESD logo"
                   style={{height: 45}} />
               </a>
