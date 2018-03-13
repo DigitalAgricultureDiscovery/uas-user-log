@@ -119,7 +119,7 @@ class EndLapText extends React.Component {
       <Field
         name={this.props.fieldName}
         component={TextField}
-        floatingLabelText="End lap"
+        floatingLabelText="End lap (%)"
         type="number"
       />
     )
@@ -132,7 +132,7 @@ class SideLapText extends React.Component {
       <Field
         name={this.props.fieldName}
         component={TextField}
-        floatingLabelText="Side lap"
+        floatingLabelText="Side lap (%)"
         type="number"
       />
     )
