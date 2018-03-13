@@ -16,12 +16,14 @@ class Welcome extends React.Component {
         <CardTitle title="Welcome to UASlog" />
         <CardText>
           <p>
-            The UASlog is an outcome of multistate teams working together
-            to develop a common protocol for unmanned aircraft systems (UAS)
-            operation for activities such as teaching/demonstration, research
-            and spray application. It relies on simple user interactions to
-            develop a record of your UAS missions and can serve to enhance
-            your flight and maintenance experience.
+            The UAS User Log is a server-based, digital logbook that is
+            accessible through any web browser on internet-connected devices.​
+            It is an outcome of multistate teams working together to develop a
+            common protocol for unmanned aircraft systems (UAS) operation for
+            activities such as teaching/demonstration, research and spray
+            application. It ​relies on simple user interactions to develop a
+            record of UAS mission and can also serve to enhance your flight
+            and maintenance experience.​
           </p>
           <Divider />
           <p>
