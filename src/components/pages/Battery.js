@@ -1,5 +1,6 @@
 import React from 'react';
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
 import { TextField }                        from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
@@ -63,7 +64,7 @@ class AddBatteryButton extends React.Component {
   }
 }
 
-const renderBatteries = ({ fields, change }) => (
+const renderBatteries = ({ fields, change, hasBatteries }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
       {fields.map((battery, index) =>
@@ -81,6 +82,9 @@ const renderBatteries = ({ fields, change }) => (
           <BatteryChargeStatusText
             fieldTargetName={`${battery}.batteryTargetText`}
             fieldMinimumName={`${battery}.batteryMinimumText`}
+            batteryIndex={index}
+            change={change}
+            hasBatteries={hasBatteries}
           />
           <br />
         </li>
@@ -104,6 +108,13 @@ class BatteryWeightText extends React.Component {
 }
 
 class BatteryChargeStatusText extends React.Component {
+  componentWillMount() {
+    if (Object.keys(this.props.hasBatteries[this.props.batteryIndex]).length < 1) {
+      this.props.change(this.props.fieldTargetName, 100.00);
+      this.props.change(this.props.fieldMinimumName, 30.00);
+    }
+  }
+
   render() {
     return (
       <div>
@@ -133,8 +144,7 @@ class BatteryChargeStatusText extends React.Component {
 
 class Battery extends React.Component {
   render() {
-    const { handleSubmit, previousPage } = this.props;
-
+    const { handleSubmit, previousPage, batteries } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Battery" />
@@ -143,7 +153,7 @@ class Battery extends React.Component {
           <br />
           <BatteriesUASText />
           <br />
-          <FieldArray name="batteries" component={renderBatteries} />
+          <FieldArray name="batteries" component={renderBatteries} change={this.props.change} hasBatteries={batteries}/>
         </CardText>
         <CardActions>
           <FlatButton
@@ -163,9 +173,19 @@ class Battery extends React.Component {
   }
 }
 
-export default reduxForm({
+const myReduxForm = reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
+  validate,
 })(Battery);
+
+const selector = formValueSelector('logbook');
+export default connect(
+  state => {
+    const batteries = selector(state, 'batteries');
+    return {
+      batteries
+    }
+  }
+)(myReduxForm);
