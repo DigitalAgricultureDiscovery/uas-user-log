@@ -24,8 +24,9 @@ class Welcome extends React.Component {
           </p>
           <Divider />
           <p>
-            S1069 Research and Extension for Unmanned Aircraft Systems (UAS)
-            Applications in U.S. Agriculture and Natural Resources
+            Released by Multistate Research Project - S1069 Research and Extension
+            for Unmanned Aircraft Systems (UAS) Applications in U.S.
+            Agriculture and Natural Resources
           </p>
           <p>
             Contributors - Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel Martin (USDA ARS),
