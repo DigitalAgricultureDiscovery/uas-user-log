@@ -2,6 +2,7 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
+import Divider                              from 'material-ui/Divider';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from './utils/validate';
@@ -21,9 +22,14 @@ class Welcome extends React.Component {
             develop a record of your UAS missions and can serve to enhance
             your flight and maintenance experience.
           </p>
+          <Divider />
           <p>
-            Contributors - Dr. Dharmendra Saraswat, Dr. Daniel Martin,
-            Dr. Luv Khot, and Dr. Seth Murray
+            S1069 Research and Extension for Unmanned Aircraft Systems (UAS)
+            Applications in U.S. Agriculture and Natural Resources
+          </p>
+          <p>
+            Contributors - Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel Martin (USDA ARS),
+            Dr. Luv Khot (Washington State University), and Dr. Seth Murray (Texas A&M University)
           </p>
         </CardText>
         <CardActions>
