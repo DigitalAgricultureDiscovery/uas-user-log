@@ -5,7 +5,7 @@ class Header extends React.Component {
   render() {
     return (
       <AppBar
-        title="UASlog"
+        title="UAS User Log"
         iconElementLeft={(<div/>)}
         // iconElementRight={
         //   <div>
