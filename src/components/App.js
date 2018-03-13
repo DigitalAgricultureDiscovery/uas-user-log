@@ -25,9 +25,6 @@ class App extends React.Component {
               <Header />
             </MuiThemeProvider>
             <LogbookForm onSubmit={ showResults } />
-            {/* <MuiThemeProvider>
-              <Footer />
-            </MuiThemeProvider> */}
           </div>
         </BrowserRouter>
       </div>
