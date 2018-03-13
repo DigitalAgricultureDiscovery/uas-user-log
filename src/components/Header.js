@@ -6,21 +6,23 @@ class Header extends React.Component {
     return (
       <AppBar
         title="UASlog"
-        iconElementLeft={
+        iconElementLeft={(<div/>)}
+        iconElementRight={
+          <div>
           <a href="https://purdue.edu" target="_blank" rel="noopener noreferrer">
             <img
               src="./images/logos/Purdue-Sig-White-Gold-rgb.png"
               alt="Purdue logo"
-              style={{marginTop: 13, width: 75}} />
+              style={{height: 45}} />
           </a>
-        }
-        iconElementRight={
+          &nsbp;
           <a href="https://saaesd.org/" target="_blank" rel="noopener noreferrer">
             <img
               src="./images/logos/logo_logbook.jpeg"
               alt="SAAESD logo"
               style={{height: 45}} />
           </a>
+          </div>
         }
         style={{backgroundColor: "#000000"}}
       />
