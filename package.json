@@ -1,27 +1,27 @@
 {
-  "name": "simple-logbook-react",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "material-ui": "^0.20.0",
-    "materialize-css": "^0.100.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-geolocated": "^2.3.0",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1",
-    "redux": "^3.7.2",
-    "redux-form": "^7.3.0",
-    "redux-form-material-ui": "^4.3.3"
+  "name": "uas-user-log",
+  "version": "1.0.0",
+  "description": "The UAS User Log is a server-based, digital logbook that is accessible through any web browser on internet-connected devices.​",
+  "engines": {
+    "node": "8.9.x"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node server",
+    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
-  "devDependencies": {
-    "redux-devtools": "^3.4.1"
-  }
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
+  "dependencies": {
+    "express": "^4.14.1"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "create-react-app",
+    "react"
+  ],
+  "license": "MIT",
+  "devDependencies": {}
 }
