@@ -93,12 +93,13 @@ class Obstacles extends React.Component {
             className="previous"
             label="Previous"
             onClick={previousPage}
+            backgroundColor="#BAA892"
           />
           <RaisedButton
             className="next"
             label="Next"
             type="submit"
-            primary={true}
+            backgroundColor="#FFD100"
           />
         </CardActions>
       </form>

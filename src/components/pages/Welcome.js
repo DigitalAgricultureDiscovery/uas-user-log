@@ -63,7 +63,7 @@ class Welcome extends React.Component {
             className="next"
             label="Next"
             type="submit"
-            primary={true}
+            backgroundColor="#FFD100"
           />
         </CardActions>
       </form>

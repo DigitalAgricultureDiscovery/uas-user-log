@@ -11,7 +11,7 @@ import ActionFlightTakeoffIcon from 'material-ui/svg-icons/action/flight-takeoff
 import DeleteForeverIcon       from 'material-ui/svg-icons/action/delete-forever';
 import MyLocationIcon          from 'material-ui/svg-icons/maps/my-location';
 // material-ui colors
-import {lightGreen500, red500} from 'material-ui/styles/colors';
+import {red500} from 'material-ui/styles/colors';
 
 import validate from './utils/validate';
 import locationUtil from './utils/location';
@@ -44,7 +44,7 @@ class AddFlightButton extends React.Component {
       <RaisedButton
         label="Add flight"
         labelPosition="before"
-        backgroundColor={lightGreen500}
+        backgroundColor="#B46012"
         icon={<ActionFlightTakeoffIcon />}
         onClick={this.handleClick}
       />
@@ -161,12 +161,13 @@ class General extends React.Component {
             className="previous"
             label="Previous"
             onClick={previousPage}
+            backgroundColor="#BAA892"
           />
           <RaisedButton
             className="next"
             label="Next"
             type="submit"
-            primary={true}
+            backgroundColor="#FFD100"
           />
         </CardActions>
       </form>
