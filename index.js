@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
@@ -27,8 +28,27 @@ if (cluster.isMaster) {
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, './client/build')));
 
+  // Enable CORS
+  app.use(cors());
+
+  // Allowed hosts
+  const whitelist = [
+    'http://localhost:5000',
+    'http://localhost:3000',
+    'http://example.com'
+  ];
+  const corsOptions = {
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1 || origin === undefined) {
+        callback(null, true);
+      } else {
+        callback('Not allowed by CORS');
+      }
+    }
+  }
+
   // Answer API requests.
-  app.get('/api', function (req, res) {
+  app.get('/api', cors(corsOptions), function (req, res) {
     res.set('Content-Type', 'application/json');
     weatherAPI.getForecast(keys.apixuKey, req.query.location.toString())
       .then(data => res.send(data))
