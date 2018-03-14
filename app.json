@@ -1,0 +1,21 @@
+{
+  "name": "uas-user-log",
+  "description": "The UAS User Log is a server-based, digital logbook that is accessible through any web browser on internet-connected devices.​",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
