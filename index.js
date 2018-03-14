@@ -33,13 +33,11 @@ if (cluster.isMaster) {
 
   // Allowed hosts
   const whitelist = [
-    'http://localhost:5000',
-    'http://localhost:3000',
-    'http://example.com'
+    'https://simple-logbook.herokuapp.com'
   ];
   const corsOptions = {
     origin: function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1 || origin === undefined) {
+      if (whitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
         callback('Not allowed by CORS');
