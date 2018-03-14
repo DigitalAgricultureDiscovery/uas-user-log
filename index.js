@@ -3,6 +3,9 @@ const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
+const keys = require('./config/keys');
+const weatherAPI = require('./helpers/weather');
+
 const PORT = process.env.PORT || 5000;
 
 // Multi-process to utilize all CPU cores.
@@ -27,7 +30,9 @@ if (cluster.isMaster) {
   // Answer API requests.
   app.get('/api', function (req, res) {
     res.set('Content-Type', 'application/json');
-    res.send('{"message":"Hello from the custom server!"}');
+    weatherAPI.getForecast(keys.apixuKey, req.query.location.toString())
+      .then(data => res.send(data))
+      .catch(err => res.send(err.message));
   });
 
   // All remaining requests return the React app, so it can handle routing.
