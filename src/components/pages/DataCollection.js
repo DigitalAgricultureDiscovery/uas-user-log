@@ -11,7 +11,7 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 // material-ui icons
 import DeleteForeverIcon  from 'material-ui/svg-icons/action/delete-forever';
 import DeveloperBoardIcon from 'material-ui/svg-icons/hardware/developer-board';
-// material-ui colors
+// material-ui colorsz
 import {lightGreen500, red500} from 'material-ui/styles/colors';
 
 import validate from './utils/validate';
@@ -344,7 +344,7 @@ class DataCollection extends React.Component {
         <CardActions>
           <FlatButton
             className="previous"
-            label="Prevous"
+            label="Previous"
             onClick={previousPage}
           />
           <RaisedButton

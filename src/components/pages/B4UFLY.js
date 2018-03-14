@@ -225,7 +225,7 @@ class B4UFLY extends React.Component {
         <CardActions>
           <FlatButton
             className="previous"
-            label="Prevous"
+            label="Previous"
             onClick={previousPage}
           />
           <RaisedButton
