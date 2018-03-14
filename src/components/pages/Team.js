@@ -12,7 +12,7 @@ import DeleteForeverIcon from 'material-ui/svg-icons/action/delete-forever';
 import HelpIcon          from 'material-ui/svg-icons/action/help';
 import PersonAddIcon     from 'material-ui/svg-icons/social/person-add';
 // material-ui colors
-import {lightGreen500, red500} from 'material-ui/styles/colors';
+import {red500} from 'material-ui/styles/colors';
 
 import validate from './utils/validate';
 
@@ -90,13 +90,15 @@ class AddRemotePICButton extends React.Component {
           label="Add Remote PIC"
           labelPosition="before"
           tooltip="Add remote Pilot in Command (PIC)"
-          backgroundColor={lightGreen500}
+          backgroundColor="#B46012"
           icon={<PersonAddIcon />}
           onClick={this.handleClick}
+          style={{verticalAlign: "middle"}}
         />
         <IconButton
           tooltip="Define remote PIC"
           onClick={this.toggleHelp}
+          style={{verticalAlign: "middle"}}
         >
           <HelpIcon />
         </IconButton>
@@ -191,13 +193,15 @@ class AddPICButton extends React.Component {
         <RaisedButton
           label="Add PIC"
           labelPosition="before"
-          backgroundColor={lightGreen500}
+          backgroundColor="#B46012"
           icon={<PersonAddIcon />}
           onClick={this.handleClick}
+          style={{verticalAlign: "middle"}}
         />
         <IconButton
           tooltip="Define PIC"
           onClick={this.toggleHelp}
+          style={{verticalAlign: "middle"}}
         >
           <HelpIcon />
         </IconButton>
@@ -291,13 +295,15 @@ class AddVOButton extends React.Component {
         <RaisedButton
           label="Add VO"
           labelPosition="before"
-          backgroundColor={lightGreen500}
+          backgroundColor="#B46012"
           icon={<PersonAddIcon />}
           onClick={this.handleClick}
+          style={{verticalAlign: "middle"}}
         />
         <IconButton
           tooltip="Define VO"
           onClick={this.toggleHelp}
+          style={{verticalAlign: "middle"}}
         >
           <HelpIcon />
         </IconButton>
@@ -350,12 +356,13 @@ class Team extends React.Component {
             className="previous"
             label="Previous"
             onClick={previousPage}
+            backgroundColor="#BAA892"
           />
           <RaisedButton
             className="next"
             label="Next"
             type="submit"
-            primary={true}
+            backgroundColor="#FFD100"
           />
         </CardActions>
       </form>

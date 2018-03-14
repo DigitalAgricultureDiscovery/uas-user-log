@@ -12,7 +12,7 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 import DeleteForeverIcon  from 'material-ui/svg-icons/action/delete-forever';
 import DeveloperBoardIcon from 'material-ui/svg-icons/hardware/developer-board';
 // material-ui colorsz
-import {lightGreen500, red500} from 'material-ui/styles/colors';
+import {red500} from 'material-ui/styles/colors';
 
 import validate from './utils/validate';
 
@@ -262,7 +262,7 @@ class AddSensorButton extends React.Component {
       <RaisedButton
         label="Add sensor"
         labelPosition="before"
-        backgroundColor={lightGreen500}
+        backgroundColor="#B46012"
         icon={<DeveloperBoardIcon />}
         onClick={this.handleClick}
       />
@@ -346,12 +346,13 @@ class DataCollection extends React.Component {
             className="previous"
             label="Previous"
             onClick={previousPage}
+            backgroundColor="#BAA892"
           />
           <RaisedButton
             className="next"
             label="Next"
             type="submit"
-            primary={true}
+            backgroundColor="#FFD100"
           />
         </CardActions>
       </form>

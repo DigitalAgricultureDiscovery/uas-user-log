@@ -20,12 +20,13 @@ const Finish = props => {
           className="previous"
           label="Previous"
           onClick={previousPage}
+          backgroundColor="#BAA892"
         />
         <RaisedButton
           className="save"
           label="Save"
           type="submit"
-          secondary={true}
+          backgroundColor="#FF9B1A"
           disabled={pristine || submitting}
         />
       </CardActions>

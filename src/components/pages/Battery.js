@@ -11,7 +11,7 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 import DeleteForeverIcon from 'material-ui/svg-icons/action/delete-forever';
 import BatteryFullIcon   from 'material-ui/svg-icons/device/battery-full';
 // material-ui colors
-import {lightGreen500, red500} from 'material-ui/styles/colors';
+import {red500} from 'material-ui/styles/colors';
 
 import validate from './utils/validate';
 
@@ -56,7 +56,7 @@ class AddBatteryButton extends React.Component {
       <RaisedButton
         label="Add battery"
         labelPosition="before"
-        backgroundColor={lightGreen500}
+        backgroundColor="#B46012"
         icon={<BatteryFullIcon />}
         onClick={this.handleClick}
       />
@@ -165,12 +165,13 @@ class Battery extends React.Component {
             className="previous"
             label="Previous"
             onClick={previousPage}
+            backgroundColor="#BAA892"
           />
           <RaisedButton
             className="next"
             label="Next"
             type="submit"
-            primary={true}
+            backgroundColor="#FFD100"
           />
         </CardActions>
       </form>
