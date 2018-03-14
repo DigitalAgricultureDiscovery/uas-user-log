@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Header from './Header';
-// import Footer from './Footer';
+import Footer from './Footer';
 import LogbookForm from './LogbookForm';
 
 const showResults = values =>
@@ -19,14 +19,15 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <BrowserRouter>
-          <div>
+          <div className="site-content">
             <MuiThemeProvider>
               <Header />
             </MuiThemeProvider>
             <LogbookForm onSubmit={ showResults } />
           </div>
-        </BrowserRouter>
+          <MuiThemeProvider>
+            <Footer />
+          </MuiThemeProvider>
       </div>
     )
   }
