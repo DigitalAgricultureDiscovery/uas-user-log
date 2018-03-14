@@ -33,10 +33,11 @@ if (cluster.isMaster) {
 
   // Allowed hosts
   const whitelist = [
-    'https://simple-logbook.herokuapp.com'
+    'simple-logbook.herokuapp.com'
   ];
   const corsOptions = {
     origin: function (origin, callback) {
+      console.log('origin', origin);
       if (whitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
