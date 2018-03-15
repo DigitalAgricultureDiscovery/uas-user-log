@@ -6,6 +6,7 @@ import { CardActions, CardTitle, CardText }           from 'material-ui/Card';
 import { GridList, GridTile }                         from 'material-ui/GridList';
 import FlatButton                                     from 'material-ui/FlatButton';
 import RaisedButton                                   from 'material-ui/RaisedButton';
+import Subheader                                      from 'material-ui/Subheader';
 import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
 
 import validate from '../helpers/validate';
@@ -21,8 +22,11 @@ const styles = {
     flexWrap: 'nowrap',
     overflowX: 'auto',
   },
+  gridTile: {
+    // border: '1px solid rgba(0, 0, 0, 0.54)',
+  },
   titleStyle: {
-    color: '#FFFFFF',
+    color: 'rgba(0, 0, 0, 0.54)',
   },
 }
 
@@ -48,6 +52,7 @@ class WeatherTable extends React.Component {
     super(props);
     this.state = {
       forecastData: [],
+      locationName: '',
     }
   }
 
@@ -56,6 +61,7 @@ class WeatherTable extends React.Component {
       .then(forecastData => {
         console.log(forecastData);
         this.setState({forecastData: forecastData.forecast.forecastday});
+        this.setState({locationName: forecastData.location.name + ', ' + forecastData.location.region})
       })
       .catch(error => {
         console.log(error.message);
@@ -81,24 +87,23 @@ class WeatherTable extends React.Component {
   }
 
   render() {
-    const forecastData = this.state.forecastData;
-    const tilesData = this.createForecastTiles(forecastData);
-
+    const tilesData = this.createForecastTiles(this.state.forecastData);
     return (
       <div style={styles.root}>
-        <GridList style={styles.gridList} cols={2.2}>
+        <Subheader>Station: {this.state.locationName}</Subheader>
+        <GridList style={styles.gridList} cols={2} padding={0}>
           {tilesData.map((tile, i) => (
             <GridTile
               key={i}
               title={tile.title}
               titleStyle={styles.titleStyle}
-              titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)">
-              <div style={{minWidth: 100}}>
-                <span style={{color: "red"}}>{tile.htemp}</span> | <span style={{color: "blue"}}>{tile.ltemp}&#8457;</span><br />
+              titleBackground="none"
+              style={styles.gridTile}
+            >
+              <div style={{minWidth: 100, textAlign: "center"}}>
+                <span style={{color: "red"}}>{tile.htemp}&#176;</span> | <span style={{color: "blue"}}>{tile.ltemp}&#176;</span> F<br />
                 <img src={tile.img} alt={tile.condition} /><br />
-                <span>{tile.condition}</span>
-                <br />
-                <span>{tile.wind}mph</span>
+                <span style={{fontSize: 10}}>{tile.condition}</span>
               </div>
             </GridTile>
           ))}
