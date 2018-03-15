@@ -53,7 +53,7 @@ class WeatherTable extends React.Component {
           <TableRow>
             {forecastData.map((row, i) =>
               <TableRowColumn key={i}>
-                {days[new Date(row.date).getUTCDay()] + ' ' + (new Date(row.date).getMonth() + 1).toString() + '/' + new Date(row.date).getDate().toString()}
+                {days[new Date(row.date).getUTCDay()] + ' ' + (new Date(row.date).getUTCMonth() + 1).toString() + '/' + new Date(row.date).getUTCDate().toString()}
               </TableRowColumn>
             )}
           </TableRow>
