@@ -114,8 +114,8 @@ class Location extends React.Component {
   handleClick() {
     locationUtil.clientLocation()
       .then(coords => {
-        this.props.change(this.props.fieldLatName, coords.latitude);
-        this.props.change(this.props.fieldLonName, coords.longitude);
+        this.props.change(this.props.fieldLatName, coords.latitude.toFixed(3));
+        this.props.change(this.props.fieldLonName, coords.longitude.toFixed(3));
       })
       .catch(err => console.log(err));
   }
