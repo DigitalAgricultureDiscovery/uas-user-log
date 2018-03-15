@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // material-ui elements
 import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme                  from 'material-ui/styles/getMuiTheme';
 import Card                         from 'material-ui/Card';
 import LinearProgress               from 'material-ui/LinearProgress';
 // form pages
@@ -20,6 +21,15 @@ import People           from './pages/People';           // page 12
 import FlightParameters from './pages/FlightParameters'; // page 13
 import Weather          from './pages/Weather';          // page 14
 import Finish           from './pages/Finish';           // page 15
+
+const muiTheme = getMuiTheme({
+  palette: {
+    accent1Color: "#AD1F65",
+    pickerHeaderColor: "#4D4038",
+    primary1Color: "#C28E0E",
+    primary2Color: "#916A0A"
+  },
+});
 
 class ProgressBar extends React.Component {
   constructor(props) {
@@ -80,7 +90,7 @@ class LogbookForm extends React.Component {
     };
 
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <div style={ divStyle }>
           <br />
           <div style={ contentStyle }>
