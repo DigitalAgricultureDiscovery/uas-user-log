@@ -122,7 +122,8 @@ class WeatherTable extends React.Component {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     let tilesData = [];
     forecastData.forEach(function(row, i) {
-      tilesData.push({
+      if (i > 0) {
+        tilesData.push({
           img: row.day.condition.icon,
           title: days[new Date(row.date).getUTCDay()] + ' ' + (new Date(row.date).getUTCMonth() + 1).toString() + '/' + new Date(row.date).getUTCDate().toString(),
           condition: row.day.condition.text,
@@ -131,7 +132,8 @@ class WeatherTable extends React.Component {
           humid: row.day.avghumidity,
           vis: row.day.avgvis_miles,
           wind: row.day.maxwind_mph,
-      });
+        });
+      }
     });
     return tilesData;
   }
