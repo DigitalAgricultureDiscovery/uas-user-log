@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
@@ -28,26 +27,8 @@ if (cluster.isMaster) {
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, './client/build')));
 
-  // Enable CORS
-  app.use(cors());
-
-  // Allowed hosts
-  const whitelist = [
-    'simple-logbook.herokuapp.com'
-  ];
-  const corsOptions = {
-    origin: function (origin, callback) {
-      console.log('origin', origin);
-      if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback('Not allowed by CORS');
-      }
-    }
-  }
-
   // Answer API requests.
-  app.get('/api', cors(corsOptions), function (req, res) {
+  app.get('/api', function (req, res) {
     res.set('Content-Type', 'application/json');
     weatherAPI.getForecast(keys.apixuKey, req.query.location.toString())
       .then(data => res.send(data))

@@ -13,7 +13,7 @@ import BatteryFullIcon   from 'material-ui/svg-icons/device/battery-full';
 // material-ui colors
 import {red500} from 'material-ui/styles/colors';
 
-import validate from './utils/validate';
+import validate from '../helpers/validate';
 
 class BatteriesUsedText extends React.Component {
   render() {

@@ -8,7 +8,7 @@ import FlatButton                             from 'material-ui/FlatButton';
 import RaisedButton                           from 'material-ui/RaisedButton';
 import MenuItem                               from 'material-ui/MenuItem';
 
-import validate from './utils/validate';
+import validate from '../helpers/validate';
 
 class LifeCycleSelect extends React.Component {
   render() {

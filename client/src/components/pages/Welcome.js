@@ -6,7 +6,7 @@ import Divider                                        from 'material-ui/Divider'
 import RaisedButton                                   from 'material-ui/RaisedButton';
 import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
 
-import validate from './utils/validate';
+import validate from '../helpers/validate';
 
 class Welcome extends React.Component {
   render() {

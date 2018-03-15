@@ -14,7 +14,7 @@ import PersonAddIcon     from 'material-ui/svg-icons/social/person-add';
 // material-ui colors
 import {red500} from 'material-ui/styles/colors';
 
-import validate from './utils/validate';
+import validate from '../helpers/validate';
 
 class RemotePICText extends React.Component {
   render() {
