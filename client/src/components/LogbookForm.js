@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// material-ui elements
 import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
-import { Card }                     from 'material-ui/Card';
-
+import Card                         from 'material-ui/Card';
+import LinearProgress               from 'material-ui/LinearProgress';
+// form pages
 import Welcome          from './pages/Welcome';          // page 1
 import Mission          from './pages/Mission';          // page 2
 import Crop             from './pages/Crop';             // page 3
@@ -18,6 +20,36 @@ import People           from './pages/People';           // page 12
 import FlightParameters from './pages/FlightParameters'; // page 13
 import Weather          from './pages/Weather';          // page 14
 import Finish           from './pages/Finish';           // page 15
+
+class ProgressBar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      completed: 0,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(this.state.completed);
+    if (this.state.completed > 15) {
+      this.setState({completed: 15});
+    } else {
+      this.setState({completed: nextProps.value});
+    }
+  }
+
+  render() {
+    return (
+      <LinearProgress
+        mode="determinate"
+        max={15}
+        color="#C28E0E"
+        value={this.state.completed}
+      />
+    );
+  }
+}
 
 class LogbookForm extends React.Component {
   constructor(props) {
@@ -138,6 +170,7 @@ class LogbookForm extends React.Component {
                   onSubmit={ onSubmit }
                 />
               )}
+              <ProgressBar value={pageIndex} />
             </Card>
           </div>
         </div>
