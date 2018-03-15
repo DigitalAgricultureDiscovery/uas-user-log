@@ -14,7 +14,7 @@ import DeveloperBoardIcon from 'material-ui/svg-icons/hardware/developer-board';
 // material-ui colorsz
 import {red500} from 'material-ui/styles/colors';
 
-import validate from './utils/validate';
+import validate from '../helpers/validate';
 
 class SensorsUsedText extends React.Component {
   render() {

@@ -5,7 +5,7 @@ import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
-import validate from './utils/validate';
+import validate from '../helpers/validate';
 
 const Finish = props => {
   const { handleSubmit, pristine, previousPage, submitting } = props;

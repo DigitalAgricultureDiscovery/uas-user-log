@@ -8,7 +8,7 @@ import FlatButton                           from 'material-ui/FlatButton';
 import RadioButton                          from 'material-ui/RadioButton';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
-import validate from './utils/validate';
+import validate from '../helpers/validate';
 
 class PeoplePresentRadioButtonGroup extends React.Component {
   render() {

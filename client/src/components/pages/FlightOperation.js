@@ -7,7 +7,7 @@ import FlatButton                           from 'material-ui/FlatButton';
 import MenuItem                             from 'material-ui/MenuItem';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
-import validate from './utils/validate';
+import validate from '../helpers/validate';
 
 class FlightModeSelect extends React.Component {
   constructor(props) {

@@ -13,8 +13,8 @@ import MyLocationIcon          from 'material-ui/svg-icons/maps/my-location';
 // material-ui colors
 import {red500} from 'material-ui/styles/colors';
 
-import validate from './utils/validate';
-import locationUtil from './utils/location';
+import validate from '../helpers/validate';
+import locationUtil from '../helpers/location';
 
 class FlightDatePicker extends React.Component {
   render() {
