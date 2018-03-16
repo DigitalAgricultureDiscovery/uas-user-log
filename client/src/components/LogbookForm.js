@@ -65,7 +65,7 @@ class LogbookForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageIndex: 1,
+      pageIndex: 0,
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
@@ -95,86 +95,86 @@ class LogbookForm extends React.Component {
           <br />
           <div style={ contentStyle }>
             <Card>
-              { pageIndex === 1 && <Welcome onSubmit={this.nextPage} /> }
-              { pageIndex === 2 && (
+              { pageIndex === 0 && <Welcome onSubmit={this.nextPage} /> }
+              { pageIndex === 1 && (
                 <Mission
                   previousPage={this.previousPage}
                   onSubmit={this.nextPage}
                 />
               )}
-              { pageIndex === 3 && (
+              { pageIndex === 2 && (
                 <Crop
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 4 && (
+              { pageIndex === 3 && (
                 <General
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 5 && (
+              { pageIndex === 4 && (
                 <Team
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 6 && (
+              { pageIndex === 5 && (
                 <Hardware
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 7 && (
+              { pageIndex === 6 && (
                 <Battery
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 8 && (
+              { pageIndex === 7 && (
                 <FlightOperation
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 9 && (
+              { pageIndex === 8 && (
                 <DataCollection
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 10 && (
+              { pageIndex === 9 && (
                 <B4UFLY
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 11 && (
+              { pageIndex === 10 && (
                 <Obstacles
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 12 && (
+              { pageIndex === 11 && (
                 <People
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 13 && (
+              { pageIndex === 12 && (
                 <FlightParameters
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 14 && (
+              { pageIndex === 13 && (
                 <Weather
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 15 && (
+              { pageIndex === 14 && (
                 <Finish
                   previousPage={ this.previousPage }
                   onSubmit={ onSubmit }

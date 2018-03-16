@@ -16,6 +16,268 @@ import {red500} from 'material-ui/styles/colors';
 
 import validate from '../helpers/validate';
 
+const chemicals = [
+  {value: 0, name: 'Herbicide'},
+  {value: 1, name: 'Insecticide'},
+  {value: 2, name: 'Fungicide'},
+  {value: 3, name: 'Plant Growth Regulator (PGR)'},
+  {value: 4, name: 'Nutrients'},
+  {value: 5, name: 'Other'},
+];
+
+class ChemicalTypeSelect extends React.Component {
+  menuItems(chemicals) {
+    return chemicals.map((chemical) => (
+      <MenuItem
+        key={chemical.value}
+        value={chemical.value}
+        primaryText={chemical.name}
+      />
+    ))
+  }
+  render() {
+    return (
+      <Field
+        name="chemicalTypeSelect"
+        component={SelectField}
+        floatingLabelText="Select a chemical type"
+      >
+        {this.menuItems(chemicals)}
+      </Field>
+    )
+  }
+}
+
+class ChemicalOtherText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="chemicalOtherText"
+        component={TextField}
+        floatingLabelText="Enter other chemical type"
+      />
+    )
+  }
+}
+
+class ApplicateRateText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="applicationRateText"
+        component={TextField}
+        floatingLabelText="Application rate"
+        type="number"
+        step="0.01"
+      />
+    )
+  }
+}
+
+class ApplicationRateUnitSelect extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event, index, value) {
+    const convertedAppRate = (index === 0 ? this.props.currentAppRate * 9.35396 : this.props.currentAppRate * 0.106907);
+    this.props.change('applicationRateText', convertedAppRate.toFixed(2));
+  }
+
+  render() {
+    return (
+      <Field
+        name="appRateUnitSelect"
+        component={SelectField}
+        floatingLabelText="Unit"
+        onChange={this.handleChange}
+      >
+        <MenuItem value={0} primaryText="gallons/acre" />
+        <MenuItem value={1} primaryText="l/ha" />
+      </Field>
+    )
+  }
+}
+
+class ChemicalRateText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="chemicalRateText"
+        component={TextField}
+        floatingLabelText="Chemical rate"
+        type="number"
+        step="0.01"
+      />
+    )
+  }
+}
+
+class StartingVolumeText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="startingVolumeText"
+        component={TextField}
+        floatingLabelText="Starting volume"
+        type="number"
+        step="0.01"
+      />
+    )
+  }
+}
+
+class NozzleTypeText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="nozzleTypeText"
+        component={TextField}
+        floatingLabelText="Nozzle type"
+      />
+    )
+  }
+}
+
+class OrificeSizeText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="orificeSizeText"
+        component={TextField}
+        floatingLabelText="Orifice size"
+        type="number"
+        step="0.01"
+      />
+    )
+  }
+}
+
+class PressureText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="pressureText"
+        component={TextField}
+        floatingLabelText="Pressure"
+        type="number"
+        step="0.01"
+      />
+    )
+  }
+}
+
+class PressureUnitSelect extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event, index, value) {
+    const convertedPressure = (index === 0 ? this.props.currentPressure * 6894.76 : this.props.currentPressure * 0.000145038);
+    this.props.change('pressureText', convertedPressure.toFixed(2));
+  }
+
+  render() {
+    return (
+      <Field
+        name="pressureUnitSelect"
+        component={SelectField}
+        floatingLabelText="Unit"
+        onChange={this.handleChange}
+      >
+        <MenuItem value={0} primaryText="psi" />
+        <MenuItem value={1} primaryText="Pascal" />
+      </Field>
+    )
+  }
+}
+
+class EffectiveSwathText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="effectiveSwathText"
+        component={TextField}
+        floatingLabelText="Effective swath distance between passes"
+        type="number"
+        step="0.01"
+      />
+    )
+  }
+}
+
+class EffectiveSwathUnitSelect extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event, index, value) {
+    const convertedEffectiveSwath = (index === 0 ? this.props.currentEffectiveSwath * 0.000022956841138659 : this.props.currentEffectiveSwath * 43560);
+    this.props.change('effectiveSwathText', convertedEffectiveSwath.toFixed(2));
+  }
+
+  render() {
+    return (
+      <Field
+        name="effectiveSwathUnitSelect"
+        component={SelectField}
+        floatingLabelText="Unit"
+        onChange={this.handleChange}
+      >
+        <MenuItem value={0} primaryText="sq ft" />
+        <MenuItem value={1} primaryText="acre" />
+      </Field>
+    )
+  }
+}
+
+class ApplicationTypeSelect extends React.Component {
+  render() {
+    return (
+      <Field
+        name="applicationTypeSelect"
+        component={SelectField}
+        floatingLabelText="Type of application"
+      >
+        <MenuItem value={0} primaryText="Precision" />
+        <MenuItem value={1} primaryText="Uniform" />
+      </Field>
+    )
+  }
+}
+
+class OtherSprayInputs extends React.Component {
+  render() {
+    return (
+      <div>
+        <ApplicateRateText /><br />
+        <ApplicationRateUnitSelect
+          currentAppRate={this.props.currentAppRate}
+          change={this.props.change}
+        /><br />
+        <ChemicalRateText /><br />
+        <StartingVolumeText /><br />
+        <NozzleTypeText /><br />
+        <OrificeSizeText /><br />
+        <PressureText /><br />
+        <PressureUnitSelect
+          currentPressure={this.props.currentPressure}
+          change={this.props.change}
+        /><br />
+        <EffectiveSwathText /><br />
+        <EffectiveSwathUnitSelect
+          currentEffectiveSwath={this.props.currentEffectiveSwath}
+          change={this.props.change}
+        /><br />
+        <ApplicationTypeSelect />
+      </div>
+    )
+  }
+}
+
 class SensorsUsedText extends React.Component {
   render() {
     return (
@@ -327,19 +589,36 @@ const renderSensors = ({ fields, change, currentSensors }) => (
 
 class DataCollection extends React.Component {
   render() {
-    const { handleSubmit, previousPage, currentSensors } = this.props;
-
+    const { handleSubmit, previousPage, currentSensors, isSpray, chemicalType, currentAppRate, currentPressure, currentEffectiveSwath } = this.props;
+    const otherIndex = 5;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Data Collection" />
         <CardText>
-          <SensorsUsedText />
-          <br />
-          <FieldArray
-            name="sensors"
-            component={renderSensors}
-            change={this.props.change}
-            currentSensors={currentSensors} />
+          {isSpray !== 3 &&
+            <div>
+              <SensorsUsedText />
+              <br />
+              <FieldArray
+                name="sensors"
+                component={renderSensors}
+                change={this.props.change}
+                currentSensors={currentSensors}
+              />
+            </div>
+          }
+          {isSpray === 3 &&
+            <div>
+              <ChemicalTypeSelect />
+              {chemicalType === otherIndex ? <div><ChemicalOtherText /></div> : null}
+              <OtherSprayInputs
+                change={this.props.change}
+                currentAppRate={currentAppRate}
+                currentPressure={currentPressure}
+                currentEffectiveSwath={currentEffectiveSwath}
+              />
+            </div>
+          }
         </CardText>
         <CardActions>
           <FlatButton
@@ -371,8 +650,18 @@ const selector = formValueSelector('logbook');
 export default connect(
   state => {
     const currentSensors = selector(state, 'sensors');
+    const isSpray = selector(state, 'typeSelect');
+    const chemicalType = selector(state, 'chemicalTypeSelect');
+    const currentAppRate = selector(state, 'applicationRateText');
+    const currentPressure = selector(state, 'pressureText');
+    const currentEffectiveSwath = selector(state, 'effectiveSwathText');
     return {
-      currentSensors
+      currentSensors,
+      isSpray,
+      chemicalType,
+      currentAppRate,
+      currentPressure,
+      currentEffectiveSwath,
     }
   }
 )(myReduxForm);
