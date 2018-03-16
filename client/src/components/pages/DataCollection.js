@@ -81,7 +81,7 @@ class ApplicationRateUnitSelect extends React.Component {
   }
 
   handleChange(event, index, value) {
-    const convertedAppRate = (index === 0 ? this.props.currentAppRate * 9.35396 : this.props.currentAppRate * 0.106907);
+    const convertedAppRate = (index === 0 ? this.props.currentAppRate * 0.106907 : this.props.currentAppRate * 9.35396);
     this.props.change('applicationRateText', convertedAppRate.toFixed(2));
   }
 
@@ -175,8 +175,10 @@ class PressureUnitSelect extends React.Component {
   }
 
   handleChange(event, index, value) {
-    const convertedPressure = (index === 0 ? this.props.currentPressure * 6894.76 : this.props.currentPressure * 0.000145038);
-    this.props.change('pressureText', convertedPressure.toFixed(2));
+    console.log(this.props.currentPressure);
+    console.log(index);
+    const convertedPressure = (index === 0 ? this.props.currentPressure * 0.000145038 : this.props.currentPressure * 6894.76);
+    this.props.change('pressureText', convertedPressure.toFixed(5));
   }
 
   render() {
@@ -215,8 +217,8 @@ class EffectiveSwathUnitSelect extends React.Component {
   }
 
   handleChange(event, index, value) {
-    const convertedEffectiveSwath = (index === 0 ? this.props.currentEffectiveSwath * 0.000022956841138659 : this.props.currentEffectiveSwath * 43560);
-    this.props.change('effectiveSwathText', convertedEffectiveSwath.toFixed(2));
+    const convertedEffectiveSwath = (index === 0 ? this.props.currentEffectiveSwath * 43560 : this.props.currentEffectiveSwath * 0.000022956841138659);
+    this.props.change('effectiveSwathText', convertedEffectiveSwath.toFixed(5));
   }
 
   render() {
@@ -253,25 +255,34 @@ class OtherSprayInputs extends React.Component {
   render() {
     return (
       <div>
-        <ApplicateRateText /><br />
-        <ApplicationRateUnitSelect
-          currentAppRate={this.props.currentAppRate}
-          change={this.props.change}
-        /><br />
+        <div style={{display: 'flex'}}>
+          <ApplicateRateText />&nbsp;
+          <ApplicationRateUnitSelect
+            currentAppRate={this.props.currentAppRate}
+            change={this.props.change}
+          />
+        </div>
+        <br />
         <ChemicalRateText /><br />
         <StartingVolumeText /><br />
         <NozzleTypeText /><br />
         <OrificeSizeText /><br />
-        <PressureText /><br />
-        <PressureUnitSelect
-          currentPressure={this.props.currentPressure}
-          change={this.props.change}
-        /><br />
-        <EffectiveSwathText /><br />
-        <EffectiveSwathUnitSelect
-          currentEffectiveSwath={this.props.currentEffectiveSwath}
-          change={this.props.change}
-        /><br />
+        <div style={{display: 'flex'}}>
+          <PressureText />&nbsp;
+          <PressureUnitSelect
+            currentPressure={this.props.currentPressure}
+            change={this.props.change}
+          />
+        </div>
+        <br />
+        <div style={{display: 'flex'}}>
+          <EffectiveSwathText />&nbsp;
+          <EffectiveSwathUnitSelect
+            currentEffectiveSwath={this.props.currentEffectiveSwath}
+            change={this.props.change}
+          />
+        </div>
+        <br />
         <ApplicationTypeSelect />
       </div>
     )
