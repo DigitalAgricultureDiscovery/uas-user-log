@@ -1,13 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
-import { CardActions, CardTitle, CardText }           from 'material-ui/Card';
+import { TextField }                                  from 'redux-form-material-ui';
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  CardMedia,
+  CardTitle,
+  CardText
+}                                                     from 'material-ui/Card';
 import { GridList, GridTile }                         from 'material-ui/GridList';
 import FlatButton                                     from 'material-ui/FlatButton';
 import RaisedButton                                   from 'material-ui/RaisedButton';
 import Subheader                                      from 'material-ui/Subheader';
-import TextField                                      from 'material-ui/TextField';
 
 import validate from '../helpers/validate';
 
@@ -41,7 +48,7 @@ class NoFlightWarningText extends React.Component {
   }
 }
 
-async function fetchForecast(location) {
+async function fetchWeatherData(location) {
   const response = await fetch('/api?location=' + location);
   const data = await response.json();
   return data;
@@ -85,40 +92,56 @@ class UpdateLocation extends React.Component {
   }
 }
 
-class WeatherTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      forecastData: [],
-      locationName: '',
-    }
-    this.callFetchForecast = this.callFetchForecast.bind(this);
-  }
+class CurrentCard extends React.Component {
+  render() {
+    const currentData = this.props.currentData;
+    const todaysForecast = this.props.forecastData;
+    console.log('todaysForecast', todaysForecast);
+    return (
+      <Card>
+        <CardHeader
+          title={this.props.locationName}
+          subtitle="Current Weather"
+          avatar={currentData.condition.icon}
+        />
+        <CardMedia style={{textAlign: "center"}}>
+          <h1 style={{color: "#085C11"}}>Current temp: {currentData.temp_f}&#176; F</h1>
+          <h2 style={{color: "#849E2A"}}>Feels like: {currentData.feelslike_f}&#176; F</h2>
+        </CardMedia>
+        <CardTitle
+          title={currentData.condition.text}
+          subtitle={<div><span style={{color: "red"}}>{todaysForecast.maxtemp_f}&#176;</span> | <span style={{color: "blue"}}>{todaysForecast.mintemp_f}&#176;</span> F</div>}
+        />
+        <CardText>
 
-  callFetchForecast = (location) => {
-    fetchForecast(location)
-      .then(forecastData => {
-        this.setState({forecastData: forecastData.forecast.forecastday});
-        this.setState({locationName: forecastData.location.name + ', ' + forecastData.location.region})
-      })
-      .catch(error => {
-        console.log(error.message);
-      });
+        </CardText>
+      </Card>
+    )
   }
+}
 
-  componentDidMount() {
-    if (this.props.location) {
-      this.callFetchForecast(this.props.location);
-    }
-  }
+const renderForecastGridTiles = (forecastTileData) => (
+  <GridList style={styles.gridList} cols={2} padding={0}>
+    {forecastTileData.map((tile, i) => (
+      <GridTile
+        key={i}
+        title={tile.title}
+        titleStyle={styles.titleStyle}
+        titleBackground="none"
+        style={styles.gridTile}
+      >
+        <div style={{minWidth: 100, textAlign: "center"}}>
+          <span style={{color: "red"}}>{tile.htemp}&#176;</span> | <span style={{color: "blue"}}>{tile.ltemp}&#176;</span> F<br />
+          <img src={tile.img} alt={tile.condition} /><br />
+          <span style={{fontSize: 10}}>{tile.condition}</span>
+        </div>
+      </GridTile>
+    ))}
+  </GridList>
+)
 
-  componentWillReceiveProps(nextProps, nextState) {
-    if (nextProps.location) {
-      this.callFetchForecast(nextProps.location);
-    }
-  }
-
-  createForecastTiles(forecastData) {
+class ForecastTable extends React.Component {
+  formatData(forecastData) {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     let tilesData = [];
     forecastData.forEach(function(row, i) {
@@ -139,44 +162,80 @@ class WeatherTable extends React.Component {
   }
 
   render() {
-    if (this.state.forecastData) {
-      const tilesData = this.createForecastTiles(this.state.forecastData);
+    const forecastData = this.formatData(this.props.forecastData);
+    return (
+      <div style={styles.root}>
+        <Subheader>Upcoming forecast</Subheader>
+        {renderForecastGridTiles(forecastData)}
+      </div>
+    )
+  }
+}
 
+class WeatherDisplay extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentData: [],
+      forecastData: [],
+      locationName: '',
+    }
+  }
+
+  callFetchWeatherData = (location) => {
+    fetchWeatherData(location)
+      .then(weatherData => {
+        this.setState({currentData: weatherData.current});
+        this.setState({forecastData: weatherData.forecast.forecastday});
+        this.setState({locationName: weatherData.location.name + ', ' + weatherData.location.region})
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  }
+
+  componentDidMount() {
+    if (this.props.location) {
+      this.callFetchWeatherData(this.props.location);
+    }
+  }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    if (nextProps.location) {
+      this.callFetchWeatherData(nextProps.location);
+    }
+  }
+
+  render() {
+    if (this.state.currentData && this.state.forecastData.length > 0) {
       return (
-        <div style={styles.root}>
-          {tilesData.length > 0 ? <Subheader>{this.state.locationName}</Subheader> : null}
-          <GridList style={styles.gridList} cols={2} padding={0}>
-            {tilesData.map((tile, i) => (
-              <GridTile
-                key={i}
-                title={tile.title}
-                titleStyle={styles.titleStyle}
-                titleBackground="none"
-                style={styles.gridTile}
-              >
-                <div style={{minWidth: 100, textAlign: "center"}}>
-                  <span style={{color: "red"}}>{tile.htemp}&#176;</span> | <span style={{color: "blue"}}>{tile.ltemp}&#176;</span> F<br />
-                  <img src={tile.img} alt={tile.condition} /><br />
-                  <span style={{fontSize: 10}}>{tile.condition}</span>
-                </div>
-              </GridTile>
-            ))}
-          </GridList>
+        <div>
+          <CurrentCard
+            currentData={this.state.currentData}
+            forecastData={this.state.forecastData[0].day}
+            locationName={this.state.locationName}
+          />
+          <br />
+          <ForecastTable
+            forecastData={this.state.forecastData}
+            locationName={this.state.locationName}
+          />
         </div>
       )
     } else {
-      return (<div></div>)
+      return null;
     }
   }
 }
 
-class APIXUWidget extends React.Component {
+class NoteText extends React.Component {
   render() {
     return (
-      <div>
-        <div id="apixu-weather-widget-3"></div>
-        <script type='text/javascript' src='https://www.apixu.com/weather/widget.ashx?loc=2571073&wid=3&tu=2&div=apixu-weather-widget-3' async></script>
-      </div>
+      <Field
+        name="noteText"
+        component={TextField}
+        floatingLabelText="Note"
+      />
     )
   }
 }
@@ -212,9 +271,10 @@ class Weather extends React.Component {
           {currentFlights === undefined && this.state.location === '' ? <NoFlightWarningText /> : null}
           <br />
           <UpdateLocation updateLocation={this.updateLocation} />
-          <APIXUWidget />
           <br />
-          <WeatherTable location={this.state.location} />
+          <WeatherDisplay location={this.state.location} />
+          <br />
+          <NoteText />
         </CardText>
         <CardActions>
           <FlatButton
