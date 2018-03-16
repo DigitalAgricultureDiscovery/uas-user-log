@@ -210,16 +210,22 @@ class WeatherDisplay extends React.Component {
     if (this.state.currentData && this.state.forecastData.length > 0) {
       return (
         <div>
-          <CurrentCard
-            currentData={this.state.currentData}
-            forecastData={this.state.forecastData[0].day}
-            locationName={this.state.locationName}
-          />
-          <br />
-          <ForecastTable
-            forecastData={this.state.forecastData}
-            locationName={this.state.locationName}
-          />
+          {this.props.isSpray &&
+            <div>
+              <CurrentCard
+                currentData={this.state.currentData}
+                forecastData={this.state.forecastData[0].day}
+                locationName={this.state.locationName}
+              />
+              <br />
+            </div>
+          }
+          <div>
+            <ForecastTable
+              forecastData={this.state.forecastData}
+              locationName={this.state.locationName}
+            />
+          </div>
         </div>
       )
     } else {
@@ -245,6 +251,7 @@ class Weather extends React.Component {
     super(props);
     this.state = {
       location: '',
+      'isSpray': '',
     }
     this.updateLocation = this.updateLocation.bind(this);
   }
@@ -262,7 +269,7 @@ class Weather extends React.Component {
   }
 
   render() {
-    const { handleSubmit, previousPage, currentFlights } = this.props;
+    const { handleSubmit, previousPage, currentFlights, isSpray } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -272,7 +279,7 @@ class Weather extends React.Component {
           <br />
           <UpdateLocation updateLocation={this.updateLocation} />
           <br />
-          <WeatherDisplay location={this.state.location} />
+          <WeatherDisplay location={this.state.location} isSpray={isSpray} />
           <br />
           <NoteText />
         </CardText>
@@ -306,8 +313,10 @@ const selector = formValueSelector('logbook');
 export default connect(
   state => {
     const currentFlights = selector(state, 'flights');
+    const isSpray = (selector(state, 'typeSelect') === 3 ? true : false);
     return {
-      currentFlights
+      currentFlights,
+      isSpray,
     }
   }
 )(myReduxForm);

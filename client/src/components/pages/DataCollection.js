@@ -606,7 +606,7 @@ class DataCollection extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Data Collection" />
         <CardText>
-          {isSpray !== 3 &&
+          {!isSpray &&
             <div>
               <SensorsUsedText />
               <br />
@@ -618,7 +618,7 @@ class DataCollection extends React.Component {
               />
             </div>
           }
-          {isSpray === 3 &&
+          {isSpray &&
             <div>
               <ChemicalTypeSelect />
               {chemicalType === otherIndex ? <div><ChemicalOtherText /></div> : null}
@@ -661,7 +661,7 @@ const selector = formValueSelector('logbook');
 export default connect(
   state => {
     const currentSensors = selector(state, 'sensors');
-    const isSpray = selector(state, 'typeSelect');
+    const isSpray = (selector(state, 'typeSelect') === 3 ? true : false);
     const chemicalType = selector(state, 'chemicalTypeSelect');
     const currentAppRate = selector(state, 'applicationRateText');
     const currentPressure = selector(state, 'pressureText');
