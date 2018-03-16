@@ -41,7 +41,6 @@ class ProgressBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.state.completed);
     if (this.state.completed > 15) {
       this.setState({completed: 15});
     } else {
