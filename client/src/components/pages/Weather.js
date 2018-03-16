@@ -96,25 +96,35 @@ class CurrentCard extends React.Component {
   render() {
     const currentData = this.props.currentData;
     const todaysForecast = this.props.forecastData;
-    console.log('todaysForecast', todaysForecast);
     return (
-      <Card>
+      <Card style={{backgroundColor: '#E7F4F5'}}>
         <CardHeader
           title={this.props.locationName}
-          subtitle="Current Weather"
+          subtitle={<div><span style={{color: "red"}}>{todaysForecast.maxtemp_f}&#176;</span> | <span style={{color: "blue"}}>{todaysForecast.mintemp_f}&#176;</span> F</div>}
           avatar={currentData.condition.icon}
         />
-        <CardMedia style={{textAlign: "center"}}>
-          <h1 style={{color: "#085C11"}}>Current temp: {currentData.temp_f}&#176; F</h1>
-          <h2 style={{color: "#849E2A"}}>Feels like: {currentData.feelslike_f}&#176; F</h2>
+        <CardMedia style={{textAlign: 'center'}}>
+          <div style={{display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gridGap: 10, gridAutoRows: "minmax(25px, auto)"}}>
+            <h2>
+              <div style={{color: "#085C11", gridColumn: 1, gridRow: 1}}>Current {currentData.temp_f}&#176; F</div>
+              <div style={{color: "#849E2A", gridColumn: 1, gridRow: 2}}>Feels like {currentData.feelslike_f}&#176; F</div>
+            </h2>
+            <h4>
+              <div style={{gridColumn: 2, gridRow: "1/2", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridGap: 10, gridAutoRows: "minmax(25px, auto)", textAlign: "left"}}>
+                <div style={{gridColumn: 1, gridRow: 1}}>Wind:</div>
+                <div style={{gridColumn: "2/4", gridRow: 1}}>{currentData.wind_dir} {currentData.wind_degree}&#176; {currentData.wind_mph} mph</div>
+                <div style={{gridColumn: 1, gridRow: 2}}>Cloud:</div>
+                <div style={{gridColumn: 2, gridRow: 2}}>{currentData.cloud}%</div>
+                <div style={{gridColumn: 3, gridRow: 2}}>Visibility:</div>
+                <div style={{gridColumn: 4, gridRow: 2}}>{currentData.vis_miles} miles</div>
+                <div style={{gridColumn: 1, gridRow: 3}}>Humidity:</div>
+                <div style={{gridColumn: 2, gridRow: 3}}>{currentData.humidity}%</div>
+                <div style={{gridColumn: 3, gridRow: 3}}>Pressure:</div>
+                <div style={{gridColumn: 4, gridRow: 3}}>{currentData.pressure_in} in</div>
+              </div>
+            </h4>
+          </div>
         </CardMedia>
-        <CardTitle
-          title={currentData.condition.text}
-          subtitle={<div><span style={{color: "red"}}>{todaysForecast.maxtemp_f}&#176;</span> | <span style={{color: "blue"}}>{todaysForecast.mintemp_f}&#176;</span> F</div>}
-        />
-        <CardText>
-
-        </CardText>
       </Card>
     )
   }
@@ -144,8 +154,22 @@ class ForecastTable extends React.Component {
   formatData(forecastData) {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     let tilesData = [];
+    const skipFirstDay = this.props.isSpray;
     forecastData.forEach(function(row, i) {
-      if (i > 0) {
+      if (skipFirstDay) {
+        if (i > 0) {
+          tilesData.push({
+            img: row.day.condition.icon,
+            title: days[new Date(row.date).getUTCDay()] + ' ' + (new Date(row.date).getUTCMonth() + 1).toString() + '/' + new Date(row.date).getUTCDate().toString(),
+            condition: row.day.condition.text,
+            htemp: row.day.maxtemp_f,
+            ltemp: row.day.mintemp_f,
+            humid: row.day.avghumidity,
+            vis: row.day.avgvis_miles,
+            wind: row.day.maxwind_mph,
+          });
+        }
+      } else {
         tilesData.push({
           img: row.day.condition.icon,
           title: days[new Date(row.date).getUTCDay()] + ' ' + (new Date(row.date).getUTCMonth() + 1).toString() + '/' + new Date(row.date).getUTCDate().toString(),
@@ -165,7 +189,7 @@ class ForecastTable extends React.Component {
     const forecastData = this.formatData(this.props.forecastData);
     return (
       <div style={styles.root}>
-        <Subheader>Upcoming forecast</Subheader>
+        <Subheader>7-Day forecast</Subheader>
         {renderForecastGridTiles(forecastData)}
       </div>
     )
@@ -224,6 +248,7 @@ class WeatherDisplay extends React.Component {
             <ForecastTable
               forecastData={this.state.forecastData}
               locationName={this.state.locationName}
+              isSpray={this.props.isSpray}
             />
           </div>
         </div>
