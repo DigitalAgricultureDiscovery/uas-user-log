@@ -59,30 +59,5 @@ export default reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate,
-  initialValues: {
-    'categorySelect': 1,
-    'typeSelect': 2,
-    'lifeCycleSelect': 1,
-    'droneTypeSelect': 1,
-    'remoteChargeTargetText': 100.00,
-    'remoteChargeMinimumText': 30.00,
-    'groundControlChargeTargetText': 100.00,
-    'groundControlChargeMinimumText': 30.00,
-    'flightModeSelect': 1,
-    'statusSelect': 1,
-    'chemicalTypeSelect': 1,
-    'appRateUnitSelect': 1,
-    'pressureUnitSelect': 1,
-    'swathDistanceUnitSelect': 1,
-    'swathAreaUnitSelect': 1,
-    'applicationTypeSelect': 1,
-    'preflightRadioButtonGroup': 'yes',
-    'permissionRadioButtonGroup': 'notRequired',
-    'peoplePresentRadioButtonGroup': 'no',
-    'maximumAGLText': 400,
-    'aglUnitSelect': 1,
-    'lookAngleRadioButtonGroup': 'vertical',
-    'maximumGroundSpeedRadioButtonGroup': 'no',
-  }
-})(Mission);
+  validate
+})(Mission)
