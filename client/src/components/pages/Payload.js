@@ -80,9 +80,9 @@ class Payload extends React.Component {
     const { handleSubmit, previousPage } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <CardTitle title="Payload Metadata" />
+        <CardTitle title="Payload" />
         <CardText>
-
+          Development in progress.
         </CardText>
         <CardActions>
           <FlatButton
