@@ -194,13 +194,13 @@ class PressureUnitSelect extends React.Component {
   }
 }
 
-class EffectiveSwathText extends React.Component {
+class SwathDistanceText extends React.Component {
   render() {
     return (
       <Field
-        name="effectiveSwathText"
+        name="swathDistanceText"
         component={TextField}
-        floatingLabelText="Effective swath dist."
+        floatingLabelText="Distance between passes"
         type="number"
         step="0.01"
       />
@@ -208,86 +208,67 @@ class EffectiveSwathText extends React.Component {
   }
 }
 
-const linearUnits = [
-  {value: 1, name: 'Feet'},
-  {value: 2, name: 'Meters'},
-];
-
-const areaUnits = [
-  {value: 1, name: 'Acre'},
-  {value: 2, name: 'Hectare'},
-]
-
-class EffectiveSwathUnitSelect extends React.Component {
+class SwathDistanceUnitSelect extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      unit: this.props.swathUnitType === 1 ? linearUnits : areaUnits,
-    }
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event, index, value) {
-    if (this.state.unit[0].name === 'feet') {
-      const convertedSwathValue = (index === 1 ? this.props.swathValue * 3.28084 : this.props.swathValue * 0.3048);
-      this.props.change('effectiveSwathText', convertedSwathValue.toFixed(5));
-    } else {
-      const convertedSwathValue = (index === 1 ? this.props.swathValue * 2.47105 : this.props.swathValue * 0.404686);
-      this.props.change('effectiveSwathText', convertedSwathValue.toFixed(5));
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({unit: nextProps.swathUnitType === 1 ? linearUnits : areaUnits});
-  }
-
-  menuItems(unitType) {
-    return unitType.map((unit) => (
-      <MenuItem
-        key={unit.value}
-        value={unit.value}
-        primaryText={unit.name}
-      />
-    ));
+    const convertedDistance = (index === 1 ? this.props.distance * 3.28084 : this.props.distance * 0.3048);
+    this.props.change('swathDistanceText', convertedDistance.toFixed(5));
   }
 
   render() {
     return (
       <Field
-        name="effectiveSwathUnitSelect"
+        name="swathDistanceUnitSelect"
         component={SelectField}
         floatingLabelText="Unit"
         onChange={this.handleChange}
       >
-        {this.menuItems(this.state.unit)}
+        <MenuItem value={1} primaryText="ft" />
+        <MenuItem value={2} primaryText="m" />
       </Field>
     )
   }
 }
 
-class EffectiveSwathUnitTypeSelect extends React.Component {
+class SwathAreaText extends React.Component {
+  render() {
+    return (
+      <Field
+        name="swathAreaText"
+        component={TextField}
+        floatingLabelText="Area between passes"
+        type="number"
+        step="0.01"
+      />
+    )
+  }
+}
+
+class SwathAreaUnitSelect extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event, index, value) {
-    // Switching unit types so set the swath value to null
-    this.props.change('effectiveSwathText', null);
-    // Update redux store with new swath unit selection
-    this.props.updateSwathUnitType(index);
+    const convertedArea = (index === 1 ? this.props.area * 2.47105 : this.props.area * 0.404686);
+    this.props.change('swathAreaText', convertedArea.toFixed(5));
   }
 
   render() {
     return (
       <Field
-        name="effectiveSwathUnitTypeSelect"
+        name="swathAreaUnitSelect"
         component={SelectField}
-        floatingLabelText="Unit type"
+        floatingLabelText="Unit"
         onChange={this.handleChange}
       >
-        <MenuItem value={1} primaryText="Linear" />
-        <MenuItem value={2} primaryText="Area" />
+        <MenuItem value={1} primaryText="ac" />
+        <MenuItem value={2} primaryText="ha" />
       </Field>
     )
   }
@@ -309,20 +290,6 @@ class ApplicationTypeSelect extends React.Component {
 }
 
 class OtherSprayInputs extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      swathValue: this.props.currentSwathValue,
-      swathUnitType: this.props.currentSwathUnitType,
-    }
-    this.updateSwathUnitType = this.updateSwathUnitType.bind(this);
-  }
-
-  updateSwathUnitType(value) {
-    this.props.change('effectiveSwathUnitTypeSelect', value);
-    this.setState({swathUnitType: value});
-  }
-
   render() {
     return (
       <div>
@@ -346,20 +313,22 @@ class OtherSprayInputs extends React.Component {
           />
         </div>
         <br />
+        Effective swath<br/>
         <div style={{display: 'flex'}}>
-          <EffectiveSwathText />&nbsp;
-          <EffectiveSwathUnitTypeSelect
+          <SwathDistanceText />&nbsp;
+          <SwathDistanceUnitSelect
+            distance={this.props.currentSwathDistance}
             change={this.props.change}
-            updateSwathUnitType={this.updateSwathUnitType}
           />
         </div>
-        {/* <div style={{display: 'flex'}}> */}
-          <EffectiveSwathUnitSelect
+        <br />
+        <div style={{display: 'flex'}}>
+          <SwathAreaText />&nbsp;
+          <SwathAreaUnitSelect
+            area={this.props.currentSwathArea}
             change={this.props.change}
-            swathValue={this.props.currentSwathValue}
-            swathUnitType={this.state.swathUnitType}
           />
-        {/* </div> */}
+        </div>
         <br />
         <ApplicationTypeSelect />
       </div>
@@ -686,9 +655,8 @@ class DataCollection extends React.Component {
       chemicalType,
       currentAppRate,
       currentPressure,
-      currentSwathValue,
-      currentSwathUnitType,
-      currentSwathUnitName,
+      currentSwathDistance,
+      currentSwathArea,
     } = this.props;
 
     const otherIndex = 5;
@@ -717,9 +685,8 @@ class DataCollection extends React.Component {
                 change={this.props.change}
                 currentAppRate={currentAppRate}
                 currentPressure={currentPressure}
-                currentSwathValue={currentSwathValue}
-                currentSwathUnitType={currentSwathUnitType}
-                currentSwathUnitName={currentSwathUnitName}
+                currentSwathDistance={currentSwathDistance}
+                currentSwathArea={currentSwathArea}
               />
             </div>
           }
@@ -758,9 +725,8 @@ export default connect(
     const chemicalType = selector(state, 'chemicalTypeSelect');
     const currentAppRate = selector(state, 'applicationRateText');
     const currentPressure = selector(state, 'pressureText');
-    const currentSwathValue = selector(state, 'effectiveSwathText');
-    const currentSwathUnitType = selector(state, 'effectiveSwathUnitTypeSelect');
-    const currentSwathUnitName = selector(state, 'effectiveSwathUnitSelect');
+    const currentSwathDistance = selector(state, 'swathDistanceText');
+    const currentSwathArea = selector(state, 'swathAreaText');
 
     return {
       currentSensors,
@@ -768,9 +734,8 @@ export default connect(
       chemicalType,
       currentAppRate,
       currentPressure,
-      currentSwathValue,
-      currentSwathUnitType,
-      currentSwathUnitName,
+      currentSwathDistance,
+      currentSwathArea,
     }
   }
 )(myReduxForm);

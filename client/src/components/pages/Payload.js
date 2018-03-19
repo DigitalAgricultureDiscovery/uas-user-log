@@ -10,6 +10,68 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
+// class RGBSensorSize extends React.Component {
+//   handleChange(event) {
+//     // convert sensor size width and height from inch to millimeter
+//     // and vice versa when the unit select field changes
+//     const conversionUnit = event.target.value;
+//     const convertedWidth = conversionUnit === 1 ? this.props.width * 0.0393701 : this.props.width * 25.4;
+//     const convertedHeight = conversionUnit === 1 ? this.props.height * 0.0393701 : this.props.height * 25.4;
+//     // update sensor size width and height values in redux store
+//     this.props.change(this.props.widthFieldName, convertedWidth);
+//     this.props.change(this.props.heightFieldName, convertedHeight);
+//   }
+//
+//   render() {
+//     return (
+//       <div>
+//         Sensor size<br />
+//         <Field
+//           name={this.props.widthFieldName}
+//           component={TextField}
+//           floatingLabelText="Width"
+//           type="number"
+//           step="0.1"
+//         />
+//         <Field
+//           name={this.props.heightFieldName}
+//           component={TextField}
+//           floatingLabelText="Height"
+//           type="number"
+//           step="0.1"
+//         />
+//         <Field
+//           name={this.props.unitFieldName}
+//           component={SelectField}
+//           floatingLabelText="Unit"
+//           onChange={this.handleChange}
+//         >
+//           <MenuItem value={1} primaryText="in" />
+//           <MenuItem value={2} primaryText="mm" />
+//         </Field>
+//       </div>
+//     )
+//   }
+// }
+//
+// class RGBSensor extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <RGBSensorSize
+//           change={this.props.change}
+//           width={this.props.rgbSensorSizeWidth}
+//           height={this.props.rgbSensorSizeHeight}
+//         />
+//         <RGBLensType />
+//         <RGBWeight />
+//         <RGBPixelCount />
+//         <RGBPixelPitch />
+//       </div>
+//     )
+//   }
+// }
+
 class Payload extends React.Component {
   render() {
     const { handleSubmit, previousPage, sensors } = this.props;
