@@ -35,7 +35,7 @@ class TypeSelect extends React.Component {
         component={SelectField}
         floatingLabelText="Type"
       >
-        <MenuItem value={1} primaryText="Teaching/Demonstration" />
+        <MenuItem value={1} primaryText="Teaching/Demonstration" disabled={true} />
         <MenuItem value={2} primaryText="Research" />
         <MenuItem value={3} primaryText="Spray application" />
       </Field>
@@ -90,17 +90,17 @@ export default reduxForm({
     'groundControlChargeMinimumText': 30.00,
     'flightModeSelect': 1,
     'statusSelect': 1,
-    'chemicalTypeSelect': 0,
-    'appRateUnitSelect': 0,
-    'pressureUnitSelect': 0,
-    'effectiveSwathUnitTypeSelect': 0,
-    'effectiveSwathUnitSelect': 0,
-    'applicationTypeSelect': 0,
+    'chemicalTypeSelect': 1,
+    'appRateUnitSelect': 1,
+    'pressureUnitSelect': 1,
+    'effectiveSwathUnitTypeSelect': 1,
+    'effectiveSwathUnitSelect': 1,
+    'applicationTypeSelect': 1,
     'preflightRadioButtonGroup': 'yes',
     'permissionRadioButtonGroup': 'notRequired',
     'peoplePresentRadioButtonGroup': 'no',
     'maximumAGLText': 400,
-    'aglUnitSelect': 0,
+    'aglUnitSelect': 1,
     'lookAngleRadioButtonGroup': 'vertical',
     'maximumGroundSpeedRadioButtonGroup': 'no',
   }

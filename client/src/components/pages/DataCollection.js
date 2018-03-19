@@ -17,12 +17,12 @@ import {red500} from 'material-ui/styles/colors';
 import validate from '../helpers/validate';
 
 const chemicals = [
-  {value: 0, name: 'Herbicide'},
-  {value: 1, name: 'Insecticide'},
-  {value: 2, name: 'Fungicide'},
-  {value: 3, name: 'Plant Growth Regulator (PGR)'},
-  {value: 4, name: 'Nutrients'},
-  {value: 5, name: 'Other'},
+  {value: 1, name: 'Herbicide'},
+  {value: 2, name: 'Insecticide'},
+  {value: 3, name: 'Fungicide'},
+  {value: 4, name: 'Plant Growth Regulator (PGR)'},
+  {value: 5, name: 'Nutrients'},
+  {value: 6, name: 'Other'},
 ];
 
 class ChemicalTypeSelect extends React.Component {
@@ -81,7 +81,7 @@ class ApplicationRateUnitSelect extends React.Component {
   }
 
   handleChange(event, index, value) {
-    const convertedAppRate = (index === 0 ? this.props.currentAppRate * 0.106907 : this.props.currentAppRate * 9.35396);
+    const convertedAppRate = (index === 1 ? this.props.currentAppRate * 0.106907 : this.props.currentAppRate * 9.35396);
     this.props.change('applicationRateText', convertedAppRate.toFixed(2));
   }
 
@@ -93,8 +93,8 @@ class ApplicationRateUnitSelect extends React.Component {
         floatingLabelText="Unit"
         onChange={this.handleChange}
       >
-        <MenuItem value={0} primaryText="gallons/acre" />
-        <MenuItem value={1} primaryText="l/ha" />
+        <MenuItem value={1} primaryText="gallons/acre" />
+        <MenuItem value={2} primaryText="l/ha" />
       </Field>
     )
   }
@@ -175,7 +175,7 @@ class PressureUnitSelect extends React.Component {
   }
 
   handleChange(event, index, value) {
-    const convertedPressure = (index === 0 ? this.props.currentPressure * 0.000145038 : this.props.currentPressure * 6894.76);
+    const convertedPressure = (index === 1 ? this.props.currentPressure * 0.000145038 : this.props.currentPressure * 6894.76);
     this.props.change('pressureText', convertedPressure.toFixed(5));
   }
 
@@ -187,8 +187,8 @@ class PressureUnitSelect extends React.Component {
         floatingLabelText="Unit"
         onChange={this.handleChange}
       >
-        <MenuItem value={0} primaryText="psi" />
-        <MenuItem value={1} primaryText="Pascal" />
+        <MenuItem value={1} primaryText="psi" />
+        <MenuItem value={2} primaryText="Pascal" />
       </Field>
     )
   }
@@ -209,36 +209,36 @@ class EffectiveSwathText extends React.Component {
 }
 
 const linearUnits = [
-  {value: 0, name: 'Feet'},
-  {value: 1, name: 'Meters'},
+  {value: 1, name: 'Feet'},
+  {value: 2, name: 'Meters'},
 ];
 
 const areaUnits = [
-  {value: 0, name: 'Acre'},
-  {value: 1, name: 'Hectare'},
+  {value: 1, name: 'Acre'},
+  {value: 2, name: 'Hectare'},
 ]
 
 class EffectiveSwathUnitSelect extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      unit: this.props.swathUnitType === 0 ? linearUnits : areaUnits,
+      unit: this.props.swathUnitType === 1 ? linearUnits : areaUnits,
     }
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event, index, value) {
     if (this.state.unit[0].name === 'feet') {
-      const convertedSwathValue = (index === 0 ? this.props.swathValue * 3.28084 : this.props.swathValue * 0.3048);
+      const convertedSwathValue = (index === 1 ? this.props.swathValue * 3.28084 : this.props.swathValue * 0.3048);
       this.props.change('effectiveSwathText', convertedSwathValue.toFixed(5));
     } else {
-      const convertedSwathValue = (index === 0 ? this.props.swathValue * 2.47105 : this.props.swathValue * 0.404686);
+      const convertedSwathValue = (index === 1 ? this.props.swathValue * 2.47105 : this.props.swathValue * 0.404686);
       this.props.change('effectiveSwathText', convertedSwathValue.toFixed(5));
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({unit: nextProps.swathUnitType === 0 ? linearUnits : areaUnits});
+    this.setState({unit: nextProps.swathUnitType === 1 ? linearUnits : areaUnits});
   }
 
   menuItems(unitType) {
@@ -286,8 +286,8 @@ class EffectiveSwathUnitTypeSelect extends React.Component {
         floatingLabelText="Unit type"
         onChange={this.handleChange}
       >
-        <MenuItem value={0} primaryText="Linear" />
-        <MenuItem value={1} primaryText="Area" />
+        <MenuItem value={1} primaryText="Linear" />
+        <MenuItem value={2} primaryText="Area" />
       </Field>
     )
   }
@@ -301,8 +301,8 @@ class ApplicationTypeSelect extends React.Component {
         component={SelectField}
         floatingLabelText="Type of application"
       >
-        <MenuItem value={0} primaryText="Precision" />
-        <MenuItem value={1} primaryText="Uniform" />
+        <MenuItem value={1} primaryText="Precision" />
+        <MenuItem value={2} primaryText="Uniform" />
       </Field>
     )
   }
@@ -381,11 +381,11 @@ class SensorsUsedText extends React.Component {
 }
 
 const sensors = [
-  {value: 0, name: 'RGB'},
-  {value: 1, name: 'Multispectral'},
-  {value: 2, name: 'Hyperspectral'},
-  {value: 3, name: 'LiDAR'},
-  {value: 4, name: 'Other'},
+  {value: 1, name: 'RGB'},
+  {value: 2, name: 'Multispectral'},
+  {value: 3, name: 'Hyperspectral'},
+  {value: 4, name: 'LiDAR'},
+  {value: 5, name: 'Other'},
 ];
 
 class SensorOtherText extends React.Component {
@@ -403,7 +403,7 @@ class SensorOtherText extends React.Component {
 class SensorTypeSelect extends React.Component {
   componentWillMount() {
     if (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length < 1) {
-      this.props.change(this.props.fieldName, 0);
+      this.props.change(this.props.fieldTypeName, 1);
     }
   }
 
@@ -418,7 +418,7 @@ class SensorTypeSelect extends React.Component {
   }
 
   render() {
-    const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].sensorType === 4 ? true : false);
+    const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].sensorType === 5 ? true : false);
     return (
       <div>
         <Field
@@ -460,8 +460,8 @@ class SensorModelText extends React.Component {
 }
 
 const operations = [
-  {value: 0, name: 'Operated by mission planner'},
-  {value: 1, name: 'Time interval'},
+  {value: 1, name: 'Operated by mission planner'},
+  {value: 2, name: 'Time interval'},
 ];
 
 class TimeIntervalText extends React.Component {
@@ -481,7 +481,7 @@ class TimeIntervalText extends React.Component {
 class OperationModeSelect extends React.Component {
   componentWillMount() {
     if (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length < 1) {
-      this.props.change(this.props.fieldName, 0);
+      this.props.change(this.props.fieldModeName, 1);
     }
   }
 
@@ -496,7 +496,7 @@ class OperationModeSelect extends React.Component {
   }
 
   render() {
-    const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].operationMode === 1 ? true : false);
+    const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].operationMode === 2 ? true : false);
     return (
       <div>
         <Field
@@ -544,11 +544,11 @@ class LapText extends React.Component {
 }
 
 const formats = [
-  {value: 0, name: 'Raw'},
-  {value: 1, name: 'Tiff'},
-  {value: 2, name: 'Jpeg'},
-  {value: 3, name: 'Video'},
-  {value: 4, name: 'Other'},
+  {value: 1, name: 'Raw'},
+  {value: 2, name: 'Tiff'},
+  {value: 3, name: 'Jpeg'},
+  {value: 4, name: 'Video'},
+  {value: 5, name: 'Other'},
 ];
 
 class DataFormatOtherText extends React.Component {
@@ -566,7 +566,7 @@ class DataFormatOtherText extends React.Component {
 class DataFormatSelect extends React.Component {
   componentWillMount() {
     if (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length < 1) {
-      this.props.change(this.props.fieldName, 0);
+      this.props.change(this.props.fieldFormatName, 1);
     }
   }
 
@@ -581,7 +581,7 @@ class DataFormatSelect extends React.Component {
   }
 
   render() {
-    const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].dataFormat === 4 ? true : false);
+    const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].dataFormat === 5 ? true : false);
     return (
       <div>
         <Field
@@ -682,7 +682,7 @@ class DataCollection extends React.Component {
       handleSubmit,
       previousPage,
       currentSensors,
-      isSpray,
+      isSprayMission,
       chemicalType,
       currentAppRate,
       currentPressure,
@@ -697,7 +697,7 @@ class DataCollection extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Data Collection" />
         <CardText>
-          {!isSpray &&
+          {!isSprayMission &&
             <div>
               <SensorsUsedText />
               <br />
@@ -709,7 +709,7 @@ class DataCollection extends React.Component {
               />
             </div>
           }
-          {isSpray &&
+          {isSprayMission &&
             <div>
               <ChemicalTypeSelect />
               {chemicalType === otherIndex ? <div><ChemicalOtherText /></div> : null}
@@ -754,7 +754,7 @@ const selector = formValueSelector('logbook');
 export default connect(
   state => {
     const currentSensors = selector(state, 'sensors');
-    const isSpray = (selector(state, 'typeSelect') === 3 ? true : false);
+    const isSprayMission = (selector(state, 'typeSelect') === 3 ? true : false);
     const chemicalType = selector(state, 'chemicalTypeSelect');
     const currentAppRate = selector(state, 'applicationRateText');
     const currentPressure = selector(state, 'pressureText');
@@ -764,7 +764,7 @@ export default connect(
 
     return {
       currentSensors,
-      isSpray,
+      isSprayMission,
       chemicalType,
       currentAppRate,
       currentPressure,
