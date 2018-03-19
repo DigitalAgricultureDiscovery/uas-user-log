@@ -10,79 +10,17 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
-class PayloadOperationModeSelect extends React.Component {
-  render() {
-    return (
-      <Field
-        name="payloadOperationModeSelect"
-        component={SelectField}
-        floatingLabelText="Operation mode"
-      >
-        <MenuItem value={0} primaryText="Automatic" />
-        <MenuItem value={1} primaryText="Manual" />
-      </Field>
-    )
-  }
-}
-
-class PayloadCameraSpecsText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="payloadCameraSpecsText"
-        component={TextField}
-        floatingLabelText="Camera Specs"
-      />
-    )
-  }
-}
-
-class ImageWidthText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="imageWidthText"
-        component={TextField}
-        floatingLabelText="Image width"
-        type="number"
-      />
-    )
-  }
-}
-
-class ImageHeightText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="imageHeightText"
-        component={TextField}
-        floatingLabelText="Image height"
-        type="number"
-      />
-    )
-  }
-}
-
-class FieldOfView extends React.Component {
-  render() {
-    return (
-      <div>
-        <ImageWidthText />
-        <br />
-        <ImageHeightText />
-      </div>
-    )
-  }
-}
-
 class Payload extends React.Component {
   render() {
-    const { handleSubmit, previousPage } = this.props;
+    const { handleSubmit, previousPage, sensors } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <CardTitle title="Payload" />
+        <CardTitle title="Payload Metadata" />
         <CardText>
-          Development in progress.
+          {sensors &&
+            <div></div>
+          }
+          {!sensors ? <span>Please <strong>add at least one sensor</strong> during the Planning phase.</span> : null}
         </CardText>
         <CardActions>
           <FlatButton
@@ -103,9 +41,20 @@ class Payload extends React.Component {
   }
 }
 
-export default reduxForm({
+const myReduxForm = reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate,
 })(Payload);
+
+const selector = formValueSelector('logbook');
+export default connect(
+  state => {
+    const sensors = selector(state, 'sensors');
+
+    return {
+      sensors,
+    }
+  }
+)(myReduxForm);
