@@ -5,6 +5,11 @@ import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme                  from 'material-ui/styles/getMuiTheme';
 import Card                         from 'material-ui/Card';
 import LinearProgress               from 'material-ui/LinearProgress';
+import {
+  Step,
+  Stepper,
+  StepButton,
+}                                   from 'material-ui/Stepper';
 // form pages
 import Welcome          from './pages/Welcome';          // page 1
 import Mission          from './pages/Mission';          // page 2
@@ -20,7 +25,9 @@ import Obstacles        from './pages/Obstacles';        // page 11
 import People           from './pages/People';           // page 12
 import FlightParameters from './pages/FlightParameters'; // page 13
 import Weather          from './pages/Weather';          // page 14
-import Finish           from './pages/Finish';           // page 15
+import Payload          from './pages/Payload';          // page 14
+import Processed        from './pages/Processed';        // page 15
+import Finish           from './pages/Finish';           // page 16
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -60,6 +67,63 @@ class ProgressBar extends React.Component {
   }
 }
 
+class HorizontalNonLinearStepper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stepIndex: 0,
+    }
+    this.updateStepIndex = this.updateStepIndex.bind(this);
+  }
+
+  updateStepIndex(newIndex) {
+    this.setState({stepIndex: newIndex});
+    if (newIndex === 0) {
+      this.props.changePage(1);
+    } else if (newIndex === 1) {
+      this.props.changePage(14);
+    } else {
+      this.props.changePage(15);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.pageIndex < 14) {
+      this.setState({stepIndex: 0});
+    } else if (nextProps.pageIndex < 15) {
+      this.setState({stepIndex: 1});
+    } else {
+      this.setState({stepIndex: 2});
+    }
+  }
+
+  render() {
+    const {stepIndex} = this.state;
+
+    return (
+      <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
+        <Stepper linear={false} activeStep={stepIndex}>
+          <Step>
+            <StepButton onClick={() => this.updateStepIndex(0)}>
+              Planning
+            </StepButton>
+          </Step>
+          <Step>
+            <StepButton onClick={() => this.updateStepIndex(1)}>
+              Payload
+            </StepButton>
+          </Step>
+          <Step>
+            <StepButton onClick={() => this.updateStepIndex(2)}>
+              Processed
+            </StepButton>
+          </Step>
+        </Stepper>
+      </div>
+    )
+  }
+}
+
 class LogbookForm extends React.Component {
   constructor(props) {
     super(props);
@@ -68,6 +132,7 @@ class LogbookForm extends React.Component {
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
+    this.stepperChangePage = this.stepperChangePage.bind(this);
   }
 
   nextPage() {
@@ -77,6 +142,10 @@ class LogbookForm extends React.Component {
   previousPage() {
     this.setState({pageIndex: this.state.pageIndex - 1});
   };
+
+  stepperChangePage(pageIndex) {
+    this.setState({pageIndex: pageIndex});
+  }
 
   render() {
     const { onSubmit } = this.props;
@@ -174,6 +243,18 @@ class LogbookForm extends React.Component {
                 />
               )}
               { pageIndex === 14 && (
+                <Payload
+                  previousPage={ this.previousPage }
+                  onSubmit={ this.nextPage }
+                />
+              )}
+              { pageIndex === 15 && (
+                <Processed
+                  previousPage={ this.previousPage }
+                  onSubmit={ this.nextPage }
+                />
+              )}
+              { pageIndex === 16 && (
                 <Finish
                   previousPage={ this.previousPage }
                   onSubmit={ onSubmit }
@@ -182,6 +263,7 @@ class LogbookForm extends React.Component {
               <ProgressBar value={pageIndex} />
             </Card>
           </div>
+          <HorizontalNonLinearStepper pageIndex={pageIndex} changePage={this.stepperChangePage} />
         </div>
       </MuiThemeProvider>
     )

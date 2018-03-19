@@ -9,23 +9,6 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
-// Select input for mission category
-class CategorySelect extends React.Component {
-  render() {
-    return (
-      <Field
-        name="categorySelect"
-        component={SelectField}
-        floatingLabelText="Category"
-      >
-        <MenuItem value={1} primaryText="Planning" />
-        <MenuItem value={2} primaryText="Payload" />
-        <MenuItem value={3} primaryText="Processed" />
-      </Field>
-    )
-  }
-}
-
 // Select input for mission type
 class TypeSelect extends React.Component {
   render() {
@@ -33,7 +16,7 @@ class TypeSelect extends React.Component {
       <Field
         name="typeSelect"
         component={SelectField}
-        floatingLabelText="Type"
+        floatingLabelText="Mission type"
       >
         <MenuItem value={1} primaryText="Teaching/Demonstration" disabled={true} />
         <MenuItem value={2} primaryText="Research" />
@@ -49,10 +32,8 @@ class Mission extends React.Component {
     const { handleSubmit, previousPage } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <CardTitle title="Mission" />
+        <CardTitle title="Planning" />
         <CardText>
-          <CategorySelect />
-          <br />
           <TypeSelect />
         </CardText>
         <CardActions>
