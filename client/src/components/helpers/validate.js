@@ -1,8 +1,9 @@
 const validate = values => {
   const errors = {};
-  // console.log('errors', errors);
   // // mission
+  // console.log(values);
   // if (!values.categorySelect) {
+  //   console.log(values.categorySelect);
   //   errors.categorySelect = 'Required';
   // }
   // if (!values.typeSelect) {
@@ -138,10 +139,44 @@ const validate = values => {
   //     errors.batteries = batteriesArrayErrors;
   //   }
   // }
-
-  // flight operation
-
-  // data collection
+  //
+  // // flight operation
+  // if (!values.flightModeSelect) {
+  //   errors.flightModeSelect = 'Required';
+  // }
+  //
+  // // data collection
+  // if (!values.sensorsUsedText) {
+  //   errors.sensorsUsedText = 'Required';
+  // }
+  // if (!values.sensors || !values.sensors.length) {
+  //   errors.sensors = { _error: 'At least one sensor must be entered'};
+  // } else {
+  //   const sensorsArrayErrors = [];
+  //   values.sensors.forEach((sensor, sensorIndex) => {
+  //     const sensorErrors = {};
+  //     if (!sensor || !sensor.sensorType) {
+  //       sensorErrors.sensorType = 'Required';
+  //       sensorsArrayErrors[sensorIndex] = sensorErrors;
+  //     }
+  //     if (!sensor || !sensor.sensorMake) {
+  //       sensorErrors.sensorType = 'Required';
+  //       sensorsArrayErrors[sensorIndex] = sensorErrors;
+  //     }
+  //     if (!sensor || !sensor.sensorModel) {
+  //       sensorErrors.sensorModel = 'Required';
+  //       sensorsArrayErrors[sensorIndex] = sensorErrors;
+  //     }
+  //     if (!sensor || !sensor.operationMode) {
+  //       sensorErrors.operationMode = 'Required';
+  //       sensorsArrayErrors[sensorIndex] = sensorErrors;
+  //     }
+  //     if (!sensor || !sensor.timeInterval) {
+  //       sensorErrors.timeInterval = 'Required';
+  //       sensorsArrayErrors[sensorIndex] = sensorErrors;
+  //     }
+  //   })
+  // }
 
   // b4ufly status
 
