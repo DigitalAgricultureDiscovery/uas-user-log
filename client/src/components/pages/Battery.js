@@ -32,7 +32,7 @@ class BatteriesUASText extends React.Component {
   render() {
     return (
       <Field
-        name="BatteriesUASText"
+        name="batteriesUASText"
         component={TextField}
         floatingLabelText="Number of batteries on UAS"
         type="number"
@@ -64,7 +64,7 @@ class AddBatteryButton extends React.Component {
   }
 }
 
-const renderBatteries = ({ fields, change, currentBatteries }) => (
+const renderBatteries = ({ fields, change, currentBatteries, meta: { touched, error, submitFailed } }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
       {fields.map((battery, index) =>
@@ -91,6 +91,7 @@ const renderBatteries = ({ fields, change, currentBatteries }) => (
       )}
     </ul>
     <AddBatteryButton addNewBattery={() => fields.push({})} />
+    {(touched || submitFailed) && error && <p><span className="error-msg">{error}</span></p>}
   </div>
 );
 

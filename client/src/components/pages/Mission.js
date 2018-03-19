@@ -93,6 +93,7 @@ export default reduxForm({
     'chemicalTypeSelect': 0,
     'appRateUnitSelect': 0,
     'pressureUnitSelect': 0,
+    'effectiveSwathUnitTypeSelect': 0,
     'effectiveSwathUnitSelect': 0,
     'applicationTypeSelect': 0,
     'preflightRadioButtonGroup': 'yes',

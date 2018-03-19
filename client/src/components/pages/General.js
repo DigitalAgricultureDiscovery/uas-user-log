@@ -52,7 +52,7 @@ class AddFlightButton extends React.Component {
   }
 }
 
-const renderFlights = ({ fields, change }) => (
+const renderFlights = ({ fields, change, meta: { touched, error, submitFailed } }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
       {fields.map((flight, index) =>
@@ -76,6 +76,7 @@ const renderFlights = ({ fields, change }) => (
       )}
     </ul>
     <AddFlightButton addNewFlight={() => fields.push({})} />
+    {(touched || submitFailed) && error && <p><span className="error-msg">{error}</span></p>}
   </div>
 );
 
