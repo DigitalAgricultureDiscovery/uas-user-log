@@ -110,7 +110,7 @@ class AddRemotePICButton extends React.Component {
   }
 }
 
-const renderRemotePICs = ({ fields, change }) => (
+const renderRemotePICs = ({ fields, change, meta: { touched, error, submitFailed } }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
       {fields.map((remotePic, index) =>
@@ -130,6 +130,7 @@ const renderRemotePICs = ({ fields, change }) => (
       )}
     </ul>
     <AddRemotePICButton addNewRemotePIC={() => fields.push({})} />
+    {(touched || submitFailed) && error && <p><span className="error-msg">{error}</span></p>}
   </div>
 );
 
