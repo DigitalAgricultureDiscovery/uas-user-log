@@ -10,78 +10,78 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
-// class RGBSensorSize extends React.Component {
-//   handleChange(event) {
-//     // convert sensor size width and height from inch to millimeter
-//     // and vice versa when the unit select field changes
-//     const conversionUnit = event.target.value;
-//     const convertedWidth = conversionUnit === 1 ? this.props.width * 0.0393701 : this.props.width * 25.4;
-//     const convertedHeight = conversionUnit === 1 ? this.props.height * 0.0393701 : this.props.height * 25.4;
-//     // update sensor size width and height values in redux store
-//     this.props.change(this.props.widthFieldName, convertedWidth);
-//     this.props.change(this.props.heightFieldName, convertedHeight);
-//   }
-//
-//   render() {
-//     return (
-//       <div>
-//         Sensor size<br />
-//         <Field
-//           name={this.props.widthFieldName}
-//           component={TextField}
-//           floatingLabelText="Width"
-//           type="number"
-//           step="0.1"
-//         />
-//         <Field
-//           name={this.props.heightFieldName}
-//           component={TextField}
-//           floatingLabelText="Height"
-//           type="number"
-//           step="0.1"
-//         />
-//         <Field
-//           name={this.props.unitFieldName}
-//           component={SelectField}
-//           floatingLabelText="Unit"
-//           onChange={this.handleChange}
-//         >
-//           <MenuItem value={1} primaryText="in" />
-//           <MenuItem value={2} primaryText="mm" />
-//         </Field>
-//       </div>
-//     )
-//   }
-// }
-//
-// class RGBSensor extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <RGBSensorSize
-//           change={this.props.change}
-//           width={this.props.rgbSensorSizeWidth}
-//           height={this.props.rgbSensorSizeHeight}
-//         />
-//         <RGBLensType />
-//         <RGBWeight />
-//         <RGBPixelCount />
-//         <RGBPixelPitch />
-//       </div>
-//     )
-//   }
-// }
+class PayloadTextField extends React.Component {
+  render() {
+    return (
+      <Field
+        name={this.props.fieldName}
+        component={TextField}
+        floatingLabelText={this.props.fieldLabel}
+      />
+    )
+  }
+}
+
+class PayloadSelectField extends React.Component {
+  menuItems(items) {
+    return items.map((item) => (
+      <MenuItem
+        key={item.value}
+        value={item.value}
+        primaryText={item.name}
+      />
+    ))
+  }
+  render() {
+    return (
+      <Field
+        name={this.props.fieldName}
+        component={SelectField}
+        floatingLabelText={this.props.fieldLabel}
+      >
+        {this.menuItems(this.props.items)}
+      </Field>
+    )
+  }
+}
+
+class RGBForm extends React.Component {
+  render() {
+    return (
+      <div>Test</div>
+    )
+  }
+}
 
 class Payload extends React.Component {
+  renderSensorForms(sensors) {
+    sensors.forEach(function(sensor, index) {
+      console.log('sensor: ', sensor);
+      if (sensor.sensorType === 1) {
+        // rgb
+        return (
+          <RGBForm
+            sensor={sensor}
+          />
+        );
+      } else if (sensor.sensorType === 2) {
+        // multispectral
+      } else if (sensor.sensorType === 3) {
+        // hyperspectral
+      } else if (sensor.sensorType === 4) {
+        // lidar
+      } else if (sensor.sensorType === 5) {
+        // thermal
+      }
+    })
+  }
   render() {
     const { handleSubmit, previousPage, sensors } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Payload Metadata" />
         <CardText>
-          {sensors &&
-            <div></div>
-          }
+          {sensors ? this.renderSensorForms(sensors) : null}
           {!sensors ? <span>Please <strong>add at least one sensor</strong> during the Planning phase.</span> : null}
         </CardText>
         <CardActions>

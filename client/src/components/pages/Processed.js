@@ -2,20 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
-import { Checkbox, SelectField, TextField }           from 'redux-form-material-ui';
+import { Checkbox, SelectField }            from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
 import MenuItem                             from 'material-ui/MenuItem';
 import RaisedButton                         from 'material-ui/RaisedButton';
 import Subheader                            from 'material-ui/Subheader';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-}                                           from 'material-ui/Table';
 
 import validate from '../helpers/validate';
 

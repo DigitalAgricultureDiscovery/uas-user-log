@@ -1,5 +1,6 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
 import { SelectField }                      from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
@@ -11,6 +12,10 @@ import validate from '../helpers/validate';
 
 // Select input for mission type
 class TypeSelect extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    this.props.updateMissionType(nextProps.currentMissionType);
+  }
+
   render() {
     return (
       <Field
@@ -29,12 +34,16 @@ class TypeSelect extends React.Component {
 // Mission card
 class Mission extends React.Component {
   render() {
-    const { handleSubmit, previousPage } = this.props;
+    const { handleSubmit, previousPage, missionType } = this.props;
+
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Planning" />
         <CardText>
-          <TypeSelect />
+          <TypeSelect
+            currentMissionType={missionType}
+            updateMissionType={this.props.updateMissionType}
+          />
         </CardText>
         <CardActions>
           <FlatButton
@@ -55,9 +64,19 @@ class Mission extends React.Component {
   }
 }
 
-export default reduxForm({
+const myReduxForm = reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
-})(Mission)
+  validate,
+})(Mission);
+
+const selector = formValueSelector('logbook');
+export default connect(
+  state => {
+    const missionType = selector(state, 'typeSelect');
+    return {
+      missionType,
+    }
+  }
+)(myReduxForm);

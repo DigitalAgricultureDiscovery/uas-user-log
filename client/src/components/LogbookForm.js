@@ -48,18 +48,27 @@ class ProgressBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.completed > 15) {
-      this.setState({completed: 15});
-    } else {
-      this.setState({completed: nextProps.value});
+    if (nextProps.missionType === 2) {
+      if (this.state.completed > 16) {
+        this.setState({completed: 16});
+      } else {
+        this.setState({completed: nextProps.value});
+      }
+    } else if (nextProps.missionType === 3) {
+      if (this.state.completed > 14) {
+        this.setState({completed: 14});
+      } else {
+        this.setState({completed: nextProps.value});
+      }
     }
   }
 
   render() {
+    const maxValue = this.props.missionType === 2 ? 16 : 14;
     return (
       <LinearProgress
         mode="determinate"
-        max={15}
+        max={maxValue}
         color="#C28E0E"
         value={this.state.completed}
       />
@@ -129,10 +138,12 @@ class LogbookForm extends React.Component {
     super(props);
     this.state = {
       pageIndex: 0,
+      missionType: 2,
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.stepperChangePage = this.stepperChangePage.bind(this);
+    this.updateMissionType = this.updateMissionType.bind(this);
   }
 
   nextPage() {
@@ -145,6 +156,10 @@ class LogbookForm extends React.Component {
 
   stepperChangePage(pageIndex) {
     this.setState({pageIndex: pageIndex});
+  }
+
+  updateMissionType(index) {
+    this.setState({'missionType': index});
   }
 
   render() {
@@ -166,6 +181,7 @@ class LogbookForm extends React.Component {
               { pageIndex === 0 && <Welcome onSubmit={this.nextPage} /> }
               { pageIndex === 1 && (
                 <Mission
+                  updateMissionType={this.updateMissionType}
                   previousPage={this.previousPage}
                   onSubmit={this.nextPage}
                 />
@@ -242,28 +258,28 @@ class LogbookForm extends React.Component {
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 14 && (
+              { this.state.missionType !== 3 && pageIndex === 14 && (
                 <Payload
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 15 && (
+              { this.state.missionType !== 3 && pageIndex === 15 && (
                 <Processed
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { pageIndex === 16 && (
+              { (pageIndex === 16 || (this.state.missionType === 3 && pageIndex === 14)) && (
                 <Finish
                   previousPage={ this.previousPage }
                   onSubmit={ onSubmit }
                 />
               )}
-              <ProgressBar value={pageIndex} />
+              <ProgressBar value={pageIndex} missionType={this.state.missionType} />
             </Card>
           </div>
-          <HorizontalNonLinearStepper pageIndex={pageIndex} changePage={this.stepperChangePage} />
+          {(this.state.missionType !== 3 && pageIndex > 0) ? <HorizontalNonLinearStepper pageIndex={pageIndex} changePage={this.stepperChangePage} /> : null}
         </div>
       </MuiThemeProvider>
     )
