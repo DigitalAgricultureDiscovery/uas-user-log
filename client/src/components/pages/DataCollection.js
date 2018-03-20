@@ -354,7 +354,8 @@ const sensors = [
   {value: 2, name: 'Multispectral'},
   {value: 3, name: 'Hyperspectral'},
   {value: 4, name: 'LiDAR'},
-  {value: 5, name: 'Other'},
+  {value: 5, name: 'Thermal'},
+  {value: 6, name: 'Other'},
 ];
 
 class SensorOtherText extends React.Component {
