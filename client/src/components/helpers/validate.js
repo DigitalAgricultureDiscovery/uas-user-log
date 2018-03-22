@@ -1,39 +1,24 @@
 const validate = values => {
   const errors = {};
+
+  // const isRequired = (fieldName) => {
+  //   !values[fieldName] ? errors[fieldName] = 'Required' : null;
+  // }
+
   // // mission
-  // console.log(values);
-  // if (!values.categorySelect) {
-  //   console.log(values.categorySelect);
-  //   errors.categorySelect = 'Required';
-  // }
-  // if (!values.typeSelect) {
-  //   errors.typeSelect = 'Required';
-  // }
+  // isRequired('typeSelect');
   //
   // // crop
-  // if (!values.lifeCycleSelect) {
-  //   errors.lifeCycleSelect = 'Required';
-  // }
-  // if (!values.cropNameText) {
-  //   errors.cropNameText = 'Required';
-  // }
-  // if (!values.growthStageText) {
-  //   errors.growthStageText = 'Required';
-  // }
-  // if (!values.varietyText) {
-  //   errors.varietyText = 'Required';
-  // }
-  // if (!values.seedSourceText) {
-  //   errors.seedSourceText = 'Required';
-  // }
-  // if (!values.seedStockText) {
-  //   errors.seedStockText = 'Required';
-  // }
+  // isRequired('lifeCycleSelect');
+  // isRequired('cropNameText');
+  // isRequired('growthStageText');
+  // isRequired('varietyText');
+  // isRequired('seedSourceText');
+  // isRequired('seedStockText');
   //
   // // general
-  // if (!values.flightDatePicker) {
-  //   errors.flightDatePicker = 'Required';
-  // }
+  // isRequired('flightDatePicker');
+  //
   // if (!values.flights || !values.flights.length) {
   //   errors.flights = { _error: 'At least one flight must be entered'}
   // } else {
@@ -84,38 +69,18 @@ const validate = values => {
   // }
   //
   // // hardware
-  // if (!values.droneTypeSelect) {
-  //   errors.droneTypeSelect = 'Required';
-  // }
-  // if (!values.droneMakeText) {
-  //   errors.droneMakeText = 'Required';
-  // }
-  // if (!values.droneModelText) {
-  //   errors.droneModelText = 'Required';
-  // }
-  // if (!values.droneRegistrationText) {
-  //   errors.droneRegistrationText = 'Required';
-  // }
-  // if (!values.remoteChargeTargetText) {
-  //   errors.remoteChargeTargetText = 'Required';
-  // }
-  // if (!values.remoteChargeMinimumText) {
-  //   errors.remoteChargeMinimumText = 'Required';
-  // }
-  // if (!values.groundControlChargeTargetText) {
-  //   errors.groundControlChargeTargetText = 'Required';
-  // }
-  // if (!values.groundControlChargeMinimumText) {
-  //   errors.groundControlChargeMinimumText = 'Required';
-  // }
+  // isRequired('droneTypeSelect');
+  // isRequired('droneMakeText');
+  // isRequired('droneModelText');
+  // isRequired('droneRegistrationText');
+  // isRequired('remoteChargeTargetText');
+  // isRequired('remoteChargeMinimumText');
+  // isRequired('groundControlChargeTargetText');
+  // isRequired('groundControlChargeMinimumText');
   //
   // // battery
-  // if (!values.batteriesUsedText) {
-  //   errors.batteriesUsedText = 'Required';
-  // }
-  // if (!values.batteriesUASText) {
-  //   errors.batteriesUASText = 'Required';
-  // }
+  // isRequired('batteriesUsedText');
+  // isRequired('batteriesUASText');
   // if (!values.batteries || !values.batteries.length) {
   //   errors.batteries = { _error: 'At least one battery must be entered'}
   // } else {
@@ -141,14 +106,10 @@ const validate = values => {
   // }
   //
   // // flight operation
-  // if (!values.flightModeSelect) {
-  //   errors.flightModeSelect = 'Required';
-  // }
+  // isRequired('flightModeSelect');
   //
   // // data collection
-  // if (!values.sensorsUsedText) {
-  //   errors.sensorsUsedText = 'Required';
-  // }
+  // isRequired('sensorsUsedText');
   // if (!values.sensors || !values.sensors.length) {
   //   errors.sensors = { _error: 'At least one sensor must be entered'};
   // } else {
@@ -177,16 +138,42 @@ const validate = values => {
   //     }
   //   })
   // }
+  //
+  // // b4ufly status
+  // isRequired('statusSelect');
+  //
+  // if (values.statusSelect && values.statusSelect == 2) {
+  //   isRequired('airportOperatorContactText');
+  //   isRequired('controlTowerContactText');
+  // }
+  //
+  // isRequired('faaCertText');
+  //
+  // isRequired('preflightRadioButtonGroup');
+  //
+  // if (values.preflightRadioButtonGroup === 'no' && values.permissionRadioButtonGroup === 'permitted') {
+  //   isRequired('permittedByText');
+  // }
+  //
+  // // obstacles present
+  // isRequired('obstaclesSelect');
+  //
+  // // people present
+  // isRequired('peoplePresentRadioButtonGroup');
+  //
+  // if (values.peoplePresentRadioButtonGroup === 'faaCOA') {
+  //   isRequired('faaCOA');
+  // }
+  //
+  // // flight parameters
+  // isRequired('maximumAGLText');
+  // isRequired('minimumAGLText');
+  // isRequired('lookAngleRadioButtonGroup');
+  // isRequired('maximumGroundSpeedRadioButtonGroup');
 
-  // b4ufly status
+  // payload
 
-  // obstacles present
-
-  // people present
-
-  // flight parameters
-
-  // weather
+  // processed
 
   return errors;
 }

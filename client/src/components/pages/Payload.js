@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, FieldArray, reduxForm, formValueSelector, getFormValues } from 'redux-form';
 // material-ui elements
 import { SelectField, TextField }           from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
@@ -9,42 +9,6 @@ import MenuItem                             from 'material-ui/MenuItem';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
-
-class PayloadTextField extends React.Component {
-  render() {
-    const form = this.props.type ? <Field name={this.props.fieldName} component={TextField} floatingLabelText={this.props.fieldLabel} type={this.props.type} step={this.props.step} /> : <Field name={this.props.fieldName} component={TextField} floatingLabelText={this.props.fieldLabel} />;
-    return (
-      <div style={{display: 'inline-block'}}>{form}</div>
-    )
-  }
-}
-
-class PayloadSelectField extends React.Component {
-  componentWillMount() {
-    this.props.change(this.props.fieldName, 1);
-  }
-
-  menuItems(items) {
-    return items.map((item) => (
-      <MenuItem
-        key={item.value}
-        value={item.value}
-        primaryText={item.name}
-      />
-    ))
-  }
-  render() {
-    return (
-      <Field
-        name={this.props.fieldName}
-        component={SelectField}
-        floatingLabelText={this.props.fieldLabel}
-      >
-        {this.menuItems(this.props.items)}
-      </Field>
-    )
-  }
-}
 
 const IN_MM_UNITS = [
   {value: 1, name: 'in'},
@@ -88,11 +52,56 @@ const OPERATION_MODES = [
   {value: 2, name: 'Snapshot'},
 ];
 
+class PayloadTextField extends React.Component {
+  render() {
+    const form = this.props.type ? <Field name={this.props.fieldName} component={TextField} floatingLabelText={this.props.fieldLabel} type={this.props.type} step={this.props.step} /> : <Field name={this.props.fieldName} component={TextField} floatingLabelText={this.props.fieldLabel} />;
+    return (
+      <div style={{display: 'inline-block'}}>{form}</div>
+    )
+  }
+}
+
+class PayloadSelectField extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.change(this.props.fieldName, 1);
+  }
+
+  handleChange(event, newValue, prevValue) {
+
+  }
+
+  menuItems(items) {
+    return items.map((item) => (
+      <MenuItem
+        key={item.value}
+        value={item.value}
+        primaryText={item.name}
+      />
+    ))
+  }
+  render() {
+    return (
+      <Field
+        name={this.props.fieldName}
+        component={SelectField}
+        floatingLabelText={this.props.fieldLabel}
+        onChange={this.handleChange}
+      >
+        {this.menuItems(this.props.items)}
+      </Field>
+    )
+  }
+}
+
 class RGBForm extends React.Component {
   render() {
     return (
       <div>
-        <strong>Sensor #{this.props.index + 1} - RGB</strong><br /><br />
         Sensor size<br />
         <PayloadTextField
           fieldName={`${this.props.index}.rgbSensorWidthText`}
@@ -107,6 +116,7 @@ class RGBForm extends React.Component {
           fieldLabel="Unit"
           items={IN_MM_UNITS}
           change={this.props.change}
+          sensorIndex={this.props.index}
         /><br />
         <PayloadTextField
           fieldName={`${this.props.index}.rgbLensTypeText`}
@@ -146,7 +156,6 @@ class MultispectralForm extends React.Component {
   render() {
     return (
       <div>
-        <strong>Sensor #{this.props.index + 1} - Multispectral</strong><br /><br />
         Sensor size<br />
         <PayloadTextField
           fieldName={`${this.props.index}.multiSensorHorizontalText`}
@@ -294,7 +303,6 @@ class HyperspectralForm extends React.Component {
   render() {
     return (
       <div>
-        <strong>Sensor #{this.props.index + 1} - Hyperspectral</strong><br /><br />
         Sensor size<br />
         <PayloadSelectField
           fieldName={`${this.props.index}.hyperOperationModeSelect`}
@@ -405,7 +413,6 @@ class LidarForm extends React.Component {
   render() {
     return (
       <div>
-        <strong>Sensor #{this.props.index + 1} - LiDAR</strong><br /><br />
         Sensor size<br />
         <PayloadTextField
           fieldName={`${this.props.index}.lidarManufacturerText`}
@@ -522,7 +529,6 @@ class ThermalForm extends React.Component {
   render() {
     return (
       <div>
-        <strong>Sensor #{this.props.index + 1} - Thermal</strong><br /><br />
         Dimensions<br />
         <PayloadTextField
           fieldName={`${this.props.index}.thermalWidthText`}
@@ -619,45 +625,70 @@ class ThermalForm extends React.Component {
   }
 }
 
-class SensorForm extends React.Component {
+class renderSensors extends React.Component {
+  componentWillMount() {
+    const { fields, sensors, change } = this.props;
+  }
+
   render() {
-    let form = null;
-    if (this.props.sensor.sensorType === 1) {
-      form = <RGBForm index={this.props.index} sensor={this.props.sensor} change={this.props.change} />
-    } else if (this.props.sensor.sensorType === 2) {
-      form = <MultispectralForm index={this.props.index} sensor={this.props.sensor} change={this.props.change} />
-    } else if (this.props.sensor.sensorType === 3) {
-      form = <HyperspectralForm index={this.props.index} sensor={this.props.sensor} change={this.props.change} />
-    } else if (this.props.sensor.sensorType === 4) {
-      form = <LidarForm index={this.props.index} sensor={this.props.sensor} change={this.props.change} />
-    } else if (this.props.sensor.sensorType === 5) {
-      form = <ThermalForm index={this.props.index} sensor={this.props.sensor} change={this.props.change} />
-    } else {
-      form = <div><strong>Sensor #{this.props.index + 1} - Other</strong><br /><br /></div>;
-    }
+    const { fields, sensors, change } = this.props;
     return (
-      <div>{form}</div>
+      <ul style={{listStyleType: "none", padding: 0}}>
+        {sensors.map((sensor, index) =>
+          <li key={index}>
+            {sensor.sensorType === 1 &&
+              <div>
+                <strong>Sensor #{index + 1} - RGB</strong><br /><br />
+                <RGBForm index={index} sensor={sensor} change={change} />
+              </div>
+            }
+            {sensor.sensorType === 2 &&
+              <div>
+                <strong>Sensor #{index + 1} - Multispectral</strong><br /><br />
+                <MultispectralForm index={index} sensor={sensor} change={change} />
+              </div>
+            }
+            {sensor.sensorType === 3 &&
+              <div>
+                <strong>Sensor #{index + 1} - Hyperspectral</strong><br /><br />
+                <HyperspectralForm index={index} sensor={sensor} change={change} />
+              </div>
+            }
+            {sensor.sensorType === 4 &&
+              <div>
+                <strong>Sensor #{index + 1} - LiDAR</strong><br /><br />
+                <LidarForm index={index} sensor={sensor} change={change} />
+              </div>
+            }
+            {sensor.sensorType === 5 &&
+              <div>
+                <strong>Sensor #{index + 1} - Thermal</strong><br /><br />
+                <ThermalForm index={index} sensor={sensor} change={change} />
+              </div>
+            }
+            {sensor.sensorType > 5 &&
+              <div><strong>Sensor #{this.props.index + 1} - Other</strong><br /><br /></div>
+            }
+          </li>
+        )}
+      </ul>
     )
   }
 }
 
-const SensorComponents = (sensors, change) => (
-  <div>
-    {sensors.map((sensor, index) => (
-      <SensorForm key={index} index={index} sensor={sensor} change={change} />
-    ))}
-  </div>
-);
-
 class Payload extends React.Component {
+  componentWillUpdate(nextProps) {
+
+  }
   render() {
-    const { handleSubmit, previousPage, sensors } = this.props;
+    const { handleSubmit, previousPage, formValues } = this.props;
+
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Payload Metadata" />
         <CardText>
-          {sensors ? SensorComponents(sensors, this.props.change) : null}
-          {!sensors ? <span>Please <strong>add at least one sensor</strong> during the Planning phase.</span> : null}
+          {formValues.sensors ? <FieldArray name="payload" sensors={formValues.sensors} component={renderSensors} change={this.props.change} /> : null}
+          {!formValues.sensors ? <span>Please <strong>add at least one sensor</strong> during the Planning phase.</span> : null}
         </CardText>
         <CardActions>
           <FlatButton
@@ -687,11 +718,7 @@ const myReduxForm = reduxForm({
 
 const selector = formValueSelector('logbook');
 export default connect(
-  state => {
-    const sensors = selector(state, 'sensors');
-
-    return {
-      sensors,
-    }
-  }
+  state => ({
+    formValues: getFormValues('logbook')(state),
+  })
 )(myReduxForm);

@@ -16,7 +16,7 @@ const store = (window.devToolsExtension
 
 ReactDOM.render(
   <Provider store={ store }>
-    <App />
+    <App dispatch={ store.dispatch } />
   </Provider>,
   document.querySelector('#root')
 );

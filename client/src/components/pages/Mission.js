@@ -73,10 +73,33 @@ const myReduxForm = reduxForm({
 
 const selector = formValueSelector('logbook');
 export default connect(
-  state => {
-    const missionType = selector(state, 'typeSelect');
-    return {
-      missionType,
-    }
-  }
+  state => ({
+    initialValues: selector(state, 'initialValuesFromJSON') ? selector(state, 'initialValuesFromJSON') : {
+      'categorySelect': 1,
+      'typeSelect': 2,
+      'lifeCycleSelect': 1,
+      'droneTypeSelect': 1,
+      'remoteChargeTargetText': 100.00,
+      'remoteChargeMinimumText': 30.00,
+      'groundControlChargeTargetText': 100.00,
+      'groundControlChargeMinimumText': 30.00,
+      'flightModeSelect': 1,
+      'statusSelect': 1,
+      'chemicalTypeSelect': 1,
+      'appRateUnitSelect': 1,
+      'pressureUnitSelect': 1,
+      'swathDistanceUnitSelect': 1,
+      'swathAreaUnitSelect': 1,
+      'applicationTypeSelect': 1,
+      'preflightRadioButtonGroup': 'yes',
+      'permissionRadioButtonGroup': 'notRequired',
+      'peoplePresentRadioButtonGroup': 'no',
+      'maximumAGLText': 400,
+      'aglUnitSelect': 1,
+      'lookAngleRadioButtonGroup': 'vertical',
+      'maximumGroundSpeedRadioButtonGroup': 'no',
+      'niirsSensorSelect': 1,
+    },
+    missionType: selector(state, 'typeSelect'),
+  })
 )(myReduxForm);

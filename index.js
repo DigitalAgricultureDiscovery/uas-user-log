@@ -23,12 +23,14 @@ if (cluster.isMaster) {
 
 } else {
   const app = express();
+  // Support JSON-encoded bodies
+  app.use(express.json());
 
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, './client/build')));
 
   // Answer API requests.
-  app.get('/api', function (req, res) {
+  app.get('/api/weather', function (req, res) {
     res.set('Content-Type', 'application/json');
     weatherAPI.getForecast(keys.apixuKey, req.query.location.toString())
       .then(data => res.send(data))

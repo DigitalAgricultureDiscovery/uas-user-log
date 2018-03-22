@@ -5,15 +5,6 @@ import Header from './Header';
 import Footer from './Footer';
 import LogbookForm from './LogbookForm';
 
-const showResults = values =>
-  new Promise(resolve => {
-    setTimeout(() => {
-      // simulate server latency
-      window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-      resolve();
-    }, 500)
-  });
-
 class App extends React.Component {
   render() {
     return (
@@ -22,7 +13,7 @@ class App extends React.Component {
             <MuiThemeProvider>
               <Header />
             </MuiThemeProvider>
-            <LogbookForm onSubmit={ showResults } />
+            <LogbookForm dispatch={this.props.dispatch} />
           </div>
           <MuiThemeProvider>
             <Footer />
