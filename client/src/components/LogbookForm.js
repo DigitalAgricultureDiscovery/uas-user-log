@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { reset } from 'redux-form';
 // material-ui elements
 import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme                  from 'material-ui/styles/getMuiTheme';
@@ -142,6 +142,7 @@ class LogbookForm extends React.Component {
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
+    this.clearAndReturn = this.clearAndReturn.bind(this);
     this.stepperChangePage = this.stepperChangePage.bind(this);
     this.updateMissionType = this.updateMissionType.bind(this);
   }
@@ -154,16 +155,21 @@ class LogbookForm extends React.Component {
     this.setState({pageIndex: this.state.pageIndex - 1});
   };
 
+  clearAndReturn() {
+    this.setState({pageIndex: 0});
+    this.props.dispatch(reset('logbook'));
+  };
+
   stepperChangePage(pageIndex) {
     this.setState({pageIndex: pageIndex});
-  }
+  };
 
   updateMissionType(index) {
     this.setState({'missionType': index});
-  }
+  };
 
   render() {
-    const { onSubmit } = this.props;
+    // const { onSubmit } = this.props;
     const { pageIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
     const divStyle = {
@@ -273,7 +279,7 @@ class LogbookForm extends React.Component {
               { (pageIndex === 16 || (this.state.missionType === 3 && pageIndex === 14)) && (
                 <Finish
                   previousPage={ this.previousPage }
-                  onSubmit={ onSubmit }
+                  clearAndReturn={ this.clearAndReturn }
                 />
               )}
               <ProgressBar value={pageIndex} missionType={this.state.missionType} />
@@ -284,10 +290,6 @@ class LogbookForm extends React.Component {
       </MuiThemeProvider>
     )
   }
-}
-
-LogbookForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
 }
 
 export default LogbookForm;

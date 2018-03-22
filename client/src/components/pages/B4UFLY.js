@@ -15,7 +15,7 @@ class AirportOperatorContactText extends React.Component {
   render() {
     return (
       <Field
-        name="AirportOperatorContactText"
+        name="airportOperatorContactText"
         component={TextField}
         floatingLabelText="Airport operator contact"
       />
@@ -27,7 +27,7 @@ class ControlTowerContactText extends React.Component {
   render() {
     return (
       <Field
-        name="ControlTowerContactText"
+        name="controlTowerContactText"
         component={TextField}
         floatingLabelText="Control tower contact"
       />
@@ -52,12 +52,16 @@ class StatusSelect extends React.Component {
 
 class NOTAMSCheckbox extends React.Component {
   render() {
+    const { touched, error, submitFailed } = this.props;
     return (
-      <Field
-        name="notamsCheckbox"
-        component={Checkbox}
-        label="Checked NOTAMS"
-      />
+      <div>
+        {(touched || submitFailed) && error && <p><span className="error-msg">{error}</span></p>}
+        <Field
+          name="notamsCheckbox"
+          component={Checkbox}
+          label="Checked NOTAMS"
+        />
+      </div>
     )
   }
 }

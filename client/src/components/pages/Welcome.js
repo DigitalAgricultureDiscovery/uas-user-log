@@ -8,7 +8,42 @@ import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
 
 import validate from '../helpers/validate';
 
+const styles = {
+  button: {
+    margin: 12,
+  },
+  logLoadButton: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '100%',
+    opacity: 0,
+  },
+};
+
 class Welcome extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.onReaderLoad = this.onReaderLoad.bind(this);
+  }
+
+  handleChange(event) {
+    // Use FileReader API to read contents of client's JSON file
+    const reader = new FileReader();
+    reader.onload = this.onReaderLoad;
+    reader.readAsText(event.target.files[0]);
+  }
+
+  onReaderLoad(event) {
+    // Add loaded JSON file to store
+    const obj = JSON.parse(event.target.result);
+    this.props.change('initialValuesFromJSON', obj);
+  }
+
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -65,6 +100,19 @@ class Welcome extends React.Component {
             type="submit"
             backgroundColor="#FFD100"
           />
+          <RaisedButton
+            label="Load Form"
+            labelPosition="before"
+            style={styles.button}
+            containerElement="label"
+          >
+            <input
+              type="file"
+              accept=".json"
+              style={styles.logLoadButton}
+              onChange={this.handleChange}
+            />
+          </RaisedButton>
         </CardActions>
       </form>
     );
@@ -76,30 +124,4 @@ export default reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate,
-  initialValues: {
-    'categorySelect': 1,
-    'typeSelect': 2,
-    'lifeCycleSelect': 1,
-    'droneTypeSelect': 1,
-    'remoteChargeTargetText': 100.00,
-    'remoteChargeMinimumText': 30.00,
-    'groundControlChargeTargetText': 100.00,
-    'groundControlChargeMinimumText': 30.00,
-    'flightModeSelect': 1,
-    'statusSelect': 1,
-    'chemicalTypeSelect': 1,
-    'appRateUnitSelect': 1,
-    'pressureUnitSelect': 1,
-    'swathDistanceUnitSelect': 1,
-    'swathAreaUnitSelect': 1,
-    'applicationTypeSelect': 1,
-    'preflightRadioButtonGroup': 'yes',
-    'permissionRadioButtonGroup': 'notRequired',
-    'peoplePresentRadioButtonGroup': 'no',
-    'maximumAGLText': 400,
-    'aglUnitSelect': 1,
-    'lookAngleRadioButtonGroup': 'vertical',
-    'maximumGroundSpeedRadioButtonGroup': 'no',
-    'niirsSensorSelect': 1,
-  }
 })(Welcome);

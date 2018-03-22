@@ -49,7 +49,7 @@ class NoFlightWarningText extends React.Component {
 }
 
 async function fetchWeatherData(location) {
-  const response = await fetch('/api?location=' + location);
+  const response = await fetch('/api/weather?location=' + location);
   const data = await response.json();
   return data;
 }
