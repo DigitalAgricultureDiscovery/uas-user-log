@@ -297,9 +297,9 @@ class Team extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Team Information" />
         <CardText>
-          <FieldArray name={`${PAGE_NAME}RemotePIC`} component={renderRemotePICs} />
-          <FieldArray name={`${PAGE_NAME}PIC`} component={renderPICs} />
-          <FieldArray name={`${PAGE_NAME}VO`} component={renderVOs} />
+          <FieldArray name={`${PAGE_NAME}RemotePICs`} component={renderRemotePICs} />
+          <FieldArray name={`${PAGE_NAME}PICs`} component={renderPICs} />
+          <FieldArray name={`${PAGE_NAME}VOs`} component={renderVOs} />
         </CardText>
         <CardActions>
           <FlatButton

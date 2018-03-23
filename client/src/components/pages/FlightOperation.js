@@ -1,42 +1,19 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
+import LogbookSelectField from '../helpers/LogbookSelectField';
 // material-ui elements
-import { SelectField }                      from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
-import MenuItem                             from 'material-ui/MenuItem';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
-class FlightModeSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 1,
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
+const PAGE_NAME = 'flightOperation_';
 
-  handleChange(event, index, value) {
-    this.setState({value: value});
-  }
-
-  render() {
-    return (
-      <Field
-        name="flightModeSelect"
-        component={SelectField}
-        floatingLabelText="Flight mode"
-        value={this.state.value}
-        onChange={this.handleChange}
-      >
-        <MenuItem value={1} primaryText="Autonomous" />
-        <MenuItem value={2} primaryText="Manual" />
-      </Field>
-    )
-  }
-}
+const FLIGHT_MODES = [
+  {value: 1, name: 'Autonomous'},
+  {value: 2, name: 'Manual'},
+];
 
 class FlightOperation extends React.Component {
   render() {
@@ -45,7 +22,12 @@ class FlightOperation extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Flight Operation" />
         <CardText>
-          <FlightModeSelect />
+          <LogbookSelectField
+            fieldName={`${PAGE_NAME}Mode`}
+            fieldLabel="Mode"
+            items={FLIGHT_MODES}
+            setDefault={false}
+          />
         </CardText>
         <CardActions>
           <FlatButton

@@ -92,22 +92,32 @@ const selector = formValueSelector('logbook');
 export default connect(
   state => ({
     initialValues: selector(state, 'initialValuesFromJSON') ? selector(state, 'initialValuesFromJSON') : {
-      'categorySelect': 1,
       'mission_Type': 2,
+
       'crop_LifeCycle': 1,
+
       'hardware_Type': 1,
       'hardware_RemoteChargeTarget': 100.00,
       'hardware_RemoteChargeMinimum': 30.00,
       'hardware_GroundControlChargeTarget': 100.00,
       'hardware_GroundControlChargeMinimum': 30.00,
-      'flightModeSelect': 1,
-      'statusSelect': 1,
-      'chemicalTypeSelect': 1,
-      'appRateUnitSelect': 1,
-      'pressureUnitSelect': 1,
-      'swathDistanceUnitSelect': 1,
-      'swathAreaUnitSelect': 1,
-      'applicationTypeSelect': 1,
+
+      'flightOperation_Mode': 1,
+
+      'dataCollection_ChemicalType': 1,
+      'dataCollection_ApplicationRateUnit': 1,
+      'dataCollection_PressureUnit': 1,
+      'dataCollection_SwathDistanceUnit': 1,
+      'dataCollection_SwathAreaUnit': 1,
+      'dataCollection_ApplicationType': 1,
+
+      // 'statusSelect': 1,
+      // 'chemicalTypeSelect': 1,
+      // 'appRateUnitSelect': 1,
+      // 'pressureUnitSelect': 1,
+      // 'swathDistanceUnitSelect': 1,
+      // 'swathAreaUnitSelect': 1,
+      // 'applicationTypeSelect': 1,
       'preflightRadioButtonGroup': 'yes',
       'permissionRadioButtonGroup': 'notRequired',
       'peoplePresentRadioButtonGroup': 'no',

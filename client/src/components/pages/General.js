@@ -149,7 +149,7 @@ class General extends React.Component {
         <CardTitle title="General" />
         <CardText>
           <FlightDatePicker />
-          <FieldArray name={`${PAGE_NAME}Flight`} component={renderFlights} change={this.props.change} />
+          <FieldArray name={`${PAGE_NAME}Flights`} component={renderFlights} change={this.props.change} />
         </CardText>
         <CardActions>
           <FlatButton

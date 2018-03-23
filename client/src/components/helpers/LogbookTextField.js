@@ -24,7 +24,7 @@ export default class LogbookTextField extends React.Component {
         component={TextField}
       />;
     return (
-      <div style={{style}}>
+      <div style={this.props.style ? this.props.style : {style}}>
         {form}
       </div>
     )
