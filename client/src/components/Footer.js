@@ -14,7 +14,7 @@ class Footer extends React.Component {
                     <img
                       src="./images/logos/Purdue-Sig-White-rgb.png"
                       alt="Purdue logo"
-                      style={{width: "auto", maxHeight: 50}} />
+                      style={{width: '100%', maxWidth: '125px'}} />
                   </a>
                 </TableRowColumn>
                 <TableRowColumn style={{textAlign: 'center'}}>
@@ -22,7 +22,7 @@ class Footer extends React.Component {
                     <img
                       src="./images/logos/logo_transparent.png"
                       alt="SAAESD logo"
-                      style={{width: "auto", maxHeight: 50}} />
+                      style={{width: '100%', maxWidth: '125px'}} />
                   </a>
                 </TableRowColumn>
                 <TableRowColumn style={{textAlign: 'right'}}>
@@ -30,7 +30,7 @@ class Footer extends React.Component {
                     <img
                       src="./images/logos/FFAR-Logo-60@2x.png"
                       alt="FFAR logo"
-                      style={{width: 'auto', maxHeight: 50}} />
+                      style={{width: '100%', maxWidth: '125px'}} />
                   </a>
                 </TableRowColumn>
               </TableRow>
