@@ -19,7 +19,8 @@ import Team             from './pages/Team';             // page 5
 import Hardware         from './pages/Hardware';         // page 6
 import Battery          from './pages/Battery';          // page 7
 import FlightOperation  from './pages/FlightOperation';  // page 8
-import DataCollection   from './pages/DataCollection';   // page 9
+import DataCollectionResearch from './pages/DataCollectionResearch';   // page 9
+import DataCollectionSpray from './pages/DataCollectionSpray';   // page 9
 import B4UFLY           from './pages/B4UFLY';           // page 10
 import Obstacles        from './pages/Obstacles';        // page 11
 import People           from './pages/People';           // page 12
@@ -229,10 +230,16 @@ class LogbookForm extends React.Component {
                 />
               )}
               { pageIndex === 8 && (
-                <DataCollection
-                  previousPage={ this.previousPage }
-                  onSubmit={ this.nextPage }
-                />
+                this.state.missionType === 2 ?
+                  <DataCollectionResearch
+                    previousPage={ this.previousPage }
+                    onSubmit={ this.nextPage }
+                  />
+                :
+                  <DataCollectionSpray
+                    previousPage={ this.previousPage }
+                    onSubmit={ this.nextPage }
+                  />
               )}
               { pageIndex === 9 && (
                 <B4UFLY

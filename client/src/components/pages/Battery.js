@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
+import { FieldArray, reduxForm, formValueSelector } from 'redux-form';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { TextField }                        from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
 import IconButton                           from 'material-ui/IconButton';
@@ -15,28 +15,33 @@ import {red500} from 'material-ui/styles/colors';
 
 import validate from '../helpers/validate';
 
-class BatteriesUsedText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="batteriesUsedText"
-        component={TextField}
-        floatingLabelText="Number of batteries used at a time"
-        type="number"
-      />
-    )
-  }
-}
+const PAGE_NAME = 'battery_';
 
-class BatteriesUASText extends React.Component {
+class BatteryChargeSubForm extends React.Component {
+  componentWillMount() {
+    if (Object.keys(this.props.currentBatteries[this.props.batteryIndex]).length < 1) {
+      this.props.change(this.props.targetName, 100.00);
+      this.props.change(this.props.minimumName, 30.00);
+    }
+  }
+
   render() {
     return (
-      <Field
-        name="batteriesUASText"
-        component={TextField}
-        floatingLabelText="Number of batteries on UAS"
-        type="number"
-      />
+      <div>
+        Charge status
+        <LogbookTextField
+          fieldName={this.props.targetName}
+          fieldLabel="Target (%)"
+          type="number"
+          step="0.001"
+        />
+        <LogbookTextField
+          fieldName={this.props.minimumName}
+          fieldLabel="Minimum (%)"
+          type="number"
+          step="0.001"
+        />
+      </div>
     )
   }
 }
@@ -76,12 +81,10 @@ const renderBatteries = ({ fields, change, currentBatteries, meta: { touched, er
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          <br />
-          <BatteryWeightText fieldName={`${battery}.batteryWeight`} />
-          <br />
-          <BatteryChargeStatusText
-            fieldTargetName={`${battery}.batteryTargetText`}
-            fieldMinimumName={`${battery}.batteryMinimumText`}
+          <LogbookTextField fieldName={`${battery}.Weight`} fieldLabel="Weight" />
+          <BatteryChargeSubForm
+            targetName={`${battery}.Target`}
+            minimumName={`${battery}.Minimum`}
             batteryIndex={index}
             change={change}
             currentBatteries={currentBatteries}
@@ -95,54 +98,6 @@ const renderBatteries = ({ fields, change, currentBatteries, meta: { touched, er
   </div>
 );
 
-class BatteryWeightText extends React.Component {
-  render() {
-    return (
-      <Field
-        name={this.props.fieldName}
-        component={TextField}
-        floatingLabelText="Battery weight"
-        type="number"
-      />
-    )
-  }
-}
-
-class BatteryChargeStatusText extends React.Component {
-  componentWillMount() {
-    if (Object.keys(this.props.currentBatteries[this.props.batteryIndex]).length < 1) {
-      this.props.change(this.props.fieldTargetName, 100.00);
-      this.props.change(this.props.fieldMinimumName, 30.00);
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        <br />
-        Charge status
-        <br />
-        <Field
-          name={this.props.fieldTargetName}
-          className="batteryTarget"
-          component={TextField}
-          floatingLabelText="Target (%)"
-          type="number"
-          step="0.001"
-        />&nbsp;
-        <Field
-          name={this.props.fieldMinimumName}
-          className="batteryMinimum"
-          component={TextField}
-          floatingLabelText="Minimum (%)"
-          type="number"
-          step="0.001"
-        />
-      </div>
-    )
-  }
-}
-
 class Battery extends React.Component {
   render() {
     const { handleSubmit, previousPage, currentBatteries } = this.props;
@@ -150,12 +105,10 @@ class Battery extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Battery" />
         <CardText>
-          <BatteriesUsedText />
-          <br />
-          <BatteriesUASText />
-          <br />
+          <LogbookTextField fieldName={`${PAGE_NAME}Used`} fieldLabel="Number of batteries used at a time" />
+          <LogbookTextField fieldName={`${PAGE_NAME}OnUAS`} fieldLabel="Number of batteries on UAS" />
           <FieldArray
-            name="batteries"
+            name={`${PAGE_NAME}Batteries`}
             component={renderBatteries}
             change={this.props.change}
             currentBatteries={currentBatteries}
@@ -188,9 +141,10 @@ const myReduxForm = reduxForm({
 })(Battery);
 
 const selector = formValueSelector('logbook');
+
 export default connect(
   state => {
-    const currentBatteries = selector(state, 'batteries');
+    const currentBatteries = selector(state, PAGE_NAME + 'Batteries');
     return {
       currentBatteries
     }

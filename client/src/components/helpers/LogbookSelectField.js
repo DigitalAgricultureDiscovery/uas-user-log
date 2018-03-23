@@ -8,10 +8,28 @@ const style = {
 };
 
 export default class LogbookSelectField extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
   componentWillMount() {
     // Select first menu item as default if 'setDefault' true
     if (this.props.setDefault) {
       this.props.change(this.props.fieldName, 1);
+    }
+  }
+
+  handleChange(event, newValue, oldValue) {
+    if (this.props.change) {
+      console.log(this.props.currentValue);
+      console.log(this.props.items[newValue - 1]);
+      // Convert value after unit change
+      const convertedValue = (newValue === 1 ?
+        this.props.currentValue * this.props.items[newValue - 1].rate
+      :
+        this.props.currentValue * this.props.items[newValue - 1].rate);
+      // Update store with converted value
+      this.props.change(this.props.currentValueField, convertedValue.toFixed(4));
     }
   }
 
@@ -32,6 +50,7 @@ export default class LogbookSelectField extends React.Component {
           name={this.props.fieldName}
           floatingLabelText={this.props.fieldLabel}
           component={SelectField}
+          onChange={this.props.change ? this.handleChange : null}
         >
           {this.menuItems(this.props.items)}
         </Field>
