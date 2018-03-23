@@ -46,8 +46,8 @@ class AGLUnitSelect extends React.Component {
   }
 
   handleChange(event, index, value) {
-    const convertedMaxAGL = (index === 0 ? this.props.currentMaxAGL * 3.28084 : this.props.currentMaxAGL * 0.3048);
-    const convertedMinAGL = (index === 0 && this.props.currentMinAGL ? this.props.currentMinAGL * 3.28084 : this.props.currentMinAGL * 0.3048);
+    const convertedMaxAGL = (index === 1 ? this.props.currentMaxAGL * 3.28084 : this.props.currentMaxAGL * 0.3048);
+    const convertedMinAGL = (index === 1 && this.props.currentMinAGL ? this.props.currentMinAGL * 3.28084 : this.props.currentMinAGL * 0.3048);
 
     this.props.change('maximumAGLText', convertedMaxAGL.toFixed(2));
     this.props.change('minimumAGLText', convertedMinAGL.toFixed(2));
@@ -61,8 +61,8 @@ class AGLUnitSelect extends React.Component {
         floatingLabelText="Unit"
         onChange={this.handleChange}
       >
-        <MenuItem value={0} primaryText="ft" />
-        <MenuItem value={1} primaryText="m" />
+        <MenuItem value={1} primaryText="ft" />
+        <MenuItem value={2} primaryText="m" />
       </Field>
     )
   }

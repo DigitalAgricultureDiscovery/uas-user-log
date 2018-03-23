@@ -1,7 +1,8 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { DatePicker, TextField, TimePicker } from 'redux-form-material-ui';
+import { DatePicker, TimePicker } from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText }  from 'material-ui/Card';
 import FlatButton                            from 'material-ui/FlatButton';
 import IconButton                            from 'material-ui/IconButton';
@@ -16,11 +17,13 @@ import {red500} from 'material-ui/styles/colors';
 import validate from '../helpers/validate';
 import locationUtil from '../helpers/location';
 
+const PAGE_NAME = 'general_';
+
 class FlightDatePicker extends React.Component {
   render() {
     return (
       <Field
-        name="flightDatePicker"
+        name={`${PAGE_NAME}FlightDate`}
         component={DatePicker}
         format={null}
         floatingLabelText="Date of flight(s)"
@@ -64,11 +67,11 @@ const renderFlights = ({ fields, change, meta: { touched, error, submitFailed } 
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          <FlightTimeStartPicker fieldName={`${flight}.flightTimeStart`} />
-          <FlightTimeEndPicker fieldName={`${flight}.flightTimeEnd`} />
+          <FlightTimeStartPicker fieldName={`${flight}.Start`} />
+          <FlightTimeEndPicker fieldName={`${flight}.End`} />
           <Location
-            fieldLatName={`${flight}.flightLatLocation`}
-            fieldLonName={`${flight}.flightLonLocation`}
+            fieldLatName={`${flight}.Latitude`}
+            fieldLonName={`${flight}.Longitude`}
             change={change}
           />
           <br />
@@ -124,17 +127,8 @@ class Location extends React.Component {
   render() {
     return (
       <div>
-        <Field
-          name={this.props.fieldLatName}
-          component={TextField}
-          floatingLabelText="Latitude"
-        />&nbsp;
-        <Field
-          name={this.props.fieldLonName}
-          component={TextField}
-          floatingLabelText="Longitude"
-        />
-        <br />
+        <LogbookTextField fieldName={this.props.fieldLatName} fieldLabel="Latitude" />
+        <LogbookTextField fieldName={this.props.fieldLonName} fieldLabel="Longitude" />
         <RaisedButton
           onClick={this.handleClick}
           label="My location"
@@ -155,7 +149,7 @@ class General extends React.Component {
         <CardTitle title="General" />
         <CardText>
           <FlightDatePicker />
-          <FieldArray name="flights" component={renderFlights} change={this.props.change} />
+          <FieldArray name={`${PAGE_NAME}Flight`} component={renderFlights} change={this.props.change} />
         </CardText>
         <CardActions>
           <FlatButton

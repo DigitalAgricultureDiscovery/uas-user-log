@@ -1,7 +1,7 @@
 import React from 'react';
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import { FieldArray, reduxForm } from 'redux-form';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { TextField }                        from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
 import IconButton                           from 'material-ui/IconButton';
@@ -16,29 +16,7 @@ import {red500} from 'material-ui/styles/colors';
 
 import validate from '../helpers/validate';
 
-class RemotePICText extends React.Component {
-  render() {
-    return (
-      <Field
-        name={this.props.fieldName}
-        component={TextField}
-        floatingLabelText="Name"
-      />
-    )
-  }
-}
-
-class RemotePICLicenseText extends React.Component {
-  render() {
-    return (
-      <Field
-        name={this.props.fieldName}
-        component={TextField}
-        floatingLabelText="License #"
-      />
-    )
-  }
-}
+const PAGE_NAME = 'team_';
 
 class RemotePICHelpText extends React.Component {
   render() {
@@ -52,7 +30,7 @@ class RemotePICHelpText extends React.Component {
 
     return (
       <Paper
-        name="remotePICHelpText"
+        name={`${PAGE_NAME}RemotePICHelp`}
         style={style}
         zDepth={1}
       >
@@ -113,19 +91,18 @@ class AddRemotePICButton extends React.Component {
 const renderRemotePICs = ({ fields, change, meta: { touched, error, submitFailed } }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
-      {fields.map((remotePic, index) =>
+      {fields.map((remotePIC, index) =>
         <li key={index}>
           <strong>Remote PIC #{index + 1}</strong>
           <IconButton
             tooltip="Remove remote PIC"
             onClick={() => fields.remove(index)}
+            style={{verticalAlign: "middle"}}
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          <br />
-          <RemotePICText fieldName={`${remotePic}.remotePicName`} />&nbsp;
-          <RemotePICLicenseText fieldName={`${remotePic}.remotePicLicense`} />
-          <br />
+          <LogbookTextField fieldName={`${remotePIC}.Name`} fieldLabel="Name" />
+          <LogbookTextField fieldName={`${remotePIC}.License`} fieldLabel="License #" />
         </li>
       )}
     </ul>
@@ -133,18 +110,6 @@ const renderRemotePICs = ({ fields, change, meta: { touched, error, submitFailed
     {(touched || submitFailed) && error && <p><span className="error-msg">{error}</span></p>}
   </div>
 );
-
-class PICText extends React.Component {
-  render() {
-    return (
-      <Field
-        name={this.props.fieldName}
-        component={TextField}
-        floatingLabelText="Name"
-      />
-    )
-  }
-}
 
 class PICHelpText extends React.Component {
   render() {
@@ -158,7 +123,7 @@ class PICHelpText extends React.Component {
 
     return (
       <Paper
-        name="remotePICHelpText"
+        name={`${PAGE_NAME}PICHelp`}
         style={style}
         zDepth={1}
       >
@@ -223,30 +188,17 @@ const renderPICs = ({ fields, change }) => (
           <IconButton
             tooltip="Remove PIC"
             onClick={() => fields.remove(index)}
+            style={{verticalAlign: "middle"}}
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          <br />
-          <PICText fieldName={`${pic}.picName`} />&nbsp;
-          <br />
+          <LogbookTextField fieldName={`${pic}.Name`} fieldLabel="Name" />
         </li>
       )}
     </ul>
     <AddPICButton addNewPIC={() => fields.push({})} />
   </div>
 );
-
-class VOText extends React.Component {
-  render() {
-    return (
-      <Field
-        name={this.props.fieldName}
-        component={TextField}
-        floatingLabelText="Name"
-      />
-    )
-  }
-}
 
 class VOHelpText extends React.Component {
   render() {
@@ -260,7 +212,7 @@ class VOHelpText extends React.Component {
 
     return (
       <Paper
-        name="voHelpText"
+        name={`${PAGE_NAME}VOHelp`}
         style={style}
         zDepth={1}
       >
@@ -325,12 +277,11 @@ const renderVOs = ({ fields, change }) => (
           <IconButton
             tooltip="Remove VO"
             onClick={() => fields.remove(index)}
+            style={{verticalAlign: "middle"}}
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          <br />
-          <VOText fieldName={`${vo}.voName`} />
-          <br />
+          <LogbookTextField fieldName={`${vo}.Name`} fieldLabel="Name" />
         </li>
       )}
     </ul>
@@ -346,11 +297,9 @@ class Team extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Team Information" />
         <CardText>
-          <FieldArray name="remotePICs" component={renderRemotePICs} />
-          <br />
-          <FieldArray name="pics" component={renderPICs} />
-          <br />
-          <FieldArray name="vos" component={renderVOs} />
+          <FieldArray name={`${PAGE_NAME}RemotePIC`} component={renderRemotePICs} />
+          <FieldArray name={`${PAGE_NAME}PIC`} component={renderPICs} />
+          <FieldArray name={`${PAGE_NAME}VO`} component={renderVOs} />
         </CardText>
         <CardActions>
           <FlatButton

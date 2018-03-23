@@ -9,7 +9,7 @@ class Footer extends React.Component {
           <Table style={{backgroundColor: "inherit"}}>
             <TableBody displayRowCheckbox={false}>
               <TableRow>
-                <TableRowColumn style={{textAlign: "left"}}>
+                <TableRowColumn style={{textAlign: 'left'}}>
                   <a href="https://purdue.edu" target="_blank" rel="noopener noreferrer">
                     <img
                       src="./images/logos/Purdue-Sig-White-rgb.png"
@@ -17,12 +17,20 @@ class Footer extends React.Component {
                       style={{width: "auto", maxHeight: 50}} />
                   </a>
                 </TableRowColumn>
-                <TableRowColumn style={{textAlign: "right"}}>
+                <TableRowColumn style={{textAlign: 'center'}}>
                   <a href="https://saaesd.org/" target="_blank" rel="noopener noreferrer">
                     <img
                       src="./images/logos/logo_transparent.png"
                       alt="SAAESD logo"
                       style={{width: "auto", maxHeight: 50}} />
+                  </a>
+                </TableRowColumn>
+                <TableRowColumn style={{textAlign: 'right'}}>
+                  <a href="http://foundationfar.org" target="_blank" rel="noopener noreferrer">
+                    <img
+                      src="./images/logos/FFAR-Logo-60@2x.png"
+                      alt="FFAR logo"
+                      style={{width: 'auto', maxHeight: 50}} />
                   </a>
                 </TableRowColumn>
               </TableRow>
