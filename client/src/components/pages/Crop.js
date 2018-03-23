@@ -1,89 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import LogbookSelectField from '../helpers/LogbookSelectField';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { DatePicker, SelectField, TextField } from 'redux-form-material-ui';
+import { DatePicker }                         from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText }   from 'material-ui/Card';
 import FlatButton                             from 'material-ui/FlatButton';
 import RaisedButton                           from 'material-ui/RaisedButton';
-import MenuItem                               from 'material-ui/MenuItem';
 
 import validate from '../helpers/validate';
 
-class LifeCycleSelect extends React.Component {
-  render() {
-    return (
-      <Field
-        name="lifeCycleSelect"
-        component={SelectField}
-        floatingLabelText="Crop lifecycle"
-      >
-        <MenuItem value={1} primaryText="Annual" />
-        <MenuItem value={2} primaryText="Perennial" />
-      </Field>
-    )
-  }
-}
+const PAGE_NAME = 'crop_';
 
-class CropNameText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="cropNameText"
-        component={TextField}
-        floatingLabelText="Crop name"
-      />
-    )
-  }
-}
-
-class GrowthStageText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="growthStageText"
-        component={TextField}
-        floatingLabelText="Growth stage"
-      />
-    )
-  }
-}
-
-class VarietyText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="varietyText"
-        component={TextField}
-        floatingLabelText="Variety/Genotype"
-      />
-    )
-  }
-}
-
-class SeedSourceText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="seedSourceText"
-        component={TextField}
-        floatingLabelText="Seed source"
-      />
-    )
-  }
-}
-
-class SeedStockText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="seedStockText"
-        component={TextField}
-        floatingLabelText="Seed stock"
-      />
-    )
-  }
-}
+const LIFE_CYCLE_ITEMS = [
+  {value: 1, name: 'Annual'},
+  {value: 2, name: 'Perennial'},
+];
 
 class YearDatePicker extends React.Component {
   render() {
@@ -99,52 +32,25 @@ class YearDatePicker extends React.Component {
   }
 }
 
-class RootstockText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="rootstockText"
-        component={TextField}
-        floatingLabelText="Rootstock"
-      />
-    )
-  }
-}
-
-class ScionText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="scionText"
-        component={TextField}
-        floatingLabelText="Scion"
-      />
-    )
-  }
-}
-
-class AnnualTexts extends React.Component {
+class AnnualSubForm extends React.Component {
   render() {
     return (
       <div>
-        <VarietyText />
-        <br />
-        <SeedSourceText />
-        <br />
-        <SeedStockText />
+        <LogbookTextField fieldName={`${PAGE_NAME}Variety`} fieldLabel="Variety/Genotype" />
+        <LogbookTextField fieldName={`${PAGE_NAME}SeedSource`} fieldLabel="Seed source" />
+        <LogbookTextField fieldName={`${PAGE_NAME}SeedStock`} fieldLabel="Seed stock" />
       </div>
     )
   }
 }
 
-class PerennialTexts extends React.Component {
+class PerennialSubForm extends React.Component {
   render() {
     return (
       <div>
         <YearDatePicker />
-        <RootstockText />
-        <br />
-        <ScionText />
+        <LogbookTextField fieldName={`${PAGE_NAME}Rootstock`} fieldLabel="Rootstock" />
+        <LogbookTextField fieldName={`${PAGE_NAME}Scion`} fieldLabel="Scion" />
       </div>
     )
   }
@@ -158,13 +64,15 @@ class Crop extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Crop" />
         <CardText>
-          <LifeCycleSelect />
-          <br />
-          <CropNameText />
-          <br />
-          <GrowthStageText />
-          <br />
-          { currentLifeCycle ? (currentLifeCycle === 1 ? <AnnualTexts /> : <PerennialTexts />) : null }
+          <LogbookSelectField
+            fieldName={`${PAGE_NAME}LifeCycle`}
+            fieldLabel="Crop Life Cycle"
+            items={LIFE_CYCLE_ITEMS}
+            setDefault={false}
+          />
+          <LogbookTextField fieldName={`${PAGE_NAME}Name`} fieldLabel="Crop name" />
+          <LogbookTextField fieldName={`${PAGE_NAME}GrowthStage`} fieldLabel="Growth stage" />
+          { currentLifeCycle ? (currentLifeCycle === 1 ? <AnnualSubForm /> : <PerennialSubForm />) : null }
         </CardText>
         <CardActions>
           <FlatButton
@@ -195,7 +103,7 @@ const myReduxForm = reduxForm({
 const selector = formValueSelector('logbook');
 export default connect(
   state => {
-    const currentLifeCycle = selector(state, 'lifeCycleSelect');
+    const currentLifeCycle = selector(state, 'crop_LifeCycle');
     return {
       currentLifeCycle
     }

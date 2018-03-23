@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { SelectField } from 'redux-form-material-ui';
 // material-ui elements
-import { SelectField }                      from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
 import MenuItem                             from 'material-ui/MenuItem';
@@ -10,22 +10,39 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
+const PAGE_NAME = 'mission_';
+
+const TYPE_ITEMS = [
+  // {value: 1, name: 'Teaching/Demonstration'},
+  {value: 2, name: 'Research/Production'},
+  {value: 3, name: 'Spray application'},
+];
+
 // Select input for mission type
 class TypeSelect extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.props.updateMissionType(nextProps.currentMissionType);
   }
 
+  menuItems(items) {
+    return items.map((item) => (
+      <MenuItem
+        key={item.value}
+        value={item.value}
+        primaryText={item.name}
+        disabled={item.value === 1 ? true : false}
+      />
+    ))
+  }
+
   render() {
     return (
       <Field
-        name="typeSelect"
+        name={`${PAGE_NAME}Type`}
         component={SelectField}
         floatingLabelText="Mission type"
       >
-        <MenuItem value={1} primaryText="Teaching/Demonstration" disabled={true} />
-        <MenuItem value={2} primaryText="Research" />
-        <MenuItem value={3} primaryText="Spray application" />
+        {this.menuItems(TYPE_ITEMS)}
       </Field>
     )
   }
@@ -76,13 +93,13 @@ export default connect(
   state => ({
     initialValues: selector(state, 'initialValuesFromJSON') ? selector(state, 'initialValuesFromJSON') : {
       'categorySelect': 1,
-      'typeSelect': 2,
-      'lifeCycleSelect': 1,
-      'droneTypeSelect': 1,
-      'remoteChargeTargetText': 100.00,
-      'remoteChargeMinimumText': 30.00,
-      'groundControlChargeTargetText': 100.00,
-      'groundControlChargeMinimumText': 30.00,
+      'mission_Type': 2,
+      'crop_LifeCycle': 1,
+      'hardware_Type': 1,
+      'hardware_RemoteChargeTarget': 100.00,
+      'hardware_RemoteChargeMinimum': 30.00,
+      'hardware_GroundControlChargeTarget': 100.00,
+      'hardware_GroundControlChargeMinimum': 30.00,
       'flightModeSelect': 1,
       'statusSelect': 1,
       'chemicalTypeSelect': 1,
@@ -100,6 +117,6 @@ export default connect(
       'maximumGroundSpeedRadioButtonGroup': 'no',
       'niirsSensorSelect': 1,
     },
-    missionType: selector(state, 'typeSelect'),
+    missionType: selector(state, 'mission_Type'),
   })
 )(myReduxForm);

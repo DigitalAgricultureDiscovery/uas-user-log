@@ -55,7 +55,7 @@ class Welcome extends React.Component {
             accessible through any web browser on internet-connected devices.​
             It is an outcome of multistate teams working together to develop a
             common protocol for unmanned aircraft systems (UAS) operation for
-            activities such as teaching/demonstration, research and spray
+            activities such as research/production and spray
             application. It ​relies on simple user interactions to develop a
             record of UAS mission and can also serve to enhance your flight
             and maintenance experience.​
@@ -87,6 +87,14 @@ class Welcome extends React.Component {
                       src="./images/logos/logo.png"
                       alt="SAAESD logo"
                       style={{width: "auto", maxHeight: 50}} />
+                  </a>
+                </TableRowColumn>
+                <TableRowColumn style={{textAlign: 'center'}}>
+                  <a href="http://foundationfar.org" target="_blank" rel="noopener noreferrer">
+                    <img
+                      src="./images/logos/FFAR-Logo-60@2x.png"
+                      alt="FFAR logo"
+                      style={{width: 'auto', maxHeight: 50}} />
                   </a>
                 </TableRowColumn>
               </TableRow>

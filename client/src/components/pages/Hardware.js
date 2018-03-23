@@ -1,84 +1,36 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
+import LogbookSelectField from '../helpers/LogbookSelectField';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { SelectField, TextField }           from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
-import MenuItem                             from 'material-ui/MenuItem';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
-// Select input for mission category
-class DroneTypeSelect extends React.Component {
-  render() {
-    return (
-      <Field
-        name="droneTypeSelect"
-        component={SelectField}
-        floatingLabelText="Drone type"
-      >
-        <MenuItem value={1} primaryText="Fixed wing" />
-        <MenuItem value={2} primaryText="Multi-rotor" />
-        <MenuItem value={3} primaryText="Helicopter" />
-      </Field>
-    )
-  }
-}
+const PAGE_NAME = 'hardware_';
 
-class DroneMakeText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="droneMakeText"
-        component={TextField}
-        floatingLabelText="Make"
-      />
-    )
-  }
-}
+const DRONE_TYPES = [
+  {value: 1, name: 'Fixed wing'},
+  {value: 2, name: 'Multi-rotor'},
+  {value: 3, name: 'Helicopter'},
+];
 
-class DroneModelText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="droneModelText"
-        component={TextField}
-        floatingLabelText="Model"
-      />
-    )
-  }
-}
-
-class DroneRegistrationText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="droneRegistrationText"
-        component={TextField}
-        floatingLabelText="FAA registration #"
-      />
-    )
-  }
-}
-
-class RemoteChargeStatusText extends React.Component {
+class RemoteChargeSubForm extends React.Component {
   render() {
     return (
       <div>
         Remote charge status
-        <br />
-        <Field
-          name="remoteChargeTargetText"
-          component={TextField}
-          floatingLabelText="Target (%)"
+        <LogbookTextField
+          fieldName={`${PAGE_NAME}RemoteChargeTarget`}
+          fieldLabel="Target (%)"
           type="number"
           step="0.01"
-        />&nbsp;
-        <Field
-          name="remoteChargeMinimumText"
-          component={TextField}
-          floatingLabelText="Minimum (%)"
+        />
+        <LogbookTextField
+          fieldName={`${PAGE_NAME}RemoteChargeMinimum`}
+          fieldLabel="Minimum (%)"
           type="number"
           step="0.01"
         />
@@ -87,23 +39,21 @@ class RemoteChargeStatusText extends React.Component {
   }
 }
 
-class GroundControlChargeStatusText extends React.Component {
+class GroundControlChargeSubForm extends React.Component {
   render() {
     return (
       <div>
         Ground control station battery status
-        <br />
-        <Field
-          name="groundControlChargeTargetText"
-          component={TextField}
-          floatingLabelText="Target (%)"
+        Remote charge status
+        <LogbookTextField
+          fieldName={`${PAGE_NAME}GroundControlChargeTarget`}
+          fieldLabel="Target (%)"
           type="number"
           step="0.01"
-        />&nbsp;
-        <Field
-          name="groundControlChargeMinimumText"
-          component={TextField}
-          floatingLabelText="Minimum (%)"
+        />
+        <LogbookTextField
+          fieldName={`${PAGE_NAME}GroundControlChargeMinimum`}
+          fieldLabel="Minimum (%)"
           type="number"
           step="0.01"
         />
@@ -120,19 +70,17 @@ class Hardware extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Hardware" />
         <CardText>
-          <DroneTypeSelect />
-          <br />
-          <DroneMakeText />
-          <br />
-          <DroneModelText />
-          <br />
-          <DroneRegistrationText />
-          <br />
-          <br />
-          <RemoteChargeStatusText />
-          <br />
-          <br />
-          <GroundControlChargeStatusText />
+          <LogbookSelectField
+            fieldName={`${PAGE_NAME}Type`}
+            fieldLabel="Type"
+            items={DRONE_TYPES}
+            setDefault={false}
+          />
+          <LogbookTextField fieldName={`${PAGE_NAME}Make`} fieldLabel="Make" />
+          <LogbookTextField fieldName={`${PAGE_NAME}Model`} fieldLabel="Model" />
+          <LogbookTextField fieldName={`${PAGE_NAME}Registration`} fieldLabel="Registration" />
+          <RemoteChargeSubForm />
+          <GroundControlChargeSubForm />
         </CardText>
         <CardActions>
           <FlatButton

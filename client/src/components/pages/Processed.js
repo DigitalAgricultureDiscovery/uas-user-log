@@ -13,9 +13,9 @@ import validate from '../helpers/validate';
 
 const SENSORS = [
   {value: 1, name: 'Visible'},
-  {value: 2, name: 'Radar'},
-  {value: 3, name: 'Infrared'},
-  {value: 4, name: 'Multispectral'},
+  {value: 2, name: 'Infrared'},
+  {value: 3, name: 'Multispectral'},
+  {value: 4, name: 'Radar'},
 ]
 
 class NiirsSensorSelect extends React.Component {
@@ -99,22 +99,22 @@ class Processed extends React.Component {
       case 2:
         return (
           <div>
-            <Subheader>Radar NIIRS - Select one or more applicable ratings</Subheader>
-            <NiirsGrid fieldName={"rad"} />
+            <Subheader>Infrared NIIRS - Select one or more applicable ratings</Subheader>
+            <NiirsGrid fieldName={"inf"} />
           </div>
         );
       case 3:
         return (
           <div>
-            <Subheader>Infrared NIIRS - Select one or more applicable ratings</Subheader>
-            <NiirsGrid fieldName={"inf"} />
+            <Subheader>Multispectral NIIRS - Select one or more applicable ratings</Subheader>
+            <NiirsGrid fieldName={"mul"} />
           </div>
         );
       case 4:
         return (
           <div>
-            <Subheader>Multispectral NIIRS - Select one or more applicable ratings</Subheader>
-            <NiirsGrid fieldName={"mul"} />
+            <Subheader>Radar NIIRS - Select one or more applicable ratings</Subheader>
+            <NiirsGrid fieldName={"rad"} />
           </div>
         );
       default:
