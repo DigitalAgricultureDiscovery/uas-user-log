@@ -27,7 +27,6 @@ const Finish = props => {
           to the beginning of the form.
         </p>
       </CardText>
-      <a id="downloadAnchorElem" href={data} download="data.json">Download file</a>
       <CardActions>
         <FlatButton
           className="previous"
@@ -35,12 +34,12 @@ const Finish = props => {
           onClick={previousPage}
           backgroundColor="#BAA892"
         />
+        <a href={data} download="data.json">Save copy</a>
         <RaisedButton
           className="saveCopy"
           label="Save Copy"
           href={data}
           download="data.json"
-          target="_blank"
           backgroundColor="#FF9B1A"
           disabled={pristine || submitting}
         />
