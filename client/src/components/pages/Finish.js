@@ -27,6 +27,7 @@ const Finish = props => {
           to the beginning of the form.
         </p>
       </CardText>
+      <a id="downloadAnchorElem" href={data} download="data.json">Download file</a>
       <CardActions>
         <FlatButton
           className="previous"
