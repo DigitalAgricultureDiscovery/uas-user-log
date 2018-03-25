@@ -34,7 +34,6 @@ const Finish = props => {
           onClick={previousPage}
           backgroundColor="#BAA892"
         />
-        <a href={data} download="data.json">Save copy</a>
         <RaisedButton
           className="saveCopy"
           label="Save Copy"
