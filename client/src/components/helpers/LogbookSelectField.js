@@ -21,15 +21,24 @@ export default class LogbookSelectField extends React.Component {
 
   handleChange(event, newValue, oldValue) {
     if (this.props.change) {
-      console.log(this.props.currentValue);
-      console.log(this.props.items[newValue - 1]);
-      // Convert value after unit change
-      const convertedValue = (newValue === 1 ?
-        this.props.currentValue * this.props.items[newValue - 1].rate
-      :
-        this.props.currentValue * this.props.items[newValue - 1].rate);
-      // Update store with converted value
-      this.props.change(this.props.currentValueField, convertedValue.toFixed(4));
+      if (this.props.valueToConvert1) {
+        // Convert value after unit change
+        const convertedValue1 = this.props.valueToConvert1 * this.props.items[newValue - 1].rate;
+        // Update store with converted value
+        this.props.change(this.props.valueToConvert1FieldName, convertedValue1.toFixed(4));
+      }
+      if (this.props.valueToConvert2) {
+        // Convert value after unit change
+        const convertedValue2 = this.props.valueToConvert2 * this.props.items[newValue - 1].rate;
+        // Update store with converted value
+        this.props.change(this.props.valueToConvert2FieldName, convertedValue2.toFixed(4));
+      }
+      if (this.props.valueToConvert3) {
+        // Convert value after unit change
+        const convertedValue3 = this.props.valueToConvert3 * this.props.items[newValue - 1].rate;
+        // Update store with converted value
+        this.props.change(this.props.valueToConvert3FieldName, convertedValue3.toFixed(4));
+      }
     }
   }
 
