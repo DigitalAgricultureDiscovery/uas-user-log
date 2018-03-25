@@ -93,8 +93,8 @@ class DataCollectionSpray extends React.Component {
               fieldLabel="Unit"
               items={GAL_AND_L}
               setDefault={false}
-              currentValue={currentApplicationRate}
-              currentValueField={`${PAGE_NAME}ApplicationRate`}
+              valueToConvert1={currentApplicationRate}
+              valueToConvert1FieldName={`${PAGE_NAME}ApplicationRate`}
               change={this.props.change}
             />
           </div>
@@ -133,8 +133,8 @@ class DataCollectionSpray extends React.Component {
               fieldLabel="Unit"
               items={PSI_AND_PA}
               setDefault={false}
-              currentValue={currentPressure}
-              currentValueField={`${PAGE_NAME}Pressure`}
+              valueToConvert1={currentPressure}
+              valueToConvert1FieldName={`${PAGE_NAME}Pressure`}
               change={this.props.change}
             />
           </div>
@@ -152,8 +152,8 @@ class DataCollectionSpray extends React.Component {
               fieldLabel="Unit"
               items={FT_AND_M}
               setDefault={false}
-              currentValue={currentSwathDistance}
-              currentValueField={`${PAGE_NAME}SwathDistance`}
+              valueToConvert1={currentSwathDistance}
+              valueToConvert1FieldName={`${PAGE_NAME}SwathDistance`}
               change={this.props.change}
             />
           </div>
@@ -170,8 +170,8 @@ class DataCollectionSpray extends React.Component {
               fieldLabel="Unit"
               items={AC_AND_HA}
               setDefault={false}
-              currentValue={currentSwathArea}
-              currentValueField={`${PAGE_NAME}SwathArea`}
+              valueToConvert1={currentSwathArea}
+              valueToConvert1FieldName={`${PAGE_NAME}SwathArea`}
               change={this.props.change}
             />
           </div>
