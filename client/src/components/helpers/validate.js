@@ -1,9 +1,9 @@
 const validate = values => {
   const errors = {};
 
-  // const isRequired = (fieldName) => {
-  //   !values[fieldName] ? errors[fieldName] = 'Required' : null;
-  // }
+  const isRequired = (fieldName) => {
+    !values[fieldName] ? errors[fieldName] = 'Required' : null;
+  }
 
   // // mission
   // isRequired('typeSelect');
@@ -79,65 +79,110 @@ const validate = values => {
   // isRequired('groundControlChargeMinimumText');
   //
   // // battery
-  // isRequired('batteriesUsedText');
-  // isRequired('batteriesUASText');
-  // if (!values.batteries || !values.batteries.length) {
-  //   errors.batteries = { _error: 'At least one battery must be entered'}
-  // } else {
-  //   const batteriesArrayErrors = [];
-  //   values.batteries.forEach((battery, batteryIndex) => {
-  //     const batteryErrors = {};
-  //     if (!battery || !battery.batteryWeight) {
-  //       batteryErrors.batteryWeight = 'Required';
-  //       batteriesArrayErrors[batteryIndex] = batteryErrors;
-  //     }
-  //     if (!battery || !battery.batteryTarget) {
-  //       batteryErrors.batteryTarget = 'Required';
-  //       batteriesArrayErrors[batteryIndex] = batteryErrors;
-  //     }
-  //     if (!battery || !battery.batteryMinimum) {
-  //       batteryErrors.batteryMinimum = 'Required'
-  //       batteriesArrayErrors[batteryIndex] = batteryErrors;
-  //     }
-  //   });
-  //   if (batteriesArrayErrors.length) {
-  //     errors.batteries = batteriesArrayErrors;
-  //   }
-  // }
+  isRequired('battery_Used');
+  isRequired('battery_OnUAS');
+  if (!values.battery_Batteries || !values.battery_Batteries.length) {
+    errors.battery_Batteries = { _error: 'At least one battery must be entered'}
+  } else {
+    const batteriesArrayErrors = [];
+    values.battery_Batteries.forEach((battery, batteryIndex) => {
+      const batteryErrors = {};
+      if (!battery || !battery.SerialNumber) {
+        batteryErrors.SerialNumber = 'Required';
+        batteriesArrayErrors[batteryIndex] = batteryErrors;
+      }
+      if (!battery || !battery.Weight) {
+        batteryErrors.Weight = 'Required';
+        batteriesArrayErrors[batteryIndex] = batteryErrors;
+      }
+      if (!battery || !battery.FullChargeVoltage) {
+        batteryErrors.FullChargeVoltage = 'Required';
+        batteriesArrayErrors[batteryIndex] = batteryErrors;
+      }
+      if (!battery || !battery.DischargeVoltage) {
+        batteryErrors.DischargeVoltage = 'Required'
+        batteriesArrayErrors[batteryIndex] = batteryErrors;
+      }
+    });
+    if (batteriesArrayErrors.length) {
+      errors.battery_Batteries = batteriesArrayErrors;
+    }
+  }
+  // Number of batteries used must match number of added batteries
+  if (values.battery_Used && values.battery_Batteries) {
+    if (parseInt(values.battery_Used, 10) !== values.battery_Batteries.length) {
+      errors.battery_Batteries = { _error: 'Must add the same number of batteries as entered in the "Number of batteries used" field before proceeding.'}
+    }
+  }
   //
   // // flight operation
   // isRequired('flightModeSelect');
   //
-  // // data collection
-  // isRequired('sensorsUsedText');
-  // if (!values.sensors || !values.sensors.length) {
-  //   errors.sensors = { _error: 'At least one sensor must be entered'};
-  // } else {
-  //   const sensorsArrayErrors = [];
-  //   values.sensors.forEach((sensor, sensorIndex) => {
-  //     const sensorErrors = {};
-  //     if (!sensor || !sensor.sensorType) {
-  //       sensorErrors.sensorType = 'Required';
-  //       sensorsArrayErrors[sensorIndex] = sensorErrors;
-  //     }
-  //     if (!sensor || !sensor.sensorMake) {
-  //       sensorErrors.sensorType = 'Required';
-  //       sensorsArrayErrors[sensorIndex] = sensorErrors;
-  //     }
-  //     if (!sensor || !sensor.sensorModel) {
-  //       sensorErrors.sensorModel = 'Required';
-  //       sensorsArrayErrors[sensorIndex] = sensorErrors;
-  //     }
-  //     if (!sensor || !sensor.operationMode) {
-  //       sensorErrors.operationMode = 'Required';
-  //       sensorsArrayErrors[sensorIndex] = sensorErrors;
-  //     }
-  //     if (!sensor || !sensor.timeInterval) {
-  //       sensorErrors.timeInterval = 'Required';
-  //       sensorsArrayErrors[sensorIndex] = sensorErrors;
-  //     }
-  //   })
-  // }
+  // data collection
+  isRequired('dataCollection_SensorsUsed');
+  if (!values.dataCollection_Sensors || !values.dataCollection_Sensors.length) {
+    errors.dataCollection_Sensors = { _error: 'At least one sensor must be entered'};
+  } else {
+    const sensorsArrayErrors = [];
+    values.dataCollection_Sensors.forEach((sensor, sensorIndex) => {
+      const sensorErrors = {};
+      if (!sensor || !sensor.Type) {
+        sensorErrors.Type = 'Required';
+        sensorsArrayErrors[sensorIndex] = sensorErrors;
+      }
+      if (sensor.Type) {
+        if (sensor.Type === 5 && !sensorErrors.Other) {
+          sensorErrors.Other = 'Required';
+          sensorsArrayErrors[sensorIndex] = sensorErrors;
+        }
+      }
+      if (!sensor || !sensor.Make) {
+        sensorErrors.Make = 'Required';
+        sensorsArrayErrors[sensorIndex] = sensorErrors;
+      }
+      if (!sensor || !sensor.Model) {
+        sensorErrors.Model = 'Required';
+        sensorsArrayErrors[sensorIndex] = sensorErrors;
+      }
+      if (!sensor || !sensor.OperationMode) {
+        sensorErrors.OperationMode = 'Required';
+        sensorsArrayErrors[sensorIndex] = sensorErrors;
+      }
+      if (sensor.OperationMode) {
+        if (sensor.OperationMode === 2 && !sensor.TimeInterval) {
+          sensorErrors.TimeInterval = 'Required';
+          sensorsArrayErrors[sensorIndex] = sensorErrors;
+        }
+      }
+      if (!sensor || !sensor.EndLap) {
+        sensorErrors.EndLap = 'Required';
+        sensorsArrayErrors[sensorIndex] = sensorErrors;
+      }
+      if (!sensor || !sensor.SideLap) {
+        sensorErrors.SideLap = 'Required';
+        sensorsArrayErrors[sensorIndex] = sensorErrors;
+      }
+      if (!sensor || !sensor.DataFormat) {
+        sensorErrors.DataFormat = 'Required';
+        sensorsArrayErrors[sensorIndex] = sensorErrors;
+      }
+      if (sensor.DataFormat) {
+        if (sensor.DataFormat === 5 && !sensor.OtherDataFormat) {
+          sensorErrors.OtherDataFormat = 'Required';
+          sensorsArrayErrors[sensorIndex] = sensorErrors;
+        }
+      }
+    });
+    if (sensorsArrayErrors.length) {
+      errors.dataCollection_Sensors = sensorsArrayErrors;
+    }
+  }
+  // Number of sensors used must match number of added sensors
+  if (values.dataCollection_SensorsUsed && values.dataCollection_Sensors) {
+    if (parseInt(values.dataCollection_SensorsUsed, 10) !== values.dataCollection_Sensors.length) {
+      errors.dataCollection_Sensors = { _error: 'Must add the same number of sensors as entered in the "Number of sensors used" field before proceeding.'}
+    }
+  }
   //
   // // b4ufly status
   // isRequired('statusSelect');

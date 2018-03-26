@@ -99,11 +99,8 @@ const renderBatteries = ({ fields, change, currentBatteries, meta: { touched, er
 );
 
 class Battery extends React.Component {
-  componentWillUpdate(nextProps) {
-    // console.log(nextProps.numberOfBatteries);
-  }
   render() {
-    const { handleSubmit, previousPage, currentBatteries, numberOfBatteries } = this.props;
+    const { handleSubmit, previousPage, currentBatteries } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Battery" />
@@ -147,11 +144,9 @@ const selector = formValueSelector('logbook');
 
 export default connect(
   state => {
-    const numberOfBatteries = selector(state, PAGE_NAME + 'Used');
     const currentBatteries = selector(state, PAGE_NAME + 'Batteries');
     return {
       currentBatteries,
-      numberOfBatteries,
     }
   }
 )(myReduxForm);
