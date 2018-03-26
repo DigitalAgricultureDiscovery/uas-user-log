@@ -9,6 +9,7 @@ import MenuItem                             from 'material-ui/MenuItem';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
+import DefaultInitialValues from '../helpers/DefaultInitialValues';
 
 const PAGE_NAME = 'mission_';
 
@@ -85,45 +86,14 @@ const myReduxForm = reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
+  enableReinitialize: true,
   validate,
 })(Mission);
 
 const selector = formValueSelector('logbook');
 export default connect(
   state => ({
-    initialValues: selector(state, 'initialValuesFromJSON') ? selector(state, 'initialValuesFromJSON') : {
-      'mission_Type': 2,
-
-      'crop_LifeCycle': 1,
-
-      'hardware_Type': 1,
-      'hardware_RemoteChargeTarget': 100.00,
-      'hardware_RemoteChargeMinimum': 30.00,
-      'hardware_GroundControlChargeTarget': 100.00,
-      'hardware_GroundControlChargeMinimum': 30.00,
-
-      'flightOperation_Mode': 1,
-
-      'dataCollection_ChemicalType': 1,
-      'dataCollection_ApplicationRateUnit': 1,
-      'dataCollection_PressureUnit': 1,
-      'dataCollection_SwathDistanceUnit': 1,
-      'dataCollection_SwathAreaUnit': 1,
-      'dataCollection_ApplicationType': 1,
-
-      'b4ufly_Status': 1,
-      'b4ufly_Preflight': 'yes',
-      'b4ufly_Permission': 'notRequired',
-
-      'flightParameters_AGLMaximum': 400,
-      'flightParameters_AGLUnit': 1,
-      'flightParameters_LookAngle': 'vertical',
-      'flightParameters_MaximumGroundSpeed': 'no',
-
-      'people_PeoplePresent': 'no',
-
-      'processed_NIIRS': 1,
-    },
+    initialValues: selector(state, 'initialValuesFromJSON') ? selector(state, 'initialValuesFromJSON') : DefaultInitialValues,
     missionType: selector(state, 'mission_Type'),
   })
 )(myReduxForm);
