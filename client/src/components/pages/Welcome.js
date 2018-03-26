@@ -3,14 +3,21 @@ import { reduxForm } from 'redux-form';
 // material-ui elements
 import { CardActions, CardTitle, CardText }           from 'material-ui/Card';
 import Divider                                        from 'material-ui/Divider';
+import IconButton                                     from 'material-ui/IconButton';
+import Paper                                          from 'material-ui/Paper';
 import RaisedButton                                   from 'material-ui/RaisedButton';
 import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
+// material-ui icons
+import HelpIcon from 'material-ui/svg-icons/action/help';
 
 import validate from '../helpers/validate';
 
+const PAGE_NAME = 'welcome_';
+
 const styles = {
   button: {
-    margin: 12,
+    marginLeft: 12,
+    marginRight: 0,
   },
   logLoadButton: {
     cursor: 'pointer',
@@ -24,11 +31,43 @@ const styles = {
   },
 };
 
+class LoadFormHelpText extends React.Component {
+  render() {
+    const style = {
+      display: 'inline-block',
+      padding: 5,
+      textAlign: 'left',
+    };
+
+    return (
+      <Paper
+        name={`${PAGE_NAME}LoadFormHelp`}
+        style={style}
+        zDepth={1}
+      >
+        <div>
+          Use the load button to initialize the form with values from a
+          previously exported form. To use this feature:
+          <ol>
+            <li>Click LOAD FORM, </li>
+            <li>select your exported form (e.g. "data.json"), </li>
+            <li>and click Next to continue.</li>
+          </ol>
+        </div>
+      </Paper>
+    )
+  }
+}
+
 class Welcome extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showHelp: false,
+    }
     this.handleChange = this.handleChange.bind(this);
     this.onReaderLoad = this.onReaderLoad.bind(this);
+    this.toggleHelp = this.toggleHelp.bind(this);
   }
 
   handleChange(event) {
@@ -59,6 +98,10 @@ class Welcome extends React.Component {
     // Add loaded JSON file to store
     const obj = this.convertFlightDatesAndTimes(JSON.parse(event.target.result));
     this.props.change('initialValuesFromJSON', obj);
+  }
+
+  toggleHelp() {
+    this.setState({showHelp: !this.state.showHelp});
   }
 
   render() {
@@ -138,6 +181,16 @@ class Welcome extends React.Component {
               onChange={this.handleChange}
             />
           </RaisedButton>
+          <IconButton
+            tooltip="Load a previous form"
+            onClick={this.toggleHelp}
+            style={{verticalAlign: 'middle'}}
+          >
+            <HelpIcon />
+          </IconButton>
+          {this.state.showHelp &&
+            <div><LoadFormHelpText /></div>
+          }
         </CardActions>
       </form>
     );

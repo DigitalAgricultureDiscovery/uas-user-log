@@ -25,7 +25,7 @@ class RemotePICHelpText extends React.Component {
       margin: 20,
       padding: 5,
       textAlign: 'left',
-      display: 'inline-block'
+      display: 'inline-block',
     };
 
     return (
