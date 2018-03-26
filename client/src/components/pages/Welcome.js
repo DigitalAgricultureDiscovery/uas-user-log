@@ -130,6 +130,9 @@ class Welcome extends React.Component {
             Contributors - Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel Martin (USDA ARS),
             Dr. Luv Khot (Washington State University), and Dr. Seth Murray (Texas A&M University)
           </p>
+          <p>
+            Acknowledgment - FFAR Award # 210316​
+          </p>
           <Table style={{marginTop: 15}}>
             <TableBody displayRowCheckbox={false}>
               <TableRow>
