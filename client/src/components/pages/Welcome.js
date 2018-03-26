@@ -38,9 +38,26 @@ class Welcome extends React.Component {
     reader.readAsText(event.target.files[0]);
   }
 
+  convertFlightDatesAndTimes(obj) {
+    if (obj.general_FlightDate) {
+      obj.general_FlightDate = new Date(obj.general_FlightDate);
+    }
+    if (Object.keys(obj.general_Flights).length > 0) {
+      obj.general_Flights.forEach((flight, index) => {
+        if (obj.general_Flights[index].Start) {
+          obj.general_Flights[index].Start = new Date(obj.general_Flights[index].Start);
+        }
+        if (obj.general_Flights[index].End) {
+          obj.general_Flights[index].End = new Date(obj.general_Flights[index].End);
+        }
+      });
+    }
+    return obj;
+  }
+
   onReaderLoad(event) {
     // Add loaded JSON file to store
-    const obj = JSON.parse(event.target.result);
+    const obj = this.convertFlightDatesAndTimes(JSON.parse(event.target.result));
     this.props.change('initialValuesFromJSON', obj);
   }
 
