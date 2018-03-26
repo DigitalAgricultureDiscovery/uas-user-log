@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { SelectField, TextField }           from 'redux-form-material-ui';
+import { SelectField }                      from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
 import MenuItem                             from 'material-ui/MenuItem';
@@ -10,28 +11,18 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
-const obstacles = [
-  {value: 0, name: 'Power/Telephone lines'},
-  {value: 1, name: 'Power/Telephone poles'},
-  {value: 2, name: 'Wood or metal towers'},
-  {value: 3, name: 'Guy-wires'},
-  {value: 4, name: 'Buildings'},
-  {value: 5, name: 'Trees'},
-  {value: 6, name: 'Signs/Signboards'},
-  {value: 7, name: 'Other'},
-];
+const PAGE_NAME = 'obstacles_';
 
-class ObstaclesOtherText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="obstacleOtherText"
-        component={TextField}
-        floatingLabelText="Enter other obstacle"
-      />
-    )
-  }
-}
+const OBSTACLES = [
+  {value: 1, name: 'Power/Telephone lines'},
+  {value: 2, name: 'Power/Telephone poles'},
+  {value: 3, name: 'Wood or metal towers'},
+  {value: 4, name: 'Guy-wires'},
+  {value: 5, name: 'Buildings'},
+  {value: 6, name: 'Trees'},
+  {value: 7, name: 'Signs/Signboards'},
+  {value: 8, name: 'Other'},
+];
 
 class ObstaclesSelect extends React.Component {
   selectionRenderer = (values) => {
@@ -39,7 +30,7 @@ class ObstaclesSelect extends React.Component {
       case 0:
         return '';
       case 1:
-        return obstacles[values[0]].name;
+        return OBSTACLES[values[0]].name;
       default:
         return `${values.length} obstacles selected`;
     }
@@ -60,13 +51,13 @@ class ObstaclesSelect extends React.Component {
   render() {
     return (
       <Field
-        name="obstaclesSelect"
+        name={`${PAGE_NAME}Obstacles`}
         component={SelectField}
         floatingLabelText="Select one or more"
         multiple={true}
         selectionRenderer={this.selectionRenderer}
       >
-        {this.menuItems(obstacles)}
+        {this.menuItems(OBSTACLES)}
       </Field>
     )
   }
@@ -75,7 +66,7 @@ class ObstaclesSelect extends React.Component {
 class Obstacles extends React.Component {
   render() {
     const { handleSubmit, previousPage, selectedObstacles } = this.props;
-    const otherIndex = 7;
+    const otherIndex = 8;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Obstacles Present" />
@@ -83,8 +74,7 @@ class Obstacles extends React.Component {
           <ObstaclesSelect selectedObstacles={selectedObstacles} />
           {selectedObstacles.indexOf(otherIndex) > -1 &&
             <div>
-              <br />
-              <ObstaclesOtherText />
+              <LogbookTextField fieldName={`${PAGE_NAME}ObstaclesOther`} fieldLabel="Enter other obstacle" />
             </div>
           }
         </CardText>
@@ -117,7 +107,7 @@ const myReduxForm = reduxForm({
 const selector = formValueSelector('logbook');
 export default connect(
   state => {
-    const selectedObstacles = selector(state, 'obstaclesSelect') ? selector(state, 'obstaclesSelect') : [];
+    const selectedObstacles = selector(state, PAGE_NAME + 'Obstacles') ? selector(state, PAGE_NAME + 'Obstacles') : [];
     return {
       selectedObstacles,
     }

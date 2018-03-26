@@ -111,21 +111,18 @@ export default connect(
       'dataCollection_SwathAreaUnit': 1,
       'dataCollection_ApplicationType': 1,
 
-      // 'statusSelect': 1,
-      // 'chemicalTypeSelect': 1,
-      // 'appRateUnitSelect': 1,
-      // 'pressureUnitSelect': 1,
-      // 'swathDistanceUnitSelect': 1,
-      // 'swathAreaUnitSelect': 1,
-      // 'applicationTypeSelect': 1,
-      'preflightRadioButtonGroup': 'yes',
-      'permissionRadioButtonGroup': 'notRequired',
-      'peoplePresentRadioButtonGroup': 'no',
-      'maximumAGLText': 400,
-      'aglUnitSelect': 1,
-      'lookAngleRadioButtonGroup': 'vertical',
-      'maximumGroundSpeedRadioButtonGroup': 'no',
-      'niirsSensorSelect': 1,
+      'b4ufly_Status': 1,
+      'b4ufly_Preflight': 'yes',
+      'b4ufly_Permission': 'notRequired',
+
+      'flightParameters_AGLMaximum': 400,
+      'flightParameters_AGLUnit': 1,
+      'flightParameters_LookAngle': 'vertical',
+      'flightParameters_MaximumGroundSpeed': 'no',
+
+      'people_PeoplePresent': 'no',
+
+      'processed_NIIRS': 1,
     },
     missionType: selector(state, 'mission_Type'),
   })

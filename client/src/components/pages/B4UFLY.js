@@ -1,54 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import LogbookSelectField from '../helpers/LogbookSelectField';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui';
+import { Checkbox, RadioButtonGroup }       from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
-import MenuItem                             from 'material-ui/MenuItem';
 import RadioButton                          from 'material-ui/RadioButton';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
-class AirportOperatorContactText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="airportOperatorContactText"
-        component={TextField}
-        floatingLabelText="Airport operator contact"
-      />
-    )
-  }
-}
+const PAGE_NAME = 'b4ufly_';
 
-class ControlTowerContactText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="controlTowerContactText"
-        component={TextField}
-        floatingLabelText="Control tower contact"
-      />
-    )
-  }
-}
-
-class StatusSelect extends React.Component {
-  render() {
-    return (
-      <Field
-        name="statusSelect"
-        component={SelectField}
-        floatingLabelText="Status"
-      >
-        <MenuItem value={1} primaryText="Proceed with caution" />
-        <MenuItem value={2} primaryText="You are within 5 miles of an airport" />
-      </Field>
-    )
-  }
-}
+const STATUSES = [
+  {value: 1, name: "Proceed with caution"},
+  {value: 2, name: "You are within 5 miles of an airport"},
+];
 
 class NOTAMSCheckbox extends React.Component {
   render() {
@@ -57,7 +26,7 @@ class NOTAMSCheckbox extends React.Component {
       <div>
         {(touched || submitFailed) && error && <p><span className="error-msg">{error}</span></p>}
         <Field
-          name="notamsCheckbox"
+          name={`${PAGE_NAME}NOTAMS`}
           component={Checkbox}
           label="Checked NOTAMS"
         />
@@ -70,7 +39,7 @@ class FlightRestrictionsCheckbox extends React.Component {
   render() {
     return (
       <Field
-        name="flightRestrictionsCheckbox"
+        name={`${PAGE_NAME}FlightRestrictions`}
         component={Checkbox}
         label="Checked flight restrictions"
       />
@@ -82,7 +51,7 @@ class LocalRestrictionsCheckbox extends React.Component {
   render() {
     return (
       <Field
-        name="localRestrictionsCheckbox"
+        name={`${PAGE_NAME}LocalRestrictions`}
         component={Checkbox}
         label="Checked local restrictions"
       />
@@ -94,7 +63,7 @@ class UpcomingRestrictionsCheckbox extends React.Component {
   render() {
     return (
       <Field
-        name="upcomingRestrictionsCheckbox"
+        name={`${PAGE_NAME}UpcomingRestrictions`}
         component={Checkbox}
         label="Checked upcoming restrictions"
       />
@@ -106,7 +75,7 @@ class NationalParksCheckbox extends React.Component {
   render() {
     return (
       <Field
-        name="nationalParksCheckbox"
+        name={`${PAGE_NAME}NationalParks`}
         component={Checkbox}
         label="Checked national parks"
       />
@@ -129,40 +98,16 @@ class B4UFLYCheckboxGroup extends React.Component {
   }
 }
 
-class FAACertText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="faaCertText"
-        component={TextField}
-        floatingLabelText="FAA COW or COA used #"
-      />
-    )
-  }
-}
-
 class PreflightRadioButtonGroup extends React.Component {
   render() {
     return (
         <Field
-          name="preflightRadioButtonGroup"
+          name={`${PAGE_NAME}Preflight`}
           component={RadioButtonGroup}
         >
           <RadioButton value="no" label="No" />
           <RadioButton value="yes" label="Yes" />
         </Field>
-    )
-  }
-}
-
-class PermittedByText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="permittedByText"
-        component={TextField}
-        floatingLabelText="Enter permission contact"
-      />
     )
   }
 }
@@ -184,14 +129,16 @@ class PermissionRadioButtonGroup extends React.Component {
     return (
       <div>
         <Field
-          name="permissionRadioButtonGroup"
+          name={`${PAGE_NAME}Permission`}
           component={RadioButtonGroup}
           onChange={this.toggleShowPermissionText}
         >
           <RadioButton value="notRequired" label="Not required" />
           <RadioButton value="permitted" label="Permitted by" />
         </Field>
-        {this.state.showPermissionText ? <PermittedByText /> : null}
+        {this.state.showPermissionText ?
+          <LogbookTextField fieldName={`${PAGE_NAME}PermittedBy`} fieldLabel="Enter permission contact" />
+          : null}
       </div>
     )
   }
@@ -204,23 +151,23 @@ class B4UFLY extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="B4UFLY Status" />
         <CardText>
-          <StatusSelect />
+          <LogbookSelectField
+            fieldName={`${PAGE_NAME}Status`}
+            fieldLabel="Status"
+            items={STATUSES}
+          />
           {currentStatus > 1 &&
             <div>
-              <AirportOperatorContactText />
-              <br />
-              <ControlTowerContactText />
+              <LogbookTextField fieldName={`${PAGE_NAME}AirportOperatorContact`} fieldLabel="Airport operator contact" />
+              <LogbookTextField fieldName={`${PAGE_NAME}ControlTowerContact`} fieldLabel="Control tower contact" />
             </div>
           }
-          <br /><br />
           <B4UFLYCheckboxGroup />
-          <FAACertText />
-          <br /><br />
+          <LogbookTextField fieldName={`${PAGE_NAME}FAACert`} fieldLabel="FAA COW or COA used #" />
           Completed pre-flight checklist
           <PreflightRadioButtonGroup />
           {noResponse &&
             <div>
-              <br />
               Reason
               <PermissionRadioButtonGroup />
             </div>
@@ -255,8 +202,8 @@ const myReduxForm = reduxForm({
 const selector = formValueSelector('logbook');
 export default connect(
   state => {
-    const currentStatus = selector(state, 'statusSelect');
-    const noResponse = selector(state, 'preflightRadioButtonGroup') === 'no' ? true : false;
+    const currentStatus = selector(state, PAGE_NAME + 'Status');
+    const noResponse = selector(state, PAGE_NAME + 'Preflight') === 'no' ? true : false;
     return {
       currentStatus,
       noResponse
