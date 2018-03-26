@@ -17,19 +17,19 @@ const DRONE_TYPES = [
   {value: 3, name: 'Helicopter'},
 ];
 
-class RemoteChargeSubForm extends React.Component {
+class RemoteControlChargeSubForm extends React.Component {
   render() {
     return (
       <div>
-        Remote charge status
+        Remote control charge status
         <LogbookTextField
-          fieldName={`${PAGE_NAME}RemoteChargeTarget`}
+          fieldName={`${PAGE_NAME}RemoteControlChargeTarget`}
           fieldLabel="Target (%)"
           type="number"
           step="0.01"
         />
         <LogbookTextField
-          fieldName={`${PAGE_NAME}RemoteChargeMinimum`}
+          fieldName={`${PAGE_NAME}RemoteControlChargeMinimum`}
           fieldLabel="Minimum (%)"
           type="number"
           step="0.01"
@@ -43,8 +43,7 @@ class GroundControlChargeSubForm extends React.Component {
   render() {
     return (
       <div>
-        Ground control station battery status
-        Remote charge status
+        Ground control station battery charge status
         <LogbookTextField
           fieldName={`${PAGE_NAME}GroundControlChargeTarget`}
           fieldLabel="Target (%)"
@@ -79,7 +78,7 @@ class Hardware extends React.Component {
           <LogbookTextField fieldName={`${PAGE_NAME}Make`} fieldLabel="Make" />
           <LogbookTextField fieldName={`${PAGE_NAME}Model`} fieldLabel="Model" />
           <LogbookTextField fieldName={`${PAGE_NAME}Registration`} fieldLabel="Registration" />
-          <RemoteChargeSubForm />
+          <RemoteControlChargeSubForm />
           <GroundControlChargeSubForm />
         </CardText>
         <CardActions>

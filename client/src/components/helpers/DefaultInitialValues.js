@@ -4,15 +4,17 @@ const initialValues = {
   'crop_LifeCycle': 1,
 
   'hardware_Type': 1,
-  'hardware_RemoteChargeTarget': 100.00,
-  'hardware_RemoteChargeMinimum': 30.00,
+  'hardware_RemoteControlChargeTarget': 100.00,
+  'hardware_RemoteControlChargeMinimum': 70.00,
   'hardware_GroundControlChargeTarget': 100.00,
-  'hardware_GroundControlChargeMinimum': 30.00,
+  'hardware_GroundControlChargeMinimum': 70.00,
 
   'flightOperation_Mode': 1,
 
   'dataCollection_ChemicalType': 1,
   'dataCollection_ApplicationRateUnit': 1,
+  'dataCollection_ChemicalRateUnit': 1,
+  'dataCollection_StartingVolumeUnit': 1,
   'dataCollection_PressureUnit': 1,
   'dataCollection_SwathDistanceUnit': 1,
   'dataCollection_SwathAreaUnit': 1,
