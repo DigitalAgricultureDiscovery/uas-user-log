@@ -30,14 +30,19 @@ const APPLICATIONS = [
   {value: 2, name: 'Uniform'},
 ];
 
+const OZ_AC_AND_ML_HA = [
+  {value: 1, name: 'oz/ac', rate: 0.013684},
+  {value: 2, name: 'ml/ha', rate: 73.0778},
+];
+
 const GAL_AND_L = [
   {value: 1, name: 'gal/ac', rate: 0.1069},
   {value: 2, name: 'l/ha', rate: 9.3540},
 ];
 
-const PSI_AND_PA = [
-  {value: 1, name: 'psi', rate: 0.000145038},
-  {value: 2, name: 'Pa', rate: 6894.76},
+const PSI_AND_KPA = [
+  {value: 1, name: 'psi', rate: 0.145038},
+  {value: 2, name: 'kPa', rate: 6.89476},
 ];
 
 const FT_AND_M = [
@@ -57,6 +62,8 @@ class DataCollectionSpray extends React.Component {
       previousPage,
       chemicalType,
       currentApplicationRate,
+      currentChemicalRate,
+      currentStartingVolume,
       currentPressure,
       currentSwathDistance,
       currentSwathArea,
@@ -82,7 +89,7 @@ class DataCollectionSpray extends React.Component {
           }
           <div style={{display: 'flex'}}>
             <LogbookTextField
-              fieldName={`${PAGE_NAME}ApplicatonRate`}
+              fieldName={`${PAGE_NAME}ApplicationRate`}
               fieldLabel="Application rate"
               type="number"
               step="0.01"
@@ -98,27 +105,57 @@ class DataCollectionSpray extends React.Component {
               change={this.props.change}
             />
           </div>
-          <LogbookTextField
-            fieldName={`${PAGE_NAME}ChemicalRate`}
-            fieldLabel="Chemical rate"
-            type="number"
-            step="0.01"
-          />
-          <LogbookTextField
-            fieldName={`${PAGE_NAME}StartingVolume`}
-            fieldLabel="Starting volume"
-            type="number"
-            step="0.01"
-          />
-          <LogbookTextField
-            fieldName={`${PAGE_NAME}NozzleType`}
-            fieldLabel="Nozzle type"
-          />
+          <div style={{display: 'flex'}}>
+            <LogbookTextField
+              fieldName={`${PAGE_NAME}ChemicalRate`}
+              fieldLabel="Chemical rate"
+              type="number"
+              step="0.01"
+              style={UNIT_STYLE}
+            />
+            <LogbookSelectField
+              fieldName={`${PAGE_NAME}ChemicalRateUnit`}
+              fieldLabel="Unit"
+              items={OZ_AC_AND_ML_HA}
+              setDefault={false}
+              valueToConvert1={currentChemicalRate}
+              valueToConvert1FieldName={`${PAGE_NAME}ChemicalRate`}
+              change={this.props.change}
+            />
+          </div>
+          <div style={{display: 'flex'}}>
+            <LogbookTextField
+              fieldName={`${PAGE_NAME}StartingVolume`}
+              fieldLabel="Starting volume"
+              type="number"
+              step="0.01"
+              style={UNIT_STYLE}
+            />
+            <LogbookSelectField
+              fieldName={`${PAGE_NAME}StartingVolumeUnit`}
+              fieldLabel="Unit"
+              items={GAL_AND_L}
+              setDefault={false}
+              valueToConvert1={currentStartingVolume}
+              valueToConvert1FieldName={`${PAGE_NAME}StartingVolume`}
+              change={this.props.change}
+            />
+          </div>
+          <div style={{display: 'flex'}}>
+            <LogbookTextField
+              fieldName={`${PAGE_NAME}NozzleNumber`}
+              fieldLabel="Number of nozzles"
+              type="number"
+              style={UNIT_STYLE}
+            />
+            <LogbookTextField
+              fieldName={`${PAGE_NAME}NozzleType`}
+              fieldLabel="Nozzle type"
+            />
+          </div>
           <LogbookTextField
             fieldName={`${PAGE_NAME}OrificeSize`}
             fieldLabel="Orifice size"
-            type="number"
-            step="0.01"
           />
           <div style={{display: 'flex'}}>
             <LogbookTextField
@@ -131,7 +168,7 @@ class DataCollectionSpray extends React.Component {
             <LogbookSelectField
               fieldName={`${PAGE_NAME}PressureUnit`}
               fieldLabel="Unit"
-              items={PSI_AND_PA}
+              items={PSI_AND_KPA}
               setDefault={false}
               valueToConvert1={currentPressure}
               valueToConvert1FieldName={`${PAGE_NAME}Pressure`}
@@ -160,7 +197,7 @@ class DataCollectionSpray extends React.Component {
           <div style={{display: 'flex'}}>
             <LogbookTextField
               fieldName={`${PAGE_NAME}SwathArea`}
-              fieldLabel="Area between passes"
+              fieldLabel="Total target area"
               type="number"
               step="0.01"
               style={UNIT_STYLE}
@@ -213,6 +250,8 @@ export default connect(
   state => {
     const chemicalType = selector(state, PAGE_NAME + 'ChemicalType');
     const currentApplicationRate = selector(state, PAGE_NAME + 'ApplicationRate');
+    const currentChemicalRate = selector(state, PAGE_NAME + 'ChemicalRate');
+    const currentStartingVolume = selector(state, PAGE_NAME + 'StartingVolume');
     const currentPressure = selector(state, PAGE_NAME + 'Pressure');
     const currentSwathDistance = selector(state, PAGE_NAME + 'SwathDistance');
     const currentSwathArea = selector(state, PAGE_NAME + 'SwathArea');
@@ -220,6 +259,8 @@ export default connect(
     return {
       chemicalType,
       currentApplicationRate,
+      currentChemicalRate,
+      currentStartingVolume,
       currentPressure,
       currentSwathDistance,
       currentSwathArea,

@@ -15,9 +15,9 @@ const PAGE_NAME = 'processed_';
 
 const SENSORS = [
   {value: 1, name: 'Visible'},
-  {value: 2, name: 'Infrared'},
-  {value: 3, name: 'Multispectral'},
-  {value: 4, name: 'Radar'},
+  // {value: 2, name: 'Infrared'},
+  // {value: 3, name: 'Multispectral'},
+  // {value: 4, name: 'Radar'},
 ]
 
 class NiirsVisibleGrid extends React.Component {
@@ -386,27 +386,27 @@ class Processed extends React.Component {
             <NiirsVisibleGrid fieldName={"vis"} />
           </div>
         );
-      case 2:
-        return (
-          <div>
-            <Subheader>Infrared NIIRS - Select one or more applicable ratings</Subheader>
-            <NiirsInfraredGrid fieldName={"inf"} />
-          </div>
-        );
-      case 3:
-        return (
-          <div>
-            <Subheader>Multispectral NIIRS - Select one or more applicable ratings</Subheader>
-            <NiirsMultispectralGrid fieldName={"mul"} />
-          </div>
-        );
-      case 4:
-        return (
-          <div>
-            <Subheader>Radar NIIRS - Select one or more applicable ratings</Subheader>
-            <NiirsRadarGrid fieldName={"rad"} />
-          </div>
-        );
+      // case 2:
+      //   return (
+      //     <div>
+      //       <Subheader>Infrared NIIRS - Select one or more applicable ratings</Subheader>
+      //       <NiirsInfraredGrid fieldName={"inf"} />
+      //     </div>
+      //   );
+      // case 3:
+      //   return (
+      //     <div>
+      //       <Subheader>Multispectral NIIRS - Select one or more applicable ratings</Subheader>
+      //       <NiirsMultispectralGrid fieldName={"mul"} />
+      //     </div>
+      //   );
+      // case 4:
+      //   return (
+      //     <div>
+      //       <Subheader>Radar NIIRS - Select one or more applicable ratings</Subheader>
+      //       <NiirsRadarGrid fieldName={"rad"} />
+      //     </div>
+      //   );
       default:
         return <div>Unknown sensor selected</div>;
     }

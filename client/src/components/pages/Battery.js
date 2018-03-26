@@ -17,30 +17,30 @@ import validate from '../helpers/validate';
 
 const PAGE_NAME = 'battery_';
 
-class BatteryChargeSubForm extends React.Component {
-  componentWillMount() {
-    if (Object.keys(this.props.currentBatteries[this.props.batteryIndex]).length < 1) {
-      this.props.change(this.props.targetName, 100.00);
-      this.props.change(this.props.minimumName, 30.00);
-    }
-  }
+const UNIT_STYLE = {
+  display: 'inline-block', marginRight: 15,
+}
 
+class BatteryChargeSubForm extends React.Component {
   render() {
     return (
       <div>
-        Charge status
-        <LogbookTextField
-          fieldName={this.props.targetName}
-          fieldLabel="Target (%)"
-          type="number"
-          step="0.001"
-        />
-        <LogbookTextField
-          fieldName={this.props.minimumName}
-          fieldLabel="Minimum (%)"
-          type="number"
-          step="0.001"
-        />
+        <div>
+          <LogbookTextField
+            fieldName={this.props.fullChargeName}
+            fieldLabel="Full charge voltage"
+            style={UNIT_STYLE}
+          />
+          <span style={{verticalAlign: 'middle'}}>volts/cell</span>
+        </div>
+        <div>
+          <LogbookTextField
+            fieldName={this.props.dischargeName}
+            fieldLabel="Discharge voltage"
+            style={UNIT_STYLE}
+          />
+          <span style={{verticalAlign: 'middle'}}>volts/cell (as per manufacturer's recommendation)</span>
+        </div>
       </div>
     )
   }
@@ -81,15 +81,15 @@ const renderBatteries = ({ fields, change, currentBatteries, meta: { touched, er
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
+          <LogbookTextField fieldName={`${battery}.SerialNumber`} fieldLabel="Serial number" />
           <LogbookTextField fieldName={`${battery}.Weight`} fieldLabel="Weight" />
           <BatteryChargeSubForm
-            targetName={`${battery}.Target`}
-            minimumName={`${battery}.Minimum`}
+            fullChargeName={`${battery}.FullChargeVoltage`}
+            dischargeName={`${battery}.DischargeVoltage`}
             batteryIndex={index}
             change={change}
             currentBatteries={currentBatteries}
           />
-          <br />
         </li>
       )}
     </ul>
@@ -99,8 +99,11 @@ const renderBatteries = ({ fields, change, currentBatteries, meta: { touched, er
 );
 
 class Battery extends React.Component {
+  componentWillUpdate(nextProps) {
+    // console.log(nextProps.numberOfBatteries);
+  }
   render() {
-    const { handleSubmit, previousPage, currentBatteries } = this.props;
+    const { handleSubmit, previousPage, currentBatteries, numberOfBatteries } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Battery" />
@@ -144,9 +147,11 @@ const selector = formValueSelector('logbook');
 
 export default connect(
   state => {
+    const numberOfBatteries = selector(state, PAGE_NAME + 'Used');
     const currentBatteries = selector(state, PAGE_NAME + 'Batteries');
     return {
-      currentBatteries
+      currentBatteries,
+      numberOfBatteries,
     }
   }
 )(myReduxForm);
