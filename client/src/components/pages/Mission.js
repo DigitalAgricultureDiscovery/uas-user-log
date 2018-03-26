@@ -86,7 +86,7 @@ const myReduxForm = reduxForm({
   form: 'logbook',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  enableReinitialize: true,
+  // enableReinitialize: true,
   validate,
 })(Mission);
 
