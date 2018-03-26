@@ -59,6 +59,7 @@ export default class LogbookSelectField extends React.Component {
           name={this.props.fieldName}
           floatingLabelText={this.props.fieldLabel}
           component={SelectField}
+          multiple={this.props.multiple}
           onChange={this.props.change ? this.handleChange : null}
         >
           {this.menuItems(this.props.items)}

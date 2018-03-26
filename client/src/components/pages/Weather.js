@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
 import { TextField }                                  from 'redux-form-material-ui';
 import {
@@ -17,6 +18,8 @@ import RaisedButton                                   from 'material-ui/RaisedBu
 import Subheader                                      from 'material-ui/Subheader';
 
 import validate from '../helpers/validate';
+
+const PAGE_NAME = 'weather_';
 
 const styles = {
   root: {
@@ -76,7 +79,7 @@ class UpdateLocation extends React.Component {
     return (
       <div>
         <TextField
-          name="locationText"
+          name={`${PAGE_NAME}Location`}
           hintText="Lat,Lon; US zip; UK postcode, etc."
           floatingLabelText="Enter location"
           onChange={this.handleChange}
@@ -259,18 +262,6 @@ class WeatherDisplay extends React.Component {
   }
 }
 
-class NoteText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="noteText"
-        component={TextField}
-        floatingLabelText="Note"
-      />
-    )
-  }
-}
-
 class Weather extends React.Component {
   constructor(props) {
     super(props);
@@ -306,7 +297,7 @@ class Weather extends React.Component {
           <br />
           <WeatherDisplay location={this.state.location} isSpray={isSpray} />
           <br />
-          <NoteText />
+          <LogbookTextField fieldName={`${PAGE_NAME}Note`} fieldLabel="Note" />
         </CardText>
         <CardActions>
           <FlatButton
@@ -338,7 +329,7 @@ const selector = formValueSelector('logbook');
 export default connect(
   state => {
     const currentFlights = selector(state, 'flights');
-    const isSpray = (selector(state, 'typeSelect') === 3 ? true : false);
+    const isSpray = (selector(state, 'mission_Type') === 3 ? true : false);
     return {
       currentFlights,
       isSpray,

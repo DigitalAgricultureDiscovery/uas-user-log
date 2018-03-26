@@ -1,72 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import LogbookSelectField from '../helpers/LogbookSelectField';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { Checkbox, RadioButtonGroup, SelectField, TextField } from 'redux-form-material-ui';
+import { Checkbox, RadioButtonGroup }              from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText }        from 'material-ui/Card';
 import FlatButton                                  from 'material-ui/FlatButton';
-import MenuItem                                    from 'material-ui/MenuItem';
 import RadioButton                                 from 'material-ui/RadioButton';
 import RaisedButton                                from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
-class MaximumAGLText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="maximumAGLText"
-        component={TextField}
-        floatingLabelText="Maximum altitude, AGL"
-        type="number"
-        step="0.1"
-      />
-    )
-  }
+const PAGE_NAME = 'flightParameters_';
+
+const UNIT_STYLE = {
+  display: 'inline-block', marginRight: 15,
 }
 
-class MinimumAGLText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="minimumAGLText"
-        component={TextField}
-        floatingLabelText="Minimum altitude, AGL"
-        type="number"
-        step="0.1"
-      />
-    )
-  }
-}
-
-class AGLUnitSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event, index, value) {
-    const convertedMaxAGL = (index === 1 ? this.props.currentMaxAGL * 3.28084 : this.props.currentMaxAGL * 0.3048);
-    const convertedMinAGL = (index === 1 && this.props.currentMinAGL ? this.props.currentMinAGL * 3.28084 : this.props.currentMinAGL * 0.3048);
-
-    this.props.change('maximumAGLText', convertedMaxAGL.toFixed(2));
-    this.props.change('minimumAGLText', convertedMinAGL.toFixed(2));
-  }
-
-  render() {
-    return (
-      <Field
-        name="aglUnitSelect"
-        component={SelectField}
-        floatingLabelText="Unit"
-        onChange={this.handleChange}
-      >
-        <MenuItem value={1} primaryText="ft" />
-        <MenuItem value={2} primaryText="m" />
-      </Field>
-    )
-  }
-}
+const FT_AND_M = [
+  {value: 1, name: 'ft', rate: 3.28084},
+  {value: 2, name: 'm', rate: 0.3048},
+];
 
 class LookAngleRadioButtonGroup extends React.Component {
   render() {
@@ -74,7 +29,7 @@ class LookAngleRadioButtonGroup extends React.Component {
       <div>
         Look angle
         <Field
-          name="lookAngleRadioButtonGroup"
+          name={`${PAGE_NAME}LookAngle`}
           component={RadioButtonGroup}
         >
           <RadioButton value="vertical" label="Vertical" />
@@ -91,7 +46,7 @@ class MaximumGroundSpeedRadioButtonGroup extends React.Component {
       <div>
         Maximum ground speed GPS controlled
         <Field
-          name="maximumGroundSpeedRadioButtonGroup"
+          name={`${PAGE_NAME}MaximumGroundSpeed`}
           component={RadioButtonGroup}
         >
           <RadioButton value="no" label="No" />
@@ -106,7 +61,7 @@ class ObstacleAvoidanceCheckbox extends React.Component {
   render() {
     return (
       <Field
-        name="obstacleAvoidanceCheckbox"
+        name={`${PAGE_NAME}ObstacleAvoidance`}
         component={Checkbox}
         label="Obstacle avoidance enabled"
       />
@@ -118,7 +73,7 @@ class ReturnHomeCheckbox extends React.Component {
   render() {
     return (
       <Field
-        name="returnHomeCheckbox"
+        name={`${PAGE_NAME}ReturnHome`}
         component={Checkbox}
         label="Return to Home enabled"
       />
@@ -128,18 +83,35 @@ class ReturnHomeCheckbox extends React.Component {
 
 class FlightParameters extends React.Component {
   render() {
-    const { handleSubmit, previousPage, currentMaxAGL, currentMinAGL } = this.props;
+    const { handleSubmit, previousPage, currentAGLMaximum, currentAGLMinimum } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Flight Parameters" />
         <CardText>
-          <MaximumAGLText />
-          &nbsp;
-          <MinimumAGLText />
-          <br />
-          <AGLUnitSelect
-            currentMaxAGL={currentMaxAGL}
-            currentMinAGL={currentMinAGL}
+          <div style={{display: 'flex'}}>
+            <LogbookTextField
+              fieldName={`${PAGE_NAME}AGLMaximum`}
+              fieldLabel="Maximum altitude, AGL"
+              type="number"
+              step="0.1"
+              style={UNIT_STYLE}
+            />
+
+            <LogbookTextField
+              fieldName={`${PAGE_NAME}AGLMinimum`}
+              fieldLabel="Minimum altitude, AGL"
+              type="number"
+              step="0.1"
+            />
+          </div>
+          <LogbookSelectField
+            fieldName={`${PAGE_NAME}AGLUnit`}
+            fieldLabel="Unit"
+            items={FT_AND_M}
+            valueToConvert1={currentAGLMaximum}
+            valueToConvert1FieldName={`${PAGE_NAME}AGLMaximum`}
+            valueToConvert2={currentAGLMinimum}
+            valueToConvert2FieldName={`${PAGE_NAME}AGLMinimum`}
             change={this.props.change}
           />
           <br /><br />
@@ -179,11 +151,11 @@ const myReduxForm = reduxForm({
 const selector = formValueSelector('logbook');
 export default connect(
   state => {
-    const currentMaxAGL = selector(state, 'maximumAGLText');
-    const currentMinAGL = selector(state, 'minimumAGLText');
+    const currentAGLMaximum = selector(state, PAGE_NAME + 'AGLMaximum');
+    const currentAGLMinimum = selector(state, PAGE_NAME + 'AGLMinimum');
     return {
-      currentMaxAGL,
-      currentMinAGL
+      currentAGLMaximum,
+      currentAGLMinimum,
     }
   }
 )(myReduxForm);

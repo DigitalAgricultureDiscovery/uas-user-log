@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import LogbookSelectField from '../helpers/LogbookSelectField';
 // material-ui elements
-import { Checkbox, SelectField }            from 'redux-form-material-ui';
+import { Checkbox }                         from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
-import MenuItem                             from 'material-ui/MenuItem';
 import RaisedButton                         from 'material-ui/RaisedButton';
 import Subheader                            from 'material-ui/Subheader';
 
 import validate from '../helpers/validate';
+
+const PAGE_NAME = 'processed_';
 
 const SENSORS = [
   {value: 1, name: 'Visible'},
@@ -17,29 +19,6 @@ const SENSORS = [
   {value: 3, name: 'Multispectral'},
   {value: 4, name: 'Radar'},
 ]
-
-class NiirsSensorSelect extends React.Component {
-  menuItems(sensors) {
-    return sensors.map((sensor) => (
-      <MenuItem
-        key={sensor.value}
-        value={sensor.value}
-        primaryText={sensor.name}
-      />
-    ))
-  }
-  render() {
-    return (
-      <Field
-        name="niirsSensorSelect"
-        component={SelectField}
-        floatingLabelText="Select a sensor"
-      >
-        {this.menuItems(SENSORS)}
-      </Field>
-    )
-  }
-}
 
 class NiirsVisibleGrid extends React.Component {
   render() {
@@ -439,14 +418,18 @@ class Processed extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Processed" />
         <CardText>
-          <NiirsSensorSelect />
-          <br /><br />
+          <LogbookSelectField
+            fieldName={`${PAGE_NAME}NIIRS`}
+            fieldLabel="Select a sensor"
+            items={SENSORS}
+          />
           {this.renderSensorGrid(currentNiirsSensor)}
-          <br /><br />
-          <strong>Source: </strong>
-          <a href="https://fas.org/irp/imint/niirs.htm" target="_blank" rel="noopener noreferrer">
-            National Image Interpretability Rating Scales
-          </a>
+          <p>
+            <strong>Source: </strong>
+            <a href="https://fas.org/irp/imint/niirs.htm" target="_blank" rel="noopener noreferrer">
+              National Image Interpretability Rating Scales
+            </a>
+          </p>
         </CardText>
         <CardActions>
           <FlatButton
@@ -477,7 +460,7 @@ const myReduxForm = reduxForm({
 const selector = formValueSelector('logbook');
 export default connect(
   state => {
-    const currentNiirsSensor = selector(state, 'niirsSensorSelect');
+    const currentNiirsSensor = selector(state, PAGE_NAME + 'NIIRS');
 
     return {
       currentNiirsSensor,

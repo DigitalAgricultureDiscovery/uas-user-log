@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { RadioButtonGroup, TextField }      from 'redux-form-material-ui';
+import { RadioButtonGroup }      from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
 import RadioButton                          from 'material-ui/RadioButton';
@@ -10,13 +11,15 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 
+const PAGE_NAME = 'people_';
+
 class PeoplePresentRadioButtonGroup extends React.Component {
   render() {
     return (
       <div>
         Select one
         <Field
-          name="peoplePresentRadioButtonGroup"
+          name={`${PAGE_NAME}PeoplePresent`}
           component={RadioButtonGroup}
         >
           <RadioButton value="no" label="No" />
@@ -24,18 +27,6 @@ class PeoplePresentRadioButtonGroup extends React.Component {
           <RadioButton value="faaCOA" label="have FAA COA approved to fly over people" />
         </Field>
       </div>
-    )
-  }
-}
-
-class FAACOAText extends React.Component {
-  render() {
-    return (
-      <Field
-        name="faaCOA"
-        component={TextField}
-        floatingLabelText="Please enter FAA COA #"
-      />
     )
   }
 }
@@ -48,7 +39,7 @@ class People extends React.Component {
         <CardTitle title="People Present" />
         <CardText>
           <PeoplePresentRadioButtonGroup />
-          {hasFAA === "faaCOA" ? <FAACOAText /> : null}
+          {hasFAA === "faaCOA" ? <LogbookTextField fieldName={`${PAGE_NAME}FAACOA`} fieldLabel="Please enter FAA COA #" /> : null}
         </CardText>
         <CardActions>
           <FlatButton
@@ -79,7 +70,7 @@ const myReduxForm = reduxForm({
 const selector = formValueSelector('logbook');
 export default connect(
   state => {
-    const hasFAA = selector(state, 'peoplePresentRadioButtonGroup');
+    const hasFAA = selector(state, PAGE_NAME + 'PeoplePresent');
     return {
       hasFAA
     }
