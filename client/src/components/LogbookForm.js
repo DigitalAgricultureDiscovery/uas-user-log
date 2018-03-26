@@ -140,6 +140,7 @@ class LogbookForm extends React.Component {
     this.state = {
       pageIndex: 0,
       missionType: 2,
+      resetStatus: true,
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
