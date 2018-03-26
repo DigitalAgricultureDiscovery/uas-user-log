@@ -179,7 +179,7 @@ class AddSensorButton extends React.Component {
   }
 }
 
-const renderSensors = ({ fields, change, currentSensors }) => (
+const renderSensors = ({ fields, change, currentSensors, meta: { touched, error, submitFailed } }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
       {fields.map((sensor, index) =>
@@ -225,6 +225,7 @@ const renderSensors = ({ fields, change, currentSensors }) => (
       )}
     </ul>
     <AddSensorButton addNewSensor={() => fields.push({})} />
+    {(touched || submitFailed) && error && <p><span className="error-msg">{error}</span></p>}
   </div>
 );
 
