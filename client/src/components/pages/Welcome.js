@@ -47,10 +47,10 @@ class LoadFormHelpText extends React.Component {
       >
         <div>
           Use the load button to initialize the form with values from a
-          previously exported form. To use this feature:
+          previously completed form. To use this feature:
           <ol>
             <li>Click LOAD FORM, </li>
-            <li>select your exported form (e.g. "data.json"), </li>
+            <li>select your completed form (e.g. "data.json"), </li>
             <li>and click Next to continue.</li>
           </ol>
         </div>
