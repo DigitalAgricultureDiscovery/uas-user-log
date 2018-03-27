@@ -23,23 +23,6 @@ const FT_AND_M = [
   {value: 2, name: 'm', rate: 0.3048},
 ];
 
-class LookAngleRadioButtonGroup extends React.Component {
-  render() {
-    return (
-      <div>
-        Look angle
-        <Field
-          name={`${PAGE_NAME}LookAngle`}
-          component={RadioButtonGroup}
-        >
-          <RadioButton value="vertical" label="Vertical" />
-          <RadioButton value="oblique" label="Oblique" />
-        </Field>
-      </div>
-    )
-  }
-}
-
 class MaximumGroundSpeedRadioButtonGroup extends React.Component {
   render() {
     return (
@@ -114,8 +97,7 @@ class FlightParameters extends React.Component {
             valueToConvert2FieldName={`${PAGE_NAME}AGLMinimum`}
             change={this.props.change}
           />
-          <br /><br />
-          <LookAngleRadioButtonGroup />
+          <br />
           <br />
           <MaximumGroundSpeedRadioButtonGroup />
           <br />
