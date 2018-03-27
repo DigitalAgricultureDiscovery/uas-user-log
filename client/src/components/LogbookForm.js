@@ -186,7 +186,7 @@ class LogbookForm extends React.Component {
           <br />
           <div style={ contentStyle }>
             <Card>
-              { pageIndex === 0 && <Welcome onSubmit={this.nextPage} /> }
+              { pageIndex === 0 && <Welcome onSubmit={this.nextPage} clearAndReturn={this.clearAndReturn} /> }
               { pageIndex === 1 && (
                 <Mission
                   updateMissionType={this.updateMissionType}
