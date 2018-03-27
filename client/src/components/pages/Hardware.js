@@ -26,13 +26,14 @@ class RemoteControlChargeSubForm extends React.Component {
           fieldName={`${PAGE_NAME}RemoteControlChargeTarget`}
           fieldLabel="Target (%)"
           type="number"
-          step="0.01"
+          min="1"
         />
         <LogbookTextField
           fieldName={`${PAGE_NAME}RemoteControlChargeMinimum`}
           fieldLabel="Minimum (%)"
           type="number"
-          step="0.01"
+          min="1"
+          max="80"
         />
       </div>
     )
@@ -48,13 +49,14 @@ class GroundControlChargeSubForm extends React.Component {
           fieldName={`${PAGE_NAME}GroundControlChargeTarget`}
           fieldLabel="Target (%)"
           type="number"
-          step="0.01"
+          min="1"
         />
         <LogbookTextField
           fieldName={`${PAGE_NAME}GroundControlChargeMinimum`}
           fieldLabel="Minimum (%)"
           type="number"
-          step="0.01"
+          min="1"
+          max="80"
         />
       </div>
     )

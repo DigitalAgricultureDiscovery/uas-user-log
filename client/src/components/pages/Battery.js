@@ -104,7 +104,7 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
               fieldName={`${battery}.Weight`}
               fieldLabel="Weight"
               type="number"
-              step="0.1"
+              min="1"
               style={UNIT_STYLE}
             />
             <LogbookSelectField
