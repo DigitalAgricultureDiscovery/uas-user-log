@@ -129,7 +129,11 @@ class Battery extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Battery" />
         <CardText>
-          <LogbookTextField fieldName={`${PAGE_NAME}OnUAS`} fieldLabel="Number of batteries on UAS" />
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}OnUAS`}
+            fieldLabel="Number of batteries on UAS"
+            type="number"
+          />
           <FieldArray
             name={`${PAGE_NAME}Batteries`}
             component={renderBatteries}
