@@ -21,10 +21,8 @@ const STATUSES = [
 
 class NOTAMSCheckbox extends React.Component {
   render() {
-    const { touched, error, submitFailed } = this.props;
     return (
       <div>
-        {(touched || submitFailed) && error && <p><span className="error-msg">{error}</span></p>}
         <Field
           name={`${PAGE_NAME}NOTAMS`}
           component={Checkbox}
