@@ -50,6 +50,11 @@ const FT_AND_M = [
   {value: 2, name: 'm', rate: 0.3048},
 ];
 
+const IN_AND_MM = [
+  {value: 1, name: 'in', rate: 0.0393701},
+  {value: 2, name: 'mm', rate: 25.4},
+];
+
 const AC_AND_HA = [
   {value: 1, name: 'ac', rate: 2.47105},
   {value: 2, name: 'ha', rate: 0.404686},
@@ -69,6 +74,7 @@ class DataCollectionSpray extends React.Component {
       currentApplicationRate,
       currentChemicalRate,
       currentStartingVolume,
+      currentOrificeSize,
       currentPressure,
       currentSwathDistance,
       currentSwathArea,
@@ -158,10 +164,22 @@ class DataCollectionSpray extends React.Component {
               fieldLabel="Nozzle type"
             />
           </div>
-          <LogbookTextField
-            fieldName={`${PAGE_NAME}OrificeSize`}
-            fieldLabel="Orifice size"
-          />
+          <div style={{display: 'flex'}}>
+            <LogbookTextField
+              fieldName={`${PAGE_NAME}OrificeSize`}
+              fieldLabel="Orifice size"
+              style={UNIT_STYLE}
+            />
+            <LogbookSelectField
+              fieldName={`${PAGE_NAME}OrificeSizeUnit`}
+              fieldLabel="Unit"
+              items={IN_AND_MM}
+              setDefault={false}
+              valueToConvert1={currentOrificeSize}
+              valueToConvert1FieldName={`${PAGE_NAME}OrificeSize`}
+              change={this.props.change}
+            />
+          </div>
           <div style={{display: 'flex'}}>
             <LogbookTextField
               fieldName={`${PAGE_NAME}Pressure`}
@@ -257,6 +275,7 @@ export default connect(
     const currentApplicationRate = selector(state, PAGE_NAME + 'ApplicationRate');
     const currentChemicalRate = selector(state, PAGE_NAME + 'ChemicalRate');
     const currentStartingVolume = selector(state, PAGE_NAME + 'StartingVolume');
+    const currentOrificeSize = selector(state, PAGE_NAME + 'OrificeSize');
     const currentPressure = selector(state, PAGE_NAME + 'Pressure');
     const currentSwathDistance = selector(state, PAGE_NAME + 'SwathDistance');
     const currentSwathArea = selector(state, PAGE_NAME + 'SwathArea');
@@ -266,6 +285,7 @@ export default connect(
       currentApplicationRate,
       currentChemicalRate,
       currentStartingVolume,
+      currentOrificeSize,
       currentPressure,
       currentSwathDistance,
       currentSwathArea,

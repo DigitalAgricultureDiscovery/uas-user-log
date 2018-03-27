@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { TextField }                                  from 'redux-form-material-ui';
 import {
   Card,
   CardActions,
@@ -68,7 +67,9 @@ class UpdateLocation extends React.Component {
   }
 
   componentDidMount() {
-    //console.log(this.props.currentLocation);
+    if (this.props.currentLocation) {
+      this.props.updateLocation(this.props.currentLocation);
+    }
   }
 
   handleClick(event) {
