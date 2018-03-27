@@ -88,7 +88,7 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
             <DeleteForeverIcon color={red500} />
           </IconButton>
           <LogbookTextField fieldName={`${battery}.NumOfCells`} fieldLabel="Number of cells" />
-          <LogbookTextField fieldName={`${battery}.SerialNumber`} fieldLabel="Serial number" />
+          <LogbookTextField fieldName={`${battery}.BatteryID`} fieldLabel="Battery ID" />
           <div style={{display: 'flex'}}>
             <LogbookTextField
               fieldName={`${battery}.Weight`}
