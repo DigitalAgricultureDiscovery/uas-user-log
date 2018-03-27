@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FieldArray, reduxForm, formValueSelector } from 'redux-form';
+import { FieldArray, reduxForm, getFormValues, formValueSelector } from 'redux-form';
+import LogbookSelectField from '../helpers/LogbookSelectField';
 import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
@@ -20,6 +21,11 @@ const PAGE_NAME = 'battery_';
 const UNIT_STYLE = {
   display: 'inline-block', marginRight: 15,
 }
+
+const OZ_AND_G = [
+  {value: 1, name: 'oz', rate: 0.035274},
+  {value: 2, name: 'g', rate: 28.3495},
+];
 
 class BatteryChargeSubForm extends React.Component {
   render() {
@@ -69,7 +75,7 @@ class AddBatteryButton extends React.Component {
   }
 }
 
-const renderBatteries = ({ fields, change, currentBatteries, meta: { touched, error, submitFailed } }) => (
+const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: { touched, error, submitFailed } }) => (
   <div>
     <ul style={{listStyleType: "none", padding: 0}}>
       {fields.map((battery, index) =>
@@ -82,7 +88,25 @@ const renderBatteries = ({ fields, change, currentBatteries, meta: { touched, er
             <DeleteForeverIcon color={red500} />
           </IconButton>
           <LogbookTextField fieldName={`${battery}.SerialNumber`} fieldLabel="Serial number" />
-          <LogbookTextField fieldName={`${battery}.Weight`} fieldLabel="Weight" />
+          <div style={{display: 'flex'}}>
+            <LogbookTextField
+              fieldName={`${battery}.Weight`}
+              fieldLabel="Weight"
+              type="number"
+              step="0.1"
+              style={UNIT_STYLE}
+            />
+            <LogbookSelectField
+              fieldName={`${battery}.WeightUnit`}
+              fieldLabel="Unit"
+              items={OZ_AND_G}
+              setDefault={true}
+              valueToConvert1={formValues[`${PAGE_NAME}Batteries`][`${index}`] ? formValues[`${PAGE_NAME}Batteries`][`${index}`].Weight : null}
+              valueToConvert1FieldName={`${PAGE_NAME}Batteries[${index}].Weight`}
+              change={change}
+            />
+          </div>
+
           <BatteryChargeSubForm
             fullChargeName={`${battery}.FullChargeVoltage`}
             dischargeName={`${battery}.DischargeVoltage`}
@@ -100,7 +124,7 @@ const renderBatteries = ({ fields, change, currentBatteries, meta: { touched, er
 
 class Battery extends React.Component {
   render() {
-    const { handleSubmit, previousPage, currentBatteries } = this.props;
+    const { handleSubmit, previousPage, currentBatteries, formValues } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Battery" />
@@ -112,6 +136,7 @@ class Battery extends React.Component {
             component={renderBatteries}
             change={this.props.change}
             currentBatteries={currentBatteries}
+            formValues={formValues}
           />
         </CardText>
         <CardActions>
@@ -145,8 +170,10 @@ const selector = formValueSelector('logbook');
 export default connect(
   state => {
     const currentBatteries = selector(state, PAGE_NAME + 'Batteries');
+    const formValues = getFormValues('logbook')(state);
     return {
       currentBatteries,
+      formValues,
     }
   }
 )(myReduxForm);
