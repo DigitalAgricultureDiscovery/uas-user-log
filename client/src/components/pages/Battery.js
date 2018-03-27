@@ -38,6 +38,7 @@ class BatteryChargeSubForm extends React.Component {
             type="number"
             step="0.1"
             style={UNIT_STYLE}
+            min="0.1"
           />
           <span style={{verticalAlign: 'middle'}}>volt</span>
         </div>
@@ -95,6 +96,7 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
             fieldName={`${battery}.NumOfCells`}
             fieldLabel="Number of cells"
             type="number"
+            min="1"
           />
           <LogbookTextField fieldName={`${battery}.BatteryID`} fieldLabel="Battery ID" />
           <div style={{display: 'flex'}}>
