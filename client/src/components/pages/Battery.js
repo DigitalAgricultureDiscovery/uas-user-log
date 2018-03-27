@@ -33,15 +33,11 @@ class BatteryChargeSubForm extends React.Component {
       <div>
         <div>
           <LogbookTextField
-            fieldName={this.props.numOfCellsName}
-            fieldLabel="Number of cells"
-          />
-          <LogbookTextField
             fieldName={this.props.fullChargeName}
             fieldLabel="Full charge voltage"
             style={UNIT_STYLE}
           />
-          <span style={{verticalAlign: 'middle'}}>volts</span>
+          <span style={{verticalAlign: 'middle'}}>volt</span>
         </div>
         <div>
           <LogbookTextField
@@ -49,7 +45,7 @@ class BatteryChargeSubForm extends React.Component {
             fieldLabel="Discharge voltage"
             style={UNIT_STYLE}
           />
-          <span style={{verticalAlign: 'middle'}}>volts (as per manufacturer's recommendation)</span>
+          <span style={{verticalAlign: 'middle'}}>volt (as per manufacturer's recommendation)</span>
         </div>
       </div>
     )
@@ -110,9 +106,7 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
               change={change}
             />
           </div>
-
           <BatteryChargeSubForm
-            numOfCellsName={`${battery}.NumOfCells`}
             fullChargeName={`${battery}.FullChargeVoltage`}
             dischargeName={`${battery}.DischargeVoltage`}
             batteryIndex={index}
@@ -124,6 +118,10 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
     </ul>
     <AddBatteryButton addNewBattery={() => fields.push({})} />
     {(touched || submitFailed) && error && <p><span className="error-msg">{error}</span></p>}
+    <LogbookTextField
+      fieldName={`${battery}.NumOfCells`}
+      fieldLabel="Number of cells"
+    />
   </div>
 );
 
