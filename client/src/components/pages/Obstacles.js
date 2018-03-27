@@ -30,7 +30,7 @@ class ObstaclesSelect extends React.Component {
       case 0:
         return '';
       case 1:
-        return OBSTACLES[values[0]].name;
+        return OBSTACLES[values[0] - 1].name;
       default:
         return `${values.length} obstacles selected`;
     }
