@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { SelectField } from 'redux-form-material-ui';
+import { reduxForm, formValueSelector } from 'redux-form';
+import LogbookSelectField from '../helpers/LogbookSelectField';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
-import MenuItem                             from 'material-ui/MenuItem';
 import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
@@ -13,54 +12,31 @@ import DefaultInitialValues from '../helpers/DefaultInitialValues';
 
 const PAGE_NAME = 'mission_';
 
-const TYPE_ITEMS = [
+const MISSION_TYPES = [
   // {value: 1, name: 'Teaching/Demonstration'},
   {value: 2, name: 'Research/Production'},
   {value: 3, name: 'Spray application'},
 ];
 
-// Select input for mission type
-class TypeSelect extends React.Component {
-  componentWillReceiveProps(nextProps) {
-    this.props.updateMissionType(nextProps.currentMissionType);
-  }
-
-  menuItems(items) {
-    return items.map((item) => (
-      <MenuItem
-        key={item.value}
-        value={item.value}
-        primaryText={item.name}
-        disabled={item.value === 1 ? true : false}
-      />
-    ))
-  }
-
-  render() {
-    return (
-      <Field
-        name={`${PAGE_NAME}Type`}
-        component={SelectField}
-        floatingLabelText="Mission type"
-      >
-        {this.menuItems(TYPE_ITEMS)}
-      </Field>
-    )
-  }
-}
-
 // Mission card
 class Mission extends React.Component {
+  componentDidUpdate() {
+    if (this.props.currentMissionType) {
+      this.props.updateMissionType(this.props.currentMissionType);
+    }
+  }
+
   render() {
-    const { handleSubmit, previousPage, missionType } = this.props;
+    const { handleSubmit, previousPage } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Planning" />
         <CardText>
-          <TypeSelect
-            currentMissionType={missionType}
-            updateMissionType={this.props.updateMissionType}
+          <LogbookSelectField
+            fieldName={`${PAGE_NAME}Type`}
+            fieldLabel="Mission type"
+            items={MISSION_TYPES}
           />
         </CardText>
         <CardActions>
@@ -95,6 +71,6 @@ const selector = formValueSelector('logbook');
 export default connect(
   state => ({
     initialValues: selector(state, 'initialValuesFromJSON') ? selector(state, 'initialValuesFromJSON') : DefaultInitialValues,
-    missionType: selector(state, 'mission_Type'),
+    currentMissionType: selector(state, 'mission_Type'),
   })
 )(myReduxForm);
