@@ -105,6 +105,7 @@ class DataCollectionSpray extends React.Component {
               type="number"
               step="0.01"
               style={UNIT_STYLE}
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}ApplicationRateUnit`}
@@ -123,6 +124,7 @@ class DataCollectionSpray extends React.Component {
               type="number"
               step="0.01"
               style={UNIT_STYLE}
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}ChemicalRateUnit`}
@@ -141,6 +143,7 @@ class DataCollectionSpray extends React.Component {
               type="number"
               step="0.01"
               style={UNIT_STYLE}
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}StartingVolumeUnit`}
@@ -158,6 +161,7 @@ class DataCollectionSpray extends React.Component {
               fieldLabel="Number of nozzles"
               type="number"
               style={UNIT_STYLE}
+              min="1"
             />
             <LogbookTextField
               fieldName={`${PAGE_NAME}NozzleType`}
@@ -206,6 +210,7 @@ class DataCollectionSpray extends React.Component {
               type="number"
               step="0.01"
               style={UNIT_STYLE}
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}SwathDistanceUnit`}
@@ -224,6 +229,7 @@ class DataCollectionSpray extends React.Component {
               type="number"
               step="0.01"
               style={UNIT_STYLE}
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}SwathAreaUnit`}
