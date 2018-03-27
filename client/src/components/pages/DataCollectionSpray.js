@@ -55,6 +55,11 @@ const AC_AND_HA = [
   {value: 2, name: 'ha', rate: 0.404686},
 ];
 
+const PPM_AND_PPB = [
+  {value: 1, name: 'ppm', rate: 0.001},
+  {value: 2, name: 'ppb', rate: 1000},
+]
+
 class DataCollectionSpray extends React.Component {
   render() {
     const {
@@ -116,7 +121,7 @@ class DataCollectionSpray extends React.Component {
             <LogbookSelectField
               fieldName={`${PAGE_NAME}ChemicalRateUnit`}
               fieldLabel="Unit"
-              items={OZ_AC_AND_ML_HA}
+              items={chemicalType !== 6 ? OZ_AC_AND_ML_HA : PPM_AND_PPB}
               setDefault={false}
               valueToConvert1={currentChemicalRate}
               valueToConvert1FieldName={`${PAGE_NAME}ChemicalRate`}
