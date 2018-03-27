@@ -13,6 +13,7 @@ export default class LogbookTextField extends React.Component {
       <Field
         name={this.props.fieldName}
         floatingLabelText={this.props.fieldLabel}
+        hintText={this.props.hintText ? this.props.hintText : null}
         component={TextField}
         type={this.props.type}
         step={this.props.step}

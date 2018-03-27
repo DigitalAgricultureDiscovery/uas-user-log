@@ -83,7 +83,7 @@ class Welcome extends React.Component {
     if (obj.general_FlightDate) {
       obj.general_FlightDate = new Date(obj.general_FlightDate);
     }
-    if (Object.keys(obj.general_Flights).length > 0) {
+    if (obj.general_Flights && Object.keys(obj.general_Flights).length > 0) {
       obj.general_Flights.forEach((flight, index) => {
         if (obj.general_Flights[index].Start) {
           obj.general_Flights[index].Start = new Date(obj.general_Flights[index].Start);

@@ -40,6 +40,10 @@ const styles = {
   },
 }
 
+const UNIT_STYLE = {
+  display: 'inline-block', marginRight: 15,
+}
+
 class NoFlightWarningText extends React.Component {
   render() {
     return (
@@ -60,31 +64,27 @@ async function fetchWeatherData(location) {
 class UpdateLocation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: '',
-    }
-    this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  componentDidMount() {
+    //console.log(this.props.currentLocation);
   }
 
   handleClick(event) {
-    this.props.updateLocation(this.state.value);
+    if (this.props.currentLocation) {
+      this.props.updateLocation(this.props.currentLocation);
+    }
   }
 
   render() {
     return (
       <div>
-        <TextField
-          name={`${PAGE_NAME}Location`}
+        <LogbookTextField
+          fieldName={`${PAGE_NAME}Location`}
+          fieldLabel="Enter location"
           hintText="Lat,Lon; US zip; UK postcode, etc."
-          floatingLabelText="Enter location"
-          onChange={this.handleChange}
-          value={this.state.value}
-          style={{marginRight: 15}}
+          style={UNIT_STYLE}
         />
         <RaisedButton
           label="Update forecast"
@@ -267,7 +267,8 @@ class Weather extends React.Component {
     super(props);
     this.state = {
       location: '',
-      'isSpray': '',
+      isSpray: '',
+      forecast: {},
     }
     this.updateLocation = this.updateLocation.bind(this);
   }
@@ -285,7 +286,7 @@ class Weather extends React.Component {
   }
 
   render() {
-    const { handleSubmit, previousPage, currentFlights, isSpray } = this.props;
+    const { handleSubmit, previousPage, currentFlights, currentLocation, isSpray } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -293,10 +294,9 @@ class Weather extends React.Component {
         <CardText>
           {currentFlights === undefined && this.state.location === '' ? <NoFlightWarningText /> : null}
           <br />
-          <UpdateLocation updateLocation={this.updateLocation} />
+          <UpdateLocation updateLocation={this.updateLocation} currentLocation={currentLocation} />
           <br />
           <WeatherDisplay location={this.state.location} isSpray={isSpray} />
-          <br />
           <LogbookTextField fieldName={`${PAGE_NAME}Note`} fieldLabel="Note" />
         </CardText>
         <CardActions>
@@ -329,9 +329,11 @@ const selector = formValueSelector('logbook');
 export default connect(
   state => {
     const currentFlights = selector(state, 'general_Flights');
+    const currentLocation = selector(state, 'weather_Location');
     const isSpray = (selector(state, 'mission_Type') === 3 ? true : false);
     return {
       currentFlights,
+      currentLocation,
       isSpray,
     }
   }
