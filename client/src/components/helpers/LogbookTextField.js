@@ -17,7 +17,7 @@ export default class LogbookTextField extends React.Component {
         component={TextField}
         type={this.props.type}
         step={this.props.step}
-        min="0"
+        min={this.props.min ? this.props.min : "0"}
       /> :
       // String type
       <Field
