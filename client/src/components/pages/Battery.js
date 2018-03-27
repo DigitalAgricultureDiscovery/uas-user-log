@@ -87,6 +87,7 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
+          <LogbookTextField fieldName={`${battery}.NumOfCells`} fieldLabel="Number of cells" />
           <LogbookTextField fieldName={`${battery}.SerialNumber`} fieldLabel="Serial number" />
           <div style={{display: 'flex'}}>
             <LogbookTextField
@@ -118,10 +119,6 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
     </ul>
     <AddBatteryButton addNewBattery={() => fields.push({})} />
     {(touched || submitFailed) && error && <p><span className="error-msg">{error}</span></p>}
-    <LogbookTextField
-      fieldName={`${PAGE_NAME}NumOfCells`}
-      fieldLabel="Number of cells"
-    />
   </div>
 );
 

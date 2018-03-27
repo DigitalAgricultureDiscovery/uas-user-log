@@ -71,6 +71,8 @@ class Welcome extends React.Component {
   }
 
   handleChange(event) {
+    // Clear out any previous loaded form data
+    this.props.clearAndReturn();
     // Use FileReader API to read contents of client's JSON file
     const reader = new FileReader();
     reader.onload = this.onReaderLoad;

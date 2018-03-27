@@ -275,7 +275,7 @@ class Weather extends React.Component {
   componentWillMount() {
     if (this.props.currentFlights !== undefined) {
       this.setState({
-        location: this.props.currentFlights[0].flightLatLocation.toString() + ',' + this.props.currentFlights[0].flightLonLocation.toString()
+        location: this.props.currentFlights[0]['Latitude'].toString() + ',' + this.props.currentFlights[0]['Longitude'].toString()
       });
     }
   }
@@ -328,7 +328,7 @@ const myReduxForm = reduxForm({
 const selector = formValueSelector('logbook');
 export default connect(
   state => {
-    const currentFlights = selector(state, 'flights');
+    const currentFlights = selector(state, 'general_Flights');
     const isSpray = (selector(state, 'mission_Type') === 3 ? true : false);
     return {
       currentFlights,
