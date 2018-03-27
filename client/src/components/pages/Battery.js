@@ -35,6 +35,8 @@ class BatteryChargeSubForm extends React.Component {
           <LogbookTextField
             fieldName={this.props.fullChargeName}
             fieldLabel="Full charge voltage"
+            type="number"
+            step="0.1"
             style={UNIT_STYLE}
           />
           <span style={{verticalAlign: 'middle'}}>volt</span>
@@ -43,6 +45,8 @@ class BatteryChargeSubForm extends React.Component {
           <LogbookTextField
             fieldName={this.props.dischargeName}
             fieldLabel="Discharge voltage"
+            type="number"
+            step="0.1"
             style={UNIT_STYLE}
           />
           <span style={{verticalAlign: 'middle'}}>volt (as per manufacturer's recommendation)</span>
@@ -87,7 +91,11 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          <LogbookTextField fieldName={`${battery}.NumOfCells`} fieldLabel="Number of cells" />
+          <LogbookTextField
+            fieldName={`${battery}.NumOfCells`}
+            fieldLabel="Number of cells"
+            type="number"
+          />
           <LogbookTextField fieldName={`${battery}.BatteryID`} fieldLabel="Battery ID" />
           <div style={{display: 'flex'}}>
             <LogbookTextField
