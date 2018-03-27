@@ -103,9 +103,9 @@ class DataCollectionSpray extends React.Component {
               fieldName={`${PAGE_NAME}ApplicationRate`}
               fieldLabel="Application rate"
               type="number"
-              step="0.01"
+              step="0.1"
               style={UNIT_STYLE}
-              min="0.01"
+              min="0.1"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}ApplicationRateUnit`}
@@ -122,9 +122,9 @@ class DataCollectionSpray extends React.Component {
               fieldName={`${PAGE_NAME}ChemicalRate`}
               fieldLabel="Chemical rate"
               type="number"
-              step="0.01"
+              step="0.1"
               style={UNIT_STYLE}
-              min="0.01"
+              min="0.1"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}ChemicalRateUnit`}
@@ -172,7 +172,10 @@ class DataCollectionSpray extends React.Component {
             <LogbookTextField
               fieldName={`${PAGE_NAME}OrificeSize`}
               fieldLabel="Orifice size"
+              type="number"
+              step="0.001"
               style={UNIT_STYLE}
+              min="0.001"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}OrificeSizeUnit`}
@@ -191,6 +194,7 @@ class DataCollectionSpray extends React.Component {
               type="number"
               step="0.01"
               style={UNIT_STYLE}
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}PressureUnit`}
@@ -208,9 +212,9 @@ class DataCollectionSpray extends React.Component {
               fieldName={`${PAGE_NAME}SwathDistance`}
               fieldLabel="Distance between passes"
               type="number"
-              step="0.01"
+              step="0.1"
               style={UNIT_STYLE}
-              min="0.01"
+              min="0.1"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}SwathDistanceUnit`}
@@ -227,9 +231,9 @@ class DataCollectionSpray extends React.Component {
               fieldName={`${PAGE_NAME}SwathArea`}
               fieldLabel="Total target area"
               type="number"
-              step="0.01"
+              step="0.1"
               style={UNIT_STYLE}
-              min="0.01"
+              min="0.1"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}SwathAreaUnit`}
