@@ -240,6 +240,7 @@ class DataCollectionResearch extends React.Component {
             fieldName={`${PAGE_NAME}SensorsUsed`}
             fieldLabel="Number of sensors used"
             type="number"
+            min="1"
           />
           <FieldArray
             name={`${PAGE_NAME}Sensors`}
