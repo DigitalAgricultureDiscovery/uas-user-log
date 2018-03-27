@@ -15,6 +15,7 @@ const initialValues = {
   'dataCollection_ApplicationRateUnit': 1,
   'dataCollection_ChemicalRateUnit': 1,
   'dataCollection_StartingVolumeUnit': 1,
+  'dataCollection_OrificeSizeUnit': 1,
   'dataCollection_PressureUnit': 1,
   'dataCollection_SwathDistanceUnit': 1,
   'dataCollection_SwathAreaUnit': 1,
