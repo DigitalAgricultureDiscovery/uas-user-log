@@ -33,11 +33,15 @@ class BatteryChargeSubForm extends React.Component {
       <div>
         <div>
           <LogbookTextField
+            fieldName={this.props.numOfCellsName}
+            fieldLabel="Number of cells"
+          />
+          <LogbookTextField
             fieldName={this.props.fullChargeName}
             fieldLabel="Full charge voltage"
             style={UNIT_STYLE}
           />
-          <span style={{verticalAlign: 'middle'}}>volts/cell</span>
+          <span style={{verticalAlign: 'middle'}}>volts</span>
         </div>
         <div>
           <LogbookTextField
@@ -45,7 +49,7 @@ class BatteryChargeSubForm extends React.Component {
             fieldLabel="Discharge voltage"
             style={UNIT_STYLE}
           />
-          <span style={{verticalAlign: 'middle'}}>volts/cell (as per manufacturer's recommendation)</span>
+          <span style={{verticalAlign: 'middle'}}>volts (as per manufacturer's recommendation)</span>
         </div>
       </div>
     )
@@ -108,6 +112,7 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
           </div>
 
           <BatteryChargeSubForm
+            numOfCellsName={`${battery}.NumOfCells`}
             fullChargeName={`${battery}.FullChargeVoltage`}
             dischargeName={`${battery}.DischargeVoltage`}
             batteryIndex={index}
@@ -129,7 +134,6 @@ class Battery extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Battery" />
         <CardText>
-          <LogbookTextField fieldName={`${PAGE_NAME}Used`} fieldLabel="Number of batteries used at a time" />
           <LogbookTextField fieldName={`${PAGE_NAME}OnUAS`} fieldLabel="Number of batteries on UAS" />
           <FieldArray
             name={`${PAGE_NAME}Batteries`}
