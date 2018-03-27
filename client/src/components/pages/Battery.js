@@ -133,6 +133,7 @@ class Battery extends React.Component {
             fieldName={`${PAGE_NAME}OnUAS`}
             fieldLabel="Number of batteries on UAS"
             type="number"
+            min="1"
           />
           <FieldArray
             name={`${PAGE_NAME}Batteries`}
