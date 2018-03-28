@@ -129,8 +129,8 @@ class Welcome extends React.Component {
             Agriculture and Natural Resources
           </p>
           <p>
-            Contributors - Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel Martin (USDA ARS),
-            Dr. Luv Khot (Washington State University), and Dr. Seth Murray (Texas A&M University)
+            Contributors - Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel E. Martin (Dan) (USDA ARS),
+            Dr. Lav R. Khot (Washington State University), and Dr. Seth Murray (Texas A&M University)
           </p>
           <p>
             Acknowledgment - FFAR Award # 210316​

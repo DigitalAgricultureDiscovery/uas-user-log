@@ -23,6 +23,24 @@ const FT_AND_M = [
   {value: 2, name: 'm', rate: 0.3048},
 ];
 
+
+class LookAngleRadioButtonGroup extends React.Component {
+  render() {
+    return (
+      <div>
+        Look angle
+        <Field
+          name={`${PAGE_NAME}LookAngle`}
+          component={RadioButtonGroup}
+        >
+          <RadioButton value="vertical" label="Vertical" />
+          <RadioButton value="oblique" label="Oblique" />
+        </Field>
+      </div>
+    )
+  }
+}
+
 class MaximumGroundSpeedRadioButtonGroup extends React.Component {
   render() {
     return (
@@ -66,7 +84,7 @@ class ReturnHomeCheckbox extends React.Component {
 
 class FlightParameters extends React.Component {
   render() {
-    const { handleSubmit, previousPage, currentAGLMaximum, currentAGLMinimum } = this.props;
+    const { handleSubmit, previousPage, currentAGLMaximum, currentAGLMinimum, currentMissionType } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Flight Parameters" />
@@ -98,6 +116,7 @@ class FlightParameters extends React.Component {
             change={this.props.change}
           />
           <br />
+          {currentMissionType === 2 ? <LookAngleRadioButtonGroup /> : null}
           <br />
           <MaximumGroundSpeedRadioButtonGroup />
           <br />
@@ -135,9 +154,11 @@ export default connect(
   state => {
     const currentAGLMaximum = selector(state, PAGE_NAME + 'AGLMaximum');
     const currentAGLMinimum = selector(state, PAGE_NAME + 'AGLMinimum');
+    const currentMissionType = selector(state, 'mission_Type');
     return {
       currentAGLMaximum,
       currentAGLMinimum,
+      currentMissionType,
     }
   }
 )(myReduxForm);
