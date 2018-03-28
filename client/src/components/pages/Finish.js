@@ -10,10 +10,23 @@ import { saveAs } from 'file-saver';
 
 import validate from '../helpers/validate';
 
+class IOSHelp extends React.Component {
+  render() {
+    return (
+      <p>
+        iOS users, if you need help saving a copy of your form, please refer to&nbsp;
+        <a href="https://support.apple.com/en-us/HT206481" target="_blank" rel="noopener noreferrer">
+        these instructions.</a>
+      </p>
+    )
+  }
+}
+
 class Finish extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.checkIOS = this.checkIOS.bind(this);
   }
 
   getTimestampFilename() {
@@ -27,6 +40,10 @@ class Finish extends React.Component {
     return 'uasuserlog_' + timestamp + '.json';
   }
 
+  checkIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  }
+
   handleClick(event) {
     const blob = new Blob([JSON.stringify(this.props.formValues)], {type: 'text/json;charset=utf-8'});
     saveAs(blob, this.getTimestampFilename());
@@ -34,7 +51,6 @@ class Finish extends React.Component {
 
   render() {
     const { handleSubmit, pristine, previousPage, submitting, clearAndReturn } = this.props;
-
     return (
       <form onSubmit={ handleSubmit }>
         <CardTitle title="Finish" />
@@ -49,6 +65,7 @@ class Finish extends React.Component {
             Click the Clear button to erase your current form selections and return
             to the beginning of the form.
           </p>
+          {this.checkIOS() ? <IOSHelp /> : null}
         </CardText>
         <CardActions>
           <FlatButton
