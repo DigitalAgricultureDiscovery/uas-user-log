@@ -39,7 +39,7 @@ class Mission extends React.Component {
             required={true}
             items={MISSION_TYPES}
           />
-          <p>All fields marked with the red asterisk <span style={{color: 'rgb(244, 67, 54)'}}>*</span> are required.</p>
+          <p>All fields marked with a red asterisk <span style={{color: 'rgb(244, 67, 54)'}}>*</span> are required.</p>
         </CardText>
         <CardActions>
           <FlatButton
