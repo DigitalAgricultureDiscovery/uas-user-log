@@ -18,12 +18,14 @@ export default class LogbookTextField extends React.Component {
         type={this.props.type}
         step={this.props.step}
         min={this.props.min ? this.props.min : "0"}
+        onChange={this.props.handleChange ? this.props.handleChange : null}
       /> :
       // String type
       <Field
         name={this.props.fieldName}
         floatingLabelText={this.props.fieldLabel}
         component={TextField}
+        onChange={this.props.handleChange ? this.props.handleChange : null}
       />;
     return (
       <div style={this.props.style ? this.props.style : {style}}>
