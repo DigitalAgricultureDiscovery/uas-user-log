@@ -35,9 +35,14 @@ const OZ_AC_AND_ML_HA = [
   {value: 2, name: 'ml/ha', rate: 73.0778},
 ];
 
-const GAL_AND_L = [
+const GAL_AC_AND_L_HA = [
   {value: 1, name: 'gal/ac', rate: 0.1069},
   {value: 2, name: 'l/ha', rate: 9.3540},
+];
+
+const GAL_AND_L = [
+  {value: 1, name: 'gal', rate: 0.264172},
+  {value: 2, name: 'l', rate: 3.78541},
 ];
 
 const PSI_AND_KPA = [
@@ -48,11 +53,6 @@ const PSI_AND_KPA = [
 const FT_AND_M = [
   {value: 1, name: 'ft', rate: 3.28084},
   {value: 2, name: 'm', rate: 0.3048},
-];
-
-const IN_AND_MM = [
-  {value: 1, name: 'in', rate: 0.0393701},
-  {value: 2, name: 'mm', rate: 25.4},
 ];
 
 const AC_AND_HA = [
@@ -74,7 +74,6 @@ class DataCollectionSpray extends React.Component {
       currentApplicationRate,
       currentChemicalRate,
       currentStartingVolume,
-      currentOrificeSize,
       currentPressure,
       currentSwathDistance,
       currentSwathArea,
@@ -110,7 +109,7 @@ class DataCollectionSpray extends React.Component {
             <LogbookSelectField
               fieldName={`${PAGE_NAME}ApplicationRateUnit`}
               fieldLabel="Unit"
-              items={GAL_AND_L}
+              items={GAL_AC_AND_L_HA}
               setDefault={false}
               valueToConvert1={currentApplicationRate}
               valueToConvert1FieldName={`${PAGE_NAME}ApplicationRate`}
@@ -141,8 +140,9 @@ class DataCollectionSpray extends React.Component {
               fieldName={`${PAGE_NAME}StartingVolume`}
               fieldLabel="Starting volume"
               type="number"
+              step="0.01"
               style={UNIT_STYLE}
-              min="1"
+              min="0.1"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}StartingVolumeUnit`}
@@ -170,10 +170,6 @@ class DataCollectionSpray extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}OrificeSize`}
             fieldLabel="Orifice size"
-            type="number"
-            step="0.001"
-            style={UNIT_STYLE}
-            min="0.001"
           />
           <div style={{display: 'flex'}}>
             <LogbookTextField
