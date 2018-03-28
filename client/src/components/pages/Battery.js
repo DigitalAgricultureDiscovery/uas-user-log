@@ -30,7 +30,8 @@ const OZ_AND_G = [
 class BatteryChargeSubForm extends React.Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleFullChargeChange = this.handleFullChargeChange.bind(this);
+    this.handleDischargeChange = this.handleDischargeChange.bind(this);
   }
 
   componentWillUpdate(nextProps) {
@@ -38,18 +39,22 @@ class BatteryChargeSubForm extends React.Component {
     if (nextProps.currentBatteries) {
       if (nextProps.currentBatteries[nextProps.batteryIndex]) {
         if (this.props.currentBatteries[this.props.batteryIndex].NumOfCells !== nextProps.currentBatteries[this.props.batteryIndex].NumOfCells) {
-          this.props.change(`${PAGE_NAME}Batteries[${this.props.batteryIndex}].FullChargeVoltage`, this.getVoltage(parseInt(nextProps.currentBatteries[this.props.batteryIndex].NumOfCells, 10)));
-          this.props.change(`${PAGE_NAME}Batteries[${this.props.batteryIndex}].DischargeVoltage`, this.getVoltage(parseInt(nextProps.currentBatteries[this.props.batteryIndex].NumOfCells, 10)));
+          this.props.change(`${PAGE_NAME}Batteries[${this.props.batteryIndex}].FullChargeVoltage`, this.getFullChargeVoltage(parseInt(nextProps.currentBatteries[this.props.batteryIndex].NumOfCells, 10)));
+          this.props.change(`${PAGE_NAME}Batteries[${this.props.batteryIndex}].DischargeVoltage`, this.getDischargeVoltage(parseInt(nextProps.currentBatteries[this.props.batteryIndex].NumOfCells, 10)));
         }
       }
     }
   }
 
-  handleChange(event) {
+  handleFullChargeChange(event) {
     this.props.change(`${PAGE_NAME}Batteries[${this.props.batteryIndex}].FullChargeVoltage`, event.target.value);
   }
 
-  getVoltage(cells) {
+  handleDischargeChange(event) {
+    this.props.change(`${PAGE_NAME}Batteries[${this.props.batteryIndex}].DischargeVoltage`, event.target.value);
+  }
+
+  getFullChargeVoltage(cells) {
     switch (cells) {
       case 1:
         return 4.2;
@@ -68,6 +73,25 @@ class BatteryChargeSubForm extends React.Component {
     }
   }
 
+  getDischargeVoltage(cells) {
+    switch (cells) {
+      case 1:
+        return 3.5;
+      case 2:
+        return 7.0;
+      case 3:
+        return 10.5;
+      case 4:
+        return 14.0;
+      case 5:
+        return 17.5;
+      case 6:
+        return 21.0;
+      default:
+        return null;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -79,7 +103,7 @@ class BatteryChargeSubForm extends React.Component {
             step="0.1"
             style={UNIT_STYLE}
             min="0.1"
-            handleChange={this.handleChange}
+            handleChange={this.handleFullChargeChange}
           />
           <span style={{verticalAlign: 'middle'}}>volt</span>
         </div>
@@ -91,7 +115,7 @@ class BatteryChargeSubForm extends React.Component {
             step="0.1"
             style={UNIT_STYLE}
             min="0.1"
-            handleChange={this.handleChange}
+            handleChange={this.handleDischargeChange}
           />
           <span style={{verticalAlign: 'middle'}}>volt (as per manufacturer's recommendation)</span>
         </div>
