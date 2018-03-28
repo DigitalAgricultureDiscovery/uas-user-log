@@ -99,6 +99,7 @@ class BatteryChargeSubForm extends React.Component {
           <LogbookTextField
             fieldName={this.props.fullChargeName}
             fieldLabel="Full charge voltage"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -111,13 +112,14 @@ class BatteryChargeSubForm extends React.Component {
           <LogbookTextField
             fieldName={this.props.dischargeName}
             fieldLabel="Discharge voltage"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
             min="0.1"
             handleChange={this.handleDischargeChange}
           />
-          <span style={{verticalAlign: 'middle'}}>volt (as per manufacturer's recommendation)</span>
+          <span style={{verticalAlign: 'middle'}}>volt (or as per manufacturer's recommendation)</span>
         </div>
       </div>
     )
@@ -162,11 +164,12 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
           <LogbookTextField
             fieldName={`${battery}.NumOfCells`}
             fieldLabel="Number of cells"
+            required={true}
             type="number"
             min="1"
             max="6"
           />
-          <LogbookTextField fieldName={`${battery}.BatteryID`} fieldLabel="Battery ID" />
+          <LogbookTextField fieldName={`${battery}.BatteryID`} fieldLabel="Battery ID" required={true} />
           <BatteryChargeSubForm
             fullChargeName={`${battery}.FullChargeVoltage`}
             dischargeName={`${battery}.DischargeVoltage`}
@@ -210,6 +213,7 @@ class Battery extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}OnUAS`}
             fieldLabel="Number of batteries on UAS"
+            required={true}
             type="number"
             min="1"
           />

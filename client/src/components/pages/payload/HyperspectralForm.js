@@ -35,6 +35,7 @@ export default class HyperspectralForm extends React.Component {
         <LogbookSelectField
           fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperOperationMode`}
           fieldLabel="Operation mode"
+          required={true}
           items={OPERATION_MODES}
           setDefault={true}
           change={this.props.change}
@@ -43,6 +44,7 @@ export default class HyperspectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperWeight`}
             fieldLabel="Weight"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -61,17 +63,20 @@ export default class HyperspectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperSpatialBands`}
             fieldLabel="Spatial bands"
+            required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperSpectralBands`}
             fieldLabel="Spectral bands"
+            required={true}
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperFrameRate`}
             fieldLabel="Frame rate (Hz)"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -79,6 +84,7 @@ export default class HyperspectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperDispersion`}
             fieldLabel="Dispersion per pixel"
+            required={true}
             type="number"
             step="0.1"
           />
@@ -87,6 +93,7 @@ export default class HyperspectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperFWHM`}
             fieldLabel="FWHM slit image"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -94,6 +101,7 @@ export default class HyperspectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperLens`}
             fieldLabel="Lens"
+            required={true}
             type="number"
             step="0.1"
           />
@@ -102,11 +110,13 @@ export default class HyperspectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperStorage`}
             fieldLabel="Storage"
+            required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperInterface`}
             fieldLabel="Interface"
+            required={true}
             type="number"
             step="0.1"
           />
@@ -115,6 +125,7 @@ export default class HyperspectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperSize`}
             fieldLabel="Size (exclusive of GPS unit)"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -133,6 +144,7 @@ export default class HyperspectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperWeightMinusLens`}
             fieldLabel="Weight (without lens)"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}

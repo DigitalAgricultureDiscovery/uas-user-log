@@ -24,6 +24,7 @@ class FlightDatePicker extends React.Component {
     return (
       <Field
         name={`${PAGE_NAME}FlightDate`}
+        className={this.props.required ? "required" : null}
         component={DatePicker}
         format={null}
         floatingLabelText="Date of flight(s)"
@@ -67,8 +68,8 @@ const renderFlights = ({ fields, change, meta: { touched, error, submitFailed } 
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          <FlightTimeStartPicker fieldName={`${flight}.Start`} />
-          <FlightTimeEndPicker fieldName={`${flight}.End`} />
+          <FlightTimeStartPicker fieldName={`${flight}.Start`} required={true} />
+          <FlightTimeEndPicker fieldName={`${flight}.End`} required={true} />
           <Location
             fieldLatName={`${flight}.Latitude`}
             fieldLonName={`${flight}.Longitude`}
@@ -88,6 +89,7 @@ class FlightTimeStartPicker extends React.Component {
     return (
       <Field
         name={this.props.fieldName}
+        className={this.props.required ? "required" : null}
         component={TimePicker}
         format={null}
         floatingLabelText="Start of flight time"
@@ -101,6 +103,7 @@ class FlightTimeEndPicker extends React.Component {
     return (
       <Field
         name={this.props.fieldName}
+        className={this.props.required ? "required" : null}
         component={TimePicker}
         format={null}
         floatingLabelText="End of flight time"
@@ -127,8 +130,8 @@ class Location extends React.Component {
   render() {
     return (
       <div>
-        <LogbookTextField fieldName={this.props.fieldLatName} fieldLabel="Latitude" />
-        <LogbookTextField fieldName={this.props.fieldLonName} fieldLabel="Longitude" />
+        <LogbookTextField fieldName={this.props.fieldLatName} fieldLabel="Latitude" required={true} />
+        <LogbookTextField fieldName={this.props.fieldLonName} fieldLabel="Longitude" required={true} />
         <RaisedButton
           onClick={this.handleClick}
           label="My location"
@@ -148,7 +151,7 @@ class General extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="General" />
         <CardText>
-          <FlightDatePicker />
+          <FlightDatePicker required={true} />
           <FieldArray name={`${PAGE_NAME}Flights`} component={renderFlights} change={this.props.change} />
         </CardText>
         <CardActions>

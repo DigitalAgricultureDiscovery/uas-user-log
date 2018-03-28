@@ -25,6 +25,7 @@ class FlightOperation extends React.Component {
           <LogbookSelectField
             fieldName={`${PAGE_NAME}Mode`}
             fieldLabel="Mode"
+            required={true}
             items={FLIGHT_MODES}
             setDefault={false}
           />

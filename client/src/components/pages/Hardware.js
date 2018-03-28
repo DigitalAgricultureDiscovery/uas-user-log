@@ -25,12 +25,14 @@ class RemoteControlChargeSubForm extends React.Component {
         <LogbookTextField
           fieldName={`${PAGE_NAME}RemoteControlChargeTarget`}
           fieldLabel="Target (%)"
+          required={true}
           type="number"
           min="1"
         />
         <LogbookTextField
           fieldName={`${PAGE_NAME}RemoteControlChargeMinimum`}
           fieldLabel="Minimum (%)"
+          required={true}
           type="number"
           min="1"
           max="80"
@@ -48,12 +50,14 @@ class GroundControlChargeSubForm extends React.Component {
         <LogbookTextField
           fieldName={`${PAGE_NAME}GroundControlChargeTarget`}
           fieldLabel="Target (%)"
+          required={true}
           type="number"
           min="1"
         />
         <LogbookTextField
           fieldName={`${PAGE_NAME}GroundControlChargeMinimum`}
           fieldLabel="Minimum (%)"
+          required={true}
           type="number"
           min="1"
           max="80"
@@ -79,7 +83,7 @@ class Hardware extends React.Component {
           />
           <LogbookTextField fieldName={`${PAGE_NAME}Make`} fieldLabel="Make" />
           <LogbookTextField fieldName={`${PAGE_NAME}Model`} fieldLabel="Model" />
-          <LogbookTextField fieldName={`${PAGE_NAME}Registration`} fieldLabel="Registration" />
+          <LogbookTextField fieldName={`${PAGE_NAME}Registration`} fieldLabel="Registration" required={true} />
           <RemoteControlChargeSubForm />
           <GroundControlChargeSubForm />
         </CardText>

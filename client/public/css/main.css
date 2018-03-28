@@ -41,3 +41,9 @@ body {
   color: rgb(244, 67, 54);
   font-size: 12;
 }
+
+/* Required */
+.required > label:after, .required > div > label:after {
+  content: " *";
+  color: rgb(244, 67, 54);
+}

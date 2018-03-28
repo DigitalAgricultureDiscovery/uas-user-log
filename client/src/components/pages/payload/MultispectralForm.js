@@ -39,6 +39,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiHorizontal`}
             fieldLabel="Horizontal"
+            required={true}
             type="number"
             step="0.01"
             style={UNIT_STYLE}
@@ -46,6 +47,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiVertical`}
             fieldLabel="Vertical"
+            required={true}
             type="number"
             step="0.01"
           />
@@ -64,12 +66,14 @@ export default class MultispectralForm extends React.Component {
         <LogbookTextField
           fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiBands`}
           fieldLabel="Number of spectral bands"
+          required={true}
           type="number"
         />
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiGSD`}
             fieldLabel="Ground sample distance"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -88,6 +92,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiFOV`}
             fieldLabel="Field of view"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -105,6 +110,7 @@ export default class MultispectralForm extends React.Component {
         <LogbookSelectField
           fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiTriggeringOption`}
           fieldLabel="Triggering option"
+          required={true}
           items={TRIGGERING_OPTIONS}
           setDefault={true}
           change={this.props.change}
@@ -113,6 +119,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiWeight`}
             fieldLabel="Weight"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -131,6 +138,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiPixelSize`}
             fieldLabel="Pixel size (microns)"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -138,6 +146,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiPixelDepth`}
             fieldLabel="Pixel depth"
+            required={true}
             type="number"
             step="0.1"
           />
@@ -145,6 +154,7 @@ export default class MultispectralForm extends React.Component {
         <LogbookTextField
           fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiFrameRate`}
           fieldLabel="Frame rate (Hz)"
+          required={true}
           type="number"
           step="0.1"
         />
@@ -152,17 +162,20 @@ export default class MultispectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiImageFormat`}
             fieldLabel="Image data format"
+            required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiVideoFormat`}
             fieldLabel="Video data format"
+            required={true}
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiElectronicShutter`}
             fieldLabel="Electronic shutter"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -170,6 +183,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiGain`}
             fieldLabel="Gain selection"
+            required={true}
             type="number"
             step="0.1"
           />
@@ -178,6 +192,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiVoltage`}
             fieldLabel="Voltage requirement (V)"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -185,6 +200,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiPower`}
             fieldLabel="Power consumption (W)"
+            required={true}
             type="number"
             step="0.1"
           />
