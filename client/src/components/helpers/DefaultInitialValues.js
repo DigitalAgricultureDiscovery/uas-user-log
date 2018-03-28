@@ -28,6 +28,7 @@ const initialValues = {
   'flightParameters_AGLMaximum': 400,
   'flightParameters_AGLUnit': 1,
   'flightParameters_MaximumGroundSpeed': 'no',
+  'flightParameters_LookAngle': 'vertical',
 
   'people_PeoplePresent': 'no',
 
