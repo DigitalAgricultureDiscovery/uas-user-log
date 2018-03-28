@@ -75,7 +75,7 @@ class Obstacles extends React.Component {
           <ObstaclesSelect selectedObstacles={selectedObstacles} />
           {selectedObstacles.indexOf(otherIndex) > -1 &&
             <div>
-              <LogbookTextField fieldName={`${PAGE_NAME}ObstaclesOther`} fieldLabel="Enter other obstacle" />
+              <LogbookTextField fieldName={`${PAGE_NAME}ObstaclesOther`} fieldLabel="Enter other obstacle" required={true} />
             </div>
           }
         </CardText>
