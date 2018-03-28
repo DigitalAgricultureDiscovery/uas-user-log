@@ -16,9 +16,20 @@ class Finish extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  getTimestampFilename() {
+    const now = new Date();
+    const year = now.getFullYear().toString();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(2, '0');
+    const hour = now.getHours().toString().padStart(2, '0');
+    const minute = now.getMinutes().toString().padStart(2, '0');
+    const timestamp = year + '-' + month + '-' + day + '_' + hour + minute;
+    return 'uasuserlog_' + timestamp + '.json';
+  }
+
   handleClick(event) {
     const blob = new Blob([JSON.stringify(this.props.formValues)], {type: 'text/json;charset=utf-8'});
-    saveAs(blob, 'data.json');
+    saveAs(blob, this.getTimestampFilename());
   }
 
   render() {
