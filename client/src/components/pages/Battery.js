@@ -28,6 +28,46 @@ const OZ_AND_G = [
 ];
 
 class BatteryChargeSubForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentWillUpdate(nextProps) {
+    // Update full charge and discharge voltages based on number of cells entered
+    if (nextProps.currentBatteries) {
+      if (nextProps.currentBatteries[nextProps.batteryIndex]) {
+        if (this.props.currentBatteries[this.props.batteryIndex].NumOfCells !== nextProps.currentBatteries[this.props.batteryIndex].NumOfCells) {
+          this.props.change(`${PAGE_NAME}Batteries[${this.props.batteryIndex}].FullChargeVoltage`, this.getVoltage(parseInt(nextProps.currentBatteries[this.props.batteryIndex].NumOfCells, 10)));
+          this.props.change(`${PAGE_NAME}Batteries[${this.props.batteryIndex}].DischargeVoltage`, this.getVoltage(parseInt(nextProps.currentBatteries[this.props.batteryIndex].NumOfCells, 10)));
+        }
+      }
+    }
+  }
+
+  handleChange(event) {
+    this.props.change(`${PAGE_NAME}Batteries[${this.props.batteryIndex}].FullChargeVoltage`, event.target.value);
+  }
+
+  getVoltage(cells) {
+    switch (cells) {
+      case 1:
+        return 4.2;
+      case 2:
+        return 8.4;
+      case 3:
+        return 12.6;
+      case 4:
+        return 16.8;
+      case 5:
+        return 21.0;
+      case 6:
+        return 25.2;
+      default:
+        return null;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -39,6 +79,7 @@ class BatteryChargeSubForm extends React.Component {
             step="0.1"
             style={UNIT_STYLE}
             min="0.1"
+            handleChange={this.handleChange}
           />
           <span style={{verticalAlign: 'middle'}}>volt</span>
         </div>
@@ -49,6 +90,8 @@ class BatteryChargeSubForm extends React.Component {
             type="number"
             step="0.1"
             style={UNIT_STYLE}
+            min="0.1"
+            handleChange={this.handleChange}
           />
           <span style={{verticalAlign: 'middle'}}>volt (as per manufacturer's recommendation)</span>
         </div>
@@ -97,8 +140,16 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
             fieldLabel="Number of cells"
             type="number"
             min="1"
+            max="6"
           />
           <LogbookTextField fieldName={`${battery}.BatteryID`} fieldLabel="Battery ID" />
+          <BatteryChargeSubForm
+            fullChargeName={`${battery}.FullChargeVoltage`}
+            dischargeName={`${battery}.DischargeVoltage`}
+            batteryIndex={index}
+            change={change}
+            currentBatteries={currentBatteries}
+          />
           <div style={{display: 'flex'}}>
             <LogbookTextField
               fieldName={`${battery}.Weight`}
@@ -117,13 +168,6 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
               change={change}
             />
           </div>
-          <BatteryChargeSubForm
-            fullChargeName={`${battery}.FullChargeVoltage`}
-            dischargeName={`${battery}.DischargeVoltage`}
-            batteryIndex={index}
-            change={change}
-            currentBatteries={currentBatteries}
-          />
         </li>
       )}
     </ul>
