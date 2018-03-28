@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
+const sslRedirect = require('heroku-ssl-redirect');
 
 const keys = require('./config/keys');
 const weatherAPI = require('./helpers/weather');
@@ -23,6 +24,9 @@ if (cluster.isMaster) {
 
 } else {
   const app = express();
+  // Redirect to https
+  app.use(sslRedirect());
+
   // Support JSON-encoded bodies
   app.use(express.json());
 
