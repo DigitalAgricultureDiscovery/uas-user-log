@@ -5,11 +5,11 @@ const validate = values => {
     !values[fieldName] ? errors[fieldName] = 'Required' : null;
   }
 
-  // // mission
-  // isRequired('typeSelect');
-  //
-  // // crop
-  // isRequired('lifeCycleSelect');
+  // Mission
+  isRequired('mission_Type');
+
+  // Crop
+  // isRequired('crop_LifeCycle');
   // isRequired('cropNameText');
   // isRequired('growthStageText');
   // isRequired('varietyText');

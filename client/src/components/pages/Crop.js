@@ -72,6 +72,7 @@ class Crop extends React.Component {
             items={LIFE_CYCLE_ITEMS}
             setDefault={false}
           />
+          <LogbookTextField fieldName={`${PAGE_NAME}Name`} fieldLabel="Crop name" required={true} />
           <LogbookTextField fieldName={`${PAGE_NAME}GrowthStage`} fieldLabel="Growth stage" required={true} />
           { currentLifeCycle ? (currentLifeCycle === 1 ? <AnnualSubForm /> : <PerennialSubForm />) : null }
         </CardText>
