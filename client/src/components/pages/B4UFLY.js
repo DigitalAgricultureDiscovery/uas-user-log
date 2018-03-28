@@ -85,7 +85,7 @@ class B4UFLYCheckboxGroup extends React.Component {
   render() {
     return (
       <div>
-        Select one or more options
+        Select one or more options <span style={{color: 'rgb(244, 67, 54)'}}>*</span>
         <NOTAMSCheckbox />
         <FlightRestrictionsCheckbox />
         <LocalRestrictionsCheckbox />
@@ -101,6 +101,7 @@ class PreflightRadioButtonGroup extends React.Component {
     return (
         <Field
           name={`${PAGE_NAME}Preflight`}
+          className="required"
           component={RadioButtonGroup}
         >
           <RadioButton value="no" label="No" />
@@ -135,7 +136,7 @@ class PermissionRadioButtonGroup extends React.Component {
           <RadioButton value="permitted" label="Permitted by" />
         </Field>
         {this.state.showPermissionText ?
-          <LogbookTextField fieldName={`${PAGE_NAME}PermittedBy`} fieldLabel="Enter permission contact" />
+          <LogbookTextField fieldName={`${PAGE_NAME}PermittedBy`} fieldLabel="Enter permission contact" required={true} />
           : null}
       </div>
     )
@@ -152,21 +153,22 @@ class B4UFLY extends React.Component {
           <LogbookSelectField
             fieldName={`${PAGE_NAME}Status`}
             fieldLabel="Status"
+            required={true}
             items={STATUSES}
           />
           {currentStatus > 1 &&
             <div>
-              <LogbookTextField fieldName={`${PAGE_NAME}AirportOperatorContact`} fieldLabel="Airport operator contact" />
-              <LogbookTextField fieldName={`${PAGE_NAME}ControlTowerContact`} fieldLabel="Control tower contact" />
+              <LogbookTextField fieldName={`${PAGE_NAME}AirportOperatorContact`} fieldLabel="Airport operator contact" required={true} />
+              <LogbookTextField fieldName={`${PAGE_NAME}ControlTowerContact`} fieldLabel="Control tower contact" required={true} />
             </div>
           }
           <B4UFLYCheckboxGroup />
-          <LogbookTextField fieldName={`${PAGE_NAME}FAACert`} fieldLabel="FAA COW or COA used #" />
-          Completed pre-flight checklist
+          <LogbookTextField fieldName={`${PAGE_NAME}FAACert`} fieldLabel="FAA COW or COA used #" required={true} />
+          Completed pre-flight checklist  <span style={{color: 'rgb(244, 67, 54)'}}>*</span>
           <PreflightRadioButtonGroup />
           {noResponse &&
             <div>
-              Reason
+              Reason  <span style={{color: 'rgb(244, 67, 54)'}}>*</span>
               <PermissionRadioButtonGroup />
             </div>
           }

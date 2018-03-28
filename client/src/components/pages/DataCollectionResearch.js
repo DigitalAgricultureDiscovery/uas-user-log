@@ -57,6 +57,7 @@ class SensorTypeSubForm extends React.Component {
         <LogbookSelectField
           fieldName={this.props.typeName}
           fieldLabel="Type of sensor"
+          required={true}
           items={SENSORS}
           setDefault={false}
         />
@@ -64,6 +65,7 @@ class SensorTypeSubForm extends React.Component {
           <LogbookTextField
             fieldName={this.props.otherName}
             fieldLabel="Enter other sensor type"
+            required={true}
           />
         : null}
       </div>
@@ -84,6 +86,7 @@ class OperationModeSubForm extends React.Component {
         <LogbookSelectField
           fieldName={this.props.modeName}
           fieldLabel="Operation mode"
+          required={true}
           items={OPERATION_MODES}
           setDefault={false}
         />
@@ -91,6 +94,7 @@ class OperationModeSubForm extends React.Component {
           <LogbookTextField
             fieldName={this.props.timeIntervalName}
             fieldLabel="Enter time interval"
+            required={true}
             type="number"
             step="0.01"
           />
@@ -113,6 +117,7 @@ class LapSubForm extends React.Component {
         <LogbookTextField
           fieldName={this.props.endName}
           fieldLabel="End lap (%)"
+          required={true}
           type="number"
           step="0.01"
           style={UNIT_STYLE}
@@ -120,6 +125,7 @@ class LapSubForm extends React.Component {
         <LogbookTextField
           fieldName={this.props.sideName}
           fieldLabel="Side lap (%)"
+          required={true}
           type="number"
           step="0.01"
         />
@@ -142,6 +148,7 @@ class DataFormatSubForm extends React.Component {
         <LogbookSelectField
           fieldName={this.props.formatName}
           fieldLabel="Data format"
+          required={true}
           items={DATA_FORMATS}
           setDefault={false}
         />
@@ -149,6 +156,7 @@ class DataFormatSubForm extends React.Component {
           <LogbookTextField
             fieldName={this.props.otherName}
             fieldLabel="Enter data format"
+            required={true}
           />
         : null}
       </div>
@@ -198,8 +206,8 @@ const renderSensors = ({ fields, change, currentSensors, meta: { touched, error,
             change={change}
             currentSensors={currentSensors}
           />
-          <LogbookTextField fieldName={`${sensor}.Make`} fieldLabel="Make" />
-          <LogbookTextField fieldName={`${sensor}.Model`} fieldLabel="Model" />
+          <LogbookTextField fieldName={`${sensor}.Make`} fieldLabel="Make" required={true} />
+          <LogbookTextField fieldName={`${sensor}.Model`} fieldLabel="Model" required={true} />
           <OperationModeSubForm
             modeName={`${sensor}.OperationMode`}
             intervalName={`${sensor}.TimeInterval`}
@@ -239,6 +247,7 @@ class DataCollectionResearch extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}SensorsUsed`}
             fieldLabel="Number of sensors used"
+            required={true}
             type="number"
             min="1"
           />

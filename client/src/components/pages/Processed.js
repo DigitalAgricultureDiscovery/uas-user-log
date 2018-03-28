@@ -48,7 +48,7 @@ class Processed extends React.Component {
       case 1:
         return (
           <div>
-            <Subheader>Visible NIIRS - Select one or more applicable ratings</Subheader>
+            <Subheader>Visible NIIRS - Select one or more applicable ratings <span style={{color: 'rgb(244, 67, 54)'}}>*</span></Subheader>
             <VisibleTable
               updateSelected={this.updateSelected}
               handleRowSelection={this.handleRowSelection}
@@ -91,6 +91,7 @@ class Processed extends React.Component {
           <LogbookSelectField
             fieldName={`${PAGE_NAME}NIIRS`}
             fieldLabel="Select a sensor"
+            required={true}
             items={SENSORS}
           />
           {this.renderSensorGrid(currentNiirsSensor, currentVisibleSelections)}

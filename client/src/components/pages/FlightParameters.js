@@ -28,7 +28,7 @@ class LookAngleRadioButtonGroup extends React.Component {
   render() {
     return (
       <div>
-        Look angle
+        Look angle <span style={{color: 'rgb(244, 67, 54)'}}>*</span>
         <Field
           name={`${PAGE_NAME}LookAngle`}
           component={RadioButtonGroup}
@@ -45,7 +45,7 @@ class MaximumGroundSpeedRadioButtonGroup extends React.Component {
   render() {
     return (
       <div>
-        Maximum ground speed GPS controlled
+        Maximum ground speed GPS controlled <span style={{color: 'rgb(244, 67, 54)'}}>*</span>
         <Field
           name={`${PAGE_NAME}MaximumGroundSpeed`}
           component={RadioButtonGroup}
@@ -93,6 +93,7 @@ class FlightParameters extends React.Component {
             <LogbookTextField
               fieldName={`${PAGE_NAME}AGLMaximum`}
               fieldLabel="Maximum altitude, AGL"
+              required={true}
               type="number"
               step="0.1"
               style={UNIT_STYLE}

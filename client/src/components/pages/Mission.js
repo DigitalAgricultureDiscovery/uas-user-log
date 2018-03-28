@@ -36,8 +36,10 @@ class Mission extends React.Component {
           <LogbookSelectField
             fieldName={`${PAGE_NAME}Type`}
             fieldLabel="Mission type"
+            required={true}
             items={MISSION_TYPES}
           />
+          <p>All fields marked with the red asterisk <span style={{color: 'rgb(244, 67, 54)'}}>*</span> are required.</p>
         </CardText>
         <CardActions>
           <FlatButton

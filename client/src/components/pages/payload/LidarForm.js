@@ -31,28 +31,33 @@ export default class LidarForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarManufacturer`}
             fieldLabel="Manufacturer"
+            required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarModel`}
             fieldLabel="Model"
+            required={true}
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarHorizontalFOV`}
             fieldLabel="Horizontal FOV (Degree)"
+            required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarVerticalFOV`}
             fieldLabel="Vertical FOV (Degree)"
+            required={true}
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarMinRange`}
             fieldLabel="Minimum range"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -71,6 +76,7 @@ export default class LidarForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarMaxRange`}
             fieldLabel="Maximum range"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -89,6 +95,7 @@ export default class LidarForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarDistResolution`}
             fieldLabel="Distance resolution"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -107,6 +114,7 @@ export default class LidarForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarScanRate`}
             fieldLabel="Scan rate (Hz)"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -114,6 +122,7 @@ export default class LidarForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarAngularResolution`}
             fieldLabel="Angular resolution (Hz)"
+            required={true}
             type="number"
             step="0.1"
           />
@@ -122,6 +131,7 @@ export default class LidarForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarPower`}
             fieldLabel="Power unit (W)"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -129,6 +139,7 @@ export default class LidarForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarVoltage`}
             fieldLabel="Voltage (V)"
+            required={true}
             type="number"
             step="0.1"
           />
@@ -137,6 +148,7 @@ export default class LidarForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.LidarWeight`}
             fieldLabel="Weight"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}

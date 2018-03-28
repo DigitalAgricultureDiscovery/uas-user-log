@@ -13,6 +13,7 @@ export default class LogbookTextField extends React.Component {
       <Field
         name={this.props.fieldName}
         floatingLabelText={this.props.fieldLabel}
+        className={this.props.required ? "required" : null}
         hintText={this.props.hintText ? this.props.hintText : null}
         component={TextField}
         type={this.props.type}
@@ -24,6 +25,7 @@ export default class LogbookTextField extends React.Component {
       <Field
         name={this.props.fieldName}
         floatingLabelText={this.props.fieldLabel}
+        className={this.props.required ? "required" : null}
         component={TextField}
         onChange={this.props.handleChange ? this.props.handleChange : null}
       />;

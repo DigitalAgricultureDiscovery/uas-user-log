@@ -101,8 +101,8 @@ const renderRemotePICs = ({ fields, change, meta: { touched, error, submitFailed
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          <LogbookTextField fieldName={`${remotePIC}.Name`} fieldLabel="Name" />
-          <LogbookTextField fieldName={`${remotePIC}.License`} fieldLabel="License #" />
+          <LogbookTextField fieldName={`${remotePIC}.Name`} fieldLabel="Name" required={true} />
+          <LogbookTextField fieldName={`${remotePIC}.License`} fieldLabel="License #" required={true} />
         </li>
       )}
     </ul>
@@ -192,7 +192,7 @@ const renderPICs = ({ fields, change }) => (
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          <LogbookTextField fieldName={`${pic}.Name`} fieldLabel="Name" />
+          <LogbookTextField fieldName={`${pic}.Name`} fieldLabel="Name" required={true} />
         </li>
       )}
     </ul>
@@ -281,7 +281,7 @@ const renderVOs = ({ fields, change }) => (
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          <LogbookTextField fieldName={`${vo}.Name`} fieldLabel="Name" />
+          <LogbookTextField fieldName={`${vo}.Name`} fieldLabel="Name" required={true} />
         </li>
       )}
     </ul>

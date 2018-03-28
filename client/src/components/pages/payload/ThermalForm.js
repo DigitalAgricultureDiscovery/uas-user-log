@@ -22,6 +22,7 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalDimensionWidth`}
             fieldLabel="Width"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -29,6 +30,7 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalDimensionLength`}
             fieldLabel="Length"
+            required={true}
             type="number"
             step="0.1"
           />
@@ -36,12 +38,14 @@ export default class ThermalForm extends React.Component {
         <LogbookTextField
           fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalDimensionHeight`}
           fieldLabel="Height"
+          required={true}
           type="number"
           step="0.1"
         />
         <LogbookSelectField
           fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalDimensionSizeUnit`}
           fieldLabel="Dimensions Unit"
+          required={true}
           items={IN_AND_MM}
           setDefault={true}
           valueToConvert1={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].ThermalDimensionWidth : null}
@@ -56,22 +60,26 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalSpectralBand`}
             fieldLabel="Spectral band (microns)"
+            required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalFrameRate`}
             fieldLabel="Frame rate (Hz)"
+            required={true}
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalImager`}
             fieldLabel="Imager"
+            required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.thermalMeasurementAcc`}
             fieldLabel="Measurement accuracy"
+            required={true}
           />
         </div>
         Sensor resolution
@@ -79,6 +87,7 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalResolutionWidth`}
             fieldLabel="Width"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -86,6 +95,7 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalResolutionHeight`}
             fieldLabel="Height"
+            required={true}
             type="number"
             step=""
           />
@@ -93,10 +103,12 @@ export default class ThermalForm extends React.Component {
         <LogbookTextField
           fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalLens`}
           fieldLabel="Lens"
+          required={true}
         />
         <LogbookTextField
           fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalFOV`}
           fieldLabel="Visible camera FOV (degree)"
+          required={true}
           type="number"
           step="0.1"
         />
@@ -105,6 +117,7 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalVisibleCameraWidth`}
             fieldLabel="Width"
+            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -112,6 +125,7 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalVisibleCameraHeight`}
             fieldLabel="Height"
+            required={true}
             type="number"
             step="0.1"
           />
@@ -119,6 +133,7 @@ export default class ThermalForm extends React.Component {
         <LogbookTextField
           fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.ThermalVoltage`}
           fieldLabel="Input voltage (V)"
+          required={true}
           type="number"
           step="0.1"
         />

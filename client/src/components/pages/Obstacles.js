@@ -52,6 +52,7 @@ class ObstaclesSelect extends React.Component {
     return (
       <Field
         name={`${PAGE_NAME}Obstacles`}
+        className="required"
         component={SelectField}
         floatingLabelText="Select one or more"
         multiple={true}

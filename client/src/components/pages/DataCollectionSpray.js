@@ -88,19 +88,23 @@ class DataCollectionSpray extends React.Component {
           <LogbookSelectField
             fieldName={`${PAGE_NAME}ChemicalType`}
             fieldLabel="Select a chemical type"
+            required={true}
             items={CHEMICALS}
             setDefault={false}
           />
           {chemicalType === otherIndex ?
             <LogbookTextField
               fieldName={`${PAGE_NAME}ChemicalOther`}
-              fieldLabel="Enter other chemical type" />
+              fieldLabel="Enter other chemical type"
+              required={true}
+            />
             : null
           }
           <div style={{display: 'flex'}}>
             <LogbookTextField
               fieldName={`${PAGE_NAME}ApplicationRate`}
               fieldLabel="Application rate"
+              required={true}
               type="number"
               step="0.1"
               style={UNIT_STYLE}
@@ -120,6 +124,7 @@ class DataCollectionSpray extends React.Component {
             <LogbookTextField
               fieldName={`${PAGE_NAME}ChemicalRate`}
               fieldLabel="Chemical rate"
+              required={true}
               type="number"
               step="0.1"
               style={UNIT_STYLE}
@@ -139,6 +144,7 @@ class DataCollectionSpray extends React.Component {
             <LogbookTextField
               fieldName={`${PAGE_NAME}StartingVolume`}
               fieldLabel="Starting volume"
+              required={true}
               type="number"
               step="0.01"
               style={UNIT_STYLE}
@@ -158,6 +164,7 @@ class DataCollectionSpray extends React.Component {
             <LogbookTextField
               fieldName={`${PAGE_NAME}NozzleNumber`}
               fieldLabel="Number of nozzles"
+              required={true}
               type="number"
               style={UNIT_STYLE}
               min="1"
@@ -165,16 +172,19 @@ class DataCollectionSpray extends React.Component {
             <LogbookTextField
               fieldName={`${PAGE_NAME}NozzleType`}
               fieldLabel="Nozzle type"
+              required={true}
             />
           </div>
           <LogbookTextField
             fieldName={`${PAGE_NAME}OrificeSize`}
             fieldLabel="Orifice size"
+            required={true}
           />
           <div style={{display: 'flex'}}>
             <LogbookTextField
               fieldName={`${PAGE_NAME}Pressure`}
               fieldLabel="Pressure"
+              required={true}
               type="number"
               step="0.01"
               style={UNIT_STYLE}
@@ -195,6 +205,7 @@ class DataCollectionSpray extends React.Component {
             <LogbookTextField
               fieldName={`${PAGE_NAME}SwathDistance`}
               fieldLabel="Distance between passes"
+              required={true}
               type="number"
               step="0.1"
               style={UNIT_STYLE}
@@ -214,6 +225,7 @@ class DataCollectionSpray extends React.Component {
             <LogbookTextField
               fieldName={`${PAGE_NAME}SwathArea`}
               fieldLabel="Total target area"
+              required={true}
               type="number"
               step="0.1"
               style={UNIT_STYLE}
@@ -232,6 +244,7 @@ class DataCollectionSpray extends React.Component {
           <LogbookSelectField
             fieldName={`${PAGE_NAME}ApplicationType`}
             fieldLabel="Type of application"
+            required={true}
             items={APPLICATIONS}
             setDefault={false}
           />

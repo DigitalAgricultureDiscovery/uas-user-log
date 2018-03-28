@@ -17,7 +17,7 @@ class PeoplePresentRadioButtonGroup extends React.Component {
   render() {
     return (
       <div>
-        Select one
+        Select one <span style={{color: 'rgb(244, 67, 54)'}}>*</span>
         <Field
           name={`${PAGE_NAME}PeoplePresent`}
           component={RadioButtonGroup}
