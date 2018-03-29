@@ -118,6 +118,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1={currentApplicationRate}
               valueToConvert1FieldName={`${PAGE_NAME}ApplicationRate`}
               change={this.props.change}
+              step="0.1"
             />
           </div>
           <div style={{display: 'flex'}}>
@@ -138,6 +139,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1={currentChemicalRate}
               valueToConvert1FieldName={`${PAGE_NAME}ChemicalRate`}
               change={this.props.change}
+              step="0.1"
             />
           </div>
           <div style={{display: 'flex'}}>
@@ -158,6 +160,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1={currentStartingVolume}
               valueToConvert1FieldName={`${PAGE_NAME}StartingVolume`}
               change={this.props.change}
+              step="0.01"
             />
           </div>
           <div style={{display: 'flex'}}>
@@ -198,6 +201,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1={currentPressure}
               valueToConvert1FieldName={`${PAGE_NAME}Pressure`}
               change={this.props.change}
+              step="0.01"
             />
           </div>
           <div style={{marginTop: 15}}>Effective swath</div>
@@ -219,6 +223,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1={currentSwathDistance}
               valueToConvert1FieldName={`${PAGE_NAME}SwathDistance`}
               change={this.props.change}
+              step="0.1"
             />
           </div>
           <div style={{display: 'flex'}}>
@@ -239,6 +244,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1={currentSwathArea}
               valueToConvert1FieldName={`${PAGE_NAME}SwathArea`}
               change={this.props.change}
+              step="0.1"
             />
           </div>
           <LogbookSelectField

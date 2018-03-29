@@ -2,7 +2,9 @@ const validate = values => {
   const errors = {};
 
   const isRequired = (fieldName) => {
-    !values[fieldName] ? errors[fieldName] = 'Required' : null;
+    if (!values[fieldName]) {
+      errors[fieldName] = 'Required';
+    }
   }
 
   // Mission
@@ -123,8 +125,8 @@ const validate = values => {
         batteryErrors.SerialNumber = 'Required';
         batteriesArrayErrors[batteryIndex] = batteryErrors;
       }
-      if (!battery || !battery.Weight) {
-        batteryErrors.Weight = 'Required';
+      if (!battery || !battery.NumOfCells) {
+        batteryErrors.NumOfCells = 'Required';
         batteriesArrayErrors[batteryIndex] = batteryErrors;
       }
       if (!battery || !battery.FullChargeVoltage) {
@@ -163,7 +165,7 @@ const validate = values => {
         sensorsArrayErrors[sensorIndex] = sensorErrors;
       }
       if (sensor.Type) {
-        if (sensor.Type === 5 && !sensorErrors.Other) {
+        if (sensor.Type === 6 && !sensor.Other) {
           sensorErrors.Other = 'Required';
           sensorsArrayErrors[sensorIndex] = sensorErrors;
         }
@@ -230,41 +232,43 @@ const validate = values => {
   isRequired('dataCollection_SwathArea');
   isRequired('dataCollection_ApplicationType');
 
-  // // b4ufly status
-  // isRequired('statusSelect');
-  //
-  // if (values.statusSelect && values.statusSelect == 2) {
-  //   isRequired('airportOperatorContactText');
-  //   isRequired('controlTowerContactText');
-  // }
-  //
-  // isRequired('faaCertText');
-  //
-  // isRequired('preflightRadioButtonGroup');
-  //
-  // if (values.preflightRadioButtonGroup === 'no' && values.permissionRadioButtonGroup === 'permitted') {
-  //   isRequired('permittedByText');
-  // }
-  //
-  // // obstacles present
-  // isRequired('obstaclesSelect');
-  //
-  // // people present
-  // isRequired('peoplePresentRadioButtonGroup');
-  //
-  // if (values.peoplePresentRadioButtonGroup === 'faaCOA') {
-  //   isRequired('faaCOA');
-  // }
-  //
-  // // flight parameters
-  // isRequired('maximumAGLText');
-  // isRequired('minimumAGLText');
-  // isRequired('lookAngleRadioButtonGroup');
-  // isRequired('maximumGroundSpeedRadioButtonGroup');
+  // B4UFLY status
+  isRequired('b4ufly_Status');
+  if (values.b4ufly_Status && values.b4ufly_Status === 2) {
+    isRequired('b4ufly_AirportOperatorContact');
+    isRequired('b4ufly_ControlTowerContact');
+  }
+  isRequired('b4ufly_Options');
+  isRequired('b4ufly_FAACert');
+  isRequired('b4ufly_Preflight');
+  if (values.b4ufly_Preflight && values.b4ufly_Preflight === 'no') {
+    isRequired('b4ufly_Permission');
+    if (values.b4ufly_Permission && values.b4ufly_Permission === 'permitted') {
+      isRequired('b4ufly_PermittedBy');
+    }
+  }
 
-  // payload
+  // Obstacles present
+  isRequired('obstacles_Obstacles');
 
-  // processed
+  // People present
+  isRequired('people_PeoplePresent');
+  if (values.peoplePresentRadioButtonGroup === 'faaCOA') {
+    isRequired('people_FAACOA');
+  }
+
+  // Flight parameters
+  isRequired('flightParameters_AGLMaximum');
+  isRequired('flightParameters_MaximumGroundSpeed');
+  if (values.mission_Type === 2) {
+    isRequired('flightParameters_LookAngle');
+  }
+
+  // Payload
+  console.log(values);
+
+
+  // Processed
 
   return errors;
 }

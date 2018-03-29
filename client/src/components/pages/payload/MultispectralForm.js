@@ -2,7 +2,7 @@ import React from 'react';
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
 
-const PAGE_NAME = 'payload_';
+const PAGE_NAME = 'payload_Sensors';
 
 const UNIT_STYLE = {
   display: 'inline-block', marginRight: 15,
@@ -32,12 +32,13 @@ const TRIGGERING_OPTIONS = [
 
 export default class MultispectralForm extends React.Component {
   render() {
+    const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
         Sensor size
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiHorizontal`}
+            fieldName={`${sensorName}.MultiHorizontal`}
             fieldLabel="Horizontal"
             required={true}
             type="number"
@@ -45,7 +46,7 @@ export default class MultispectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiVertical`}
+            fieldName={`${sensorName}.MultiVertical`}
             fieldLabel="Vertical"
             required={true}
             type="number"
@@ -53,25 +54,26 @@ export default class MultispectralForm extends React.Component {
           />
         </div>
         <LogbookSelectField
-          fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiSizeUnit`}
+          fieldName={`${sensorName}.MultiSizeUnit`}
           fieldLabel="Unit"
           items={IN_AND_MM}
           setDefault={true}
-          valueToConvert1={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].MultiHorizontal : null}
-          valueToConvert2={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].MultiVertical : null}
-          valueToConvert1FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiHorizontal`}
-          valueToConvert2FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiVertical`}
-          change={this.props.change}
+          valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiHorizontal : null}
+          valueToConvert2={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiVertical : null}
+          valueToConvert1FieldName={`${sensorName}.MultiHorizontal`}
+          valueToConvert2FieldName={`${sensorName}.MultiVertical`}
+          change={change}
+          step="0.01"
         />
         <LogbookTextField
-          fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiBands`}
+          fieldName={`${sensorName}.MultiBands`}
           fieldLabel="Number of spectral bands"
           required={true}
           type="number"
         />
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiGSD`}
+            fieldName={`${sensorName}.MultiGSD`}
             fieldLabel="Ground sample distance"
             required={true}
             type="number"
@@ -79,18 +81,19 @@ export default class MultispectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookSelectField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiGSDUnit`}
+            fieldName={`${sensorName}.MultiGSDUnit`}
             fieldLabel="Unit"
             items={IN_AND_CM}
             setDefault={true}
-            valueToConvert1={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].MultiGSD : null}
-            valueToConvert1FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiGSD`}
-            change={this.props.change}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiGSD : null}
+            valueToConvert1FieldName={`${sensorName}.MultiGSD`}
+            change={change}
+            step="0.1"
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiFOV`}
+            fieldName={`${sensorName}.MultiFOV`}
             fieldLabel="Field of view"
             required={true}
             type="number"
@@ -98,26 +101,27 @@ export default class MultispectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookSelectField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiFOVUnit`}
+            fieldName={`${sensorName}.MultiFOVUnit`}
             fieldLabel="Unit"
             items={IN_AND_CM}
             setDefault={true}
-            valueToConvert1={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].MultiFOV : null}
-            valueToConvert1FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiFOV`}
-            change={this.props.change}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiFOV : null}
+            valueToConvert1FieldName={`${sensorName}.MultiFOV`}
+            change={change}
+            step="0.1"
           />
         </div>
         <LogbookSelectField
-          fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiTriggeringOption`}
+          fieldName={`${sensorName}.MultiTriggeringOption`}
           fieldLabel="Triggering option"
           required={true}
           items={TRIGGERING_OPTIONS}
           setDefault={true}
-          change={this.props.change}
+          change={change}
         />
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiWeight`}
+            fieldName={`${sensorName}.MultiWeight`}
             fieldLabel="Weight"
             required={true}
             type="number"
@@ -125,18 +129,19 @@ export default class MultispectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookSelectField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiWeightUnit`}
+            fieldName={`${sensorName}.MultiWeightUnit`}
             fieldLabel="Unit"
             items={OZ_AND_G}
             setDefault={true}
-            valueToConvert1={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].MultiWeight : null}
-            valueToConvert1FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiWeight`}
-            change={this.props.change}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiWeight : null}
+            valueToConvert1FieldName={`${sensorName}.MultiWeight`}
+            change={change}
+            step="0.1"
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiPixelSize`}
+            fieldName={`${sensorName}.MultiPixelSize`}
             fieldLabel="Pixel size (microns)"
             required={true}
             type="number"
@@ -144,7 +149,7 @@ export default class MultispectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiPixelDepth`}
+            fieldName={`${sensorName}.MultiPixelDepth`}
             fieldLabel="Pixel depth"
             required={true}
             type="number"
@@ -152,7 +157,7 @@ export default class MultispectralForm extends React.Component {
           />
         </div>
         <LogbookTextField
-          fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiFrameRate`}
+          fieldName={`${sensorName}.MultiFrameRate`}
           fieldLabel="Frame rate (Hz)"
           required={true}
           type="number"
@@ -160,20 +165,20 @@ export default class MultispectralForm extends React.Component {
         />
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiImageFormat`}
+            fieldName={`${sensorName}.MultiImageFormat`}
             fieldLabel="Image data format"
             required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiVideoFormat`}
+            fieldName={`${sensorName}.MultiVideoFormat`}
             fieldLabel="Video data format"
             required={true}
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiElectronicShutter`}
+            fieldName={`${sensorName}.MultiElectronicShutter`}
             fieldLabel="Electronic shutter"
             required={true}
             type="number"
@@ -181,7 +186,7 @@ export default class MultispectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiGain`}
+            fieldName={`${sensorName}.MultiGain`}
             fieldLabel="Gain selection"
             required={true}
             type="number"
@@ -190,7 +195,7 @@ export default class MultispectralForm extends React.Component {
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiVoltage`}
+            fieldName={`${sensorName}.MultiVoltage`}
             fieldLabel="Voltage requirement (V)"
             required={true}
             type="number"
@@ -198,7 +203,7 @@ export default class MultispectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.MultiPower`}
+            fieldName={`${sensorName}.MultiPower`}
             fieldLabel="Power consumption (W)"
             required={true}
             type="number"

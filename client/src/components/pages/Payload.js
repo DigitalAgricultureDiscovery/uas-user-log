@@ -14,44 +14,78 @@ import ThermalForm       from './payload/ThermalForm';
 
 import validate from '../helpers/validate';
 
-class renderSensors extends React.Component {
+const PAGE_NAME = 'payload_';
+
+class RenderSensors extends React.Component {
+  componentWillMount() {
+    if (this.props.formValues.dataCollection_Sensors && this.props.formValues.dataCollection_Sensors.length > 0) {
+      this.props.formValues.dataCollection_Sensors.forEach((sensor, index) => {
+        this.props.fields.push({});
+      });
+    }
+  }
   render() {
-    const { sensors, change } = this.props;
+    const { fields, change, formValues } = this.props;
     return (
       <ul style={{listStyleType: "none", padding: 0}}>
-        {sensors.map((sensor, index) =>
+        {fields.map((sensor, index) =>
           <li key={index}>
-            {sensor.Type === 1 &&
+            {formValues.dataCollection_Sensors[index].Type === 1 &&
               <div>
                 <strong>Sensor #{index + 1} - RGB</strong><br /><br />
-                <RGBForm index={index} sensor={sensor} change={change} formValues={this.props.formValues} />
+                <RGBForm
+                  sensorName={`${sensor}`}
+                  index={index}
+                  change={change}
+                  formValues={formValues}
+                />
               </div>
             }
-            {sensor.Type === 2 &&
+            {formValues.dataCollection_Sensors[index].Type === 2 &&
               <div>
                 <strong>Sensor #{index + 1} - Multispectral</strong><br /><br />
-                <MultispectralForm index={index} sensor={sensor} change={change} formValues={this.props.formValues} />
+                <MultispectralForm
+                  sensorName={`${sensor}`}
+                  index={index}
+                  change={change}
+                  formValues={formValues}
+                />
               </div>
             }
-            {sensor.Type === 3 &&
+            {formValues.dataCollection_Sensors[index].Type === 3 &&
               <div>
                 <strong>Sensor #{index + 1} - Hyperspectral</strong><br /><br />
-                <HyperspectralForm index={index} sensor={sensor} change={change} formValues={this.props.formValues} />
+                <HyperspectralForm
+                  sensorName={`${sensor}`}
+                  index={index}
+                  change={change}
+                  formValues={formValues}
+                />
               </div>
             }
-            {sensor.Type === 4 &&
+            {formValues.dataCollection_Sensors[index].Type === 4 &&
               <div>
                 <strong>Sensor #{index + 1} - LiDAR</strong><br /><br />
-                <LidarForm index={index} sensor={sensor} change={change} formValues={this.props.formValues} />
+                <LidarForm
+                  sensorName={`${sensor}`}
+                  index={index}
+                  change={change}
+                  formValues={formValues}
+                />
               </div>
             }
-            {sensor.Type === 5 &&
+            {formValues.dataCollection_Sensors[index].Type === 5 &&
               <div>
                 <strong>Sensor #{index + 1} - Thermal</strong><br /><br />
-                <ThermalForm index={index} sensor={sensor} change={change} formValues={this.props.formValues} />
+                <ThermalForm
+                  sensorName={`${sensor}`}
+                  index={index}
+                  change={change}
+                  formValues={formValues}
+                />
               </div>
             }
-            {sensor.Type > 5 &&
+            {formValues.dataCollection_Sensors[index].Type > 5 &&
               <div><strong>Sensor #{index + 1} - Other</strong><br /><br /></div>
             }
           </li>
@@ -59,24 +93,20 @@ class renderSensors extends React.Component {
       </ul>
     )
   }
+
 }
 
 class Payload extends React.Component {
-  componentWillUpdate(nextProps) {
-
-  }
   render() {
     const { handleSubmit, previousPage, formValues } = this.props;
-
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Payload Metadata" />
         <CardText>
           {formValues.dataCollection_Sensors ?
             <FieldArray
-              name="payload"
-              sensors={formValues.dataCollection_Sensors}
-              component={renderSensors}
+              name={`${PAGE_NAME}Sensors`}
+              component={RenderSensors}
               change={this.props.change}
               formValues={formValues}
             />
