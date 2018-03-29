@@ -22,7 +22,7 @@ class YearDatePicker extends React.Component {
   render() {
     return (
       <Field
-        name="yearDatePicker"
+        name={`${PAGE_NAME}YearDate`}
         className={this.props.required ? "required" : null}
         component={DatePicker}
         format={null}

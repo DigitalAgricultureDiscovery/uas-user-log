@@ -9,76 +9,108 @@ const validate = values => {
   isRequired('mission_Type');
 
   // Crop
-  // isRequired('crop_LifeCycle');
-  // isRequired('cropNameText');
-  // isRequired('growthStageText');
-  // isRequired('varietyText');
-  // isRequired('seedSourceText');
-  // isRequired('seedStockText');
-  //
-  // // general
-  // isRequired('flightDatePicker');
-  //
-  // if (!values.flights || !values.flights.length) {
-  //   errors.flights = { _error: 'At least one flight must be entered'}
-  // } else {
-  //   const flightsArrayErrors = [];
-  //   values.flights.forEach((flight, flightIndex) => {
-  //     const flightErrors = {};
-  //     if (!flight || !flight.flightTimeStart) {
-  //       flightErrors.flightTimeStart = 'Required';
-  //       flightsArrayErrors[flightIndex] = flightErrors;
-  //     }
-  //     if (!flight || !flight.flightTimeEnd) {
-  //       flightErrors.flightTimeEnd = 'Required';
-  //       flightsArrayErrors[flightIndex] = flightErrors;
-  //     }
-  //     if (!flight || !flight.flightLatLocation) {
-  //       flightErrors.flightLatLocation = 'Required';
-  //       flightsArrayErrors[flightIndex] = flightErrors;
-  //     }
-  //     if (!flight || !flight.flightLonLocation) {
-  //       flightErrors.flightLonLocation = 'Required';
-  //       flightsArrayErrors[flightIndex] = flightErrors;
-  //     }
-  //   });
-  //   if (flightsArrayErrors.length) {
-  //     errors.flights = flightsArrayErrors;
-  //   }
-  // }
-  //
-  // // team information
-  // if (!values.remotePICs || !values.remotePICs.length) {
-  //   errors.remotePICs = { _error: 'At least one remote PIC must be entered'}
-  // } else {
-  //   const remotePICsArrayErrors = [];
-  //   values.remotePICs.forEach((remotePIC, remotePICIndex) => {
-  //     const remotePICErrors = {};
-  //     if (!remotePIC || !remotePIC.remotePicName) {
-  //       remotePICErrors.remotePicName = 'Required';
-  //       remotePICsArrayErrors[remotePICIndex] = remotePICErrors;
-  //     }
-  //     if (!remotePIC || !remotePIC.remotePicLicense) {
-  //       remotePICErrors.remotePicLicense = 'Required';
-  //       remotePICsArrayErrors[remotePICIndex] = remotePICErrors;
-  //     }
-  //   });
-  //   if (remotePICsArrayErrors.length) {
-  //     errors.remotePICs = remotePICsArrayErrors;
-  //   }
-  // }
-  //
-  // // hardware
-  // isRequired('droneTypeSelect');
-  // isRequired('droneMakeText');
-  // isRequired('droneModelText');
-  // isRequired('droneRegistrationText');
-  // isRequired('remoteChargeTargetText');
-  // isRequired('remoteChargeMinimumText');
-  // isRequired('groundControlChargeTargetText');
-  // isRequired('groundControlChargeMinimumText');
-  //
-  // // battery
+  isRequired('crop_LifeCycle');
+  isRequired('crop_Name');
+  isRequired('crop_GrowthStage');
+  isRequired('crop_Variety');
+  isRequired('crop_SeedSource');
+  isRequired('crop_SeedStock');
+  isRequired('crop_YearDate');
+  isRequired('crop_Rootstock');
+  isRequired('crop_Scion');
+
+  // General
+  isRequired('general_FlightDate');
+  if (!values.general_Flights || !values.general_Flights.length) {
+    errors.general_Flights = { _error: 'At least one flight must be entered'}
+  } else {
+    const flightsArrayErrors = [];
+    values.general_Flights.forEach((flight, flightIndex) => {
+      const flightErrors = {};
+      if (!flight || !flight.Start) {
+        flightErrors.Start = 'Required';
+        flightsArrayErrors[flightIndex] = flightErrors;
+      }
+      if (!flight || !flight.End) {
+        flightErrors.End = 'Required';
+        flightsArrayErrors[flightIndex] = flightErrors;
+      }
+      if (!flight || !flight.Latitude) {
+        flightErrors.Latitude = 'Required';
+        flightsArrayErrors[flightIndex] = flightErrors;
+      }
+      if (!flight || !flight.Longitude) {
+        flightErrors.Longitude = 'Required';
+        flightsArrayErrors[flightIndex] = flightErrors;
+      }
+    });
+    if (flightsArrayErrors.length) {
+      errors.general_Flights = flightsArrayErrors;
+    }
+  }
+
+  // Team information
+  if (!values.team_RemotePICs || !values.team_RemotePICs.length) {
+    errors.team_RemotePICs = { _error: 'At least one remote PIC must be entered'}
+  } else {
+    const remotePICsArrayErrors = [];
+    values.team_RemotePICs.forEach((remotePIC, remotePICIndex) => {
+      const remotePICErrors = {};
+      if (!remotePIC || !remotePIC.Name) {
+        remotePICErrors.Name = 'Required';
+        remotePICsArrayErrors[remotePICIndex] = remotePICErrors;
+      }
+      if (!remotePIC || !remotePIC.License) {
+        remotePICErrors.License = 'Required';
+        remotePICsArrayErrors[remotePICIndex] = remotePICErrors;
+      }
+    });
+    if (remotePICsArrayErrors.length) {
+      errors.team_RemotePICs = remotePICsArrayErrors;
+    }
+  }
+
+  if (values.team_PICs !== undefined) {
+    if (values.team_PICs.length > 0) {
+      const picsArrayErrors = [];
+      values.team_PICs.forEach((pic, picIndex) => {
+        const picErrors = {};
+        if (!pic || !pic.Name) {
+          picErrors.Name = 'Required';
+          picsArrayErrors[picIndex] = picErrors;
+        }
+      });
+      if (picsArrayErrors.length) {
+        errors.team_PICs = picsArrayErrors;
+      }
+    }
+  }
+
+  if (values.team_VOs !== undefined) {
+    if (values.team_VOs.length > 0) {
+      const vosArrayErrors = [];
+      values.team_VOs.forEach((vo, voIndex) => {
+        const voErrors = {};
+        if (!vo || !vo.Name) {
+          voErrors.Name = 'Required';
+          vosArrayErrors[voIndex] = voErrors;
+        }
+      });
+      if (vosArrayErrors.length) {
+        errors.team_VOs = vosArrayErrors;
+      }
+    }
+  }
+
+  // Hardware
+  isRequired('hardware_Type');
+  isRequired('hardware_Registration');
+  isRequired('hardware_RemoteControlChargeTarget');
+  isRequired('hardware_RemoteControlChargeMinimum');
+  isRequired('hardware_GroundControlChargeTarget');
+  isRequired('hardware_GroundControlChargeMinimum');
+
+  // Battery
   isRequired('battery_Used');
   isRequired('battery_OnUAS');
   if (!values.battery_Batteries || !values.battery_Batteries.length) {
@@ -114,11 +146,11 @@ const validate = values => {
       errors.battery_Batteries = { _error: 'Must add the same number of batteries as entered in the "Number of batteries used" field before proceeding.'}
     }
   }
-  //
-  // // flight operation
-  // isRequired('flightModeSelect');
-  //
-  // data collection
+
+  // Flight operation
+  isRequired('flightOperation_Mode');
+
+  // Data collection - Research
   isRequired('dataCollection_SensorsUsed');
   if (!values.dataCollection_Sensors || !values.dataCollection_Sensors.length) {
     errors.dataCollection_Sensors = { _error: 'At least one sensor must be entered'};
@@ -183,7 +215,21 @@ const validate = values => {
       errors.dataCollection_Sensors = { _error: 'Must add the same number of sensors as entered in the "Number of sensors used" field before proceeding.'}
     }
   }
-  //
+
+  // Data collection - Research
+  isRequired('dataCollection_ChemicalType');
+  isRequired('dataCollection_ChemicalOther');
+  isRequired('dataCollection_ApplicationRate');
+  isRequired('dataCollection_ChemicalRate');
+  isRequired('dataCollection_StartingVolume');
+  isRequired('dataCollection_NozzleNumber');
+  isRequired('dataCollection_NozzleType');
+  isRequired('dataCollection_OrificeSize');
+  isRequired('dataCollection_Pressure');
+  isRequired('dataCollection_SwathDistance');
+  isRequired('dataCollection_SwathArea');
+  isRequired('dataCollection_ApplicationType');
+
   // // b4ufly status
   // isRequired('statusSelect');
   //
