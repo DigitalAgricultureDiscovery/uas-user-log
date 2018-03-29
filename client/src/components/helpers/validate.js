@@ -265,8 +265,6 @@ const validate = values => {
   }
 
   // Payload
-  console.log(values);
-
 
   // Processed
 
