@@ -2,7 +2,7 @@ import React from 'react';
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
 
-const PAGE_NAME = 'payload_';
+const PAGE_NAME = 'payload_Sensors';
 
 const UNIT_STYLE = {
   display: 'inline-block', marginRight: 15,
@@ -20,12 +20,13 @@ const OZ_AND_G = [
 
 export default class RGBForm extends React.Component {
   render() {
+    const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
         Sensor size
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBWidth`}
+            fieldName={`${sensorName}.RGBWidth`}
             fieldLabel="Width"
             required={true}
             type="number"
@@ -33,7 +34,7 @@ export default class RGBForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBHeight`}
+            fieldName={`${sensorName}.RGBHeight`}
             fieldLabel="Height"
             required={true}
             type="number"
@@ -41,24 +42,25 @@ export default class RGBForm extends React.Component {
           />
         </div>
         <LogbookSelectField
-          fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBSizeUnit`}
+          fieldName={`${sensorName}.RGBSizeUnit`}
           fieldLabel="Unit"
           items={IN_AND_MM}
           setDefault={true}
-          valueToConvert1={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].RGBWidth : null}
-          valueToConvert2={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].RGBHeight : null}
-          valueToConvert1FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBWidth`}
-          valueToConvert2FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBHeight`}
-          change={this.props.change}
+          valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].RGBWidth : null}
+          valueToConvert2={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].RGBHeight : null}
+          valueToConvert1FieldName={`${sensorName}.RGBWidth`}
+          valueToConvert2FieldName={`${sensorName}.RGBHeight`}
+          change={change}
+          step="0.01"
         />
         <LogbookTextField
-          fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBLensType`}
+          fieldName={`${sensorName}.RGBLensType`}
           fieldLabel="Lens type"
           required={true}
         />
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBWeight`}
+            fieldName={`${sensorName}.RGBWeight`}
             fieldLabel="Weight"
             required={true}
             type="number"
@@ -66,23 +68,24 @@ export default class RGBForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookSelectField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBWeightUnit`}
+            fieldName={`${sensorName}.RGBWeightUnit`}
             fieldLabel="Unit"
             items={OZ_AND_G}
             setDefault={true}
-            valueToConvert1={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].RGBWeight : null}
-            valueToConvert1FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBWeight`}
-            change={this.props.change}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].RGBWeight : null}
+            valueToConvert1FieldName={`${sensorName}.RGBWeight`}
+            change={change}
+            step="0.01"
           />
         </div>
         <LogbookTextField
-          fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBPixelCount`}
+          fieldName={`${sensorName}.RGBPixelCount`}
           fieldLabel="Pixel count"
           required={true}
           type="number"
         />
         <LogbookTextField
-          fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.RGBPixelPitch`}
+          fieldName={`${sensorName}.RGBPixelPitch`}
           fieldLabel="Pixel pitch (microns)"
           required={true}
           type="number"

@@ -92,7 +92,7 @@ class OperationModeSubForm extends React.Component {
         />
         {timeIntervalSelected ?
           <LogbookTextField
-            fieldName={this.props.timeIntervalName}
+            fieldName={this.props.intervalName}
             fieldLabel="Enter time interval"
             required={true}
             type="number"

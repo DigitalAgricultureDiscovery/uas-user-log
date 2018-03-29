@@ -2,7 +2,7 @@ import React from 'react';
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
 
-const PAGE_NAME = 'payload_';
+const PAGE_NAME = 'payload_Sensors';
 
 const UNIT_STYLE = {
   display: 'inline-block', marginRight: 15,
@@ -30,19 +30,20 @@ const OPERATION_MODES = [
 
 export default class HyperspectralForm extends React.Component {
   render() {
+    const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
         <LogbookSelectField
-          fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperOperationMode`}
+          fieldName={`${sensorName}.HyperOperationMode`}
           fieldLabel="Operation mode"
           required={true}
           items={OPERATION_MODES}
           setDefault={true}
-          change={this.props.change}
+          change={change}
         />
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperWeight`}
+            fieldName={`${sensorName}.HyperWeight`}
             fieldLabel="Weight"
             required={true}
             type="number"
@@ -50,31 +51,32 @@ export default class HyperspectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookSelectField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperWeightUnit`}
+            fieldName={`${sensorName}.HyperWeightUnit`}
             fieldLabel="Unit"
             items={OZ_AND_G}
             setDefault={true}
-            valueToConvert1={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].HyperWeight : null}
-            valueToConvert1FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperWeight`}
-            change={this.props.change}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].HyperWeight : null}
+            valueToConvert1FieldName={`${sensorName}.HyperWeight`}
+            change={change}
+            step="0.1"
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperSpatialBands`}
+            fieldName={`${sensorName}.HyperSpatialBands`}
             fieldLabel="Spatial bands"
             required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperSpectralBands`}
+            fieldName={`${sensorName}.HyperSpectralBands`}
             fieldLabel="Spectral bands"
             required={true}
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperFrameRate`}
+            fieldName={`${sensorName}.HyperFrameRate`}
             fieldLabel="Frame rate (Hz)"
             required={true}
             type="number"
@@ -82,7 +84,7 @@ export default class HyperspectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperDispersion`}
+            fieldName={`${sensorName}.HyperDispersion`}
             fieldLabel="Dispersion per pixel"
             required={true}
             type="number"
@@ -91,7 +93,7 @@ export default class HyperspectralForm extends React.Component {
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperFWHM`}
+            fieldName={`${sensorName}.HyperFWHM`}
             fieldLabel="FWHM slit image"
             required={true}
             type="number"
@@ -99,7 +101,7 @@ export default class HyperspectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperLens`}
+            fieldName={`${sensorName}.HyperLens`}
             fieldLabel="Lens"
             required={true}
             type="number"
@@ -108,13 +110,13 @@ export default class HyperspectralForm extends React.Component {
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperStorage`}
+            fieldName={`${sensorName}.HyperStorage`}
             fieldLabel="Storage"
             required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperInterface`}
+            fieldName={`${sensorName}.HyperInterface`}
             fieldLabel="Interface"
             required={true}
             type="number"
@@ -123,7 +125,7 @@ export default class HyperspectralForm extends React.Component {
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperSize`}
+            fieldName={`${sensorName}.HyperSize`}
             fieldLabel="Size (exclusive of GPS unit)"
             required={true}
             type="number"
@@ -131,18 +133,19 @@ export default class HyperspectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookSelectField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperSizeUnit`}
+            fieldName={`${sensorName}.HyperSizeUnit`}
             fieldLabel="Unit"
             items={IN_AND_MM}
             setDefault={true}
-            valueToConvert1={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].HyperSize : null}
-            valueToConvert1FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperSize`}
-            change={this.props.change}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].HyperSize : null}
+            valueToConvert1FieldName={`${sensorName}.HyperSize`}
+            change={change}
+            step="0.1"
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperWeightMinusLens`}
+            fieldName={`${sensorName}.HyperWeightMinusLens`}
             fieldLabel="Weight (without lens)"
             required={true}
             type="number"
@@ -150,13 +153,14 @@ export default class HyperspectralForm extends React.Component {
             style={UNIT_STYLE}
           />
           <LogbookSelectField
-            fieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperWeightMinusLensUnit`}
+            fieldName={`${sensorName}.HyperWeightMinusLensUnit`}
             fieldLabel="Unit"
             items={G_AND_KG}
             setDefault={true}
-            valueToConvert1={this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`] ? this.props.formValues[`${PAGE_NAME}Sensor${this.props.index + 1}`].HyperWeightMinusLens : null}
-            valueToConvert1FieldName={`${PAGE_NAME}Sensor${this.props.index + 1}.HyperWeightMinusLens`}
-            change={this.props.change}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].HyperWeightMinusLens : null}
+            valueToConvert1FieldName={`${sensorName}.HyperWeightMinusLens`}
+            change={change}
+            step="0.1"
           />
         </div>
       </div>

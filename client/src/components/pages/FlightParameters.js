@@ -23,7 +23,6 @@ const FT_AND_M = [
   {value: 2, name: 'm', rate: 0.3048},
 ];
 
-
 class LookAngleRadioButtonGroup extends React.Component {
   render() {
     return (
@@ -98,7 +97,6 @@ class FlightParameters extends React.Component {
               step="0.1"
               style={UNIT_STYLE}
             />
-
             <LogbookTextField
               fieldName={`${PAGE_NAME}AGLMinimum`}
               fieldLabel="Minimum altitude, AGL"
@@ -114,6 +112,7 @@ class FlightParameters extends React.Component {
             valueToConvert1FieldName={`${PAGE_NAME}AGLMaximum`}
             valueToConvert2={currentAGLMinimum}
             valueToConvert2FieldName={`${PAGE_NAME}AGLMinimum`}
+            step="0.1"
             change={this.props.change}
           />
           <br />
