@@ -78,6 +78,7 @@ class Hardware extends React.Component {
           <LogbookSelectField
             fieldName={`${PAGE_NAME}Type`}
             fieldLabel="Type"
+            required={true}
             items={DRONE_TYPES}
             setDefault={false}
           />
