@@ -169,7 +169,10 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
             min="1"
             max="6"
           />
-          <LogbookTextField fieldName={`${battery}.BatteryID`} fieldLabel="Battery ID" required={true} />
+          <LogbookTextField
+            fieldName={`${battery}.BatteryID`}
+            fieldLabel="Battery ID"
+          />
           <BatteryChargeSubForm
             fullChargeName={`${battery}.FullChargeVoltage`}
             dischargeName={`${battery}.DischargeVoltage`}
