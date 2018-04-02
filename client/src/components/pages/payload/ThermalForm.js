@@ -23,7 +23,6 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${sensorName}.ThermalDimensionWidth`}
             fieldLabel="Width"
-            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -31,7 +30,6 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${sensorName}.ThermalDimensionLength`}
             fieldLabel="Length"
-            required={true}
             type="number"
             step="0.1"
           />
@@ -39,14 +37,12 @@ export default class ThermalForm extends React.Component {
         <LogbookTextField
           fieldName={`${sensorName}.ThermalDimensionHeight`}
           fieldLabel="Height"
-          required={true}
           type="number"
           step="0.1"
         />
         <LogbookSelectField
           fieldName={`${sensorName}.ThermalDimensionSizeUnit`}
           fieldLabel="Dimensions Unit"
-          required={true}
           items={IN_AND_MM}
           setDefault={true}
           valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].ThermalDimensionWidth : null}
@@ -62,26 +58,22 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${sensorName}.ThermalSpectralBand`}
             fieldLabel="Spectral band (microns)"
-            required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${sensorName}.ThermalFrameRate`}
             fieldLabel="Frame rate (Hz)"
-            required={true}
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.ThermalImager`}
             fieldLabel="Imager"
-            required={true}
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${sensorName}.ThermalMeasurementAcc`}
             fieldLabel="Measurement accuracy"
-            required={true}
           />
         </div>
         Sensor resolution
@@ -89,7 +81,6 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${sensorName}.ThermalResolutionWidth`}
             fieldLabel="Width"
-            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -97,7 +88,6 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${sensorName}.ThermalResolutionHeight`}
             fieldLabel="Height"
-            required={true}
             type="number"
             step=""
           />
@@ -105,12 +95,10 @@ export default class ThermalForm extends React.Component {
         <LogbookTextField
           fieldName={`${sensorName}.ThermalLens`}
           fieldLabel="Lens"
-          required={true}
         />
         <LogbookTextField
           fieldName={`${sensorName}.ThermalFOV`}
           fieldLabel="Visible camera FOV (degree)"
-          required={true}
           type="number"
           step="0.1"
         />
@@ -119,7 +107,6 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${sensorName}.ThermalVisibleCameraWidth`}
             fieldLabel="Width"
-            required={true}
             type="number"
             step="0.1"
             style={UNIT_STYLE}
@@ -127,7 +114,6 @@ export default class ThermalForm extends React.Component {
           <LogbookTextField
             fieldName={`${sensorName}.ThermalVisibleCameraHeight`}
             fieldLabel="Height"
-            required={true}
             type="number"
             step="0.1"
           />
@@ -135,7 +121,6 @@ export default class ThermalForm extends React.Component {
         <LogbookTextField
           fieldName={`${sensorName}.ThermalVoltage`}
           fieldLabel="Input voltage (V)"
-          required={true}
           type="number"
           step="0.1"
         />

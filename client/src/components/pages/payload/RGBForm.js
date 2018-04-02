@@ -28,7 +28,6 @@ export default class RGBForm extends React.Component {
           <LogbookTextField
             fieldName={`${sensorName}.RGBWidth`}
             fieldLabel="Width"
-            required={true}
             type="number"
             step="0.01"
             style={UNIT_STYLE}
@@ -36,7 +35,6 @@ export default class RGBForm extends React.Component {
           <LogbookTextField
             fieldName={`${sensorName}.RGBHeight`}
             fieldLabel="Height"
-            required={true}
             type="number"
             step="0.01"
           />
@@ -56,13 +54,11 @@ export default class RGBForm extends React.Component {
         <LogbookTextField
           fieldName={`${sensorName}.RGBLensType`}
           fieldLabel="Lens type"
-          required={true}
         />
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.RGBWeight`}
             fieldLabel="Weight"
-            required={true}
             type="number"
             step="0.01"
             style={UNIT_STYLE}
@@ -81,13 +77,11 @@ export default class RGBForm extends React.Component {
         <LogbookTextField
           fieldName={`${sensorName}.RGBPixelCount`}
           fieldLabel="Pixel count"
-          required={true}
           type="number"
         />
         <LogbookTextField
           fieldName={`${sensorName}.RGBPixelPitch`}
           fieldLabel="Pixel pitch (microns)"
-          required={true}
           type="number"
           step="0.1"
         />

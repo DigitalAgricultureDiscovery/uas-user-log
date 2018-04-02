@@ -121,10 +121,6 @@ const validate = values => {
     const batteriesArrayErrors = [];
     values.battery_Batteries.forEach((battery, batteryIndex) => {
       const batteryErrors = {};
-      if (!battery || !battery.SerialNumber) {
-        batteryErrors.SerialNumber = 'Required';
-        batteriesArrayErrors[batteryIndex] = batteryErrors;
-      }
       if (!battery || !battery.NumOfCells) {
         batteryErrors.NumOfCells = 'Required';
         batteriesArrayErrors[batteryIndex] = batteryErrors;
@@ -169,14 +165,6 @@ const validate = values => {
           sensorErrors.Other = 'Required';
           sensorsArrayErrors[sensorIndex] = sensorErrors;
         }
-      }
-      if (!sensor || !sensor.Make) {
-        sensorErrors.Make = 'Required';
-        sensorsArrayErrors[sensorIndex] = sensorErrors;
-      }
-      if (!sensor || !sensor.Model) {
-        sensorErrors.Model = 'Required';
-        sensorsArrayErrors[sensorIndex] = sensorErrors;
       }
       if (!sensor || !sensor.OperationMode) {
         sensorErrors.OperationMode = 'Required';

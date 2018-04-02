@@ -206,8 +206,8 @@ const renderSensors = ({ fields, change, currentSensors, meta: { touched, error,
             change={change}
             currentSensors={currentSensors}
           />
-          <LogbookTextField fieldName={`${sensor}.Make`} fieldLabel="Make" required={true} />
-          <LogbookTextField fieldName={`${sensor}.Model`} fieldLabel="Model" required={true} />
+          <LogbookTextField fieldName={`${sensor}.Make`} fieldLabel="Make" />
+          <LogbookTextField fieldName={`${sensor}.Model`} fieldLabel="Model" />
           <OperationModeSubForm
             modeName={`${sensor}.OperationMode`}
             intervalName={`${sensor}.TimeInterval`}
