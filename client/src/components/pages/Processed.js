@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { FieldArray, getFormValues, reduxForm, formValueSelector } from 'redux-form';
 import LogbookSelectField from '../helpers/LogbookSelectField';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
@@ -31,13 +31,21 @@ class NIIRSStatement extends React.Component {
         The use of small Unmanned Aircraft Systems (sUAS) has been increasing
         in the US National Air Space (NAS). It's increasing use is also
         requiring an objective manner to ascertain quality of data being
-        collected by payload mounted on sUAS. Until small other standard
+        collected by payload mounted on sUAS. Until some other standard
         evolves, the National Imagery Interpretability Rating Scale (NIIRS)
-        is being proposed for assessing performance of sUAS sensors.
+        is being proposed for assessing performance of sUAS sensors.​
       </p>
     )
   }
 }
+
+// class RenderTables extends React.Component {
+//   render() {
+//     return (
+//
+//     )
+//   }
+// }
 
 class Processed extends React.Component {
   constructor(props) {
@@ -98,7 +106,7 @@ class Processed extends React.Component {
   }
 
   render() {
-    const { handleSubmit, previousPage, currentNiirsSensor, currentVisibleSelections } = this.props;
+    const { handleSubmit, previousPage, currentNiirsSensor, currentVisibleSelections, formValues } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Processed" />
@@ -110,11 +118,17 @@ class Processed extends React.Component {
             required={true}
             items={SENSORS}
           />
+          {/* <FieldArray
+            name={`${PAGE_NAME}Tables`}
+            component={RenderTables}
+            change={this.props.change}
+            formValues={formValues}
+          /> */}
           {this.renderSensorGrid(currentNiirsSensor, currentVisibleSelections)}
           <p>
             <strong>Source: </strong>
-            <a href="https://fas.org/irp/imint/niirs.htm" target="_blank" rel="noopener noreferrer">
-              National Image Interpretability Rating Scales
+            <a href="https://fas.org/irp/imint/niirs_c/app2.htm" target="_blank" rel="noopener noreferrer">
+              Civil NIIRS Reference Guide. Appendix II: Additional NIIRS Criteria
             </a>
           </p>
         </CardText>
@@ -149,10 +163,11 @@ export default connect(
   state => {
     const currentNiirsSensor = selector(state, PAGE_NAME + 'NIIRS');
     const currentVisibleSelections = selector(state, PAGE_NAME + 'Visible');
-
+    const formValues = getFormValues('logbook')(state);
     return {
       currentNiirsSensor,
       currentVisibleSelections,
+      formValues,
     }
   }
 )(myReduxForm);
