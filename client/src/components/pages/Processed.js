@@ -54,7 +54,7 @@ class Processed extends React.Component {
     let selectedNames = [];
     selected.forEach(function(row, index) {
       selectedNames.push(`Rating${row}`);
-    })
+    });
     this.props.change(PAGE_NAME + type, selectedNames);
   }
 
