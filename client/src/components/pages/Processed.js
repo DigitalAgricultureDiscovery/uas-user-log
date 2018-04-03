@@ -25,6 +25,21 @@ const SENSORS = [
   // {value: 4, name: 'Radar'},
 ]
 
+class NIIRSStatement extends React.Component {
+  render() {
+    return (
+      <p>
+        The use of small Unmanned Aircraft Systems (sUAS) has been increasing
+        in the US National Air Space (NAS). It's increasing use is also
+        requiring an objective manner to ascertain quality of data being
+        collected by payload mounted on sUAS. Until small other standard
+        evolves, the National Imagery Interpretability Rating Scale (NIIRS)
+        is being proposed for assessing performance of sUAS sensors.
+      </p>
+    )
+  }
+}
+
 class Processed extends React.Component {
   constructor(props) {
     super(props);
@@ -93,6 +108,7 @@ class Processed extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Processed" />
         <CardText>
+          <NIIRSStatement />
           <LogbookSelectField
             fieldName={`${PAGE_NAME}NIIRS`}
             fieldLabel="Select a sensor"

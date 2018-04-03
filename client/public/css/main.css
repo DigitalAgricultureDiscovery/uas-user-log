@@ -49,3 +49,8 @@ body {
   content: " *";
   color: rgb(244, 67, 54);
 }
+
+/* Processed table */
+.processed-table > tr > td > ul {
+  padding-left: 0;
+}
