@@ -24,9 +24,13 @@ class RenderSensors extends React.Component {
 
   componentWillMount() {
     if (this.props.formValues.dataCollection_Sensors && this.props.formValues.dataCollection_Sensors.length > 0) {
-      this.props.formValues.dataCollection_Sensors.forEach((sensor, index) => {
-        this.props.fields.push({});
-      });
+      // Only add new fields if there are more sensors than fields
+      const diff = this.props.formValues.dataCollection_Sensors.length - this.props.fields.length;
+      if (diff > 0) {
+        for (let sensorIndex = 0; sensorIndex < diff; sensorIndex++) {
+          this.props.fields.push({});
+        }
+      }
     }
   }
   render() {
@@ -116,7 +120,7 @@ class Payload extends React.Component {
               formValues={formValues}
             />
           : null}
-          {!formValues.dataCollection_Sensors ? <span>Please <strong>add at least one sensor</strong> during the Planning phase.</span> : null}
+          {!formValues.dataCollection_Sensors ? <span>No sensor added for this mission.</span> : null}
         </CardText>
         <CardActions>
           <FlatButton
