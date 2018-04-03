@@ -33,7 +33,7 @@ class Planning extends React.Component {
   }
 
   render() {
-    const { handleSubmit, previousPage, currentPurpose } = this.props;
+    const { handleSubmit, previousPage, currentPlanningType, currentPurpose } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -45,12 +45,14 @@ class Planning extends React.Component {
             required={true}
             items={PLANNING_TYPES}
           />
-          <LogbookSelectField
-            fieldName={`${PAGE_NAME}Purpose`}
-            fieldLabel="Purpose"
-            required={true}
-            items={PURPOSES}
-          />
+          {currentPlanningType !== 3 &&
+            <LogbookSelectField
+              fieldName={`${PAGE_NAME}Purpose`}
+              fieldLabel="Purpose"
+              required={true}
+              items={PURPOSES}
+            />
+          }
           {currentPurpose === 2 &&
             <LogbookTextField
               fieldName={`${PAGE_NAME}Other`}
