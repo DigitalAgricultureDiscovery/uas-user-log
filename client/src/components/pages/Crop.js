@@ -37,9 +37,9 @@ class AnnualSubForm extends React.Component {
   render() {
     return (
       <div>
-        <LogbookTextField fieldName={`${PAGE_NAME}Variety`} fieldLabel="Variety/Genotype" required={true} />
-        <LogbookTextField fieldName={`${PAGE_NAME}SeedSource`} fieldLabel="Seed source" required={true} />
-        <LogbookTextField fieldName={`${PAGE_NAME}SeedStock`} fieldLabel="Seed stock" required={true} />
+        <LogbookTextField fieldName={`${PAGE_NAME}Variety`} fieldLabel="Variety/Genotype" />
+        <LogbookTextField fieldName={`${PAGE_NAME}SeedSource`} fieldLabel="Seed source" />
+        <LogbookTextField fieldName={`${PAGE_NAME}SeedStock`} fieldLabel="Seed stock" />
       </div>
     )
   }
@@ -49,9 +49,9 @@ class PerennialSubForm extends React.Component {
   render() {
     return (
       <div>
-        <YearDatePicker required={true} />
-        <LogbookTextField fieldName={`${PAGE_NAME}Rootstock`} fieldLabel="Rootstock" required={true} />
-        <LogbookTextField fieldName={`${PAGE_NAME}Scion`} fieldLabel="Scion" required={true} />
+        <YearDatePicker />
+        <LogbookTextField fieldName={`${PAGE_NAME}Rootstock`} fieldLabel="Rootstock" />
+        <LogbookTextField fieldName={`${PAGE_NAME}Scion`} fieldLabel="Scion" />
       </div>
     )
   }
@@ -68,12 +68,11 @@ class Crop extends React.Component {
           <LogbookSelectField
             fieldName={`${PAGE_NAME}LifeCycle`}
             fieldLabel="Crop Life Cycle"
-            required={true}
             items={LIFE_CYCLE_ITEMS}
             setDefault={false}
           />
-          <LogbookTextField fieldName={`${PAGE_NAME}Name`} fieldLabel="Crop name" required={true} />
-          <LogbookTextField fieldName={`${PAGE_NAME}GrowthStage`} fieldLabel="Growth stage" required={true} />
+          <LogbookTextField fieldName={`${PAGE_NAME}Name`} fieldLabel="Crop name" />
+          <LogbookTextField fieldName={`${PAGE_NAME}GrowthStage`} fieldLabel="Growth stage" />
           { currentLifeCycle ? (currentLifeCycle === 1 ? <AnnualSubForm /> : <PerennialSubForm />) : null }
         </CardText>
         <CardActions>

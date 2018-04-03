@@ -247,7 +247,6 @@ class DataCollectionResearch extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}SensorsUsed`}
             fieldLabel="Number of sensors used"
-            required={true}
             type="number"
             min="1"
           />

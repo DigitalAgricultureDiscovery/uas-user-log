@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { FieldArray, reduxForm, getFormValues } from 'redux-form';
 // material-ui elements
@@ -17,6 +18,10 @@ import validate from '../helpers/validate';
 const PAGE_NAME = 'payload_';
 
 class RenderSensors extends React.Component {
+  componentDidUpdate() {
+    ReactDOM.findDOMNode(this).scrollTop = 0;
+  }
+
   componentWillMount() {
     if (this.props.formValues.dataCollection_Sensors && this.props.formValues.dataCollection_Sensors.length > 0) {
       this.props.formValues.dataCollection_Sensors.forEach((sensor, index) => {

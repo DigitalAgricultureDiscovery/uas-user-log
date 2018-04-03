@@ -11,15 +11,15 @@ const validate = values => {
   isRequired('mission_Type');
 
   // Crop
-  isRequired('crop_LifeCycle');
-  isRequired('crop_Name');
-  isRequired('crop_GrowthStage');
-  isRequired('crop_Variety');
-  isRequired('crop_SeedSource');
-  isRequired('crop_SeedStock');
-  isRequired('crop_YearDate');
-  isRequired('crop_Rootstock');
-  isRequired('crop_Scion');
+  // isRequired('crop_LifeCycle');
+  // isRequired('crop_Name');
+  // isRequired('crop_GrowthStage');
+  // isRequired('crop_Variety');
+  // isRequired('crop_SeedSource');
+  // isRequired('crop_SeedStock');
+  // isRequired('crop_YearDate');
+  // isRequired('crop_Rootstock');
+  // isRequired('crop_Scion');
 
   // General
   isRequired('general_FlightDate');
@@ -149,10 +149,11 @@ const validate = values => {
   isRequired('flightOperation_Mode');
 
   // Data collection - Research
-  isRequired('dataCollection_SensorsUsed');
-  if (!values.dataCollection_Sensors || !values.dataCollection_Sensors.length) {
-    errors.dataCollection_Sensors = { _error: 'At least one sensor must be entered'};
-  } else {
+  // isRequired('dataCollection_SensorsUsed');
+  // if (!values.dataCollection_Sensors || !values.dataCollection_Sensors.length) {
+  //   errors.dataCollection_Sensors = { _error: 'At least one sensor must be entered'};
+  // } else {
+  if (values.dataCollection_Sensors) {
     const sensorsArrayErrors = [];
     values.dataCollection_Sensors.forEach((sensor, sensorIndex) => {
       const sensorErrors = {};
