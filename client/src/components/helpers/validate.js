@@ -7,8 +7,8 @@ const validate = values => {
     }
   }
 
-  // Mission
-  isRequired('mission_Type');
+  // Planning
+  isRequired('planning_Type');
 
   // Crop
   // isRequired('crop_LifeCycle');
@@ -249,7 +249,7 @@ const validate = values => {
   // Flight parameters
   isRequired('flightParameters_AGLMaximum');
   isRequired('flightParameters_MaximumGroundSpeed');
-  if (values.mission_Type === 2) {
+  if (values.planning_Type === 2) {
     isRequired('flightParameters_LookAngle');
   }
 

@@ -10,19 +10,19 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 import validate from '../helpers/validate';
 import DefaultInitialValues from '../helpers/DefaultInitialValues';
 
-const PAGE_NAME = 'mission_';
+const PAGE_NAME = 'planning_';
 
-const MISSION_TYPES = [
+const PLANNING_TYPES = [
   // {value: 1, name: 'Teaching/Demonstration'},
   {value: 2, name: 'Research/Production'},
   {value: 3, name: 'Spray application'},
 ];
 
-// Mission card
-class Mission extends React.Component {
+// Planning card
+class Planning extends React.Component {
   componentDidUpdate() {
-    if (this.props.currentMissionType) {
-      this.props.updateMissionType(this.props.currentMissionType);
+    if (this.props.currentPlanningType) {
+      this.props.updateMissionType(this.props.currentPlanningType);
     }
   }
 
@@ -31,13 +31,13 @@ class Mission extends React.Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <CardTitle title="Planning" />
+        <CardTitle title="Planning and Purpose" />
         <CardText>
           <LogbookSelectField
             fieldName={`${PAGE_NAME}Type`}
-            fieldLabel="Mission type"
+            fieldLabel="Planning"
             required={true}
-            items={MISSION_TYPES}
+            items={PLANNING_TYPES}
           />
           <p>All fields marked with a red asterisk <span style={{color: 'rgb(244, 67, 54)'}}>*</span> are required.</p>
         </CardText>
@@ -67,12 +67,12 @@ const myReduxForm = reduxForm({
   enableReinitialize: true,
   keepDirtyOnReinitialize: true,
   validate,
-})(Mission);
+})(Planning);
 
 const selector = formValueSelector('logbook');
 export default connect(
   state => ({
     initialValues: selector(state, 'initialValuesFromJSON') ? selector(state, 'initialValuesFromJSON') : DefaultInitialValues,
-    currentMissionType: selector(state, 'mission_Type'),
+    currentPlanningType: selector(state, 'planning_Type'),
   })
 )(myReduxForm);

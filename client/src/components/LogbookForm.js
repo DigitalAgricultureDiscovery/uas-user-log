@@ -12,7 +12,7 @@ import {
 }                                   from 'material-ui/Stepper';
 // form pages
 import Welcome          from './pages/Welcome';          // page 1
-import Mission          from './pages/Mission';          // page 2
+import Planning         from './pages/Planning';         // page 2
 import Crop             from './pages/Crop';             // page 3
 import General          from './pages/General';          // page 4
 import Team             from './pages/Team';             // page 5
@@ -20,15 +20,15 @@ import Hardware         from './pages/Hardware';         // page 6
 import Battery          from './pages/Battery';          // page 7
 import FlightOperation  from './pages/FlightOperation';  // page 8
 import DataCollectionResearch from './pages/DataCollectionResearch';   // page 9
-import DataCollectionSpray from './pages/DataCollectionSpray';   // page 9
-import B4UFLY           from './pages/B4UFLY';           // page 10
-import Obstacles        from './pages/Obstacles';        // page 11
-import People           from './pages/People';           // page 12
-import FlightParameters from './pages/FlightParameters'; // page 13
-import Weather          from './pages/Weather';          // page 14
-import Payload          from './pages/Payload';          // page 14
-import Processed        from './pages/Processed';        // page 15
-import Finish           from './pages/Finish';           // page 16
+import DataCollectionSpray from './pages/DataCollectionSpray';         // page 10
+import B4UFLY           from './pages/B4UFLY';           // page 11
+import Obstacles        from './pages/Obstacles';        // page 12
+import People           from './pages/People';           // page 13
+import FlightParameters from './pages/FlightParameters'; // page 14
+import Weather          from './pages/Weather';          // page 15
+import Payload          from './pages/Payload';          // page 16
+import Processed        from './pages/Processed';        // page 17
+import Finish           from './pages/Finish';           // page 18
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -49,13 +49,13 @@ class ProgressBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.missionType === 2) {
+    if (nextProps.planningType === 2) {
       if (this.state.completed > 16) {
         this.setState({completed: 16});
       } else {
         this.setState({completed: nextProps.value});
       }
-    } else if (nextProps.missionType === 3) {
+    } else if (nextProps.planningType === 3) {
       if (this.state.completed > 14) {
         this.setState({completed: 14});
       } else {
@@ -65,7 +65,7 @@ class ProgressBar extends React.Component {
   }
 
   render() {
-    const maxValue = this.props.missionType === 2 ? 16 : 14;
+    const maxValue = this.props.planningType === 2 ? 16 : 14;
     return (
       <LinearProgress
         mode="determinate"
@@ -139,14 +139,14 @@ class LogbookForm extends React.Component {
     super(props);
     this.state = {
       pageIndex: 0,
-      missionType: 2,
+      planningType: 2,
       resetStatus: true,
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.clearAndReturn = this.clearAndReturn.bind(this);
     this.stepperChangePage = this.stepperChangePage.bind(this);
-    this.updateMissionType = this.updateMissionType.bind(this);
+    this.updatePlanningType = this.updatePlanningType.bind(this);
   }
 
   nextPage() {
@@ -166,8 +166,8 @@ class LogbookForm extends React.Component {
     this.setState({pageIndex: pageIndex});
   };
 
-  updateMissionType(index) {
-    this.setState({'missionType': index});
+  updatePlanningType(index) {
+    this.setState({'planningType': index});
   };
 
   render() {
@@ -188,8 +188,8 @@ class LogbookForm extends React.Component {
             <Card>
               { pageIndex === 0 && <Welcome onSubmit={this.nextPage} clearAndReturn={this.clearAndReturn} /> }
               { pageIndex === 1 && (
-                <Mission
-                  updateMissionType={this.updateMissionType}
+                <Planning
+                  updatePlanningType={this.updatePlanningType}
                   previousPage={this.previousPage}
                   onSubmit={this.nextPage}
                 />
@@ -231,7 +231,7 @@ class LogbookForm extends React.Component {
                 />
               )}
               { pageIndex === 8 && (
-                this.state.missionType === 2 ?
+                this.state.planningType === 2 ?
                   <DataCollectionResearch
                     previousPage={ this.previousPage }
                     onSubmit={ this.nextPage }
@@ -272,28 +272,28 @@ class LogbookForm extends React.Component {
                   onSubmit={ this.nextPage }
                 />
               )}
-              { this.state.missionType !== 3 && pageIndex === 14 && (
+              { this.state.planningType !== 3 && pageIndex === 14 && (
                 <Payload
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { this.state.missionType !== 3 && pageIndex === 15 && (
+              { this.state.planningType !== 3 && pageIndex === 15 && (
                 <Processed
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
                 />
               )}
-              { (pageIndex === 16 || (this.state.missionType === 3 && pageIndex === 14)) && (
+              { (pageIndex === 16 || (this.state.planningType === 3 && pageIndex === 14)) && (
                 <Finish
                   previousPage={ this.previousPage }
                   clearAndReturn={ this.clearAndReturn }
                 />
               )}
-              <ProgressBar value={pageIndex} missionType={this.state.missionType} />
+              <ProgressBar value={pageIndex} planningType={this.state.planningType} />
             </Card>
           </div>
-          {(this.state.missionType !== 3 && pageIndex > 0) ? <HorizontalNonLinearStepper pageIndex={pageIndex} changePage={this.stepperChangePage} /> : null}
+          {(this.state.planningType !== 3 && pageIndex > 0) ? <HorizontalNonLinearStepper pageIndex={pageIndex} changePage={this.stepperChangePage} /> : null}
         </div>
       </MuiThemeProvider>
     )
