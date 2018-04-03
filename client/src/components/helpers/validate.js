@@ -9,6 +9,10 @@ const validate = values => {
 
   // Planning
   isRequired('planning_Type');
+  isRequired('planning_Purpose');
+  if (values.planning_Purpose === 2) {
+    isRequired('planning_Other');
+  }
 
   // Crop
   // isRequired('crop_LifeCycle');
