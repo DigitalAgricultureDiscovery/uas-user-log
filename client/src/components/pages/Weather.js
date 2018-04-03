@@ -331,7 +331,7 @@ export default connect(
   state => {
     const currentFlights = selector(state, 'general_Flights');
     const currentLocation = selector(state, 'weather_Location');
-    const isSpray = (selector(state, 'mission_Type') === 3 ? true : false);
+    const isSpray = (selector(state, 'planning_Type') === 3 ? true : false);
     return {
       currentFlights,
       currentLocation,

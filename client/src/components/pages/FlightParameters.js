@@ -83,7 +83,7 @@ class ReturnHomeCheckbox extends React.Component {
 
 class FlightParameters extends React.Component {
   render() {
-    const { handleSubmit, previousPage, currentAGLMaximum, currentAGLMinimum, currentMissionType } = this.props;
+    const { handleSubmit, previousPage, currentAGLMaximum, currentAGLMinimum, currentPlanningType } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Flight Parameters" />
@@ -116,7 +116,7 @@ class FlightParameters extends React.Component {
             change={this.props.change}
           />
           <br />
-          {currentMissionType === 2 ? <LookAngleRadioButtonGroup /> : null}
+          {currentPlanningType === 2 ? <LookAngleRadioButtonGroup /> : null}
           <br />
           <MaximumGroundSpeedRadioButtonGroup />
           <br />
@@ -154,11 +154,11 @@ export default connect(
   state => {
     const currentAGLMaximum = selector(state, PAGE_NAME + 'AGLMaximum');
     const currentAGLMinimum = selector(state, PAGE_NAME + 'AGLMinimum');
-    const currentMissionType = selector(state, 'mission_Type');
+    const currentPlanningType = selector(state, 'planning_Type');
     return {
       currentAGLMaximum,
       currentAGLMinimum,
-      currentMissionType,
+      currentPlanningType,
     }
   }
 )(myReduxForm);

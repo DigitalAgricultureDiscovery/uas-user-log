@@ -1,5 +1,5 @@
 const initialValues = {
-  'mission_Type': 2,
+  'planning_Type': 2,
 
   'crop_LifeCycle': 1,
 
