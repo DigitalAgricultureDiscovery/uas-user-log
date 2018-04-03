@@ -150,10 +150,12 @@ class LogbookForm extends React.Component {
   }
 
   nextPage() {
+    window.scrollTo(0, 0);
     this.setState({pageIndex: this.state.pageIndex + 1});
   };
 
   previousPage() {
+    window.scrollTo(0, 0);
     this.setState({pageIndex: this.state.pageIndex - 1});
   };
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import LogbookSelectField from '../helpers/LogbookSelectField';
@@ -45,10 +44,6 @@ class Processed extends React.Component {
     super(props);
     this.updateSelected = this.updateSelected.bind(this);
     this.handleRowSelection = this.handleRowSelection.bind(this);
-  }
-
-  componentDidUpdate() {
-    ReactDOM.findDOMNode(this).scrollTop = 0;
   }
 
   updateSelected(selected) {
