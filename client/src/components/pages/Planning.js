@@ -34,7 +34,7 @@ class Planning extends React.Component {
   }
 
   render() {
-    const { handleSubmit, previousPage, currentPlanningType, currentPurpose } = this.props;
+    const { handleSubmit, previousPage, currentPlanningType } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -50,21 +50,6 @@ class Planning extends React.Component {
             <LogbookTextField
               fieldName={`${PAGE_NAME}OtherPlanning`}
               fieldLabel="Other planning"
-              required={true}
-            />
-          }
-          {currentPlanningType !== 3 &&
-            <LogbookSelectField
-              fieldName={`${PAGE_NAME}Purpose`}
-              fieldLabel="Purpose"
-              required={true}
-              items={PURPOSES}
-            />
-          }
-          {currentPurpose === 2 &&
-            <LogbookTextField
-              fieldName={`${PAGE_NAME}OtherPurpose`}
-              fieldLabel="Other purpose"
               required={true}
             />
           }
@@ -103,6 +88,5 @@ export default connect(
   state => ({
     initialValues: selector(state, 'initialValuesFromJSON') ? selector(state, 'initialValuesFromJSON') : DefaultInitialValues,
     currentPlanningType: selector(state, 'planning_Type'),
-    currentPurpose: selector(state, 'planning_Purpose'),
   })
 )(myReduxForm);
