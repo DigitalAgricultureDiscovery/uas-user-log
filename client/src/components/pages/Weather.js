@@ -207,18 +207,20 @@ class WeatherDisplay extends React.Component {
       currentData: [],
       forecastData: [],
       locationName: '',
+      error: null,
     }
   }
 
   callFetchWeatherData = (location) => {
+    this.setState({error: null});
     fetchWeatherData(location)
       .then(weatherData => {
         this.setState({currentData: weatherData.current});
         this.setState({forecastData: weatherData.forecast.forecastday});
         this.setState({locationName: weatherData.location.name + ', ' + weatherData.location.region})
       })
-      .catch(error => {
-        console.log(error.message);
+      .catch(err => {
+        this.setState({error: err.message});
       });
   }
 
@@ -258,7 +260,11 @@ class WeatherDisplay extends React.Component {
         </div>
       )
     } else {
-      return null;
+      return (
+        <div>
+          {this.state.error ? <p><span className="error-msg">Unable to retrieve forecast.</span></p> : null}
+        </div>
+      );
     }
   }
 }
