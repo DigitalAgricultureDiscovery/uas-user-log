@@ -28,6 +28,8 @@ export default class LogbookTextField extends React.Component {
         className={this.props.required ? "required" : null}
         component={TextField}
         onChange={this.props.handleChange ? this.props.handleChange : null}
+        multiLine={this.props.multiLine ? true : false}
+        rows={this.props.multiLine ? this.props.rows ? this.props.rows : null : 1}
       />;
     return (
       <div style={this.props.style ? this.props.style : {style}}>

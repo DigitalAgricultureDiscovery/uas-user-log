@@ -17,6 +17,7 @@ const PLANNING_TYPES = [
   // {value: 1, name: 'Teaching/Demonstration'},
   {value: 2, name: 'Research/Production'},
   {value: 3, name: 'Spray application'},
+  {value: 4, name: 'Other'},
 ];
 
 const PURPOSES = [
@@ -45,6 +46,13 @@ class Planning extends React.Component {
             required={true}
             items={PLANNING_TYPES}
           />
+          {currentPlanningType === 4 &&
+            <LogbookTextField
+              fieldName={`${PAGE_NAME}OtherPlanning`}
+              fieldLabel="Other planning"
+              required={true}
+            />
+          }
           {currentPlanningType !== 3 &&
             <LogbookSelectField
               fieldName={`${PAGE_NAME}Purpose`}
@@ -55,7 +63,7 @@ class Planning extends React.Component {
           }
           {currentPurpose === 2 &&
             <LogbookTextField
-              fieldName={`${PAGE_NAME}Other`}
+              fieldName={`${PAGE_NAME}OtherPurpose`}
               fieldLabel="Other purpose"
               required={true}
             />

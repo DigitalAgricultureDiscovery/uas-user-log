@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FieldArray, reduxForm, getFormValues } from 'redux-form';
+import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
@@ -105,7 +106,7 @@ class Payload extends React.Component {
     const { handleSubmit, previousPage, formValues } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <CardTitle title="Payload Metadata" />
+        <CardTitle title="Sensor Metadata" />
         <CardText>
           {formValues.dataCollection_Sensors ?
             <FieldArray
@@ -116,6 +117,12 @@ class Payload extends React.Component {
             />
           : null}
           {!formValues.dataCollection_Sensors ? <span>No sensor added for this mission.</span> : null}
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}Notes`}
+            fieldLabel="Additional notes"
+            multiLine={true}
+            rows={2}
+          />
         </CardText>
         <CardActions>
           <FlatButton

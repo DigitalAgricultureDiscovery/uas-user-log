@@ -96,7 +96,7 @@ class PermissionRadioButtonGroup extends React.Component {
           <RadioButton value="permitted" label="Permitted by" />
         </Field>
         {this.props.currentPermission === 'permitted' ?
-          <LogbookTextField fieldName={`${PAGE_NAME}PermittedBy`} fieldLabel="Enter permission contact" required={true} />
+          <LogbookTextField fieldName={`${PAGE_NAME}PermittedBy`} fieldLabel="Permission contact" required={true} />
           : null}
       </div>
     )
