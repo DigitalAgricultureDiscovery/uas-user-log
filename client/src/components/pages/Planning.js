@@ -20,11 +20,6 @@ const PLANNING_TYPES = [
   {value: 4, name: 'Other'},
 ];
 
-const PURPOSES = [
-  {value: 1, name: 'Crop related'},
-  {value: 2, name: 'Other'},
-];
-
 // Planning card
 class Planning extends React.Component {
   componentDidUpdate() {
