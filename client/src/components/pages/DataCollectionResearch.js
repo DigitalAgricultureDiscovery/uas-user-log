@@ -64,7 +64,7 @@ class SensorTypeSubForm extends React.Component {
         {otherSelected ?
           <LogbookTextField
             fieldName={this.props.otherName}
-            fieldLabel="Enter other sensor type"
+            fieldLabel="Other sensor type"
             required={true}
           />
         : null}
@@ -93,7 +93,7 @@ class OperationModeSubForm extends React.Component {
         {timeIntervalSelected ?
           <LogbookTextField
             fieldName={this.props.intervalName}
-            fieldLabel="Enter time interval"
+            fieldLabel="Time interval"
             required={true}
             type="number"
             step="0.01"
@@ -155,7 +155,7 @@ class DataFormatSubForm extends React.Component {
         {otherDataFormatSelected ?
           <LogbookTextField
             fieldName={this.props.otherName}
-            fieldLabel="Enter data format"
+            fieldLabel="Other data format"
             required={true}
           />
         : null}

@@ -83,7 +83,7 @@ class UpdateLocation extends React.Component {
       <div>
         <LogbookTextField
           fieldName={`${PAGE_NAME}Location`}
-          fieldLabel="Enter location"
+          fieldLabel="Location"
           hintText="Lat,Lon; US zip; UK postcode, etc."
           style={UNIT_STYLE}
         />

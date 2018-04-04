@@ -95,7 +95,7 @@ class DataCollectionSpray extends React.Component {
           {chemicalType === otherIndex ?
             <LogbookTextField
               fieldName={`${PAGE_NAME}ChemicalOther`}
-              fieldLabel="Enter other chemical type"
+              fieldLabel="Other chemical type"
               required={true}
             />
             : null
