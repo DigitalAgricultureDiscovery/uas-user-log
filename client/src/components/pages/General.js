@@ -115,16 +115,22 @@ class FlightTimeEndPicker extends React.Component {
 class Location extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      error: null,
+    };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
+    this.setState({error: null});
     locationUtil.clientLocation()
       .then(coords => {
         this.props.change(this.props.fieldLatName, coords.latitude.toFixed(3));
         this.props.change(this.props.fieldLonName, coords.longitude.toFixed(3));
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({error: err.message});
+      });
   }
 
   render() {
@@ -132,6 +138,7 @@ class Location extends React.Component {
       <div>
         <LogbookTextField fieldName={this.props.fieldLatName} fieldLabel="Latitude" required={true} />
         <LogbookTextField fieldName={this.props.fieldLonName} fieldLabel="Longitude" required={true} />
+        {this.state.error ? <p><span className="error-msg">Unable to retrieve location. ERROR: {this.state.error}</span></p> : null}
         <RaisedButton
           onClick={this.handleClick}
           label="My location"
