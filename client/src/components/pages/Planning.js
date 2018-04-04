@@ -38,7 +38,7 @@ class Planning extends React.Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <CardTitle title="Planning and Purpose" />
+        <CardTitle title="Planning" />
         <CardText>
           <LogbookSelectField
             fieldName={`${PAGE_NAME}Type`}
