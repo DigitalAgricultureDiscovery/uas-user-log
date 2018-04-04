@@ -138,7 +138,7 @@ class Location extends React.Component {
       <div>
         <LogbookTextField fieldName={this.props.fieldLatName} fieldLabel="Latitude" required={true} />
         <LogbookTextField fieldName={this.props.fieldLonName} fieldLabel="Longitude" required={true} />
-        {this.state.error ? <p><span className="error-msg">Unable to retrieve location. ERROR: {this.state.error}</span></p> : null}
+        {this.state.error ? <p><span className="error-msg">Unable to retrieve location.</span></p> : null}
         <RaisedButton
           onClick={this.handleClick}
           label="My location"
