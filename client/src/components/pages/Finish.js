@@ -45,7 +45,7 @@ class Finish extends React.Component {
   }
 
   handleClick(event) {
-    const blob = new Blob([JSON.stringify(this.props.formValues)], {type: 'text/json;charset=utf-8'});
+    const blob = new Blob([JSON.stringify(this.props.formValues)], {type: 'application/json;charset=utf-8'});
     saveAs(blob, this.getTimestampFilename());
   }
 

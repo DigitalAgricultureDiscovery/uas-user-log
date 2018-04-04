@@ -7,6 +7,10 @@
 
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
+import React from 'react';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -66,11 +70,14 @@ function registerValidSW(swUrl) {
               // It's the perfect time to display a "New content is
               // available; please refresh." message in your web app.
               console.log('New content is available; please refresh.');
+              <UpdateReady />
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
               console.log('Content is cached for offline use.');
+              console.log('mmk');
+              <OfflineReady />
             }
           }
         };
@@ -113,5 +120,70 @@ export function unregister() {
     navigator.serviceWorker.ready.then(registration => {
       registration.unregister();
     });
+  }
+}
+
+class UpdateReady extends React.Component {
+  state = {
+    open: true,
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  }
+
+  render() {
+    const actions = [
+      <FlatButton
+        label="OK"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleClose}
+      />
+    ];
+    return (
+      <Dialog
+        title="Update"
+        actions={actions}
+        modal={false}
+        open={this.state.open}
+        onRequestClose={this.handleClose}
+      >
+        An update to UAS User Log has been made. Please refresh.
+      </Dialog>
+    )
+  }
+}
+
+class OfflineReady extends React.Component {
+  state = {
+    open: true,
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  }
+
+  render() {
+    const actions = [
+      <FlatButton
+        label="OK"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleClose}
+      />
+    ];
+    return (
+      <Dialog
+        title="Offline access"
+        actions={actions}
+        modal={false}
+        open={this.state.open}
+        onRequestClose={this.handleClose}
+      >
+        UAS User Log is ready for offline use. Note, you may not be able to
+        retrieve location and forecast data while offline.
+      </Dialog>
+    )
   }
 }
