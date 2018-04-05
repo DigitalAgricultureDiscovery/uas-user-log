@@ -36,7 +36,8 @@ class Finish extends React.Component {
     const day = now.getDate().toString().padStart(2, '0');
     const hour = now.getHours().toString().padStart(2, '0');
     const minute = now.getMinutes().toString().padStart(2, '0');
-    const timestamp = year + '-' + month + '-' + day + '_' + hour + minute;
+    const second = now.getSeconds().toString().padStart(2, '0');
+    const timestamp = year + '-' + month + '-' + day + '_' + hour + minute + second;
     return 'uasuserlog_' + timestamp + '.json';
   }
 
