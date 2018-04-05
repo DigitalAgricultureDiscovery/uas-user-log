@@ -8,10 +8,10 @@ const UNIT_STYLE = {
   display: 'inline-block', marginRight: 15,
 }
 
-const IN_AND_CM = [
-  {value: 1, name: 'in', rate: 0.393701},
-  {value: 2, name: 'cm', rate: 2.54},
-];
+// const IN_AND_CM = [
+//   {value: 1, name: 'in', rate: 0.393701},
+//   {value: 2, name: 'cm', rate: 2.54},
+// ];
 
 const IN_AND_MM = [
   {value: 1, name: 'in', rate: 0.0393701},
@@ -79,7 +79,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookSelectField
             fieldName={`${sensorName}.MultiGSDUnit`}
             fieldLabel="Unit"
-            items={IN_AND_CM}
+            items={IN_AND_MM}
             setDefault={true}
             valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiGSD : null}
             valueToConvert1FieldName={`${sensorName}.MultiGSD`}
@@ -98,7 +98,7 @@ export default class MultispectralForm extends React.Component {
           <LogbookSelectField
             fieldName={`${sensorName}.MultiFOVUnit`}
             fieldLabel="Unit"
-            items={IN_AND_CM}
+            items={IN_AND_MM}
             setDefault={true}
             valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiFOV : null}
             valueToConvert1FieldName={`${sensorName}.MultiFOV`}
