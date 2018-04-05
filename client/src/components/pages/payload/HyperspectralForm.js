@@ -18,10 +18,10 @@ const OZ_AND_G = [
   {value: 2, name: 'g', rate: 28.3495},
 ];
 
-const G_AND_KG = [
-  {value: 1, name: 'g', rate: 1000},
-  {value: 2, name: 'kg', rate: 0.001},
-];
+// const G_AND_KG = [
+//   {value: 1, name: 'g', rate: 1000},
+//   {value: 2, name: 'kg', rate: 0.001},
+// ];
 
 const OPERATION_MODES = [
   {value: 1, name: 'Push-broom'},
@@ -143,7 +143,7 @@ export default class HyperspectralForm extends React.Component {
           <LogbookSelectField
             fieldName={`${sensorName}.HyperWeightMinusLensUnit`}
             fieldLabel="Unit"
-            items={G_AND_KG}
+            items={OZ_AND_G}
             setDefault={true}
             valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].HyperWeightMinusLens : null}
             valueToConvert1FieldName={`${sensorName}.HyperWeightMinusLens`}
