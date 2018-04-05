@@ -1,6 +1,12 @@
 import React from 'react';
+import { Field } from 'redux-form'
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
+import IconButton from 'material-ui/IconButton';
+import Paper from 'material-ui/Paper';
+import { Toggle } from 'redux-form-material-ui';
+// material-ui icons
+import HelpIcon from 'material-ui/svg-icons/action/help';
 
 const PAGE_NAME = 'payload_Sensors';
 
@@ -18,7 +24,41 @@ const OZ_AND_G = [
   {value: 2, name: 'g', rate: 28.3495},
 ];
 
+class SaveSensorHelpText extends React.Component {
+  render() {
+    const style = {
+      display: 'inline-block',
+      padding: 5,
+      textAlign: 'left',
+    };
+
+    return (
+      <Paper
+        name={`${this.props.sensorName}.SaveSensorFormHelp`}
+        style={style}
+        zDepth={1}
+      >
+        <div>
+          Placeholder text.
+        </div>
+      </Paper>
+    )
+  }
+}
+
 export default class RGBForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showHelp: false,
+    }
+    this.toggleHelp = this.toggleHelp.bind(this);
+  }
+
+  toggleHelp() {
+    this.setState({showHelp: !this.state.showHelp});
+  }
+
   render() {
     const { index, sensorName, formValues, change } = this.props;
     return (
@@ -85,6 +125,22 @@ export default class RGBForm extends React.Component {
           type="number"
           step="0.1"
         />
+        <Field
+          name={`${sensorName}.RGBSave`}
+          label="Save this sensor"
+          labelPosition="right"
+          component={Toggle}
+          style={{display: 'inline-block', width: 'auto'}}
+        />
+        <IconButton
+          tooltip="Learn about saving"
+          onClick={this.toggleHelp}
+        >
+          <HelpIcon />
+        </IconButton>
+        {this.state.showHelp &&
+          <div><SaveSensorHelpText sensorName={sensorName} /></div>
+        }
       </div>
     )
   }

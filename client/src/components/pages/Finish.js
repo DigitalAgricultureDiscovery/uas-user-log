@@ -46,6 +46,16 @@ class Finish extends React.Component {
   }
 
   handleClick(event) {
+    // Check for saved sensors and send to server
+    if (this.props.formValues.payload_Sensors && this.props.formValues.payload_Sensors.length > 0) {
+      this.props.formValues.payload_Sensors.forEach((sensor, index) => {
+        if (sensor.RGBSave) {
+          // send to server
+          console.log(sensor);
+        }
+      });
+    }
+    // Save form data in json file
     const blob = new Blob([JSON.stringify(this.props.formValues)], {type: 'application/json;charset=utf-8'});
     saveAs(blob, this.getTimestampFilename());
   }
