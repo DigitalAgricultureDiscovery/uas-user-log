@@ -12,6 +12,7 @@ class Header extends React.Component {
         iconElementRight={(
           <address>
             <RaisedButton
+              backgroundColor="#C28E0E"
               href="mailto:uasuserlog@gmail.com?Subject=User%20feedback"
               target="_top"
               label="Feedback"
