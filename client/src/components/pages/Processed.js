@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FieldArray, getFormValues, reduxForm, formValueSelector } from 'redux-form';
+import { reduxForm, formValueSelector } from 'redux-form';
 import LogbookSelectField from '../helpers/LogbookSelectField';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
@@ -38,14 +38,6 @@ class NIIRSStatement extends React.Component {
     )
   }
 }
-
-// class RenderTables extends React.Component {
-//   render() {
-//     return (
-//
-//     )
-//   }
-// }
 
 class Processed extends React.Component {
   constructor(props) {
@@ -106,24 +98,18 @@ class Processed extends React.Component {
   }
 
   render() {
-    const { handleSubmit, previousPage, currentNiirsSensor, currentVisibleSelections, formValues } = this.props;
+    const { handleSubmit, previousPage, currentNiirsSensor, currentVisibleSelections } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Processed" />
         <CardText>
           <NIIRSStatement />
           <LogbookSelectField
-            fieldName={`${PAGE_NAME}NIIRS`}
+            fieldName={`${PAGE_NAME}Sensor`}
             fieldLabel="Select a sensor"
             required={true}
             items={SENSORS}
           />
-          {/* <FieldArray
-            name={`${PAGE_NAME}Tables`}
-            component={RenderTables}
-            change={this.props.change}
-            formValues={formValues}
-          /> */}
           {this.renderSensorGrid(currentNiirsSensor, currentVisibleSelections)}
           <p>
             <strong>Source: </strong>
@@ -161,13 +147,11 @@ const myReduxForm = reduxForm({
 const selector = formValueSelector('logbook');
 export default connect(
   state => {
-    const currentNiirsSensor = selector(state, PAGE_NAME + 'NIIRS');
+    const currentNiirsSensor = selector(state, PAGE_NAME + 'Sensor');
     const currentVisibleSelections = selector(state, PAGE_NAME + 'Visible');
-    const formValues = getFormValues('logbook')(state);
     return {
       currentNiirsSensor,
       currentVisibleSelections,
-      formValues,
     }
   }
 )(myReduxForm);

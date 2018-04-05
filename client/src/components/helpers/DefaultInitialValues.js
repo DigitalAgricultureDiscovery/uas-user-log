@@ -33,7 +33,7 @@ const initialValues = {
 
   'people_PeoplePresent': 'no',
 
-  'processed_NIIRS': 1,
+  'processed_Sensor': 1,
 }
 
 module.exports = initialValues;
