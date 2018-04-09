@@ -7,6 +7,7 @@ import Paper from 'material-ui/Paper';
 import { Toggle } from 'redux-form-material-ui';
 // material-ui icons
 import HelpIcon from 'material-ui/svg-icons/action/help';
+import communitySensors from '../../helpers/communitySensors';
 
 const PAGE_NAME = 'payload_Sensors';
 
@@ -55,6 +56,22 @@ export default class RGBForm extends React.Component {
     this.toggleHelp = this.toggleHelp.bind(this);
   }
 
+  componentWillMount() {
+    if (this.props.formValues.dataCollection_Sensors[this.props.index].CommunitySensors) {
+      if (this.props.formValues.dataCollection_Sensors[this.props.index].Type === 1) {
+        const sensorIndex = this.props.formValues.dataCollection_Sensors[this.props.index].CommunitySensors;
+        const sensorData = communitySensors.rgb()[sensorIndex - 1];
+        const sensorName = this.props.sensorName;
+        this.props.change(`${sensorName}.RGBWidth`, sensorData.width);
+        this.props.change(`${sensorName}.RGBHeight`, sensorData.height);
+        this.props.change(`${sensorName}.RGBLensType`, sensorData.lensType);
+        this.props.change(`${sensorName}.RGBWeight`, sensorData.weight);
+        this.props.change(`${sensorName}.RGBPixelCount`, sensorData.pixelCount);
+        this.props.change(`${sensorName}.RGBPixelPitch`, sensorData.pixelPitch);
+      }
+    }
+  }
+
   toggleHelp() {
     this.setState({showHelp: !this.state.showHelp});
   }
@@ -63,6 +80,20 @@ export default class RGBForm extends React.Component {
     const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
+        <LogbookTextField
+          fieldName={`${sensorName}.RGBMake`}
+          fieldLabel="Make"
+          setDefault={true}
+          defaultValue={formValues.dataCollection_Sensors[index].Make}
+          change={change}
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.RGBModel`}
+          fieldLabel="Model"
+          setDefault={true}
+          defaultValue={formValues.dataCollection_Sensors[index].Model}
+          change={change}
+        />
         Sensor size
         <div style={{display: 'flex'}}>
           <LogbookTextField
@@ -123,17 +154,17 @@ export default class RGBForm extends React.Component {
           fieldName={`${sensorName}.RGBPixelPitch`}
           fieldLabel="Pixel pitch (microns)"
           type="number"
-          step="0.1"
+          step="0.01"
         />
         <Field
           name={`${sensorName}.RGBSave`}
-          label="Save this sensor"
+          label="Share this sensor with community"
           labelPosition="right"
           component={Toggle}
           style={{display: 'inline-block', width: 'auto'}}
         />
         <IconButton
-          tooltip="Learn about saving"
+          tooltip="Learn about the benefits"
           onClick={this.toggleHelp}
         >
           <HelpIcon />

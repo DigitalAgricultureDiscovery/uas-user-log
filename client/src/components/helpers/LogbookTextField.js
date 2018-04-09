@@ -7,6 +7,13 @@ const style = {
 };
 
 export default class LogbookTextField extends React.Component {
+  componentWillMount() {
+    // Select first menu item as default if 'setDefault' true
+    if (this.props.setDefault) {
+      this.props.change(this.props.fieldName, this.props.defaultValue);
+    }
+  }
+
   render() {
     const form = this.props.type ?
       // Number type

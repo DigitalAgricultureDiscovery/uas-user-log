@@ -22,6 +22,20 @@ class IOSHelp extends React.Component {
   }
 }
 
+async function saveSensor(sensor) {
+  console.log('saveSensor', sensor);
+  const response = await fetch('/api/save', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(sensor),
+  });
+  const data = await response.json();
+  return data;
+}
+
 class Finish extends React.Component {
   constructor(props) {
     super(props);
@@ -49,9 +63,16 @@ class Finish extends React.Component {
     // Check for saved sensors and send to server
     if (this.props.formValues.payload_Sensors && this.props.formValues.payload_Sensors.length > 0) {
       this.props.formValues.payload_Sensors.forEach((sensor, index) => {
+        console.log('sensor: ', sensor);
         if (sensor.RGBSave) {
           // send to server
-          console.log(sensor);
+          saveSensor(sensor)
+            .then(data => {
+              console.log(data);
+            })
+            .catch(err => {
+              console.log(err.message);
+            });
         }
       });
     }
