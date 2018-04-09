@@ -30,6 +30,7 @@ export default class LogbookSelectField extends React.Component {
   }
   handleChange(event, newValue, oldValue) {
     if (this.props.change) {
+      // Unit conversions
       if (this.props.valueToConvert1) {
         // Convert value after unit change
         const convertedValue1 = this.precisionRound(this.props.valueToConvert1 * this.props.items[newValue - 1].rate);
@@ -47,6 +48,41 @@ export default class LogbookSelectField extends React.Component {
         const convertedValue3 = this.precisionRound(this.props.valueToConvert3 * this.props.items[newValue - 1].rate);
         // Update store with converted value
         this.props.change(this.props.valueToConvert3FieldName, convertedValue3);
+      }
+
+      // Generic sensor changes
+      if (this.props.communitySensorsFieldName && this.props.communitySensors && this.props.genericTypeChange) {
+        // Sensor type changed - reset community sensors, make, and model
+        this.props.change(this.props.communitySensorsFieldName, null);
+        this.props.change(this.props.makeFieldName, '');
+        this.props.change(this.props.modelFieldName, '');
+        // Update community sensors list based on selected sensor type
+        if (newValue === 1) {
+          if (this.props.communitySensors.rgb()) {
+            let communityRGBSensors = [];
+            communityRGBSensors.push({value: null, name: ''});
+            this.props.communitySensors.rgb().forEach(function(sensor, index) {
+              communityRGBSensors.push({
+                value: index + 1,
+                name: sensor.make + ' ' + sensor.model,
+              });
+            });
+            this.props.updateCommunitySensors(communityRGBSensors);
+          }
+        } else {
+          this.props.updateCommunitySensors([]);
+        }
+      }
+      // Community sensor changes
+      if (this.props.makeFieldName && this.props.modelFieldName && this.props.communitySensors && this.props.communitySensorChange) {
+        // Set make and model
+        if (newValue > 0 && this.props.communitySensors.length > 0) {
+          this.props.change(this.props.makeFieldName, this.props.communitySensors[newValue - 1].make);
+          this.props.change(this.props.modelFieldName, this.props.communitySensors[newValue - 1].model);
+        } else {
+          this.props.change(this.props.makeFieldName, '');
+          this.props.change(this.props.modelFieldName, '');
+        }
       }
     }
   }

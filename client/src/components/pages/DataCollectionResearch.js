@@ -15,6 +15,7 @@ import DeveloperBoardIcon from 'material-ui/svg-icons/hardware/developer-board';
 import {red500} from 'material-ui/styles/colors';
 
 import validate from '../helpers/validate';
+import communitySensors from '../helpers/communitySensors';
 
 const PAGE_NAME = 'dataCollection_';
 
@@ -45,22 +46,65 @@ const DATA_FORMATS = [
 ];
 
 class SensorTypeSubForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      communitySensors: [],
+    };
+    this.updateCommunitySensors = this.updateCommunitySensors.bind(this);
+  }
   componentWillMount() {
     if (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length < 1) {
       this.props.change(this.props.typeName, 1);
+      if (communitySensors.rgb()) {
+        let communityRGBSensors = [{value: null, name: ''}];
+
+        communitySensors.rgb().forEach(function(sensor, index) {
+          communityRGBSensors.push({
+            value: index + 1,
+            name: sensor.make + ' ' + sensor.model,
+          });
+        });
+        this.setState({communitySensors: communityRGBSensors});
+      }
     }
   }
+
+  updateCommunitySensors(sensors) {
+    this.setState({communitySensors: sensors});
+  }
+
   render() {
     const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].Type === 6 ? true : false);
     return (
       <div>
-        <LogbookSelectField
-          fieldName={this.props.typeName}
-          fieldLabel="Type of sensor"
-          required={true}
-          items={SENSORS}
-          setDefault={false}
-        />
+        <div style={{display: 'flex'}}>
+          <LogbookSelectField
+            fieldName={this.props.typeName}
+            fieldLabel="Type of sensor"
+            required={true}
+            items={SENSORS}
+            change={this.props.change}
+            communitySensors={communitySensors}
+            communitySensorsFieldName={this.props.communityName}
+            makeFieldName={this.props.makeName}
+            modelFieldName={this.props.modelName}
+            updateCommunitySensors={this.updateCommunitySensors}
+            genericTypeChange={true}
+            setDefault={false}
+          />&nbsp;
+          <LogbookSelectField
+            fieldName={this.props.communityName}
+            fieldLabel="Community sensor"
+            items={this.state.communitySensors}
+            change={this.props.change}
+            communitySensors={communitySensors.rgb()}
+            makeFieldName={this.props.makeName}
+            modelFieldName={this.props.modelName}
+            communitySensorChange={true}
+            setDefault={false}
+          />
+        </div>
         {otherSelected ?
           <LogbookTextField
             fieldName={this.props.otherName}
@@ -202,6 +246,9 @@ const renderSensors = ({ fields, change, currentSensors, meta: { touched, error,
           <SensorTypeSubForm
             typeName={`${sensor}.Type`}
             otherName={`${sensor}.Other`}
+            communityName={`${sensor}.CommunitySensors`}
+            makeName={`${sensor}.Make`}
+            modelName={`${sensor}.Model`}
             sensorIndex={index}
             change={change}
             currentSensors={currentSensors}
