@@ -173,7 +173,6 @@ class LogbookForm extends React.Component {
   };
 
   render() {
-    // const { onSubmit } = this.props;
     const { pageIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
     const divStyle = {
