@@ -2,8 +2,8 @@ import React from 'react';
 import { Field } from 'redux-form'
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
+import SaveSensorHelp from '../../helpers/SaveSensorHelp';
 import IconButton from 'material-ui/IconButton';
-import Paper from 'material-ui/Paper';
 import { Toggle } from 'redux-form-material-ui';
 // material-ui icons
 import HelpIcon from 'material-ui/svg-icons/action/help';
@@ -25,28 +25,6 @@ const OZ_AND_G = [
   {value: 2, name: 'g', rate: 28.3495},
 ];
 
-class SaveSensorHelpText extends React.Component {
-  render() {
-    const style = {
-      display: 'inline-block',
-      padding: 5,
-      textAlign: 'left',
-    };
-
-    return (
-      <Paper
-        name={`${this.props.sensorName}.SaveSensorFormHelp`}
-        style={style}
-        zDepth={1}
-      >
-        <div>
-          Placeholder text.
-        </div>
-      </Paper>
-    )
-  }
-}
-
 export default class RGBForm extends React.Component {
   constructor(props) {
     super(props);
@@ -57,11 +35,13 @@ export default class RGBForm extends React.Component {
   }
 
   componentWillMount() {
-    if (this.props.formValues.dataCollection_Sensors[this.props.index].CommunitySensors) {
-      if (this.props.formValues.dataCollection_Sensors[this.props.index].Type === 1) {
-        const sensorIndex = this.props.formValues.dataCollection_Sensors[this.props.index].CommunitySensors;
+    // Determine if any community sensors were used
+    const { formValues, index, sensorName } = this.props;
+    if (formValues.dataCollection_Sensors[index].CommunitySensors) {
+      if (formValues.dataCollection_Sensors[index].Type === 1) {
+        const sensorIndex = formValues.dataCollection_Sensors[index].CommunitySensors;
         const sensorData = communitySensors.rgb()[sensorIndex - 1];
-        const sensorName = this.props.sensorName;
+        // Initial form with specs from community sensor
         this.props.change(`${sensorName}.RGBWidth`, sensorData.width);
         this.props.change(`${sensorName}.RGBHeight`, sensorData.height);
         this.props.change(`${sensorName}.RGBLensType`, sensorData.lensType);
@@ -170,7 +150,7 @@ export default class RGBForm extends React.Component {
           <HelpIcon />
         </IconButton>
         {this.state.showHelp &&
-          <div><SaveSensorHelpText sensorName={sensorName} /></div>
+          <div><SaveSensorHelp sensorName={sensorName} /></div>
         }
       </div>
     )

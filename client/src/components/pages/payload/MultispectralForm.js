@@ -1,6 +1,7 @@
 import React from 'react';
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
+import communitySensors from '../../helpers/communitySensors';
 
 const PAGE_NAME = 'payload_Sensors';
 
@@ -31,10 +32,50 @@ const TRIGGERING_OPTIONS = [
 ];
 
 export default class MultispectralForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showHelp: false,
+    }
+    this.toggleHelp = this.toggleHelp.bind(this);
+  }
+
+  componentWillMount() {
+    // Determine if any community sensors were used
+    const { formValues, index, sensorName } = this.props;
+    if (formValues.dataCollection_Sensors[index].CommunitySensors) {
+      if (formValues.dataCollection_Sensors[index].Type === 2) {
+        const sensorIndex = formValues.dataCollection_Sensors[index].CommunitySensors;
+        const sensorData = communitySensors.rgb()[sensorIndex - 1];
+        // Initial form with specs from community sensor
+        // this.props.change(`${sensorName}.MultiHorizontal`, sensorData.horizontal);
+
+      }
+    }
+  }
+
+  toggleHelp() {
+    this.setState({showHelp: !this.state.showHelp});
+  }
+
   render() {
     const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiMake`}
+          fieldLabel="Make"
+          setDefault={true}
+          defaultValue={formValues.dataCollection_Sensors[index].Make}
+          change={change}
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiModel`}
+          fieldLabel="Model"
+          setDefault={true}
+          defaultValue={formValues.dataCollection_Sensors[index].Model}
+          change={change}
+        />
         Sensor size
         <div style={{display: 'flex'}}>
           <LogbookTextField
