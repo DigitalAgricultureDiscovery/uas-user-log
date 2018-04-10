@@ -138,7 +138,7 @@ class LogbookForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageIndex: 0,
+      pageIndex: 8,
       planningType: 2,
       resetStatus: true,
     };

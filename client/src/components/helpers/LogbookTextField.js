@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 
-const style = {
+const containerStyle = {
   display: 'block',
 };
 
@@ -27,6 +27,7 @@ export default class LogbookTextField extends React.Component {
         step={this.props.step}
         min={this.props.min ? this.props.min : "0"}
         onChange={this.props.handleChange ? this.props.handleChange : null}
+        style={this.props.style ? this.props.style : null}
       /> :
       // String type
       <Field
@@ -37,9 +38,10 @@ export default class LogbookTextField extends React.Component {
         onChange={this.props.handleChange ? this.props.handleChange : null}
         multiLine={this.props.multiLine ? true : false}
         rows={this.props.multiLine ? this.props.rows ? this.props.rows : null : 1}
+        style={this.props.style ? this.props.style : null}
       />;
     return (
-      <div style={this.props.style ? this.props.style : {style}}>
+      <div style={this.props.containerStyle ? this.props.containeStyle : {containerStyle}}>
         {form}
       </div>
     )

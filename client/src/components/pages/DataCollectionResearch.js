@@ -50,10 +50,13 @@ class SensorTypeSubForm extends React.Component {
     super(props);
     this.state = {
       communitySensors: [],
+      sensorType: 1,
     };
     this.updateCommunitySensors = this.updateCommunitySensors.bind(this);
   }
+
   componentWillMount() {
+    // Populate community sensors list with RGB sensors (initial default)
     if (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length < 1) {
       this.props.change(this.props.typeName, 1);
       if (communitySensors.rgb()) {
@@ -70,12 +73,14 @@ class SensorTypeSubForm extends React.Component {
     }
   }
 
-  updateCommunitySensors(sensors) {
+  updateCommunitySensors(sensors, type) {
     this.setState({communitySensors: sensors});
+    this.setState({sensorType: type});
   }
 
   render() {
     const otherSelected = (Object.keys(this.props.currentSensors[this.props.sensorIndex]).length > 0 & this.props.currentSensors[this.props.sensorIndex].Type === 6 ? true : false);
+
     return (
       <div>
         <div style={{display: 'flex'}}>
@@ -85,24 +90,20 @@ class SensorTypeSubForm extends React.Component {
             required={true}
             items={SENSORS}
             change={this.props.change}
-            communitySensors={communitySensors}
+            updateCommunitySensors={this.updateCommunitySensors}
             communitySensorsFieldName={this.props.communityName}
             makeFieldName={this.props.makeName}
             modelFieldName={this.props.modelName}
-            updateCommunitySensors={this.updateCommunitySensors}
-            genericTypeChange={true}
-            setDefault={false}
-          />&nbsp;
+            style={UNIT_STYLE}
+          />
           <LogbookSelectField
             fieldName={this.props.communityName}
             fieldLabel="Community sensor"
             items={this.state.communitySensors}
             change={this.props.change}
-            communitySensors={communitySensors.rgb()}
+            sensorType={this.state.sensorType}
             makeFieldName={this.props.makeName}
             modelFieldName={this.props.modelName}
-            communitySensorChange={true}
-            setDefault={false}
           />
         </div>
         {otherSelected ?
