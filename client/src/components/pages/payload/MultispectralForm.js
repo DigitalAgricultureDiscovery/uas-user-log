@@ -1,12 +1,46 @@
 import React from 'react';
+import { Field } from 'redux-form'
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
+import SaveSensorHelp from '../../helpers/SaveSensorHelp';
+import IconButton from 'material-ui/IconButton';
+import { Toggle } from 'redux-form-material-ui';
+// material-ui icons
+import HelpIcon from 'material-ui/svg-icons/action/help';
 import communitySensors from '../../helpers/communitySensors';
 
 const PAGE_NAME = 'payload_Sensors';
 
 const UNIT_STYLE = {
   display: 'inline-block', marginRight: 15,
+}
+
+const STYLES = {
+  dimensions: {
+    marginRight: 15,
+    width: 100,
+  },
+  divider: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  imageSensor: {
+    marginRight: 15,
+    width: 128,
+  },
+  makemodel: {
+    marginRight: 15,
+    width: 156,
+  },
+  subheader: {
+    paddingLeft: 0,
+    marginTop: 15,
+  },
+  unit: {
+    display: 'inline-block', marginRight: 15,
+  },
 }
 
 // const IN_AND_CM = [
@@ -31,6 +65,45 @@ const TRIGGERING_OPTIONS = [
   {value: 4, name: 'Manual capture mode'}
 ];
 
+// class TriggeringOptionsSelect extends React.Component {
+//   selectionRenderer = (values) => {
+//     switch (values.length) {
+//       case 0:
+//         return '';
+//       case 1:
+//         return TRIGGERING_OPTIONS[values[0] - 1].name;
+//       default:
+//         return `${values.length} options selected`;
+//     }
+//   }
+//
+//   menuItems (options) {
+//     return options.map((option) => (
+//       <MenuItem
+//         key={option.value}
+//         insetChildren={true}
+//         value={option.value}
+//         checked={this.props.selectedOptions.indexOf(option.value) > -1}
+//         primaryText={option.name}
+//       />
+//     ));
+//   }
+//
+//   render() {
+//     return (
+//       <Field
+//         name={`${sensorName}.MultiTriggeringOption`}
+//         component={SelectField}
+//         floatingLabelText="Select one or more"
+//         multiple={true}
+//         selectionRenderer={this.selectionRenderer}
+//       >
+//           {this.menuItems(TRIGGERING_OPTIONS)}
+//       </Field>
+//     )
+//   }
+// }
+
 export default class MultispectralForm extends React.Component {
   constructor(props) {
     super(props);
@@ -46,10 +119,25 @@ export default class MultispectralForm extends React.Component {
     if (formValues.dataCollection_Sensors[index].CommunitySensors) {
       if (formValues.dataCollection_Sensors[index].Type === 2) {
         const sensorIndex = formValues.dataCollection_Sensors[index].CommunitySensors;
-        const sensorData = communitySensors.rgb()[sensorIndex - 1];
+        const sensorData = communitySensors.multi()[sensorIndex - 1];
         // Initial form with specs from community sensor
-        // this.props.change(`${sensorName}.MultiHorizontal`, sensorData.horizontal);
-
+        this.props.change(`${sensorName}.MultiWidth`, sensorData.width);
+        this.props.change(`${sensorName}.MultiHeight`, sensorData.height);
+        this.props.change(`${sensorName}.MultiDepth`, sensorData.depth);
+        this.props.change(`${sensorName}.MultiWeight`, sensorData.weight);
+        this.props.change(`${sensorName}.MultiBands`, sensorData.bands);
+        this.props.change(`${sensorName}.MultiGSD`, sensorData.gsd);
+        this.props.change(`${sensorName}.MultiHFOV`, sensorData.hfov);
+        // this.props.change(`${sensorName}.MultiTriggeringOption`, sensorData.triggeringOptions);
+        this.props.change(`${sensorName}.MultiPixelSize`, sensorData.pixelSize);
+        this.props.change(`${sensorName}.MultiPixelDepth`, sensorData.pixelDepth);
+        this.props.change(`${sensorName}.MultiFrameRate`, sensorData.frameRate);
+        this.props.change(`${sensorName}.MultiImageFormat`, sensorData.imageFormat);
+        this.props.change(`${sensorName}.MultiVideoFormat`, sensorData.videoFormat);
+        this.props.change(`${sensorName}.MultiElectronicShutter`, sensorData.shutter);
+        this.props.change(`${sensorName}.MultiGain`, sensorData.gain);
+        this.props.change(`${sensorName}.MultiVoltage`, sensorData.voltage);
+        this.props.change(`${sensorName}.MultiPower`, sensorData.power);
       }
     }
   }
@@ -79,31 +167,58 @@ export default class MultispectralForm extends React.Component {
         Sensor size
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${sensorName}.MultiHorizontal`}
-            fieldLabel="Horizontal"
+            fieldName={`${sensorName}.MultiWidth`}
+            fieldLabel="Width"
             type="number"
             step="0.01"
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${sensorName}.MultiVertical`}
-            fieldLabel="Vertical"
+            fieldName={`${sensorName}.MultiHeight`}
+            fieldLabel="Height"
             type="number"
             step="0.01"
           />
         </div>
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiDepth`}
+          fieldLabel="Depth"
+          type="number"
+          step="0.01"
+        />
         <LogbookSelectField
           fieldName={`${sensorName}.MultiSizeUnit`}
           fieldLabel="Unit"
           items={IN_AND_MM}
           setDefault={true}
-          valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiHorizontal : null}
-          valueToConvert2={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiVertical : null}
-          valueToConvert1FieldName={`${sensorName}.MultiHorizontal`}
-          valueToConvert2FieldName={`${sensorName}.MultiVertical`}
+          valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiWidth : null}
+          valueToConvert2={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiHeight : null}
+          valueToConvert3={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiDepth : null}
+          valueToConvert1FieldName={`${sensorName}.MultiWidth`}
+          valueToConvert2FieldName={`${sensorName}.MultiHeight`}
+          valueToConvert3FieldName={`${sensorName}.MultiDepth`}
           change={change}
           step="0.01"
         />
+        <div style={{display: 'flex'}}>
+          <LogbookTextField
+            fieldName={`${sensorName}.MultiWeight`}
+            fieldLabel="Weight"
+            type="number"
+            step="0.1"
+            style={UNIT_STYLE}
+          />
+          <LogbookSelectField
+            fieldName={`${sensorName}.MultiWeightUnit`}
+            fieldLabel="Unit"
+            items={OZ_AND_G}
+            setDefault={true}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiWeight : null}
+            valueToConvert1FieldName={`${sensorName}.MultiWeight`}
+            change={change}
+            step="0.1"
+          />
+        </div>
         <LogbookTextField
           fieldName={`${sensorName}.MultiBands`}
           fieldLabel="Number of spectral bands"
@@ -130,19 +245,19 @@ export default class MultispectralForm extends React.Component {
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${sensorName}.MultiFOV`}
-            fieldLabel="Field of view"
+            fieldName={`${sensorName}.MultiHFOV`}
+            fieldLabel="Horizontal Field of View"
             type="number"
             step="0.1"
             style={UNIT_STYLE}
           />
           <LogbookSelectField
-            fieldName={`${sensorName}.MultiFOVUnit`}
+            fieldName={`${sensorName}.MultiHFOVUnit`}
             fieldLabel="Unit"
             items={IN_AND_MM}
             setDefault={true}
-            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiFOV : null}
-            valueToConvert1FieldName={`${sensorName}.MultiFOV`}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiHFOV : null}
+            valueToConvert1FieldName={`${sensorName}.MultiHFOV`}
             change={change}
             step="0.1"
           />
@@ -154,25 +269,6 @@ export default class MultispectralForm extends React.Component {
           setDefault={true}
           change={change}
         />
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.MultiWeight`}
-            fieldLabel="Weight"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookSelectField
-            fieldName={`${sensorName}.MultiWeightUnit`}
-            fieldLabel="Unit"
-            items={OZ_AND_G}
-            setDefault={true}
-            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiWeight : null}
-            valueToConvert1FieldName={`${sensorName}.MultiWeight`}
-            change={change}
-            step="0.1"
-          />
-        </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.MultiPixelSize`}
@@ -235,6 +331,23 @@ export default class MultispectralForm extends React.Component {
             step="0.1"
           />
         </div>
+        <Field
+          name={`${sensorName}.MultiSave`}
+          label="Share this sensor with community"
+          labelPosition="right"
+          component={Toggle}
+          style={{display: 'inline-block', width: 'auto'}}
+        />
+        <IconButton
+          tooltip="Learn about the benefits"
+          onClick={this.toggleHelp}
+        >
+          <HelpIcon />
+        </IconButton>
+        {this.state.showHelp &&
+          <div><SaveSensorHelp sensorName={sensorName} /></div>
+        }
+        <Divider style={STYLES.divider} />
       </div>
     )
   }

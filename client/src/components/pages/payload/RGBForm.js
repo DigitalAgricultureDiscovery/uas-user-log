@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form'
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
 import SaveSensorHelp from '../../helpers/SaveSensorHelp';
@@ -11,8 +13,30 @@ import communitySensors from '../../helpers/communitySensors';
 
 const PAGE_NAME = 'payload_Sensors';
 
-const UNIT_STYLE = {
-  display: 'inline-block', marginRight: 15,
+const STYLES = {
+  dimensions: {
+    marginRight: 15,
+    width: 100,
+  },
+  divider: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  imageSensor: {
+    marginRight: 15,
+    width: 128,
+  },
+  makemodel: {
+    marginRight: 15,
+    width: 156,
+  },
+  subheader: {
+    paddingLeft: 0,
+    marginTop: 15,
+  },
+  unit: {
+    display: 'inline-block', marginRight: 15,
+  },
 }
 
 const IN_AND_MM = [
@@ -44,6 +68,7 @@ export default class RGBForm extends React.Component {
         // Initial form with specs from community sensor
         this.props.change(`${sensorName}.RGBWidth`, sensorData.width);
         this.props.change(`${sensorName}.RGBHeight`, sensorData.height);
+        this.props.change(`${sensorName}.RGBDepth`, sensorData.depth);
         this.props.change(`${sensorName}.RGBLensType`, sensorData.lensType);
         this.props.change(`${sensorName}.RGBWeight`, sensorData.weight);
         this.props.change(`${sensorName}.RGBPixelCount`, sensorData.pixelCount);
@@ -60,59 +85,73 @@ export default class RGBForm extends React.Component {
     const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
-        <LogbookTextField
-          fieldName={`${sensorName}.RGBMake`}
-          fieldLabel="Make"
-          setDefault={true}
-          defaultValue={formValues.dataCollection_Sensors[index].Make}
-          change={change}
-        />
-        <LogbookTextField
-          fieldName={`${sensorName}.RGBModel`}
-          fieldLabel="Model"
-          setDefault={true}
-          defaultValue={formValues.dataCollection_Sensors[index].Model}
-          change={change}
-        />
-        Sensor size
+        <Subheader style={STYLES.subheader}>Make and model</Subheader>
+        <div style={{display: 'flex'}}>
+          <LogbookTextField
+            fieldName={`${sensorName}.RGBMake`}
+            fieldLabel="Make"
+            setDefault={true}
+            defaultValue={formValues.dataCollection_Sensors[index].Make}
+            change={change}
+            style={STYLES.makemodel}
+          />
+          <LogbookTextField
+            fieldName={`${sensorName}.RGBModel`}
+            fieldLabel="Model"
+            setDefault={true}
+            defaultValue={formValues.dataCollection_Sensors[index].Model}
+            change={change}
+          />
+        </div>
+        <Subheader style={STYLES.subheader}>Dimensions and Weight</Subheader>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.RGBWidth`}
             fieldLabel="Width"
             type="number"
             step="0.01"
-            style={UNIT_STYLE}
+            fullWidth
+            style={STYLES.dimensions}
           />
           <LogbookTextField
             fieldName={`${sensorName}.RGBHeight`}
             fieldLabel="Height"
             type="number"
             step="0.01"
+            fullWidth
+            style={STYLES.dimensions}
+          />
+          <LogbookTextField
+            fieldName={`${sensorName}.RGBDepth`}
+            fieldLabel="Depth"
+            type="number"
+            step="0.01"
+            fullWidth
+            style={STYLES.dimensions}
+          />
+          <LogbookSelectField
+            fieldName={`${sensorName}.RGBSizeUnit`}
+            fieldLabel="Unit"
+            items={IN_AND_MM}
+            setDefault={true}
+            style={STYLES.dimensions}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].RGBWidth : null}
+            valueToConvert2={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].RGBHeight : null}
+            valueToConvert3={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].RGBDepth : null}
+            valueToConvert1FieldName={`${sensorName}.RGBWidth`}
+            valueToConvert2FieldName={`${sensorName}.RGBHeight`}
+            valueToConvert3FieldName={`${sensorName}.RGBDepth`}
+            change={change}
+            step="0.01"
           />
         </div>
-        <LogbookSelectField
-          fieldName={`${sensorName}.RGBSizeUnit`}
-          fieldLabel="Unit"
-          items={IN_AND_MM}
-          setDefault={true}
-          valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].RGBWidth : null}
-          valueToConvert2={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].RGBHeight : null}
-          valueToConvert1FieldName={`${sensorName}.RGBWidth`}
-          valueToConvert2FieldName={`${sensorName}.RGBHeight`}
-          change={change}
-          step="0.01"
-        />
-        <LogbookTextField
-          fieldName={`${sensorName}.RGBLensType`}
-          fieldLabel="Lens type"
-        />
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.RGBWeight`}
             fieldLabel="Weight"
             type="number"
             step="0.01"
-            style={UNIT_STYLE}
+            style={STYLES.dimensions}
           />
           <LogbookSelectField
             fieldName={`${sensorName}.RGBWeightUnit`}
@@ -123,19 +162,28 @@ export default class RGBForm extends React.Component {
             valueToConvert1FieldName={`${sensorName}.RGBWeight`}
             change={change}
             step="0.01"
+            style={STYLES.dimensions}
           />
         </div>
+        <Subheader style={STYLES.subheader}>Image sensor</Subheader>
         <LogbookTextField
-          fieldName={`${sensorName}.RGBPixelCount`}
-          fieldLabel="Pixel count"
-          type="number"
+          fieldName={`${sensorName}.RGBLensType`}
+          fieldLabel="Lens type"
         />
-        <LogbookTextField
-          fieldName={`${sensorName}.RGBPixelPitch`}
-          fieldLabel="Pixel pitch (microns)"
-          type="number"
-          step="0.01"
-        />
+        <div style={{display: 'flex'}}>
+          <LogbookTextField
+            fieldName={`${sensorName}.RGBPixelCount`}
+            fieldLabel="Pixel count"
+            style={STYLES.imageSensor}
+          />
+          <LogbookTextField
+            fieldName={`${sensorName}.RGBPixelPitch`}
+            fieldLabel="Pixel pitch µm"
+            step="0.01"
+            style={STYLES.imageSensor}
+          />
+        </div>
+        <Subheader style={STYLES.subheader}>Share</Subheader>
         <Field
           name={`${sensorName}.RGBSave`}
           label="Share this sensor with community"
@@ -152,6 +200,7 @@ export default class RGBForm extends React.Component {
         {this.state.showHelp &&
           <div><SaveSensorHelp sensorName={sensorName} /></div>
         }
+        <Divider style={STYLES.divider} />
       </div>
     )
   }

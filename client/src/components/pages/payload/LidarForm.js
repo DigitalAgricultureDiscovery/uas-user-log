@@ -1,6 +1,13 @@
 import React from 'react';
+import { Field } from 'redux-form'
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
+import SaveSensorHelp from '../../helpers/SaveSensorHelp';
+import IconButton from 'material-ui/IconButton';
+import { Toggle } from 'redux-form-material-ui';
+// material-ui icons
+import HelpIcon from 'material-ui/svg-icons/action/help';
+import communitySensors from '../../helpers/communitySensors';
 
 const PAGE_NAME = 'payload_Sensors';
 
@@ -24,19 +31,76 @@ const LB_AND_KG = [
 ];
 
 export default class LidarForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showHelp: false,
+    }
+    this.toggleHelp = this.toggleHelp.bind(this);
+  }
+
+  componentWillMount() {
+    // Determine if any community sensors were used
+    const { formValues, index, sensorName } = this.props;
+    if (formValues.dataCollection_Sensors[index].CommunitySensors) {
+      if (formValues.dataCollection_Sensors[index].Type === 4) {
+        const sensorIndex = formValues.dataCollection_Sensors[index].CommunitySensors;
+        const sensorData = communitySensors.lidar()[sensorIndex - 1];
+        // Initial form with specs from community sensor
+        this.props.change(`${sensorName}.LidarWeight`, sensorData.weight);
+        this.props.change(`${sensorName}.LidarHorizontalFOV`, sensorData.hfov);
+        this.props.change(`${sensorName}.LidarVerticalFOV`, sensorData.vfov);
+        this.props.change(`${sensorName}.LidarMinRange`, sensorData.minRange);
+        this.props.change(`${sensorName}.LidarMaxRange`, sensorData.maxRange);
+        this.props.change(`${sensorName}.LidarDistResolution`, sensorData.distResolution);
+        this.props.change(`${sensorName}.LidarScanRate`, sensorData.scanRate);
+        this.props.change(`${sensorName}.LidarAngularResolution`, sensorData.angResolution);
+        this.props.change(`${sensorName}.LidarVoltage`, sensorData.voltage);
+        this.props.change(`${sensorName}.LidarPower`, sensorData.power);
+      }
+    }
+  }
+
+  toggleHelp() {
+    this.setState({showHelp: !this.state.showHelp});
+  }
+
   render() {
     const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
+        <LogbookTextField
+          fieldName={`${sensorName}.LidarMake`}
+          fieldLabel="Make"
+          setDefault={true}
+          defaultValue={formValues.dataCollection_Sensors[index].Make}
+          change={change}
+          style={UNIT_STYLE}
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.LidarModel`}
+          fieldLabel="Model"
+          setDefault={true}
+          defaultValue={formValues.dataCollection_Sensors[index].Model}
+          change={change}
+        />
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${sensorName}.LidarManufacturer`}
-            fieldLabel="Manufacturer"
+            fieldName={`${sensorName}.LidarWeight`}
+            fieldLabel="Weight"
+            type="number"
+            step="0.01"
             style={UNIT_STYLE}
           />
-          <LogbookTextField
-            fieldName={`${sensorName}.LidarModel`}
-            fieldLabel="Model"
+          <LogbookSelectField
+            fieldName={`${sensorName}.LidarWeightUnit`}
+            fieldLabel="Unit"
+            items={LB_AND_KG}
+            setDefault={true}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].LidarWeight : null}
+            valueToConvert1FieldName={`${sensorName}.LidarWeight`}
+            change={change}
+            step="0.01"
           />
         </div>
         <div style={{display: 'flex'}}>
@@ -55,7 +119,7 @@ export default class LidarForm extends React.Component {
             fieldName={`${sensorName}.LidarMinRange`}
             fieldLabel="Minimum range"
             type="number"
-            step="0.1"
+            step="0.01"
             style={UNIT_STYLE}
           />
           <LogbookSelectField
@@ -66,7 +130,7 @@ export default class LidarForm extends React.Component {
             valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].LidarMinRange : null}
             valueToConvert1FieldName={`${sensorName}.LidarMinRange`}
             change={change}
-            step="0.1"
+            step="0.01"
           />
         </div>
         <div style={{display: 'flex'}}>
@@ -74,7 +138,7 @@ export default class LidarForm extends React.Component {
             fieldName={`${sensorName}.LidarMaxRange`}
             fieldLabel="Maximum range"
             type="number"
-            step="0.1"
+            step="0.01"
             style={UNIT_STYLE}
           />
           <LogbookSelectField
@@ -85,7 +149,7 @@ export default class LidarForm extends React.Component {
             valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].LidarMaxRange : null}
             valueToConvert1FieldName={`${sensorName}.LidarMaxRange`}
             change={change}
-            step="0.1"
+            step="0.01"
           />
         </div>
         <div style={{display: 'flex'}}>
@@ -124,39 +188,36 @@ export default class LidarForm extends React.Component {
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${sensorName}.LidarPower`}
-            fieldLabel="Power unit (W)"
+            fieldName={`${sensorName}.LidarVoltage`}
+            fieldLabel="Voltage requirement (V)"
             type="number"
             step="0.1"
             style={UNIT_STYLE}
           />
           <LogbookTextField
-            fieldName={`${sensorName}.LidarVoltage`}
-            fieldLabel="Voltage (V)"
+            fieldName={`${sensorName}.LidarPower`}
+            fieldLabel="Power consumption (W)"
             type="number"
             step="0.1"
           />
         </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.LidarWeight`}
-            fieldLabel="Weight"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookSelectField
-            fieldName={`${sensorName}.LidarWeightUnit`}
-            fieldLabel="Unit"
-            items={LB_AND_KG}
-            setDefault={true}
-            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].LidarWeight : null}
-            valueToConvert1FieldName={`${sensorName}.LidarWeight`}
-            change={change}
-            step="0.1"
-          />
+        <Field
+          name={`${sensorName}.LidarSave`}
+          label="Share this sensor with community"
+          labelPosition="right"
+          component={Toggle}
+          style={{display: 'inline-block', width: 'auto'}}
+        />
+        <IconButton
+          tooltip="Learn about the benefits"
+          onClick={this.toggleHelp}
+        >
+          <HelpIcon />
+        </IconButton>
+        {this.state.showHelp &&
+          <div><SaveSensorHelp sensorName={sensorName} /></div>
+        }
       </div>
-    </div>
     )
   }
 }
