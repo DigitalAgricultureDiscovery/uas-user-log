@@ -81,21 +81,21 @@ export default class ThermalForm extends React.Component {
             fieldName={`${sensorName}.ThermalDimensionWidth`}
             fieldLabel="Width"
             type="number"
-            step="0.1"
+            step="0.01"
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${sensorName}.ThermalDimensionHeight`}
             fieldLabel="Height"
             type="number"
-            step="0.1"
+            step="0.01"
           />
         </div>
         <LogbookTextField
           fieldName={`${sensorName}.ThermalDimensionDepth`}
           fieldLabel="Depth"
           type="number"
-          step="0.1"
+          step="0.01"
         />
         <LogbookSelectField
           fieldName={`${sensorName}.ThermalDimensionSizeUnit`}
@@ -109,7 +109,7 @@ export default class ThermalForm extends React.Component {
           valueToConvert2FieldName={`${sensorName}.ThermalDimensionHeight`}
           valueToConvert3FieldName={`${sensorName}.ThermalDimensionDepth`}
           change={change}
-          step="0.1"
+          step="0.01"
         />
         <div style={{display: 'flex'}}>
           <LogbookTextField
