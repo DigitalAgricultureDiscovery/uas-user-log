@@ -82,7 +82,7 @@ const renderFlights = ({ fields, change, meta: { touched, error, submitFailed } 
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
-          {index === 0 ? <Subheader style={STYLES.subheader}>Time format - HH:MM AM or PM. For example, 04:30 PM</Subheader> : null}
+          {index === 0 ? <Subheader style={STYLES.subheader}>Format - HH:MM AM/PM. E.g. 04:30 PM</Subheader> : null}
           <FlightTimeStartPicker fieldName={`${flight}.Start`} required={true} />
           <FlightTimeEndPicker fieldName={`${flight}.End`} required={true} />
           <Location
