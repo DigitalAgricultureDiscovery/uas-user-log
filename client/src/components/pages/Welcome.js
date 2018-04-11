@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import { reduxForm } from 'redux-form';
 // material-ui elements
 import { CardActions, CardTitle, CardText }           from 'material-ui/Card';
@@ -68,6 +69,8 @@ class Welcome extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.onReaderLoad = this.onReaderLoad.bind(this);
     this.toggleHelp = this.toggleHelp.bind(this);
+    ReactGA.initialize('UA-78284792-5');
+    ReactGA.pageview('Welcome');
   }
 
   handleChange(event) {
