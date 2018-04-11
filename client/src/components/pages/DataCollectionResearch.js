@@ -19,9 +19,12 @@ import communitySensors from '../helpers/communitySensors';
 
 const PAGE_NAME = 'dataCollection_';
 
-const UNIT_STYLE = {
-  display: 'inline-block', marginRight: 15,
-}
+const STYLES = {
+  shortField: {
+    marginRight: 10,
+    width: 123,
+  },
+};
 
 const SENSORS = [
   {value: 1, name: 'RGB'},
@@ -83,29 +86,26 @@ class SensorTypeSubForm extends React.Component {
 
     return (
       <div>
-        <div style={{display: 'flex'}}>
-          <LogbookSelectField
-            fieldName={this.props.typeName}
-            fieldLabel="Type of sensor"
-            required={true}
-            items={SENSORS}
-            change={this.props.change}
-            updateCommunitySensors={this.updateCommunitySensors}
-            communitySensorsFieldName={this.props.communityName}
-            makeFieldName={this.props.makeName}
-            modelFieldName={this.props.modelName}
-            style={UNIT_STYLE}
-          />
-          <LogbookSelectField
-            fieldName={this.props.communityName}
-            fieldLabel="Community sensor"
-            items={this.state.communitySensors}
-            change={this.props.change}
-            sensorType={this.state.sensorType}
-            makeFieldName={this.props.makeName}
-            modelFieldName={this.props.modelName}
-          />
-        </div>
+        <LogbookSelectField
+          fieldName={this.props.typeName}
+          fieldLabel="Type of sensor"
+          required={true}
+          items={SENSORS}
+          change={this.props.change}
+          updateCommunitySensors={this.updateCommunitySensors}
+          communitySensorsFieldName={this.props.communityName}
+          makeFieldName={this.props.makeName}
+          modelFieldName={this.props.modelName}
+        />
+        <LogbookSelectField
+          fieldName={this.props.communityName}
+          fieldLabel="Community sensor (optional)"
+          items={this.state.communitySensors}
+          change={this.props.change}
+          sensorType={this.state.sensorType}
+          makeFieldName={this.props.makeName}
+          modelFieldName={this.props.modelName}
+        />
         {otherSelected ?
           <LogbookTextField
             fieldName={this.props.otherName}
@@ -165,7 +165,7 @@ class LapSubForm extends React.Component {
           required={true}
           type="number"
           step="0.01"
-          style={UNIT_STYLE}
+          style={STYLES.shortField}
         />
         <LogbookTextField
           fieldName={this.props.sideName}
@@ -173,6 +173,7 @@ class LapSubForm extends React.Component {
           required={true}
           type="number"
           step="0.01"
+          style={STYLES.shortField}
         />
       </div>
     )

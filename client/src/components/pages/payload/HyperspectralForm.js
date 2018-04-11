@@ -1,5 +1,7 @@
 import React from 'react';
-import { Field } from 'redux-form'
+import { Field } from 'redux-form';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
 import SaveSensorHelp from '../../helpers/SaveSensorHelp';
@@ -11,8 +13,22 @@ import communitySensors from '../../helpers/communitySensors';
 
 const PAGE_NAME = 'payload_Sensors';
 
-const UNIT_STYLE = {
-  display: 'inline-block', marginRight: 15,
+const STYLES = {
+  divider: {
+    marginTop: 10,
+  },
+  shortField: {
+    marginRight: 10,
+    width: 128,
+  },
+  subheader: {
+    paddingLeft: 0,
+    marginTop: 15,
+  },
+  unit: {
+    marginRight: 10,
+    width: 64,
+  },
 }
 
 const IN_AND_MM = [
@@ -78,6 +94,7 @@ export default class HyperspectralForm extends React.Component {
     const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
+        <Subheader style={STYLES.subheader}>Make and Model</Subheader>
         <LogbookTextField
           fieldName={`${sensorName}.HyperMake`}
           fieldLabel="Make"
@@ -92,13 +109,34 @@ export default class HyperspectralForm extends React.Component {
           defaultValue={formValues.dataCollection_Sensors[index].Model}
           change={change}
         />
+        <Subheader style={STYLES.subheader}>Size and Weight</Subheader>
+        <div style={{display: 'flex'}}>
+          <LogbookTextField
+            fieldName={`${sensorName}.HyperSize`}
+            fieldLabel="Size w/o GPS"
+            type="number"
+            step="0.01"
+            style={STYLES.shortField}
+          />
+          <LogbookSelectField
+            fieldName={`${sensorName}.HyperSizeUnit`}
+            fieldLabel="Unit"
+            items={IN_AND_MM}
+            setDefault={true}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].HyperSize : null}
+            valueToConvert1FieldName={`${sensorName}.HyperSize`}
+            change={change}
+            step="0.01"
+            style={STYLES.unit}
+          />
+        </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.HyperWeight`}
             fieldLabel="Weight"
             type="number"
             step="0.1"
-            style={UNIT_STYLE}
+            style={STYLES.shortField}
           />
           <LogbookSelectField
             fieldName={`${sensorName}.HyperWeightUnit`}
@@ -109,98 +147,16 @@ export default class HyperspectralForm extends React.Component {
             valueToConvert1FieldName={`${sensorName}.HyperWeight`}
             change={change}
             step="0.1"
-          />
-        </div>
-        <LogbookTextField
-          fieldName={`${sensorName}.HyperSpatialBands`}
-          fieldLabel="Spatial bands"
-        />
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.HyperSpectralBands`}
-            fieldLabel="Spectral bands"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.HyperSpectralRange`}
-            fieldLabel="Spectral range"
-          />
-        </div>
-        <LogbookSelectField
-          fieldName={`${sensorName}.HyperOperationMode`}
-          fieldLabel="Operation mode"
-          items={OPERATION_MODES}
-          change={change}
-        />
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.HyperFrameRate`}
-            fieldLabel="Frame rate (Hz)"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.HyperDispersion`}
-            fieldLabel="Dispersion per pixel"
-            type="number"
-            step="0.1"
-          />
-        </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.HyperFWHM`}
-            fieldLabel="FWHM slit image"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.HyperLens`}
-            fieldLabel="Lens"
-            type="number"
-            step="0.1"
-          />
-        </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.HyperStorage`}
-            fieldLabel="Storage"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.HyperInterface`}
-            fieldLabel="Interface"
-            type="number"
-            step="0.1"
-          />
-        </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.HyperSize`}
-            fieldLabel="Size (exclusive of GPS unit)"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookSelectField
-            fieldName={`${sensorName}.HyperSizeUnit`}
-            fieldLabel="Unit"
-            items={IN_AND_MM}
-            setDefault={true}
-            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].HyperSize : null}
-            valueToConvert1FieldName={`${sensorName}.HyperSize`}
-            change={change}
-            step="0.1"
+            style={STYLES.unit}
           />
         </div>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.HyperWeightMinusLens`}
-            fieldLabel="Weight (without lens)"
+            fieldLabel="Weight w/o lens"
             type="number"
             step="0.1"
-            style={UNIT_STYLE}
+            style={STYLES.shortField}
           />
           <LogbookSelectField
             fieldName={`${sensorName}.HyperWeightMinusLensUnit`}
@@ -211,8 +167,55 @@ export default class HyperspectralForm extends React.Component {
             valueToConvert1FieldName={`${sensorName}.HyperWeightMinusLens`}
             change={change}
             step="0.1"
+            style={STYLES.unit}
           />
         </div>
+        <Subheader style={STYLES.subheader}>Spatial and Spectral Bands</Subheader>
+        <LogbookTextField
+          fieldName={`${sensorName}.HyperSpatialBands`}
+          fieldLabel="Spatial bands"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.HyperSpectralBands`}
+          fieldLabel="Spectral bands"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.HyperSpectralRange`}
+          fieldLabel="Spectral range"
+        />
+        <Subheader style={STYLES.subheader}>Camera</Subheader>
+        <LogbookSelectField
+          fieldName={`${sensorName}.HyperOperationMode`}
+          fieldLabel="Operation mode"
+          items={OPERATION_MODES}
+          change={change}
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.HyperFrameRate`}
+          fieldLabel="Frame rate (Hz)"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.HyperDispersion`}
+          fieldLabel="Dispersion per pixel"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.HyperFWHM`}
+          fieldLabel="FWHM slit image"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.HyperLens`}
+          fieldLabel="Lens"
+        />
+        <Subheader style={STYLES.subheader}>Outputs</Subheader>
+        <LogbookTextField
+          fieldName={`${sensorName}.HyperStorage`}
+          fieldLabel="Storage"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.HyperInterface`}
+          fieldLabel="Interface"
+        />
+        <Subheader style={STYLES.subheader}>Share</Subheader>
         <Field
           name={`${sensorName}.HyperSave`}
           label="Share this sensor with community"
@@ -229,6 +232,7 @@ export default class HyperspectralForm extends React.Component {
         {this.state.showHelp &&
           <div><SaveSensorHelp sensorName={sensorName} /></div>
         }
+        <Divider style={STYLES.divider} />
       </div>
     )
   }
