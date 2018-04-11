@@ -231,7 +231,7 @@ const validate = values => {
     isRequired('b4ufly_ControlTowerContact');
   }
   isRequired('b4ufly_Options');
-  isRequired('b4ufly_FAACert');
+  // isRequired('b4ufly_FAACert');
   isRequired('b4ufly_Preflight');
   if (values.b4ufly_Preflight && values.b4ufly_Preflight === 'no') {
     isRequired('b4ufly_Permission');

@@ -123,7 +123,7 @@ class B4UFLY extends React.Component {
             </div>
           }
           <OptionsSelect selectedOptions={selectedOptions} />
-          <LogbookTextField fieldName={`${PAGE_NAME}FAACert`} fieldLabel="FAA COW or COA used #" required={true} />
+          <LogbookTextField fieldName={`${PAGE_NAME}FAACert`} fieldLabel="FAA COW or COA used #" />
           <br />
           Completed pre-flight checklist  <span style={{color: 'rgb(244, 67, 54)'}}>*</span>
           <PreflightRadioButtonGroup />
