@@ -40,6 +40,22 @@ const validate = values => {
         flightErrors.End = 'Required';
         flightsArrayErrors[flightIndex] = flightErrors;
       }
+      if (flight && flight.Start && flight.End) {
+        const startH = flight.Start.split(':')[0];
+        const startM = flight.Start.split(':')[1];
+        const endH = flight.End.split(':')[0];
+        const endM = flight.End.split(':')[1];
+        if (startH === endH) {
+          if (startM > endM) {
+            flightErrors.End = 'End Time cannot take place before Start Time';
+            flightsArrayErrors[flightIndex] = flightErrors;
+          }
+        }
+        if (startH > endH) {
+          flightErrors.End = 'End Time cannot take place before Start Time';
+          flightsArrayErrors[flightIndex] = flightErrors;
+        }
+      }
       if (!flight || !flight.Latitude) {
         flightErrors.Latitude = 'Required';
         flightsArrayErrors[flightIndex] = flightErrors;
