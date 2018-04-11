@@ -14,10 +14,6 @@ import validate from '../helpers/validate';
 
 const PAGE_NAME = 'flightParameters_';
 
-const UNIT_STYLE = {
-  display: 'inline-block', marginRight: 15,
-}
-
 const FT_AND_M = [
   {value: 1, name: 'ft', rate: 3.28084},
   {value: 2, name: 'm', rate: 0.3048},
@@ -88,25 +84,22 @@ class FlightParameters extends React.Component {
       <form onSubmit={handleSubmit}>
         <CardTitle title="Flight Parameters" />
         <CardText>
-          <div style={{display: 'flex'}}>
-            <LogbookTextField
-              fieldName={`${PAGE_NAME}AGLMaximum`}
-              fieldLabel="Maximum altitude, AGL"
-              required={true}
-              type="number"
-              step="0.1"
-              style={UNIT_STYLE}
-            />
-            <LogbookTextField
-              fieldName={`${PAGE_NAME}AGLMinimum`}
-              fieldLabel="Minimum altitude, AGL"
-              type="number"
-              step="0.1"
-            />
-          </div>
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}AGLMaximum`}
+            fieldLabel="Max altitude, AGL"
+            required={true}
+            type="number"
+            step="0.1"
+          />
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}AGLMinimum`}
+            fieldLabel="Min altitude, AGL"
+            type="number"
+            step="0.1"
+          />
           <LogbookSelectField
             fieldName={`${PAGE_NAME}AGLUnit`}
-            fieldLabel="Unit"
+            fieldLabel="Altitude Unit"
             items={FT_AND_M}
             valueToConvert1={currentAGLMaximum}
             valueToConvert1FieldName={`${PAGE_NAME}AGLMaximum`}

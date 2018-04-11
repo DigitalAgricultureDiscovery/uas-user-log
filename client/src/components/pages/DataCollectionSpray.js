@@ -12,9 +12,22 @@ import validate from '../helpers/validate';
 
 const PAGE_NAME = 'dataCollection_';
 
-const UNIT_STYLE = {
-  display: 'inline-block', marginRight: 15,
-}
+const STYLES = {
+  shortField: {
+    marginRight: 10,
+    width: 172,
+  },
+  shortFieldB: {
+    marginRight: 10,
+    width: 144,
+  },
+  unit: {
+    width: 74,
+  },
+  unitB: {
+    width: 102,
+  },
+};
 
 const CHEMICALS = [
   {value: 1, name: 'Herbicide'},
@@ -107,7 +120,7 @@ class DataCollectionSpray extends React.Component {
               required={true}
               type="number"
               step="0.1"
-              style={UNIT_STYLE}
+              style={STYLES.shortFieldB}
               min="0.1"
             />
             <LogbookSelectField
@@ -119,6 +132,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1FieldName={`${PAGE_NAME}ApplicationRate`}
               change={this.props.change}
               step="0.1"
+              style={STYLES.unitB}
             />
           </div>
           <div style={{display: 'flex'}}>
@@ -128,7 +142,7 @@ class DataCollectionSpray extends React.Component {
               required={true}
               type="number"
               step="0.1"
-              style={UNIT_STYLE}
+              style={STYLES.shortFieldB}
               min="0.1"
             />
             <LogbookSelectField
@@ -140,6 +154,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1FieldName={`${PAGE_NAME}ChemicalRate`}
               change={this.props.change}
               step="0.1"
+              style={STYLES.unitB}
             />
           </div>
           <div style={{display: 'flex'}}>
@@ -149,7 +164,7 @@ class DataCollectionSpray extends React.Component {
               required={true}
               type="number"
               step="0.01"
-              style={UNIT_STYLE}
+              style={STYLES.shortField}
               min="0.1"
             />
             <LogbookSelectField
@@ -161,23 +176,21 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1FieldName={`${PAGE_NAME}StartingVolume`}
               change={this.props.change}
               step="0.01"
+              style={STYLES.unit}
             />
           </div>
-          <div style={{display: 'flex'}}>
-            <LogbookTextField
-              fieldName={`${PAGE_NAME}NozzleNumber`}
-              fieldLabel="Number of nozzles"
-              required={true}
-              type="number"
-              style={UNIT_STYLE}
-              min="1"
-            />
-            <LogbookTextField
-              fieldName={`${PAGE_NAME}NozzleType`}
-              fieldLabel="Nozzle type"
-              required={true}
-            />
-          </div>
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}NozzleNumber`}
+            fieldLabel="Number of nozzles"
+            required={true}
+            type="number"
+            min="1"
+          />
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}NozzleType`}
+            fieldLabel="Nozzle type"
+            required={true}
+          />
           <LogbookTextField
             fieldName={`${PAGE_NAME}OrificeSize`}
             fieldLabel="Orifice size"
@@ -190,7 +203,7 @@ class DataCollectionSpray extends React.Component {
               required={true}
               type="number"
               step="0.01"
-              style={UNIT_STYLE}
+              style={STYLES.shortField}
               min="0.01"
             />
             <LogbookSelectField
@@ -202,6 +215,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1FieldName={`${PAGE_NAME}Pressure`}
               change={this.props.change}
               step="0.01"
+              style={STYLES.unit}
             />
           </div>
           <div style={{marginTop: 15}}>Effective swath</div>
@@ -212,7 +226,7 @@ class DataCollectionSpray extends React.Component {
               required={true}
               type="number"
               step="0.1"
-              style={UNIT_STYLE}
+              style={STYLES.shortField}
               min="0.1"
             />
             <LogbookSelectField
@@ -224,6 +238,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1FieldName={`${PAGE_NAME}SwathDistance`}
               change={this.props.change}
               step="0.1"
+              style={STYLES.unit}
             />
           </div>
           <div style={{display: 'flex'}}>
@@ -233,7 +248,7 @@ class DataCollectionSpray extends React.Component {
               required={true}
               type="number"
               step="0.1"
-              style={UNIT_STYLE}
+              style={STYLES.shortField}
               min="0.1"
             />
             <LogbookSelectField
@@ -245,6 +260,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1FieldName={`${PAGE_NAME}SwathArea`}
               change={this.props.change}
               step="0.1"
+              style={STYLES.unit}
             />
           </div>
           <LogbookSelectField

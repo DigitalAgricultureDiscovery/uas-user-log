@@ -2,6 +2,7 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 import LogbookSelectField from '../helpers/LogbookSelectField';
 import LogbookTextField from '../helpers/LogbookTextField';
+import Subheader from 'material-ui/Subheader';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton                           from 'material-ui/FlatButton';
@@ -10,6 +11,17 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 import validate from '../helpers/validate';
 
 const PAGE_NAME = 'hardware_';
+
+const STYLES = {
+  shortField: {
+    marginRight: 10,
+    width: 123,
+  },
+  subheader: {
+    paddingLeft: 0,
+    marginTop: 15,
+  },
+};
 
 const DRONE_TYPES = [
   {value: 1, name: 'Fixed wing'},
@@ -21,22 +33,26 @@ class RemoteControlChargeSubForm extends React.Component {
   render() {
     return (
       <div>
-        Remote control charge status
-        <LogbookTextField
-          fieldName={`${PAGE_NAME}RemoteControlChargeTarget`}
-          fieldLabel="Target (%)"
-          required={true}
-          type="number"
-          min="1"
-        />
-        <LogbookTextField
-          fieldName={`${PAGE_NAME}RemoteControlChargeMinimum`}
-          fieldLabel="Minimum (%)"
-          required={true}
-          type="number"
-          min="1"
-          max="80"
-        />
+        <Subheader style={STYLES.subheader}>Remote control charge status</Subheader>
+        <div style={{display: 'flex'}}>
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}RemoteControlChargeTarget`}
+            fieldLabel="Target (%)"
+            required={true}
+            type="number"
+            min="1"
+            style={STYLES.shortField}
+          />
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}RemoteControlChargeMinimum`}
+            fieldLabel="Minimum (%)"
+            required={true}
+            type="number"
+            min="1"
+            max="80"
+            style={STYLES.shortField}
+          />
+        </div>
       </div>
     )
   }
@@ -46,22 +62,26 @@ class GroundControlChargeSubForm extends React.Component {
   render() {
     return (
       <div>
-        Ground control station battery charge status
-        <LogbookTextField
-          fieldName={`${PAGE_NAME}GroundControlChargeTarget`}
-          fieldLabel="Target (%)"
-          required={true}
-          type="number"
-          min="1"
-        />
-        <LogbookTextField
-          fieldName={`${PAGE_NAME}GroundControlChargeMinimum`}
-          fieldLabel="Minimum (%)"
-          required={true}
-          type="number"
-          min="1"
-          max="80"
-        />
+        <Subheader style={STYLES.subheader}>Ground control station battery charge status</Subheader>
+        <div style={{display: 'flex'}}>
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}GroundControlChargeTarget`}
+            fieldLabel="Target (%)"
+            required={true}
+            type="number"
+            min="1"
+            style={STYLES.shortField}
+          />
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}GroundControlChargeMinimum`}
+            fieldLabel="Minimum (%)"
+            required={true}
+            type="number"
+            min="1"
+            max="80"
+            style={STYLES.shortField}
+          />
+        </div>
       </div>
     )
   }

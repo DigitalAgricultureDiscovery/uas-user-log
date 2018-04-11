@@ -18,8 +18,15 @@ import validate from '../helpers/validate';
 
 const PAGE_NAME = 'battery_';
 
-const UNIT_STYLE = {
-  display: 'inline-block', marginRight: 15,
+const STYLES = {
+  shortField: {
+    marginRight: 10,
+    width: 182,
+  },
+  unit: {
+    marginRight: 10,
+    width: 64,
+  },
 }
 
 const OZ_AND_G = [
@@ -95,31 +102,31 @@ class BatteryChargeSubForm extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={this.props.fullChargeName}
             fieldLabel="Full charge voltage"
             required={true}
             type="number"
             step="0.1"
-            style={UNIT_STYLE}
+            style={STYLES.shortField}
             min="0.1"
             handleChange={this.handleFullChargeChange}
           />
-          <span style={{verticalAlign: 'middle'}}>volt</span>
+          <span style={{marginTop: 49, fontSize: 12}}>volt</span>
         </div>
-        <div>
+        <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={this.props.dischargeName}
             fieldLabel="Discharge voltage"
             required={true}
             type="number"
             step="0.1"
-            style={UNIT_STYLE}
+            style={STYLES.shortField}
             min="0.1"
             handleChange={this.handleDischargeChange}
           />
-          <span style={{verticalAlign: 'middle'}}>volt (or as per manufacturer's recommendation)</span>
+          <span style={{marginTop: 49, fontSize: 12}}>volt (or as per manufacturer's recommendation)</span>
         </div>
       </div>
     )
@@ -186,7 +193,7 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
               fieldLabel="Weight"
               type="number"
               min="1"
-              style={UNIT_STYLE}
+              style={STYLES.shortField}
             />
             <LogbookSelectField
               fieldName={`${battery}.WeightUnit`}
@@ -196,6 +203,7 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
               valueToConvert1={formValues[`${PAGE_NAME}Batteries`][`${index}`] ? formValues[`${PAGE_NAME}Batteries`][`${index}`].Weight : null}
               valueToConvert1FieldName={`${PAGE_NAME}Batteries[${index}].Weight`}
               change={change}
+              style={STYLES.unit}
             />
           </div>
         </li>
