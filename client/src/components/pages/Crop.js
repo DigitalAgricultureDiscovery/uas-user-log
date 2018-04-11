@@ -59,6 +59,10 @@ class PerennialSubForm extends React.Component {
 }
 
 class Crop extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Crop');
+  }
+
   render() {
     const { handleSubmit, previousPage, currentLifeCycle } = this.props;
 

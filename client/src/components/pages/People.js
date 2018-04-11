@@ -32,6 +32,10 @@ class PeoplePresentRadioButtonGroup extends React.Component {
 }
 
 class People extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('People');
+  }
+
   render() {
     const { handleSubmit, previousPage, hasFAA } = this.props;
     return (

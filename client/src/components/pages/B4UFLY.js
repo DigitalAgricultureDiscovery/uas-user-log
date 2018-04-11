@@ -104,6 +104,10 @@ class PermissionRadioButtonGroup extends React.Component {
 }
 
 class B4UFLY extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('B4UFLY');
+  }
+
   render() {
     const { handleSubmit, previousPage, currentStatus, noResponse, selectedOptions, currentPermission } = this.props;
     return (

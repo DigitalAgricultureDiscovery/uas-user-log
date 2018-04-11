@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactGA from 'react-ga';
 import { reduxForm } from 'redux-form';
 // material-ui elements
 import { CardActions, CardTitle, CardText }           from 'material-ui/Card';
@@ -7,6 +6,7 @@ import Divider                                        from 'material-ui/Divider'
 import IconButton                                     from 'material-ui/IconButton';
 import Paper                                          from 'material-ui/Paper';
 import RaisedButton                                   from 'material-ui/RaisedButton';
+import Subheader                                      from 'material-ui/Subheader';
 import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
 // material-ui icons
 import HelpIcon from 'material-ui/svg-icons/action/help';
@@ -29,6 +29,10 @@ const styles = {
     left: 0,
     width: '100%',
     opacity: 0,
+  },
+  subheader: {
+    paddingLeft: 0,
+    marginTop: 15,
   },
 };
 
@@ -69,8 +73,10 @@ class Welcome extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.onReaderLoad = this.onReaderLoad.bind(this);
     this.toggleHelp = this.toggleHelp.bind(this);
-    ReactGA.initialize('UA-78284792-5');
-    ReactGA.pageview('Welcome');
+  }
+
+  componentDidMount() {
+    this.props.trackPage('Welcome');
   }
 
   handleChange(event) {
@@ -127,18 +133,22 @@ class Welcome extends React.Component {
             to enhance your flight and maintenance experience.​
           </p>
           <Divider />
-          <p>
-            Facilitated by Multistate Research Project - S1069 Research and Extension
-            for Unmanned Aircraft Systems (UAS) Applications in U.S.
-            Agriculture and Natural Resources
-          </p>
-          <p>
-            Contributors - Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel E. Martin (Dan) (USDA ARS),
-            Dr. Lav R. Khot (Washington State University), and Dr. Seth Murray (Texas A&M University)
-          </p>
-          <p>
-            Acknowledgment - FFAR Award # 210316​
-          </p>
+          <Subheader style={styles.subheader}>Acknowledgment</Subheader>
+            <ol style={{marginTop: 0}}>
+              <li>
+                This work was supported by the USDA National Institute of Food
+                and Agriculture, Hatch project S1069- Research and Extension
+                for Unmanned Aircraft Systems (UAS) Applications in U.S.
+                Agriculture and Natural Resources.
+              </li>
+              <li>
+                Support by Foundation for Food and Agricultural Research (FFAR)
+                through Award # 210316 is also acknowledged.
+              </li>
+            </ol>
+          <Subheader style={styles.subheader}>Contributors</Subheader>
+          Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel E. Martin (Dan) (USDA ARS),
+          Dr. Lav R. Khot (Washington State University), and Dr. Seth Murray (Texas A&M University)
           <Table style={{marginTop: 15}}>
             <TableBody displayRowCheckbox={false}>
               <TableRow>

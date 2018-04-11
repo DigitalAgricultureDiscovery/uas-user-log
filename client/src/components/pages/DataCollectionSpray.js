@@ -79,6 +79,10 @@ const PPM_AND_PPB = [
 ]
 
 class DataCollectionSpray extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Data Collection Spray');
+  }
+
   render() {
     const {
       handleSubmit,

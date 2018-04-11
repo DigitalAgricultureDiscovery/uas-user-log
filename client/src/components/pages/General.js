@@ -186,6 +186,10 @@ class Location extends React.Component {
 }
 
 class General extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('General');
+  }
+
   render() {
     const { handleSubmit, previousPage } = this.props;
 

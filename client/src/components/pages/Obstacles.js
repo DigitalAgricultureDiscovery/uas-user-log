@@ -65,6 +65,10 @@ class ObstaclesSelect extends React.Component {
 }
 
 class Obstacles extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Obstacles');
+  }
+  
   render() {
     const { handleSubmit, previousPage, selectedObstacles } = this.props;
     const otherIndex = 8;

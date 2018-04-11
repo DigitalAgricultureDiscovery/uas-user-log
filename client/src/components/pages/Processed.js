@@ -46,6 +46,10 @@ class Processed extends React.Component {
     this.handleRowSelection = this.handleRowSelection.bind(this);
   }
 
+  componentDidMount() {
+    this.props.trackPage('Processed');
+  }
+
   updateSelected(selected) {
     this.props.change(selected.type, selected);
   }

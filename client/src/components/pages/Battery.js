@@ -215,6 +215,10 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
 );
 
 class Battery extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Battery');
+  }
+
   render() {
     const { handleSubmit, previousPage, currentBatteries, formValues } = this.props;
     return (

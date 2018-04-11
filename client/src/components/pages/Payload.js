@@ -102,6 +102,10 @@ class RenderSensors extends React.Component {
 }
 
 class Payload extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Payload');
+  }
+
   render() {
     const { handleSubmit, previousPage, formValues } = this.props;
     return (

@@ -16,6 +16,10 @@ const FLIGHT_MODES = [
 ];
 
 class FlightOperation extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Flight Operation');
+  }
+
   render() {
     const { handleSubmit, previousPage } = this.props;
     return (
