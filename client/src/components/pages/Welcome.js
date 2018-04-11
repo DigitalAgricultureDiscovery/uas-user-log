@@ -133,22 +133,22 @@ class Welcome extends React.Component {
             to enhance your flight and maintenance experience.​
           </p>
           <Divider />
-          <Subheader style={styles.subheader}>Acknowledgment</Subheader>
-            <ol style={{marginTop: 0}}>
-              <li>
-                This work was supported by the USDA National Institute of Food
-                and Agriculture, Hatch project S1069- Research and Extension
-                for Unmanned Aircraft Systems (UAS) Applications in U.S.
-                Agriculture and Natural Resources.
-              </li>
-              <li>
-                Support by Foundation for Food and Agricultural Research (FFAR)
-                through Award # 210316 is also acknowledged.
-              </li>
-            </ol>
           <Subheader style={styles.subheader}>Contributors</Subheader>
           Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel E. Martin (Dan) (USDA ARS),
           Dr. Lav R. Khot (Washington State University), and Dr. Seth Murray (Texas A&M University)
+          <Subheader style={styles.subheader}>Acknowledgments</Subheader>
+          <ol style={{marginTop: 0}}>
+            <li>
+              This work was supported by the USDA National Institute of Food
+              and Agriculture, Hatch project S1069- Research and Extension
+              for Unmanned Aircraft Systems (UAS) Applications in U.S.
+              Agriculture and Natural Resources.
+            </li>
+            <li>
+              Support by Foundation for Food and Agricultural Research (FFAR)
+              through Award # 210316 is also acknowledged.
+            </li>
+          </ol>
           <Table style={{marginTop: 15}}>
             <TableBody displayRowCheckbox={false}>
               <TableRow>
