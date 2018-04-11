@@ -19,6 +19,13 @@ import locationUtil from '../helpers/location';
 
 const PAGE_NAME = 'general_';
 
+const STYLES = {
+  shortField: {
+    marginRight: 10,
+    width: 123,
+  },
+};
+
 class FlightDatePicker extends React.Component {
   render() {
     return (
@@ -136,8 +143,20 @@ class Location extends React.Component {
   render() {
     return (
       <div>
-        <LogbookTextField fieldName={this.props.fieldLatName} fieldLabel="Latitude" required={true} />
-        <LogbookTextField fieldName={this.props.fieldLonName} fieldLabel="Longitude" required={true} />
+        <div style={{display: 'flex'}}>
+          <LogbookTextField
+            fieldName={this.props.fieldLatName}
+            fieldLabel="Latitude"
+            required={true}
+            style={STYLES.shortField}
+          />
+          <LogbookTextField
+            fieldName={this.props.fieldLonName}
+            fieldLabel="Longitude"
+            required={true}
+            style={STYLES.shortField}
+          />
+        </div>
         {this.state.error ? <p><span className="error-msg">Unable to retrieve location.</span></p> : null}
         <RaisedButton
           onClick={this.handleClick}
