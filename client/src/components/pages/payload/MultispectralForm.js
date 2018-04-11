@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field } from 'redux-form'
+import { Field } from 'redux-form';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import LogbookSelectField from '../../helpers/LogbookSelectField';
@@ -13,33 +13,21 @@ import communitySensors from '../../helpers/communitySensors';
 
 const PAGE_NAME = 'payload_Sensors';
 
-const UNIT_STYLE = {
-  display: 'inline-block', marginRight: 15,
-}
-
 const STYLES = {
-  dimensions: {
-    marginRight: 15,
-    width: 100,
-  },
   divider: {
     marginTop: 10,
-    marginBottom: 10,
   },
-  imageSensor: {
-    marginRight: 15,
-    width: 128,
-  },
-  makemodel: {
-    marginRight: 15,
-    width: 156,
+  shortField: {
+    marginRight: 10,
+    width: 182,
   },
   subheader: {
     paddingLeft: 0,
     marginTop: 15,
   },
   unit: {
-    display: 'inline-block', marginRight: 15,
+    marginRight: 10,
+    width: 64,
   },
 }
 
@@ -150,6 +138,7 @@ export default class MultispectralForm extends React.Component {
     const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
+        <Subheader style={STYLES.subheader}>Make and Model</Subheader>
         <LogbookTextField
           fieldName={`${sensorName}.MultiMake`}
           fieldLabel="Make"
@@ -164,49 +153,52 @@ export default class MultispectralForm extends React.Component {
           defaultValue={formValues.dataCollection_Sensors[index].Model}
           change={change}
         />
-        Sensor size
+        <Subheader style={STYLES.subheader}>Dimensions (WxHxD) and Weight</Subheader>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.MultiWidth`}
             fieldLabel="Width"
             type="number"
             step="0.01"
-            style={UNIT_STYLE}
+            style={STYLES.unit}
           />
           <LogbookTextField
             fieldName={`${sensorName}.MultiHeight`}
             fieldLabel="Height"
             type="number"
             step="0.01"
+            style={STYLES.unit}
+          />
+          <LogbookTextField
+            fieldName={`${sensorName}.MultiDepth`}
+            fieldLabel="Depth"
+            type="number"
+            step="0.01"
+            style={STYLES.unit}
+          />
+          <LogbookSelectField
+            fieldName={`${sensorName}.MultiSizeUnit`}
+            fieldLabel="Unit"
+            items={IN_AND_MM}
+            setDefault={true}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiWidth : null}
+            valueToConvert2={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiHeight : null}
+            valueToConvert3={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiDepth : null}
+            valueToConvert1FieldName={`${sensorName}.MultiWidth`}
+            valueToConvert2FieldName={`${sensorName}.MultiHeight`}
+            valueToConvert3FieldName={`${sensorName}.MultiDepth`}
+            change={change}
+            step="0.01"
+            style={STYLES.unit}
           />
         </div>
-        <LogbookTextField
-          fieldName={`${sensorName}.MultiDepth`}
-          fieldLabel="Depth"
-          type="number"
-          step="0.01"
-        />
-        <LogbookSelectField
-          fieldName={`${sensorName}.MultiSizeUnit`}
-          fieldLabel="Unit"
-          items={IN_AND_MM}
-          setDefault={true}
-          valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiWidth : null}
-          valueToConvert2={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiHeight : null}
-          valueToConvert3={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiDepth : null}
-          valueToConvert1FieldName={`${sensorName}.MultiWidth`}
-          valueToConvert2FieldName={`${sensorName}.MultiHeight`}
-          valueToConvert3FieldName={`${sensorName}.MultiDepth`}
-          change={change}
-          step="0.01"
-        />
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.MultiWeight`}
             fieldLabel="Weight"
             type="number"
-            step="0.1"
-            style={UNIT_STYLE}
+            step="0.01"
+            style={STYLES.unit}
           />
           <LogbookSelectField
             fieldName={`${sensorName}.MultiWeightUnit`}
@@ -216,38 +208,17 @@ export default class MultispectralForm extends React.Component {
             valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiWeight : null}
             valueToConvert1FieldName={`${sensorName}.MultiWeight`}
             change={change}
-            step="0.1"
+            step="0.01"
+            style={STYLES.unit}
           />
         </div>
+        <Subheader style={STYLES.subheader}>Spatial and Spectral Bands</Subheader>
         <LogbookTextField
           fieldName={`${sensorName}.MultiBands`}
           fieldLabel="Number of spectral bands"
           type="number"
         />
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.MultiGSD`}
-            fieldLabel="Ground sample distance"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookSelectField
-            fieldName={`${sensorName}.MultiGSDUnit`}
-            fieldLabel="Unit"
-            items={IN_AND_MM}
-            setDefault={true}
-            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiGSD : null}
-            valueToConvert1FieldName={`${sensorName}.MultiGSD`}
-            change={change}
-            step="0.1"
-          />
-        </div>
-        <LogbookTextField
-          fieldName={`${sensorName}.MultiHFOV`}
-          fieldLabel="Horizontal Field of View (degree)"
-          style={UNIT_STYLE}
-        />
+        <Subheader style={STYLES.subheader}>Camera</Subheader>
         <LogbookSelectField
           fieldName={`${sensorName}.MultiTriggeringOption`}
           fieldLabel="Triggering option"
@@ -257,66 +228,77 @@ export default class MultispectralForm extends React.Component {
         />
         <div style={{display: 'flex'}}>
           <LogbookTextField
-            fieldName={`${sensorName}.MultiPixelSize`}
-            fieldLabel="Pixel size (microns)"
+            fieldName={`${sensorName}.MultiGSD`}
+            fieldLabel="Ground sample distance"
             type="number"
-            step="0.1"
-            style={UNIT_STYLE}
+            step="0.01"
+            style={STYLES.shortField}
           />
-          <LogbookTextField
-            fieldName={`${sensorName}.MultiPixelDepth`}
-            fieldLabel="Pixel depth"
-            type="number"
-            step="0.1"
+          <LogbookSelectField
+            fieldName={`${sensorName}.MultiGSDUnit`}
+            fieldLabel="Unit"
+            items={IN_AND_MM}
+            setDefault={true}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiGSD : null}
+            valueToConvert1FieldName={`${sensorName}.MultiGSD`}
+            change={change}
+            step="0.01"
+            style={STYLES.unit}
           />
         </div>
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiHFOV`}
+          fieldLabel="Horizontal Field of View (degree)"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiPixelSize`}
+          fieldLabel="Pixel size (microns)"
+          type="number"
+          step="0.01"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiPixelDepth`}
+          fieldLabel="Pixel depth"
+          type="number"
+          step="0.01"
+        />
         <LogbookTextField
           fieldName={`${sensorName}.MultiFrameRate`}
           fieldLabel="Frame rate (Hz)"
           type="number"
-          step="0.1"
+          step="0.01"
         />
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.MultiImageFormat`}
-            fieldLabel="Image data format"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.MultiVideoFormat`}
-            fieldLabel="Video data format"
-          />
-        </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.MultiElectronicShutter`}
-            fieldLabel="Electronic shutter"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.MultiGain`}
-            fieldLabel="Gain selection"
-            type="number"
-            step="0.1"
-          />
-        </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.MultiVoltage`}
-            fieldLabel="Voltage requirement (V)"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.MultiPower`}
-            fieldLabel="Power consumption (W)"
-            type="number"
-            step="0.1"
-          />
-        </div>
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiElectronicShutter`}
+          fieldLabel="Electronic shutter"
+          type="number"
+          step="0.01"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiGain`}
+          fieldLabel="Gain selection"
+          type="number"
+          step="0.01"
+        />
+        <Subheader style={STYLES.subheader}>Outputs</Subheader>
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiImageFormat`}
+          fieldLabel="Image data format"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiVideoFormat`}
+          fieldLabel="Video data format"
+        />
+        <Subheader style={STYLES.subheader}>Inputs and Power Consumption</Subheader>
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiVoltage`}
+          fieldLabel="Voltage requirement (V)"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiPower`}
+          fieldLabel="Power consumption (W)"
+        />
+        <Subheader style={STYLES.subheader}>Share</Subheader>
         <Field
           name={`${sensorName}.MultiSave`}
           label="Share this sensor with community"

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Field } from 'redux-form'
+import { Field } from 'redux-form';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
 import SaveSensorHelp from '../../helpers/SaveSensorHelp';
@@ -11,8 +13,22 @@ import communitySensors from '../../helpers/communitySensors';
 
 const PAGE_NAME = 'payload_Sensors';
 
-const UNIT_STYLE = {
-  display: 'inline-block', marginRight: 15,
+const STYLES = {
+  divider: {
+    marginTop: 10,
+  },
+  shortField: {
+    marginRight: 10,
+    width: 128,
+  },
+  subheader: {
+    paddingLeft: 0,
+    marginTop: 15,
+  },
+  unit: {
+    marginRight: 10,
+    width: 64,
+  },
 }
 
 const IN_AND_MM = [
@@ -60,13 +76,13 @@ export default class ThermalForm extends React.Component {
     const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
+        <Subheader style={STYLES.subheader}>Make and Model</Subheader>
         <LogbookTextField
           fieldName={`${sensorName}.ThermalMake`}
           fieldLabel="Make"
           setDefault={true}
           defaultValue={formValues.dataCollection_Sensors[index].Make}
           change={change}
-          style={UNIT_STYLE}
         />
         <LogbookTextField
           fieldName={`${sensorName}.ThermalModel`}
@@ -75,64 +91,63 @@ export default class ThermalForm extends React.Component {
           defaultValue={formValues.dataCollection_Sensors[index].Model}
           change={change}
         />
-        Dimensions
+        <Subheader style={STYLES.subheader}>Dimensions (WxHxD) and Weight</Subheader>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.ThermalDimensionWidth`}
             fieldLabel="Width"
             type="number"
             step="0.01"
-            style={UNIT_STYLE}
+            style={STYLES.unit}
           />
           <LogbookTextField
             fieldName={`${sensorName}.ThermalDimensionHeight`}
             fieldLabel="Height"
             type="number"
             step="0.01"
+            style={STYLES.unit}
+          />
+          <LogbookTextField
+            fieldName={`${sensorName}.ThermalDimensionDepth`}
+            fieldLabel="Depth"
+            type="number"
+            step="0.01"
+            style={STYLES.unit}
+          />
+          <LogbookSelectField
+            fieldName={`${sensorName}.ThermalDimensionSizeUnit`}
+            fieldLabel="Unit"
+            items={IN_AND_MM}
+            setDefault={true}
+            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].ThermalDimensionWidth : null}
+            valueToConvert2={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].ThermalDimensionHeight : null}
+            valueToConvert3={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].ThermalDimensionDepth : null}
+            valueToConvert1FieldName={`${sensorName}.ThermalDimensionWidth`}
+            valueToConvert2FieldName={`${sensorName}.ThermalDimensionHeight`}
+            valueToConvert3FieldName={`${sensorName}.ThermalDimensionDepth`}
+            change={change}
+            step="0.01"
+            style={STYLES.unit}
           />
         </div>
+        <Subheader style={STYLES.subheader}>Spatial and Spectral Bands</Subheader>
         <LogbookTextField
-          fieldName={`${sensorName}.ThermalDimensionDepth`}
-          fieldLabel="Depth"
-          type="number"
-          step="0.01"
+          fieldName={`${sensorName}.ThermalSpectralBand`}
+          fieldLabel="Spectral band (microns)"
         />
-        <LogbookSelectField
-          fieldName={`${sensorName}.ThermalDimensionSizeUnit`}
-          fieldLabel="Dimensions Unit"
-          items={IN_AND_MM}
-          setDefault={true}
-          valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].ThermalDimensionWidth : null}
-          valueToConvert2={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].ThermalDimensionHeight : null}
-          valueToConvert3={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].ThermalDimensionDepth : null}
-          valueToConvert1FieldName={`${sensorName}.ThermalDimensionWidth`}
-          valueToConvert2FieldName={`${sensorName}.ThermalDimensionHeight`}
-          valueToConvert3FieldName={`${sensorName}.ThermalDimensionDepth`}
-          change={change}
-          step="0.01"
+        <Subheader style={STYLES.subheader}>Camera</Subheader>
+        <LogbookTextField
+          fieldName={`${sensorName}.ThermalFrameRate`}
+          fieldLabel="Frame rate (Hz)"
         />
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.ThermalSpectralBand`}
-            fieldLabel="Spectral band (microns)"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.ThermalFrameRate`}
-            fieldLabel="Frame rate (Hz)"
-          />
-        </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.ThermalImager`}
-            fieldLabel="Imager"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.ThermalMeasurementAcc`}
-            fieldLabel="Measurement accuracy"
-          />
-        </div>
+        <LogbookTextField
+          fieldName={`${sensorName}.ThermalImager`}
+          fieldLabel="Imager"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.ThermalMeasurementAcc`}
+          fieldLabel="Measurement accuracy"
+        />
         {/* Sensor resolution
         <div style={{display: 'flex'}}>
           <LogbookTextField
@@ -175,18 +190,16 @@ export default class ThermalForm extends React.Component {
             step="0.1"
           />
         </div> */}
+        <Subheader style={STYLES.subheader}>Inputs and Power Consumption</Subheader>
         <LogbookTextField
           fieldName={`${sensorName}.ThermalVoltage`}
           fieldLabel="Voltage requirement (V)"
-          type="number"
-          step="0.1"
         />
         <LogbookTextField
           fieldName={`${sensorName}.ThermalPower`}
           fieldLabel="Power consumption (W)"
-          type="number"
-          step="0.1"
         />
+        <Subheader style={STYLES.subheader}>Share</Subheader>
         <Field
           name={`${sensorName}.ThermalSave`}
           label="Share this sensor with community"
@@ -203,6 +216,7 @@ export default class ThermalForm extends React.Component {
         {this.state.showHelp &&
           <div><SaveSensorHelp sensorName={sensorName} /></div>
         }
+        <Divider style={STYLES.divider} />
       </div>
     )
   }

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Field } from 'redux-form'
+import { Field } from 'redux-form';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 import LogbookSelectField from '../../helpers/LogbookSelectField';
 import LogbookTextField from '../../helpers/LogbookTextField';
 import SaveSensorHelp from '../../helpers/SaveSensorHelp';
@@ -11,8 +13,22 @@ import communitySensors from '../../helpers/communitySensors';
 
 const PAGE_NAME = 'payload_Sensors';
 
-const UNIT_STYLE = {
-  display: 'inline-block', marginRight: 15,
+const STYLES = {
+  divider: {
+    marginTop: 10,
+  },
+  shortField: {
+    marginRight: 10,
+    width: 128,
+  },
+  subheader: {
+    paddingLeft: 0,
+    marginTop: 15,
+  },
+  unit: {
+    marginRight: 10,
+    width: 64,
+  },
 }
 
 const IN_AND_CM = [
@@ -69,13 +85,13 @@ export default class LidarForm extends React.Component {
     const { index, sensorName, formValues, change } = this.props;
     return (
       <div>
+        <Subheader style={STYLES.subheader}>Make and Model</Subheader>
         <LogbookTextField
           fieldName={`${sensorName}.LidarMake`}
           fieldLabel="Make"
           setDefault={true}
           defaultValue={formValues.dataCollection_Sensors[index].Make}
           change={change}
-          style={UNIT_STYLE}
         />
         <LogbookTextField
           fieldName={`${sensorName}.LidarModel`}
@@ -84,13 +100,14 @@ export default class LidarForm extends React.Component {
           defaultValue={formValues.dataCollection_Sensors[index].Model}
           change={change}
         />
+        <Subheader style={STYLES.subheader}>Weight</Subheader>
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.LidarWeight`}
             fieldLabel="Weight"
             type="number"
             step="0.01"
-            style={UNIT_STYLE}
+            style={STYLES.unit}
           />
           <LogbookSelectField
             fieldName={`${sensorName}.LidarWeightUnit`}
@@ -101,26 +118,25 @@ export default class LidarForm extends React.Component {
             valueToConvert1FieldName={`${sensorName}.LidarWeight`}
             change={change}
             step="0.01"
+            style={STYLES.unit}
           />
         </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.LidarHorizontalFOV`}
-            fieldLabel="Horizontal FOV (Degree)"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.LidarVerticalFOV`}
-            fieldLabel="Vertical FOV (Degree)"
-          />
-        </div>
+        <Subheader style={STYLES.subheader}>Camera</Subheader>
+        <LogbookTextField
+          fieldName={`${sensorName}.LidarHorizontalFOV`}
+          fieldLabel="Horizontal FOV (Degree)"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.LidarVerticalFOV`}
+          fieldLabel="Vertical FOV (Degree)"
+        />
         <div style={{display: 'flex'}}>
           <LogbookTextField
             fieldName={`${sensorName}.LidarMinRange`}
             fieldLabel="Minimum range"
             type="number"
             step="0.01"
-            style={UNIT_STYLE}
+            style={STYLES.shortField}
           />
           <LogbookSelectField
             fieldName={`${sensorName}.LidarMinRangeUnit`}
@@ -131,6 +147,7 @@ export default class LidarForm extends React.Component {
             valueToConvert1FieldName={`${sensorName}.LidarMinRange`}
             change={change}
             step="0.01"
+            style={STYLES.unit}
           />
         </div>
         <div style={{display: 'flex'}}>
@@ -139,7 +156,7 @@ export default class LidarForm extends React.Component {
             fieldLabel="Maximum range"
             type="number"
             step="0.01"
-            style={UNIT_STYLE}
+            style={STYLES.shortField}
           />
           <LogbookSelectField
             fieldName={`${sensorName}.LidarMaxRangeUnit`}
@@ -150,6 +167,7 @@ export default class LidarForm extends React.Component {
             valueToConvert1FieldName={`${sensorName}.LidarMaxRange`}
             change={change}
             step="0.01"
+            style={STYLES.unit}
           />
         </div>
         <div style={{display: 'flex'}}>
@@ -158,7 +176,7 @@ export default class LidarForm extends React.Component {
             fieldLabel="Distance resolution"
             type="number"
             step="0.1"
-            style={UNIT_STYLE}
+            style={STYLES.shortField}
           />
           <LogbookSelectField
             fieldName={`${sensorName}.LidarDistResolutionUnit`}
@@ -169,38 +187,27 @@ export default class LidarForm extends React.Component {
             valueToConvert1FieldName={`${sensorName}.LidarDistResolution`}
             change={change}
             step="0.1"
+            style={STYLES.unit}
           />
         </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.LidarScanRate`}
-            fieldLabel="Scan rate (Hz)"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.LidarAngularResolution`}
-            fieldLabel="Angular resolution (Hz)"
-            type="number"
-            step="0.1"
-          />
-        </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.LidarVoltage`}
-            fieldLabel="Voltage requirement (V)"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookTextField
-            fieldName={`${sensorName}.LidarPower`}
-            fieldLabel="Power consumption (W)"
-            type="number"
-            step="0.1"
-          />
-        </div>
+        <LogbookTextField
+          fieldName={`${sensorName}.LidarScanRate`}
+          fieldLabel="Scan rate (Hz)"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.LidarAngularResolution`}
+          fieldLabel="Angular resolution"
+        />
+        <Subheader style={STYLES.subheader}>Inputs and Power Consumption</Subheader>
+        <LogbookTextField
+          fieldName={`${sensorName}.LidarVoltage`}
+          fieldLabel="Voltage requirement (V)"
+        />
+        <LogbookTextField
+          fieldName={`${sensorName}.LidarPower`}
+          fieldLabel="Power consumption (W)"
+        />
+        <Subheader style={STYLES.subheader}>Share</Subheader>
         <Field
           name={`${sensorName}.LidarSave`}
           label="Share this sensor with community"
@@ -217,6 +224,7 @@ export default class LidarForm extends React.Component {
         {this.state.showHelp &&
           <div><SaveSensorHelp sensorName={sensorName} /></div>
         }
+        <Divider style={STYLES.divider} />
       </div>
     )
   }

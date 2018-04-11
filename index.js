@@ -199,7 +199,6 @@ if (cluster.isMaster) {
 
   app.post('/api/save', function (req, res) {
     const sensor = req.body;
-    console.log(sensor);
     if (sensor.sensorType === 1) {
       sendMail(prepRGBEmail(sensor));
     } else if (sensor.sensorType === 2) {
