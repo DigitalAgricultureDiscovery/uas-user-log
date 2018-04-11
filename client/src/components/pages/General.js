@@ -2,11 +2,12 @@ import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { DatePicker, TimePicker } from 'redux-form-material-ui';
+import { TextField } from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText }  from 'material-ui/Card';
 import FlatButton                            from 'material-ui/FlatButton';
 import IconButton                            from 'material-ui/IconButton';
 import RaisedButton                          from 'material-ui/RaisedButton';
+import Subheader                             from 'material-ui/Subheader';
 // material-ui icons
 import ActionFlightTakeoffIcon from 'material-ui/svg-icons/action/flight-takeoff';
 import DeleteForeverIcon       from 'material-ui/svg-icons/action/delete-forever';
@@ -24,6 +25,10 @@ const STYLES = {
     marginRight: 10,
     width: 123,
   },
+  subheader: {
+    paddingLeft: 0,
+    marginTop: 15,
+  },
 };
 
 class FlightDatePicker extends React.Component {
@@ -32,9 +37,11 @@ class FlightDatePicker extends React.Component {
       <Field
         name={`${PAGE_NAME}FlightDate`}
         className={this.props.required ? "required" : null}
-        component={DatePicker}
+        component={TextField}
         format={null}
+        type="date"
         floatingLabelText="Date of flight(s)"
+        floatingLabelFixed={true}
       />
     )
   }
@@ -75,6 +82,7 @@ const renderFlights = ({ fields, change, meta: { touched, error, submitFailed } 
           >
             <DeleteForeverIcon color={red500} />
           </IconButton>
+          {index === 0 ? <Subheader style={STYLES.subheader}>Time format - HH:MM AM or PM. For example, 04:30 PM</Subheader> : null}
           <FlightTimeStartPicker fieldName={`${flight}.Start`} required={true} />
           <FlightTimeEndPicker fieldName={`${flight}.End`} required={true} />
           <Location
@@ -97,9 +105,13 @@ class FlightTimeStartPicker extends React.Component {
       <Field
         name={this.props.fieldName}
         className={this.props.required ? "required" : null}
-        component={TimePicker}
+        component={TextField}
         format={null}
+        type="time"
         floatingLabelText="Start of flight time"
+        floatingLabelFixed={true}
+        style={{display: 'block'}}
+        defaultValue="16:00"
       />
     )
   }
@@ -111,9 +123,13 @@ class FlightTimeEndPicker extends React.Component {
       <Field
         name={this.props.fieldName}
         className={this.props.required ? "required" : null}
-        component={TimePicker}
+        component={TextField}
         format={null}
+        type="time"
         floatingLabelText="End of flight time"
+        floatingLabelFixed={true}
+        style={{display: 'block'}}
+        defaultValue="17:30"
       />
     )
   }
