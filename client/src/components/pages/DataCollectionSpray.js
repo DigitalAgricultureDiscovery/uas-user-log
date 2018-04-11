@@ -164,7 +164,7 @@ class DataCollectionSpray extends React.Component {
               required={true}
               type="number"
               step="0.01"
-              style={STYLES.shortField}
+              style={STYLES.shortFieldB}
               min="0.1"
             />
             <LogbookSelectField
@@ -176,7 +176,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1FieldName={`${PAGE_NAME}StartingVolume`}
               change={this.props.change}
               step="0.01"
-              style={STYLES.unit}
+              style={STYLES.unitB}
             />
           </div>
           <LogbookTextField
@@ -203,7 +203,7 @@ class DataCollectionSpray extends React.Component {
               required={true}
               type="number"
               step="0.01"
-              style={STYLES.shortField}
+              style={STYLES.shortFieldB}
               min="0.01"
             />
             <LogbookSelectField
@@ -215,7 +215,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1FieldName={`${PAGE_NAME}Pressure`}
               change={this.props.change}
               step="0.01"
-              style={STYLES.unit}
+              style={STYLES.unitB}
             />
           </div>
           <div style={{marginTop: 15}}>Effective swath</div>
