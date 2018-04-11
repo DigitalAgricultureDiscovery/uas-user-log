@@ -118,7 +118,7 @@ class Welcome extends React.Component {
             It is an outcome of multi-state teams working together to develop
             a common protocol for unmanned aircraft systems (UAS) operation
             for purposes such as research/production, spray application, and
-            any other activity of interest . It ​relies on simple user
+            any other activity of interest. It ​relies on simple user
             interactions to develop a record of UAS mission and can also serve
             to enhance your flight and maintenance experience.​
           </p>
