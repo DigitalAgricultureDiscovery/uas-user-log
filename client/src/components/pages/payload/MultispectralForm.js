@@ -243,25 +243,11 @@ export default class MultispectralForm extends React.Component {
             step="0.1"
           />
         </div>
-        <div style={{display: 'flex'}}>
-          <LogbookTextField
-            fieldName={`${sensorName}.MultiHFOV`}
-            fieldLabel="Horizontal Field of View"
-            type="number"
-            step="0.1"
-            style={UNIT_STYLE}
-          />
-          <LogbookSelectField
-            fieldName={`${sensorName}.MultiHFOVUnit`}
-            fieldLabel="Unit"
-            items={IN_AND_MM}
-            setDefault={true}
-            valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].MultiHFOV : null}
-            valueToConvert1FieldName={`${sensorName}.MultiHFOV`}
-            change={change}
-            step="0.1"
-          />
-        </div>
+        <LogbookTextField
+          fieldName={`${sensorName}.MultiHFOV`}
+          fieldLabel="Horizontal Field of View (degree)"
+          style={UNIT_STYLE}
+        />
         <LogbookSelectField
           fieldName={`${sensorName}.MultiTriggeringOption`}
           fieldLabel="Triggering option"
