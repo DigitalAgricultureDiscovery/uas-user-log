@@ -23,7 +23,6 @@ class IOSHelp extends React.Component {
 }
 
 async function saveSensor(sensor) {
-  console.log('saveSensor', sensor);
   const response = await fetch('/api/save', {
     method: 'POST',
     headers: {
@@ -63,12 +62,13 @@ class Finish extends React.Component {
     // Check for saved sensors and send to server
     if (this.props.formValues.payload_Sensors && this.props.formValues.payload_Sensors.length > 0) {
       this.props.formValues.payload_Sensors.forEach((sensor, index) => {
-        console.log('sensor: ', sensor);
-        if (sensor.RGBSave) {
-          // send to server
+        if (sensor.RGBSave || sensor.MultiSave || sensor.HyperSave || sensor.LidarSave || sensor.ThermalSave) {
+          // Append sensor type
+          sensor.sensorType = this.props.formValues.dataCollection_Sensors[index].Type;
+          // Send to server
           saveSensor(sensor)
             .then(data => {
-              console.log(data);
+              // console.log(data);
             })
             .catch(err => {
               console.log(err.message);
