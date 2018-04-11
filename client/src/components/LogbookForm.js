@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import { reset } from 'redux-form';
 // material-ui elements
 import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
@@ -147,6 +148,10 @@ class LogbookForm extends React.Component {
     this.clearAndReturn = this.clearAndReturn.bind(this);
     this.stepperChangePage = this.stepperChangePage.bind(this);
     this.updatePlanningType = this.updatePlanningType.bind(this);
+
+    // Add Google Analytics
+    ReactGA.initialize('UA-78284792-5');
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   nextPage() {
