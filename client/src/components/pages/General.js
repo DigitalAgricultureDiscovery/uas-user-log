@@ -38,7 +38,6 @@ class FlightDatePicker extends React.Component {
         name={`${PAGE_NAME}FlightDate`}
         className={this.props.required ? "required" : null}
         component={TextField}
-        format={null}
         type="date"
         floatingLabelText="Date of flight(s)"
         floatingLabelFixed={true}
@@ -106,7 +105,6 @@ class FlightTimeStartPicker extends React.Component {
         name={this.props.fieldName}
         className={this.props.required ? "required" : null}
         component={TextField}
-        format={null}
         type="time"
         floatingLabelText="Start of flight time"
         floatingLabelFixed={true}
@@ -124,7 +122,6 @@ class FlightTimeEndPicker extends React.Component {
         name={this.props.fieldName}
         className={this.props.required ? "required" : null}
         component={TextField}
-        format={null}
         type="time"
         floatingLabelText="End of flight time"
         floatingLabelFixed={true}
