@@ -98,7 +98,8 @@ class Welcome extends React.Component {
 
   onReaderLoad(event) {
     // Add loaded JSON file to store
-    const obj = this.convertFlightDatesAndTimes(JSON.parse(event.target.result));
+    // const obj = this.convertFlightDatesAndTimes(JSON.parse(event.target.result));
+    const obj = JSON.parse(event.target.result);
     this.props.change('initialValuesFromJSON', obj);
   }
 

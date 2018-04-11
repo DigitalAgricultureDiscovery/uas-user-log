@@ -4,7 +4,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import LogbookSelectField from '../helpers/LogbookSelectField';
 import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
-import { DatePicker }                         from 'redux-form-material-ui';
+import { TextField }                         from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText }   from 'material-ui/Card';
 import FlatButton                             from 'material-ui/FlatButton';
 import RaisedButton                           from 'material-ui/RaisedButton';
@@ -24,10 +24,11 @@ class YearDatePicker extends React.Component {
       <Field
         name={`${PAGE_NAME}YearDate`}
         className={this.props.required ? "required" : null}
-        component={DatePicker}
+        component={TextField}
         format={null}
+        type="date"
         floatingLabelText="Year of planting"
-        openToYearSelection={true}
+        floatingLabelFixed={true}
       />
     )
   }
