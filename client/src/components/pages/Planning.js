@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import LogbookSelectField from '../helpers/LogbookSelectField';
@@ -22,6 +23,12 @@ const PLANNING_TYPES = [
 
 // Planning card
 class Planning extends React.Component {
+  constructor(props) {
+    super(props);
+    ReactGA.initialize('UA-78284792-5');
+    ReactGA.pageview('Planning');
+  }
+
   componentDidUpdate() {
     if (this.props.currentPlanningType) {
       this.props.updatePlanningType(this.props.currentPlanningType);
