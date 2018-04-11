@@ -287,6 +287,10 @@ const renderSensors = ({ fields, change, currentSensors, meta: { touched, error,
 );
 
 class DataCollectionResearch extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Data Collection Research');
+  }
+
   render() {
     const { handleSubmit, previousPage, currentSensors } = this.props;
     return (

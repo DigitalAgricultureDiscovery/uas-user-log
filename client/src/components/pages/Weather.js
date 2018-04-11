@@ -288,6 +288,10 @@ class Weather extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.trackPage('Weather');
+  }
+
   updateLocation(location) {
     this.setState({location: location});
   }

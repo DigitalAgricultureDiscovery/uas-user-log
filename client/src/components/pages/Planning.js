@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactGA from 'react-ga';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import LogbookSelectField from '../helpers/LogbookSelectField';
@@ -23,10 +22,8 @@ const PLANNING_TYPES = [
 
 // Planning card
 class Planning extends React.Component {
-  constructor(props) {
-    super(props);
-    ReactGA.initialize('UA-78284792-5');
-    ReactGA.pageview('Planning');
+  componentDidMount() {
+    this.props.trackPage('Planning');
   }
 
   componentDidUpdate() {
@@ -37,7 +34,6 @@ class Planning extends React.Component {
 
   render() {
     const { handleSubmit, previousPage, currentPlanningType } = this.props;
-
     return (
       <form onSubmit={handleSubmit}>
         <CardTitle title="Planning" />

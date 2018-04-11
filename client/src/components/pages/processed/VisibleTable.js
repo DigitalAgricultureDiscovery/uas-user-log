@@ -51,7 +51,7 @@ export default class VisibleTable extends React.Component {
           </TableRow> */}
           {/* Rating 1 */}
           <TableRow selected={this.props.currentSelections.indexOf('Rating0') > -1 ? true : false}>
-            <TableRowColumn>Rating Level 1<br />{'(< 9 meters)'}</TableRowColumn>
+            <TableRowColumn>Rating Level 1<br />{'(> 9 meters)'}</TableRowColumn>
             <TableRowColumn style={STYLE.tableRow}>
               <ul>
                 <li>Detect large (i.e., greater than 100 acre) slash and burn clearings in jungle areas. (NIIRS 1.4)</li>

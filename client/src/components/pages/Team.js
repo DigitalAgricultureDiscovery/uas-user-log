@@ -102,7 +102,7 @@ const renderRemotePICs = ({ fields, change, meta: { touched, error, submitFailed
             <DeleteForeverIcon color={red500} />
           </IconButton>
           <LogbookTextField fieldName={`${remotePIC}.Name`} fieldLabel="Name" required={true} />
-          <LogbookTextField fieldName={`${remotePIC}.License`} fieldLabel="License #" required={true} />
+          <LogbookTextField fieldName={`${remotePIC}.License`} fieldLabel="Certificate number" required={true} />
         </li>
       )}
     </ul>
@@ -290,6 +290,10 @@ const renderVOs = ({ fields, change }) => (
 );
 
 class Team extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Team');
+  }
+
   render() {
     const { handleSubmit, previousPage } = this.props;
 

@@ -88,6 +88,10 @@ class GroundControlChargeSubForm extends React.Component {
 }
 
 class Hardware extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Hardware');
+  }
+
   render() {
     const { handleSubmit, previousPage } = this.props;
 

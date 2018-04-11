@@ -78,6 +78,10 @@ class ReturnHomeCheckbox extends React.Component {
 }
 
 class FlightParameters extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Flight Parameters');
+  }
+
   render() {
     const { handleSubmit, previousPage, currentAGLMaximum, currentAGLMinimum, currentPlanningType } = this.props;
     return (

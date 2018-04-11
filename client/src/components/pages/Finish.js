@@ -42,6 +42,10 @@ class Finish extends React.Component {
     this.checkIOS = this.checkIOS.bind(this);
   }
 
+  componentDidMount() {
+    this.props.trackPage('Finish');
+  }
+
   getTimestampFilename() {
     const now = new Date();
     const year = now.getFullYear().toString();
