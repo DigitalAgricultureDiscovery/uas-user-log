@@ -25,7 +25,6 @@ class YearDatePicker extends React.Component {
         name={`${PAGE_NAME}YearDate`}
         className={this.props.required ? "required" : null}
         component={TextField}
-        format={null}
         type="date"
         floatingLabelText="Year of planting"
         floatingLabelFixed={true}
