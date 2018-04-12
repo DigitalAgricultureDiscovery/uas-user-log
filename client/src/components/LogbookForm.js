@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactGA from 'react-ga';
 import { reset } from 'redux-form';
 // material-ui elements
 import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
@@ -148,9 +147,6 @@ class LogbookForm extends React.Component {
     this.clearAndReturn = this.clearAndReturn.bind(this);
     this.stepperChangePage = this.stepperChangePage.bind(this);
     this.updatePlanningType = this.updatePlanningType.bind(this);
-    this.trackPage = this.trackPage.bind(this);
-
-    ReactGA.initialize('UA-78284792-5');
   }
 
   nextPage() {
@@ -176,10 +172,6 @@ class LogbookForm extends React.Component {
     this.setState({'planningType': index});
   };
 
-  trackPage(pageName) {
-    ReactGA.pageview(pageName);
-  }
-
   render() {
     const { pageIndex } = this.state;
     const contentStyle = { margin: '0 16px' };
@@ -199,7 +191,7 @@ class LogbookForm extends React.Component {
                 <Welcome
                   onSubmit={this.nextPage}
                   clearAndReturn={this.clearAndReturn}
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 1 && (
@@ -207,49 +199,49 @@ class LogbookForm extends React.Component {
                   updatePlanningType={this.updatePlanningType}
                   previousPage={this.previousPage}
                   onSubmit={this.nextPage}
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 2 && (
                 <Crop
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 3 && (
                 <General
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 4 && (
                 <Team
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 5 && (
                 <Hardware
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 6 && (
                 <Battery
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 7 && (
                 <FlightOperation
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 8 && (
@@ -257,69 +249,69 @@ class LogbookForm extends React.Component {
                   <DataCollectionResearch
                     previousPage={ this.previousPage }
                     onSubmit={ this.nextPage }
-                    trackPage={this.trackPage}
+                    trackPage={this.props.trackPage}
                   />
                 :
                   <DataCollectionSpray
                     previousPage={ this.previousPage }
                     onSubmit={ this.nextPage }
-                    trackPage={this.trackPage}
+                    trackPage={this.props.trackPage}
                   />
               )}
               { pageIndex === 9 && (
                 <B4UFLY
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 10 && (
                 <Obstacles
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 11 && (
                 <People
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 12 && (
                 <FlightParameters
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { pageIndex === 13 && (
                 <Weather
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { this.state.planningType !== 3 && pageIndex === 14 && (
                 <Payload
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { this.state.planningType !== 3 && pageIndex === 15 && (
                 <Processed
                   previousPage={ this.previousPage }
                   onSubmit={ this.nextPage }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               { (pageIndex === 16 || (this.state.planningType === 3 && pageIndex === 14)) && (
                 <Finish
                   previousPage={ this.previousPage }
                   clearAndReturn={ this.clearAndReturn }
-                  trackPage={this.trackPage}
+                  trackPage={this.props.trackPage}
                 />
               )}
               <ProgressBar value={pageIndex} planningType={this.state.planningType} />

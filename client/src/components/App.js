@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import ReactGA from 'react-ga';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Disclaimer from './Disclaimer';
@@ -8,6 +9,16 @@ import Footer from './Footer';
 import LogbookForm from './LogbookForm';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.trackPage = this.trackPage.bind(this);
+    ReactGA.initialize('UA-78284792-5');
+  }
+
+  trackPage(pageName) {
+    ReactGA.pageview(pageName);
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -16,9 +27,9 @@ class App extends React.Component {
             <MuiThemeProvider>
               <Header />
             </MuiThemeProvider>
-            <Route exact path="/" component={LogbookForm} dispatch={this.props.dispatch} />
+            <Route exact path="/" render={()=><LogbookForm dispatch={this.props.dispatch} trackPage={this.trackPage} />} />
             <MuiThemeProvider>
-              <Route exact path="/disclaimer" component={Disclaimer} />
+              <Route exact path="/disclaimer" render={()=><Disclaimer trackPage={this.trackPage} />} />
             </MuiThemeProvider>
           </div>
           <MuiThemeProvider>
