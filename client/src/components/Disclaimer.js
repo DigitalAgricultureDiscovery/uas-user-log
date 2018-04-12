@@ -14,6 +14,10 @@ const muiTheme = getMuiTheme({
 });
 
 export default class Disclaimer extends React.Component {
+  componentDidMount() {
+    this.props.trackPage('Disclaimer');
+  }
+
   render() {
     const contentStyle = { margin: '0 16px' };
     const divStyle = {
