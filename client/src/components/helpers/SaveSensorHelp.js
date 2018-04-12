@@ -16,12 +16,11 @@ export default class SaveSensorHelpText extends React.Component {
         zDepth={1}
       >
         <div>
-          By toggling the switch to yes, you agree to provide information
-          related to make and model of sUAS platform and sensor specifications
-          for updating publicly available choices for other users of uasuserlog
-          app. All new information will be reviewed before it is made available
-          to the user community. Please note that none of your personal
-          information is collected by exercising this option.
+          By moving the toggle switch to the right, you agree to submit sensor
+          specifications for updating publicly available choices for other
+          users of this tool. All submitted information may be reviewed before
+          it becomes part of community sensor database. Please note that none
+          of your personal information is collected by exercising this option.​
         </div>
       </Paper>
     )
