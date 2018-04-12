@@ -49,7 +49,7 @@ const OZ_AC_AND_ML_HA = [
 ];
 
 const GAL_AC_AND_L_HA = [
-  {value: 1, name: 'gal/ac', rate: 0.1069},
+  {value: 1, name: 'gal/ac', rate: 0.01069},
   {value: 2, name: 'l/ha', rate: 9.3540},
 ];
 
@@ -59,7 +59,7 @@ const GAL_AND_L = [
 ];
 
 const PSI_AND_KPA = [
-  {value: 1, name: 'psi', rate: 0.145038},
+  {value: 1, name: 'psi', rate: 0.0145038},
   {value: 2, name: 'kPa', rate: 6.89476},
 ];
 
@@ -123,9 +123,9 @@ class DataCollectionSpray extends React.Component {
               fieldLabel="Application rate"
               required={true}
               type="number"
-              step="0.1"
+              step="0.01"
               style={STYLES.shortFieldB}
-              min="0.1"
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}ApplicationRateUnit`}
@@ -135,7 +135,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1={currentApplicationRate}
               valueToConvert1FieldName={`${PAGE_NAME}ApplicationRate`}
               change={this.props.change}
-              step="0.1"
+              step="0.01"
               style={STYLES.unitB}
             />
           </div>
@@ -145,9 +145,9 @@ class DataCollectionSpray extends React.Component {
               fieldLabel="Chemical rate"
               required={true}
               type="number"
-              step="0.1"
+              step="0.01"
               style={STYLES.shortFieldB}
-              min="0.1"
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}ChemicalRateUnit`}
@@ -157,7 +157,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1={currentChemicalRate}
               valueToConvert1FieldName={`${PAGE_NAME}ChemicalRate`}
               change={this.props.change}
-              step="0.1"
+              step="0.01"
               style={STYLES.unitB}
             />
           </div>
@@ -169,7 +169,7 @@ class DataCollectionSpray extends React.Component {
               type="number"
               step="0.01"
               style={STYLES.shortFieldB}
-              min="0.1"
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}StartingVolumeUnit`}
@@ -229,9 +229,9 @@ class DataCollectionSpray extends React.Component {
               fieldLabel="Distance between passes"
               required={true}
               type="number"
-              step="0.1"
+              step="0.01"
               style={STYLES.shortField}
-              min="0.1"
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}SwathDistanceUnit`}
@@ -241,7 +241,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1={currentSwathDistance}
               valueToConvert1FieldName={`${PAGE_NAME}SwathDistance`}
               change={this.props.change}
-              step="0.1"
+              step="0.01"
               style={STYLES.unit}
             />
           </div>
@@ -251,9 +251,9 @@ class DataCollectionSpray extends React.Component {
               fieldLabel="Total target area"
               required={true}
               type="number"
-              step="0.1"
+              step="0.01"
               style={STYLES.shortField}
-              min="0.1"
+              min="0.01"
             />
             <LogbookSelectField
               fieldName={`${PAGE_NAME}SwathAreaUnit`}
@@ -263,7 +263,7 @@ class DataCollectionSpray extends React.Component {
               valueToConvert1={currentSwathArea}
               valueToConvert1FieldName={`${PAGE_NAME}SwathArea`}
               change={this.props.change}
-              step="0.1"
+              step="0.01"
               style={STYLES.unit}
             />
           </div>

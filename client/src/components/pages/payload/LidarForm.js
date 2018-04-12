@@ -175,7 +175,7 @@ export default class LidarForm extends React.Component {
             fieldName={`${sensorName}.LidarDistResolution`}
             fieldLabel="Distance resolution"
             type="number"
-            step="0.1"
+            step="0.01"
             style={STYLES.shortField}
           />
           <LogbookSelectField
@@ -186,7 +186,7 @@ export default class LidarForm extends React.Component {
             valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].LidarDistResolution : null}
             valueToConvert1FieldName={`${sensorName}.LidarDistResolution`}
             change={change}
-            step="0.1"
+            step="0.01"
             style={STYLES.unit}
           />
         </div>

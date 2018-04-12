@@ -154,7 +154,7 @@ export default class ThermalForm extends React.Component {
             fieldName={`${sensorName}.ThermalResolutionWidth`}
             fieldLabel="Width"
             type="number"
-            step="0.1"
+            step="0.01"
             style={UNIT_STYLE}
           />
           <LogbookTextField
@@ -172,7 +172,7 @@ export default class ThermalForm extends React.Component {
           fieldName={`${sensorName}.ThermalFOV`}
           fieldLabel="Visible camera FOV (degree)"
           type="number"
-          step="0.1"
+          step="0.01"
         />
         {/* Visible camera resolution
         <div style={{display: 'flex'}}>
@@ -180,14 +180,14 @@ export default class ThermalForm extends React.Component {
             fieldName={`${sensorName}.ThermalVisibleCameraWidth`}
             fieldLabel="Width"
             type="number"
-            step="0.1"
+            step="0.01"
             style={UNIT_STYLE}
           />
           <LogbookTextField
             fieldName={`${sensorName}.ThermalVisibleCameraHeight`}
             fieldLabel="Height"
             type="number"
-            step="0.1"
+            step="0.01"
           />
         </div> */}
         <Subheader style={STYLES.subheader}>Inputs and Power Consumption</Subheader>

@@ -93,13 +93,13 @@ class FlightParameters extends React.Component {
             fieldLabel="Max altitude, AGL"
             required={true}
             type="number"
-            step="0.1"
+            step="0.01"
           />
           <LogbookTextField
             fieldName={`${PAGE_NAME}AGLMinimum`}
             fieldLabel="Min altitude, AGL"
             type="number"
-            step="0.1"
+            step="0.01"
           />
           <LogbookSelectField
             fieldName={`${PAGE_NAME}AGLUnit`}
@@ -109,7 +109,7 @@ class FlightParameters extends React.Component {
             valueToConvert1FieldName={`${PAGE_NAME}AGLMaximum`}
             valueToConvert2={currentAGLMinimum}
             valueToConvert2FieldName={`${PAGE_NAME}AGLMinimum`}
-            step="0.1"
+            step="0.01"
             change={this.props.change}
           />
           <br />
