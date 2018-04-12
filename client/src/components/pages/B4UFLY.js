@@ -122,8 +122,8 @@ class B4UFLY extends React.Component {
           />
           {currentStatus > 1 &&
             <div>
-              {/* <LogbookTextField fieldName={`${PAGE_NAME}AirportOperatorContact`} fieldLabel="Airport operator contact" required={true} />
-              <LogbookTextField fieldName={`${PAGE_NAME}ControlTowerContact`} fieldLabel="Control tower contact" required={true} /> */}
+              <LogbookTextField fieldName={`${PAGE_NAME}AirportOperatorContact`} fieldLabel="Airport operator contact" required={true} />
+              <LogbookTextField fieldName={`${PAGE_NAME}ControlTowerContact`} fieldLabel="Control tower contact" required={true} />
               <LogbookTextField fieldName={`${PAGE_NAME}PriorAuthorization`} fieldLabel="Prior authorization" required={true} />
             </div>
           }
