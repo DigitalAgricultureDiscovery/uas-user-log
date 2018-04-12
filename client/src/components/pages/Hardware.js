@@ -108,7 +108,7 @@ class Hardware extends React.Component {
           />
           <LogbookTextField fieldName={`${PAGE_NAME}Make`} fieldLabel="Make" />
           <LogbookTextField fieldName={`${PAGE_NAME}Model`} fieldLabel="Model" />
-          <LogbookTextField fieldName={`${PAGE_NAME}Registration`} fieldLabel="Registration" required={true} />
+          <LogbookTextField fieldName={`${PAGE_NAME}Registration`} fieldLabel="Registration Certificate#" required={true} />
           <RemoteControlChargeSubForm />
           <GroundControlChargeSubForm />
         </CardText>
