@@ -10,16 +10,24 @@ class Header extends React.Component {
         title="UAS User Log"
         iconElementLeft={(<div/>)}
         iconElementRight={(
-          <address>
+          <div style={{display: 'flex'}}>
             <RaisedButton
-              backgroundColor="#C28E0E"
-              href="mailto:uasuserlog@gmail.com?Subject=User%20feedback"
-              target="_top"
-              label="Feedback"
-              style={{margin: 5}}
-              icon={<EmailIcon />}
+              backgroundColor="#BAA892"
+              href="/disclaimer"
+              label="Disclaimer"
+              style={{display: 'inline-block', margin: 5}}
             />
-          </address>
+            <address>
+              <RaisedButton
+                backgroundColor="#C28E0E"
+                href="mailto:uasuserlog@gmail.com?Subject=User%20feedback"
+                target="_top"
+                label="Feedback"
+                style={{display: 'inline-block', margin: 5}}
+                icon={<EmailIcon />}
+              />
+            </address>
+          </div>
         )}
         style={{backgroundColor: "#000000"}}
       />
