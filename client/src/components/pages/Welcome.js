@@ -134,21 +134,18 @@ class Welcome extends React.Component {
           </p>
           <Divider />
           <Subheader style={styles.subheader}>Contributors</Subheader>
-          Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel E. Martin (Dan) (USDA ARS),
-          Dr. Lav R. Khot (Washington State University), and Dr. Seth Murray (Texas A&M University)
-          <Subheader style={styles.subheader}>Acknowledgments</Subheader>
-          <ol style={{marginTop: 0}}>
-            <li>
-              This work was supported by the USDA National Institute of Food
-              and Agriculture, Hatch project S1069- Research and Extension
-              for Unmanned Aircraft Systems (UAS) Applications in U.S.
-              Agriculture and Natural Resources.
-            </li>
-            <li>
-              Support by Foundation for Food and Agricultural Research (FFAR)
-              through Award # 210316 is also acknowledged.
-            </li>
-          </ol>
+          <p>
+            Dr. Dharmendra Saraswat (Purdue University), Dr. Daniel E. Martin
+            (Dan) (USDA ARS), Dr. Lav R. Khot (Washington State University),
+            and Dr. Seth Murray (Texas A&M University)
+          </p>
+          <Subheader style={styles.subheader}>Acknowledgment</Subheader>
+          <p>
+            This work is supported by Hatch project 1012501 (project # S1069)
+            from the USDA National Institute of Food and Agriculture and
+            award#210316 from the Foundation for Food and Agricultural
+            Research (FFAR).​
+          </p>
           <Table style={{marginTop: 15}}>
             <TableBody displayRowCheckbox={false}>
               <TableRow>

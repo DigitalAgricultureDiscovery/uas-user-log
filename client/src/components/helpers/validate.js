@@ -243,8 +243,8 @@ const validate = values => {
   // B4UFLY status
   isRequired('b4ufly_Status');
   if (values.b4ufly_Status && values.b4ufly_Status === 2) {
-    // isRequired('b4ufly_AirportOperatorContact');
-    // isRequired('b4ufly_ControlTowerContact');
+    isRequired('b4ufly_AirportOperatorContact');
+    isRequired('b4ufly_ControlTowerContact');
     isRequired('b4ufly_PriorAuthorization');
   }
   isRequired('b4ufly_Options');
