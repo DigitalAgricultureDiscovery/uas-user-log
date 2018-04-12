@@ -17,7 +17,7 @@ const PAGE_NAME = 'b4ufly_';
 
 const STATUSES = [
   {value: 1, name: "Proceed with caution"},
-  {value: 2, name: "You are within 5 miles of an airport"},
+  {value: 2, name: "Flying in controlled airspace (Class B/C/D/E)"},
 ];
 
 const OPTIONS = [
