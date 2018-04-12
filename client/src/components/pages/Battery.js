@@ -169,23 +169,8 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
             <DeleteForeverIcon color={red500} />
           </IconButton>
           <LogbookTextField
-            fieldName={`${battery}.NumOfCells`}
-            fieldLabel="Number of cells"
-            required={true}
-            type="number"
-            min="1"
-            max="6"
-          />
-          <LogbookTextField
             fieldName={`${battery}.BatteryID`}
             fieldLabel="Battery ID"
-          />
-          <BatteryChargeSubForm
-            fullChargeName={`${battery}.FullChargeVoltage`}
-            dischargeName={`${battery}.DischargeVoltage`}
-            batteryIndex={index}
-            change={change}
-            currentBatteries={currentBatteries}
           />
           <div style={{display: 'flex'}}>
             <LogbookTextField
@@ -206,6 +191,21 @@ const renderBatteries = ({ fields, change, currentBatteries, formValues, meta: {
               style={STYLES.unit}
             />
           </div>
+          <LogbookTextField
+            fieldName={`${battery}.NumOfCells`}
+            fieldLabel="Number of cells"
+            required={true}
+            type="number"
+            min="1"
+            max="6"
+          />
+          <BatteryChargeSubForm
+            fullChargeName={`${battery}.FullChargeVoltage`}
+            dischargeName={`${battery}.DischargeVoltage`}
+            batteryIndex={index}
+            change={change}
+            currentBatteries={currentBatteries}
+          />
         </li>
       )}
     </ul>
