@@ -10,24 +10,22 @@ import LogbookForm from './LogbookForm';
 class App extends React.Component {
   render() {
     return (
-      <div className="container">
-          <BrowserRouter>
-            <div>
-              <div className="site-content">
-                <MuiThemeProvider>
-                  <Header />
-                </MuiThemeProvider>
-                <Route exact path="/" component={LogbookForm} dispatch={this.props.dispatch} />
-                <MuiThemeProvider>
-                  <Route exact path="/disclaimer" component={Disclaimer} />
-                </MuiThemeProvider>
-              </div>
-              <MuiThemeProvider>
-                <Footer />
-              </MuiThemeProvider>
-            </div>
-          </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <div className="site-content">
+            <MuiThemeProvider>
+              <Header />
+            </MuiThemeProvider>
+            <Route exact path="/" component={LogbookForm} dispatch={this.props.dispatch} />
+            <MuiThemeProvider>
+              <Route exact path="/disclaimer" component={Disclaimer} />
+            </MuiThemeProvider>
+          </div>
+          <MuiThemeProvider>
+            <Footer />
+          </MuiThemeProvider>
+        </div>
+      </BrowserRouter>
     )
   }
 }
