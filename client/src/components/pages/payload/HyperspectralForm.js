@@ -135,7 +135,7 @@ export default class HyperspectralForm extends React.Component {
             fieldName={`${sensorName}.HyperWeight`}
             fieldLabel="Weight"
             type="number"
-            step="0.1"
+            step="0.01"
             style={STYLES.shortField}
           />
           <LogbookSelectField
@@ -146,7 +146,7 @@ export default class HyperspectralForm extends React.Component {
             valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].HyperWeight : null}
             valueToConvert1FieldName={`${sensorName}.HyperWeight`}
             change={change}
-            step="0.1"
+            step="0.01"
             style={STYLES.unit}
           />
         </div>
@@ -155,7 +155,7 @@ export default class HyperspectralForm extends React.Component {
             fieldName={`${sensorName}.HyperWeightMinusLens`}
             fieldLabel="Weight w/o lens"
             type="number"
-            step="0.1"
+            step="0.01"
             style={STYLES.shortField}
           />
           <LogbookSelectField
@@ -166,7 +166,7 @@ export default class HyperspectralForm extends React.Component {
             valueToConvert1={formValues[PAGE_NAME][index] ? formValues[PAGE_NAME][index].HyperWeightMinusLens : null}
             valueToConvert1FieldName={`${sensorName}.HyperWeightMinusLens`}
             change={change}
-            step="0.1"
+            step="0.01"
             style={STYLES.unit}
           />
         </div>
