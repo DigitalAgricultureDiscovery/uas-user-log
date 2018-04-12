@@ -6,7 +6,7 @@ import { reducer as reduxFormReducer } from 'redux-form'
 import App from './components/App';
 // import registerServiceWorker from './registerServiceWorker';
 
-// registerServiceWorker();
+//const status = registerServiceWorker();
 
 const reducer = combineReducers({
   form: reduxFormReducer,
@@ -18,6 +18,7 @@ const store = (window.devToolsExtension
 
 ReactDOM.render(
   <Provider store={ store }>
+    {/* <App dispatch={ store.dispatch } swStatus={ status } /> */}
     <App dispatch={ store.dispatch } />
   </Provider>,
   document.querySelector('#root')
