@@ -20,7 +20,7 @@ export const ServiceWorkerUpdated = () => (
 export const ServiceWorkerError = () => (
   <Snackbar
     open={true}
-    message="An error has occurred. Offline access may not work."
+    message="An error has occurred. Offline access may not be available."
     autoHideDuration={5000}
   />
 );
