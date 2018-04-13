@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -15,7 +16,7 @@ class App extends React.Component {
     ReactGA.initialize('UA-78284792-5');
     // console.log(this.props.swStatus);
   }
-
+  
   trackPage(pageName) {
     ReactGA.pageview(pageName);
   }
@@ -42,4 +43,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect()(App);
