@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import { setServiceWorkerStatus } from './actions';
 import rootReducer from './reducers';
 import App from './components/App';
+import './assets/css/main.css';
 import registerServiceWorker from './registerServiceWorker';
 
 const store = (window.devToolsExtension
