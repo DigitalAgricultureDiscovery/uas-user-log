@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { reset } from 'redux-form';
+import { ServiceWorkerStatuses } from '../actions';
+import { ServiceWorkerRegistered, ServiceWorkerUpdated, ServiceWorkerError } from './helpers/ServiceWorkerNotifications';
 // material-ui elements
 import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme                  from 'material-ui/styles/getMuiTheme';
@@ -318,10 +321,15 @@ class LogbookForm extends React.Component {
             </Card>
           </div>
           {(this.state.planningType !== 3 && pageIndex > 0) ? <HorizontalNonLinearStepper pageIndex={pageIndex} changePage={this.stepperChangePage} /> : null}
+          {(this.props.store.serviceWorkerStatus === ServiceWorkerStatuses.REGISTERED ? <ServiceWorkerRegistered /> : null)}
+          {(this.props.store.serviceWorkerStatus === ServiceWorkerStatuses.UPDATED ? <ServiceWorkerUpdated /> : null)}
+          {(this.props.store.serviceWorkerStatus === ServiceWorkerStatuses.ERROR ? <ServiceWorkerError /> : null)}
         </div>
       </MuiThemeProvider>
     )
   }
 }
 
-export default LogbookForm;
+export default connect(
+  store => ({ store }),
+)(LogbookForm);
