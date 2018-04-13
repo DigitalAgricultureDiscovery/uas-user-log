@@ -11,7 +11,7 @@ class Footer extends React.Component {
         <div className="footer">
           <Table style={{backgroundColor: "inherit"}}>
             <TableBody displayRowCheckbox={false}>
-              <TableRow>
+              <TableRow displayBorder={false}>
                 <TableRowColumn style={{textAlign: 'left'}}>
                   <a href="https://purdue.edu" target="_blank" rel="noopener noreferrer">
                     <img
@@ -36,6 +36,13 @@ class Footer extends React.Component {
                       style={{width: '100%', maxWidth: '125px'}} />
                   </a>
                 </TableRowColumn>
+              </TableRow>
+              <TableRow displayBorder={false}>
+                <TableRowColumn style={{textAlign: 'left'}}></TableRowColumn>
+                <TableRowColumn style={{textAlign: 'center'}}>
+                  <a href="/disclaimer" style={{color: '#FFFFFF', textDecoration: 'none'}}>Site Disclaimer</a>
+                </TableRowColumn>
+                <TableRowColumn style={{textAlign: 'right'}}></TableRowColumn>
               </TableRow>
             </TableBody>
           </Table>
