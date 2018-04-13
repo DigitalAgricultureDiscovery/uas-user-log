@@ -10,6 +10,10 @@ import Subheader                                      from 'material-ui/Subheade
 import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
 // material-ui icons
 import HelpIcon from 'material-ui/svg-icons/action/help';
+// logos
+import ffarLogo from '../../assets/images/logos/FFAR-Logo-60@2x.png'
+import purdueLogo from '../../assets/images/logos/Purdue-Sig-Black-Gold-rgb.png';
+import saaesdLogo from '../../assets/images/logos/saaesd-logo.png';
 
 import validate from '../helpers/validate';
 
@@ -152,7 +156,7 @@ class Welcome extends React.Component {
                 <TableRowColumn style={{textAlign: "center"}}>
                   <a href="https://purdue.edu" target="_blank" rel="noopener noreferrer">
                     <img
-                      src="./images/logos/Purdue-Sig-Black-Gold-rgb.png"
+                      src={purdueLogo}
                       alt="Purdue logo"
                       style={{width: '100%'}} />
                   </a>
@@ -160,7 +164,7 @@ class Welcome extends React.Component {
                 <TableRowColumn style={{textAlign: "center"}}>
                   <a href="https://saaesd.org/" target="_blank" rel="noopener noreferrer">
                     <img
-                      src="./images/logos/logo.png"
+                      src={saaesdLogo}
                       alt="SAAESD logo"
                       style={{width: '100%'}} />
                   </a>
@@ -168,7 +172,7 @@ class Welcome extends React.Component {
                 <TableRowColumn style={{textAlign: 'center'}}>
                   <a href="http://foundationfar.org" target="_blank" rel="noopener noreferrer">
                     <img
-                      src="./images/logos/FFAR-Logo-60@2x.png"
+                      src={ffarLogo}
                       alt="FFAR logo"
                       style={{width: '100%'}} />
                   </a>

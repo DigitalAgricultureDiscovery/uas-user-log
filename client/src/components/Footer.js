@@ -1,5 +1,8 @@
 import React from 'react';
 import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
+import ffarLogo from '../assets/images/logos/FFAR-Logo-60@2x.png'
+import purdueLogo from '../assets/images/logos/Purdue-Sig-White-rgb.png';
+import saaesdLogo from '../assets/images/logos/saaesd-logo-transparent.png';
 
 class Footer extends React.Component {
   render() {
@@ -12,7 +15,7 @@ class Footer extends React.Component {
                 <TableRowColumn style={{textAlign: 'left'}}>
                   <a href="https://purdue.edu" target="_blank" rel="noopener noreferrer">
                     <img
-                      src="./images/logos/Purdue-Sig-White-rgb.png"
+                      src={purdueLogo}
                       alt="Purdue logo"
                       style={{width: '100%', maxWidth: '125px'}} />
                   </a>
@@ -20,7 +23,7 @@ class Footer extends React.Component {
                 <TableRowColumn style={{textAlign: 'center'}}>
                   <a href="https://saaesd.org/" target="_blank" rel="noopener noreferrer">
                     <img
-                      src="./images/logos/logo_transparent.png"
+                      src={saaesdLogo}
                       alt="SAAESD logo"
                       style={{width: '100%', maxWidth: '125px'}} />
                   </a>
@@ -28,7 +31,7 @@ class Footer extends React.Component {
                 <TableRowColumn style={{textAlign: 'right'}}>
                   <a href="http://foundationfar.org" target="_blank" rel="noopener noreferrer">
                     <img
-                      src="./images/logos/FFAR-Logo-60@2x.png"
+                      src={ffarLogo}
                       alt="FFAR logo"
                       style={{width: '100%', maxWidth: '125px'}} />
                   </a>
