@@ -7,7 +7,6 @@
 
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
-import React from 'react';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -47,7 +46,7 @@ export default function register() {
         });
       } else {
         // Is not local host. Just register service worker
-        return registerValidSW(swUrl);
+        registerValidSW(swUrl);
       }
     });
   }
@@ -67,20 +66,18 @@ function registerValidSW(swUrl) {
               // It's the perfect time to display a "New content is
               // available; please refresh." message in your web app.
               console.log('New content is available; please refresh.');
-              return {'serviceWorker': 'updateReady'};
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
               console.log('Content is cached for offline use.');
-              return {'serviceWorker': 'offlineReady'};
+            }
           }
         };
       };
     })
     .catch(error => {
       console.error('Error during service worker registration:', error);
-      return {'serviceWorker': 'error'};
     });
 }
 
