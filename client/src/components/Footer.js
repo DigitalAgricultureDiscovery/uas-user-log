@@ -37,15 +37,13 @@ class Footer extends React.Component {
                   </a>
                 </TableRowColumn>
               </TableRow>
-              <TableRow displayBorder={false}>
-                <TableRowColumn style={{textAlign: 'left'}}></TableRowColumn>
-                <TableRowColumn style={{textAlign: 'center'}}>
-                  <a href="/disclaimer" style={{color: '#FFFFFF', textDecoration: 'none'}}>Site Disclaimer</a>
-                </TableRowColumn>
-                <TableRowColumn style={{textAlign: 'right'}}></TableRowColumn>
-              </TableRow>
             </TableBody>
           </Table>
+          <p>
+            <span style={{textAlign: 'center', fontSize: 12}}>
+              <a href="/disclaimer" style={{color: '#FFFFFF', textDecoration: 'none'}}>Site Disclaimer</a>
+            </span>
+          </p>
         </div>
       </footer>
     )
