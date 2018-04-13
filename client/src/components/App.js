@@ -14,7 +14,6 @@ class App extends React.Component {
     super(props);
     this.trackPage = this.trackPage.bind(this);
     ReactGA.initialize('UA-78284792-5');
-    // console.log(this.props.swStatus);
   }
   
   trackPage(pageName) {
