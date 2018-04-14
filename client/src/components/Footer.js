@@ -41,6 +41,7 @@ class Footer extends React.Component {
           </Table>
           <p>
             <span style={{textAlign: 'center', fontSize: 12}}>
+              <a href="https://datastudio.google.com/embed/reporting/162Ji8O9c2rjtNEqN8_O8ohSHj7Yy7JDh/page/1M" target="_blank" rel="noopener noreferrer" style={{color: '#FFFFFF', textDecoration: 'none'}}>Site Statistics</a>&nbsp;<span style={{color: "#FFFFFF"}}>|</span>&nbsp;
               <a href="/disclaimer" style={{color: '#FFFFFF', textDecoration: 'none'}}>Site Disclaimer</a>
             </span>
           </p>
