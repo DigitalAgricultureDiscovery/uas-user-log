@@ -13,6 +13,12 @@ import validate from '../helpers/validate';
 
 const PAGE_NAME = 'people_';
 
+const STYLES = {
+  longField: {
+    width: 384,
+  },
+};
+
 class PeoplePresentRadioButtonGroup extends React.Component {
   render() {
     return (
@@ -43,7 +49,7 @@ class People extends React.Component {
         <CardTitle title="People Present" />
         <CardText>
           <PeoplePresentRadioButtonGroup />
-          {hasFAA === "faaCOA" ? <LogbookTextField fieldName={`${PAGE_NAME}COA`} fieldLabel="Please enter FAA COA# or other approval# as per local law" /> : null}
+          {hasFAA === "faaCOA" ? <LogbookTextField fieldName={`${PAGE_NAME}COA`} fieldLabel="Please enter FAA COA# or other approval# as per local law" style={STYLES.longField} /> : null}
         </CardText>
         <CardActions>
           <FlatButton
