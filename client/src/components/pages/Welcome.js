@@ -12,7 +12,8 @@ import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
 import HelpIcon from 'material-ui/svg-icons/action/help';
 // logos
 import ffarLogo from '../../assets/images/logos/FFAR-Logo-60@2x.png'
-import purdueLogo from '../../assets/images/logos/Purdue-Sig-Black-Gold-rgb.png';
+import purdueLogo512 from '../../assets/images/logos/Purdue-Sig-Black-Gold-rgb-512.png';
+import purdueLogo256 from '../../assets/images/logos/Purdue-Sig-Black-Gold-rgb-256.png';
 import saaesdLogo from '../../assets/images/logos/saaesd-logo-transparent.png';
 
 import validate from '../helpers/validate';
@@ -156,7 +157,8 @@ class Welcome extends React.Component {
                 <TableRowColumn style={{textAlign: "center"}}>
                   <a href="https://purdue.edu" target="_blank" rel="noopener noreferrer">
                     <img
-                      src={purdueLogo}
+                      src={purdueLogo256}
+                      srcSet={purdueLogo256 + ' 256w, ' + purdueLogo512 + ' 512w'}
                       alt="Purdue logo"
                       style={{width: '100%', height: 'auto'}} />
                   </a>

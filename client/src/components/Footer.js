@@ -1,7 +1,8 @@
 import React from 'react';
 import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
 import ffarLogo from '../assets/images/logos/FFAR-Logo-60@2x.png'
-import purdueLogo from '../assets/images/logos/Purdue-Sig-White-rgb.png';
+import purdueLogo512 from '../assets/images/logos/Purdue-Sig-White-rgb-512.png';
+import purdueLogo256 from '../assets/images/logos/Purdue-Sig-White-rgb-256.png';
 import saaesdLogo from '../assets/images/logos/saaesd-logo-transparent.png';
 
 class Footer extends React.Component {
@@ -15,7 +16,8 @@ class Footer extends React.Component {
                 <TableRowColumn style={{textAlign: 'left'}}>
                   <a href="https://purdue.edu" target="_blank" rel="noopener noreferrer">
                     <img
-                      src={purdueLogo}
+                      src={purdueLogo256}
+                      srcSet={purdueLogo256 + ' 256w, ' + purdueLogo512 + ' 512w'}
                       alt="Purdue logo"
                       style={{width: '100%', maxWidth: '125px'}} />
                   </a>
