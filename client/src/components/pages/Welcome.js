@@ -13,7 +13,7 @@ import HelpIcon from 'material-ui/svg-icons/action/help';
 // logos
 import ffarLogo from '../../assets/images/logos/FFAR-Logo-60@2x.png'
 import purdueLogo from '../../assets/images/logos/Purdue-Sig-Black-Gold-rgb.png';
-import saaesdLogo from '../../assets/images/logos/saaesd-logo.png';
+import saaesdLogo from '../../assets/images/logos/saaesd-logo-transparent.png';
 
 import validate from '../helpers/validate';
 
