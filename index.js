@@ -4,7 +4,7 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const sslRedirect = require('heroku-ssl-redirect');
 const nodemailer = require('nodemailer');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 const keys = require('./config/keys');
 const weatherAPI = require('./helpers/weather');
@@ -30,7 +30,7 @@ if (cluster.isMaster) {
   app.use(sslRedirect());
 
   // Connect with database
-  mongoose.connect(keys.mongoURI);
+  // mongoose.connect(keys.mongoURI);
 
   // Configure transporter
   const transporter = nodemailer.createTransport({
