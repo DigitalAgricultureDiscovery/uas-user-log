@@ -4,6 +4,7 @@ import ffarLogo from '../assets/images/logos/FFAR-Logo-60@2x.png'
 import purdueLogo512 from '../assets/images/logos/Purdue-Sig-White-rgb-512.png';
 import purdueLogo256 from '../assets/images/logos/Purdue-Sig-White-rgb-256.png';
 import saaesdLogo from '../assets/images/logos/saaesd-logo-transparent.png';
+import '../assets/css/footer.css';
 
 class Footer extends React.Component {
   render() {

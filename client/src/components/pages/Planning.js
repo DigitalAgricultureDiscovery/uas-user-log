@@ -10,6 +10,7 @@ import RaisedButton                         from 'material-ui/RaisedButton';
 
 import validate from '../helpers/validate';
 import DefaultInitialValues from '../helpers/DefaultInitialValues';
+import '../../assets/css/fields.css';
 
 const PAGE_NAME = 'planning_';
 
