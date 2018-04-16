@@ -2,15 +2,9 @@ import React from 'react';
 import Snackbar from 'material-ui/Snackbar';
 
 export const ServiceWorkerRegistered = () => (
-  handleActionClick = () => {
-    window.open('https://goo.gl/SC7cgQ');
-  }
-
   <Snackbar
     open={true}
     message="Offline access is ready"
-    action="Learn more"
-    onActionClick={this.handleActionClick}
     autoHideDuration={5000}
   />
 );
