@@ -24,7 +24,7 @@ class PeoplePresentRadioButtonGroup extends React.Component {
         >
           <RadioButton value="no" label="No" />
           <RadioButton value="yes" label="Yes, but did not fly over them, or" />
-          <RadioButton value="faaCOA" label="have FAA COA approved to fly over people" />
+          <RadioButton value="faaCOA" label="have FAA COA approval or approval as per local law to fly over people" />
         </Field>
       </div>
     )
@@ -43,7 +43,7 @@ class People extends React.Component {
         <CardTitle title="People Present" />
         <CardText>
           <PeoplePresentRadioButtonGroup />
-          {hasFAA === "faaCOA" ? <LogbookTextField fieldName={`${PAGE_NAME}FAACOA`} fieldLabel="Please enter FAA COA #" /> : null}
+          {hasFAA === "faaCOA" ? <LogbookTextField fieldName={`${PAGE_NAME}COA`} fieldLabel="Please enter COA #" /> : null}
         </CardText>
         <CardActions>
           <FlatButton
