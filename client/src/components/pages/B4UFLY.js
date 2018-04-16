@@ -16,8 +16,9 @@ import validate from '../helpers/validate';
 const PAGE_NAME = 'b4ufly_';
 
 const STATUSES = [
-  {value: 1, name: "Proceed with caution"},
-  {value: 2, name: "Flying in controlled airspace (Class B/C/D/E)"},
+  {value: 1, name: 'Proceed with caution'},
+  {value: 2, name: 'Flying in controlled airspace (Class B/C/D/E)'},
+  {value: 3, name: 'Other'},
 ];
 
 const OPTIONS = [
@@ -120,15 +121,22 @@ class B4UFLY extends React.Component {
             required={true}
             items={STATUSES}
           />
-          {currentStatus > 1 &&
+          {currentStatus === 2 &&
             <div>
               <LogbookTextField fieldName={`${PAGE_NAME}AirportOperatorContact`} fieldLabel="Airport operator contact" required={true} />
               <LogbookTextField fieldName={`${PAGE_NAME}ControlTowerContact`} fieldLabel="Control tower contact" required={true} />
               <LogbookTextField fieldName={`${PAGE_NAME}PriorAuthorization`} fieldLabel="Prior authorization" required={true} />
             </div>
           }
+          {currentStatus === 3 &&
+            <div>
+              <LogbookTextField fieldName={`${PAGE_NAME}AirportOperatorContact`} fieldLabel="Airport operator contact" />
+              <LogbookTextField fieldName={`${PAGE_NAME}ControlTowerContact`} fieldLabel="Control tower contact" />
+              <LogbookTextField fieldName={`${PAGE_NAME}PriorAuthorization`} fieldLabel="Prior authorization" />
+            </div>
+          }
           <OptionsSelect selectedOptions={selectedOptions} />
-          <LogbookTextField fieldName={`${PAGE_NAME}FAACert`} fieldLabel="FAA COW or COA used #" />
+          <LogbookTextField fieldName={`${PAGE_NAME}CowORCoa`} fieldLabel="COW or COA #" />
           <br />
           Completed pre-flight checklist  <span style={{color: 'rgb(244, 67, 54)'}}>*</span>
           <PreflightRadioButtonGroup />
