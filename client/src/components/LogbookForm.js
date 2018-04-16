@@ -5,7 +5,6 @@ import { ServiceWorkerStatuses } from '../actions';
 import { ServiceWorkerRegistered, ServiceWorkerUpdated, ServiceWorkerError } from './helpers/ServiceWorkerNotifications';
 // material-ui elements
 import MuiThemeProvider             from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme                  from 'material-ui/styles/getMuiTheme';
 import Card                         from 'material-ui/Card';
 import LinearProgress               from 'material-ui/LinearProgress';
 import {
@@ -32,15 +31,6 @@ import Weather          from './pages/Weather';          // page 15
 import Payload          from './pages/Payload';          // page 16
 import Processed        from './pages/Processed';        // page 17
 import Finish           from './pages/Finish';           // page 18
-
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: "#AD1F65",
-    pickerHeaderColor: "#4D4038",
-    primary1Color: "#C28E0E",
-    primary2Color: "#916A0A"
-  },
-});
 
 class ProgressBar extends React.Component {
   constructor(props) {
@@ -141,7 +131,7 @@ class LogbookForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageIndex: 0,
+      pageIndex: 1,
       planningType: 2,
       resetStatus: true,
     };
@@ -154,7 +144,7 @@ class LogbookForm extends React.Component {
 
   nextPage() {
     window.scrollTo(0, 0);
-    this.setState({pageIndex: this.state.pageIndex + 1});
+    this.setState({pageIndex: this.state.pageIndex + 10});
   };
 
   previousPage() {
@@ -185,7 +175,7 @@ class LogbookForm extends React.Component {
     };
 
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
+      <MuiThemeProvider muiTheme={this.props.muiTheme}>
         <div style={ divStyle }>
           <br />
           <div style={ contentStyle }>

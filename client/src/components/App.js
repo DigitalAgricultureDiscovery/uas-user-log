@@ -3,11 +3,21 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
+import getMuiTheme                  from 'material-ui/styles/getMuiTheme';
 import Disclaimer from './Disclaimer';
 import Header from './Header';
 import Footer from './Footer';
 import LogbookForm from './LogbookForm';
+
+const muiTheme = getMuiTheme({
+  fontFamily: 'Roboto, sans-serif',
+  palette: {
+    accent1Color: "#AD1F65",
+    pickerHeaderColor: "#4D4038",
+    primary1Color: "#C28E0E",
+    primary2Color: "#916A0A"
+  },
+});
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +25,7 @@ class App extends React.Component {
     this.trackPage = this.trackPage.bind(this);
     ReactGA.initialize('UA-78284792-5');
   }
-  
+
   trackPage(pageName) {
     ReactGA.pageview(pageName);
   }
@@ -25,15 +35,15 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="container">
           <div className="site-content">
-            <MuiThemeProvider>
+            <MuiThemeProvider muiTheme={muiTheme}>
               <Header />
             </MuiThemeProvider>
-            <Route exact path="/" render={()=><LogbookForm dispatch={this.props.dispatch} trackPage={this.trackPage} />} />
-            <MuiThemeProvider>
+            <Route exact path="/" render={()=><LogbookForm dispatch={this.props.dispatch} trackPage={this.trackPage} muiTheme={muiTheme} />} />
+            <MuiThemeProvider muiTheme={muiTheme}>
               <Route exact path="/disclaimer" render={()=><Disclaimer trackPage={this.trackPage} />} />
             </MuiThemeProvider>
           </div>
-          <MuiThemeProvider>
+          <MuiThemeProvider muiTheme={muiTheme}>
             <Footer />
           </MuiThemeProvider>
         </div>

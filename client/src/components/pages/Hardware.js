@@ -14,7 +14,7 @@ const PAGE_NAME = 'hardware_';
 
 const STYLES = {
   longField: {
-    width: 384,
+    top: 25,
   },
   shortField: {
     marginRight: 10,
@@ -114,7 +114,7 @@ class Hardware extends React.Component {
           <LogbookTextField
             fieldName={`${PAGE_NAME}Registration`}
             fieldLabel="Registration certificate or equivalent as per local law"
-            style={STYLES.longField}
+            floatingLabelShrinkStyle={STYLES.longField}
           />
           <RemoteControlChargeSubForm />
           <GroundControlChargeSubForm />

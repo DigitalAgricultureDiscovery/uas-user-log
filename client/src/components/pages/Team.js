@@ -20,7 +20,7 @@ const PAGE_NAME = 'team_';
 
 const STYLES = {
   longField: {
-    width: 384,
+    top: 25,
   },
 };
 
@@ -111,7 +111,7 @@ const renderRemotePICs = ({ fields, change, meta: { touched, error, submitFailed
           <LogbookTextField
             fieldName={`${remotePIC}.License`}
             fieldLabel="Certificate # or equivalent as per local law"
-            style={STYLES.longField}
+            floatingLabelShrinkStyle={STYLES.longField}
           />
         </li>
       )}
