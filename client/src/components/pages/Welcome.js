@@ -158,7 +158,7 @@ class Welcome extends React.Component {
                     <img
                       src={purdueLogo}
                       alt="Purdue logo"
-                      style={{width: '100%'}} />
+                      style={{width: '100%', height: 'auto'}} />
                   </a>
                 </TableRowColumn>
                 <TableRowColumn style={{textAlign: "center"}}>
@@ -166,7 +166,7 @@ class Welcome extends React.Component {
                     <img
                       src={saaesdLogo}
                       alt="SAAESD logo"
-                      style={{width: '100%'}} />
+                      style={{width: '100%', height: 'auto'}} />
                   </a>
                 </TableRowColumn>
                 <TableRowColumn style={{textAlign: 'center'}}>
@@ -174,7 +174,7 @@ class Welcome extends React.Component {
                     <img
                       src={ffarLogo}
                       alt="FFAR logo"
-                      style={{width: '100%'}} />
+                      style={{width: '100%', height: 'auto'}} />
                   </a>
                 </TableRowColumn>
               </TableRow>
