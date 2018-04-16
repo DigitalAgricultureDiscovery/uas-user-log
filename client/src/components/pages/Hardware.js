@@ -13,6 +13,9 @@ import validate from '../helpers/validate';
 const PAGE_NAME = 'hardware_';
 
 const STYLES = {
+  longField: {
+    width: 384,
+  },
   shortField: {
     marginRight: 10,
     width: 123,
@@ -108,7 +111,11 @@ class Hardware extends React.Component {
           />
           <LogbookTextField fieldName={`${PAGE_NAME}Make`} fieldLabel="Make" />
           <LogbookTextField fieldName={`${PAGE_NAME}Model`} fieldLabel="Model" />
-          <LogbookTextField fieldName={`${PAGE_NAME}Registration`} fieldLabel="Registration Certificate#" required={true} />
+          <LogbookTextField
+            fieldName={`${PAGE_NAME}Registration`}
+            fieldLabel="Registration certificate or equivalent as per local law"
+            style={STYLES.longField}
+          />
           <RemoteControlChargeSubForm />
           <GroundControlChargeSubForm />
         </CardText>

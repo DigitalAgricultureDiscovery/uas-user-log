@@ -18,6 +18,12 @@ import validate from '../helpers/validate';
 
 const PAGE_NAME = 'team_';
 
+const STYLES = {
+  longField: {
+    width: 384,
+  },
+};
+
 class RemotePICHelpText extends React.Component {
   render() {
     const style = {
@@ -102,7 +108,11 @@ const renderRemotePICs = ({ fields, change, meta: { touched, error, submitFailed
             <DeleteForeverIcon color={red500} />
           </IconButton>
           <LogbookTextField fieldName={`${remotePIC}.Name`} fieldLabel="Name" required={true} />
-          <LogbookTextField fieldName={`${remotePIC}.License`} fieldLabel="Certificate number" required={true} />
+          <LogbookTextField
+            fieldName={`${remotePIC}.License`}
+            fieldLabel="Certificate # or equivalent as per local law"
+            style={STYLES.longField}
+          />
         </li>
       )}
     </ul>

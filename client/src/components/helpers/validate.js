@@ -81,10 +81,10 @@ const validate = values => {
         remotePICErrors.Name = 'Required';
         remotePICsArrayErrors[remotePICIndex] = remotePICErrors;
       }
-      if (!remotePIC || !remotePIC.License) {
-        remotePICErrors.License = 'Required';
-        remotePICsArrayErrors[remotePICIndex] = remotePICErrors;
-      }
+      // if (!remotePIC || !remotePIC.License) {
+      //   remotePICErrors.License = 'Required';
+      //   remotePICsArrayErrors[remotePICIndex] = remotePICErrors;
+      // }
     });
     if (remotePICsArrayErrors.length) {
       errors.team_RemotePICs = remotePICsArrayErrors;
@@ -125,7 +125,7 @@ const validate = values => {
 
   // Hardware
   isRequired('hardware_Type');
-  isRequired('hardware_Registration');
+  // isRequired('hardware_Registration');
   isRequired('hardware_RemoteControlChargeTarget');
   isRequired('hardware_RemoteControlChargeMinimum');
   isRequired('hardware_GroundControlChargeTarget');
@@ -248,7 +248,7 @@ const validate = values => {
     isRequired('b4ufly_PriorAuthorization');
   }
   isRequired('b4ufly_Options');
-  // isRequired('b4ufly_FAACert');
+  // isRequired('b4ufly_CowOrCoa');
   isRequired('b4ufly_Preflight');
   if (values.b4ufly_Preflight && values.b4ufly_Preflight === 'no') {
     isRequired('b4ufly_Permission');
