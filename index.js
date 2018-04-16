@@ -4,6 +4,7 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const sslRedirect = require('heroku-ssl-redirect');
 const nodemailer = require('nodemailer');
+const compression = require('compression');
 // const mongoose = require('mongoose');
 
 const keys = require('./config/keys');
@@ -28,6 +29,9 @@ if (cluster.isMaster) {
   const app = express();
   // Redirect to https
   app.use(sslRedirect());
+
+  // Compression middleware
+  app.use(compression());
 
   // Connect with database
   // mongoose.connect(keys.mongoURI);
