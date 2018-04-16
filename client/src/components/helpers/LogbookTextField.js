@@ -20,6 +20,7 @@ export default class LogbookTextField extends React.Component {
       <Field
         name={this.props.fieldName}
         floatingLabelText={this.props.fieldLabel}
+        floatingLabelShrinkStyle={this.props.floatingLabelShrinkStyle ? this.props.floatingLabelShrinkStyle : null}
         className={this.props.required ? "required" : null}
         hintText={this.props.hintText ? this.props.hintText : null}
         component={TextField}
@@ -33,6 +34,7 @@ export default class LogbookTextField extends React.Component {
       <Field
         name={this.props.fieldName}
         floatingLabelText={this.props.fieldLabel}
+        floatingLabelShrinkStyle={this.props.floatingLabelShrinkStyle ? this.props.floatingLabelShrinkStyle : null}
         className={this.props.required ? "required" : null}
         component={TextField}
         onChange={this.props.handleChange ? this.props.handleChange : null}
