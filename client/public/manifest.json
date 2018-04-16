@@ -1,6 +1,11 @@
 {
-  "short_name": "UAS User Log",
   "name": "UAS User Log",
+  "short_name": "UAS User Log",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "description": "An interactive digital logbook for recording unmanned aircraft systems (UAS) operations under a common protocol.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,8 +13,4 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
 }
