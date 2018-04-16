@@ -262,9 +262,9 @@ const validate = values => {
 
   // People present
   isRequired('people_PeoplePresent');
-  if (values.peoplePresentRadioButtonGroup === 'faaCOA') {
-    isRequired('people_FAACOA');
-  }
+  // if (values.peoplePresentRadioButtonGroup === 'faaCOA') {
+  //   isRequired('people_FAACOA');
+  // }
 
   // Flight parameters
   isRequired('flightParameters_AGLMaximum');
