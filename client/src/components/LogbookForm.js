@@ -131,7 +131,7 @@ class LogbookForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageIndex: 1,
+      pageIndex: 0,
       planningType: 2,
       resetStatus: true,
     };
@@ -144,7 +144,7 @@ class LogbookForm extends React.Component {
 
   nextPage() {
     window.scrollTo(0, 0);
-    this.setState({pageIndex: this.state.pageIndex + 10});
+    this.setState({pageIndex: this.state.pageIndex + 1});
   };
 
   previousPage() {
