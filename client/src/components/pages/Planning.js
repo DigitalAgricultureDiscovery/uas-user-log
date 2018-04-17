@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
-import LogbookSelectField from '../helpers/LogbookSelectField';
-import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton                           from 'material-ui/FlatButton';
-import RaisedButton                         from 'material-ui/RaisedButton';
-
-import validate from '../helpers/validate';
-import DefaultInitialValues from '../helpers/DefaultInitialValues';
+// helpers
+import LogbookSelectField         from '../helpers/LogbookSelectField';
+import LogbookTextField           from '../helpers/LogbookTextField';
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
+import validate                   from '../helpers/validate';
+import DefaultInitialValues       from '../helpers/DefaultInitialValues';
+// css
 import '../../assets/css/fields.css';
 
 const PAGE_NAME = 'planning_';
@@ -55,18 +55,8 @@ class Planning extends React.Component {
           <p>All fields marked with a red asterisk <span style={{color: 'rgb(244, 67, 54)'}}>*</span> are required.</p>
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

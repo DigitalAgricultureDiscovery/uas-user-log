@@ -1,16 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import LogbookSelectField from '../helpers/LogbookSelectField';
-import LogbookTextField from '../helpers/LogbookTextField';
+import { RadioButtonGroup, SelectField } from 'redux-form-material-ui';
 // material-ui elements
-import { RadioButtonGroup, SelectField }    from 'redux-form-material-ui';
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton                           from 'material-ui/FlatButton';
 import MenuItem                             from 'material-ui/MenuItem';
 import RadioButton                          from 'material-ui/RadioButton';
-import RaisedButton                         from 'material-ui/RaisedButton';
-
+// helpers
+import LogbookSelectField from '../helpers/LogbookSelectField';
+import LogbookTextField from '../helpers/LogbookTextField';
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 
 const PAGE_NAME = 'b4ufly_';
@@ -149,18 +148,8 @@ class B4UFLY extends React.Component {
           }
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

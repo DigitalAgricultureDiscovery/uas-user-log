@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
-import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
 import {
   Card,
@@ -10,12 +9,13 @@ import {
   CardMedia,
   CardTitle,
   CardText
-}                                                     from 'material-ui/Card';
-import { GridList, GridTile }                         from 'material-ui/GridList';
-import FlatButton                                     from 'material-ui/FlatButton';
-import RaisedButton                                   from 'material-ui/RaisedButton';
-import Subheader                                      from 'material-ui/Subheader';
+}                             from 'material-ui/Card';
+import { GridList, GridTile } from 'material-ui/GridList';
+import RaisedButton           from 'material-ui/RaisedButton';
+import Subheader              from 'material-ui/Subheader';
 
+import LogbookTextField from '../helpers/LogbookTextField';
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 
 const PAGE_NAME = 'weather_';
@@ -311,18 +311,8 @@ class Weather extends React.Component {
           <LogbookTextField fieldName={`${PAGE_NAME}Note`} fieldLabel="Note" />
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

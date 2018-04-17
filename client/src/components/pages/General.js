@@ -1,10 +1,8 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
-import LogbookTextField from '../helpers/LogbookTextField';
-// material-ui elements
 import { TextField } from 'redux-form-material-ui';
+// material-ui elements
 import { CardActions, CardTitle, CardText }  from 'material-ui/Card';
-import FlatButton                            from 'material-ui/FlatButton';
 import IconButton                            from 'material-ui/IconButton';
 import RaisedButton                          from 'material-ui/RaisedButton';
 import Subheader                             from 'material-ui/Subheader';
@@ -14,9 +12,11 @@ import DeleteForeverIcon       from 'material-ui/svg-icons/action/delete-forever
 import MyLocationIcon          from 'material-ui/svg-icons/maps/my-location';
 // material-ui colors
 import {red500} from 'material-ui/styles/colors';
-
-import validate from '../helpers/validate';
-import locationUtil from '../helpers/location';
+// helpers
+import LogbookTextField           from '../helpers/LogbookTextField';
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
+import validate                   from '../helpers/validate';
+import locationUtil               from '../helpers/location';
 
 const PAGE_NAME = 'general_';
 
@@ -198,18 +198,8 @@ class General extends React.Component {
           <FieldArray name={`${PAGE_NAME}Flights`} component={renderFlights} change={this.props.change} />
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

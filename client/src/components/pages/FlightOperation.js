@@ -1,11 +1,10 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import LogbookSelectField from '../helpers/LogbookSelectField';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton                           from 'material-ui/FlatButton';
-import RaisedButton                         from 'material-ui/RaisedButton';
-
+// helpers
+import LogbookSelectField from '../helpers/LogbookSelectField';
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 
 const PAGE_NAME = 'flightOperation_';
@@ -35,18 +34,8 @@ class FlightOperation extends React.Component {
           />
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

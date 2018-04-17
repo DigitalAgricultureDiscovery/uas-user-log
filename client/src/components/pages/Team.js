@@ -1,9 +1,7 @@
 import React from 'react';
 import { FieldArray, reduxForm } from 'redux-form';
-import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton                           from 'material-ui/FlatButton';
 import IconButton                           from 'material-ui/IconButton';
 import Paper                                from 'material-ui/Paper';
 import RaisedButton                         from 'material-ui/RaisedButton';
@@ -13,7 +11,9 @@ import HelpIcon          from 'material-ui/svg-icons/action/help';
 import PersonAddIcon     from 'material-ui/svg-icons/social/person-add';
 // material-ui colors
 import {red500} from 'material-ui/styles/colors';
-
+// helpers
+import LogbookTextField from '../helpers/LogbookTextField';
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 
 const PAGE_NAME = 'team_';
@@ -316,18 +316,8 @@ class Team extends React.Component {
           <FieldArray name={`${PAGE_NAME}VOs`} component={renderVOs} />
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

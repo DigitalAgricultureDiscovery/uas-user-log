@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Checkbox, RadioButtonGroup }              from 'redux-form-material-ui';
+// material-ui elements
+import { CardActions, CardTitle, CardText }        from 'material-ui/Card';
+import RadioButton                                 from 'material-ui/RadioButton';
+// helpers
 import LogbookSelectField from '../helpers/LogbookSelectField';
 import LogbookTextField from '../helpers/LogbookTextField';
-// material-ui elements
-import { Checkbox, RadioButtonGroup }              from 'redux-form-material-ui';
-import { CardActions, CardTitle, CardText }        from 'material-ui/Card';
-import FlatButton                                  from 'material-ui/FlatButton';
-import RadioButton                                 from 'material-ui/RadioButton';
-import RaisedButton                                from 'material-ui/RaisedButton';
-
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 
 const PAGE_NAME = 'flightParameters_';
@@ -121,18 +120,8 @@ class FlightParameters extends React.Component {
           <ReturnHomeCheckbox />
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

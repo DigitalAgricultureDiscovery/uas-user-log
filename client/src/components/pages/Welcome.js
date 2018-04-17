@@ -10,6 +10,8 @@ import Subheader                                      from 'material-ui/Subheade
 import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
 // material-ui icons
 import HelpIcon from 'material-ui/svg-icons/action/help';
+// buttons
+import { NextButton } from '../helpers/LogbookButtons';
 // logos
 import ffarLogo from '../../assets/images/logos/FFAR-Logo-60@2x.png'
 import purdueLogo512 from '../../assets/images/logos/Purdue-Sig-Black-Gold-rgb-512.png';
@@ -184,12 +186,7 @@ class Welcome extends React.Component {
           </Table>
         </CardText>
         <CardActions>
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <NextButton />
           <RaisedButton
             label="Load Form"
             labelPosition="before"
