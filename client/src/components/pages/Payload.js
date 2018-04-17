@@ -1,18 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FieldArray, reduxForm, getFormValues } from 'redux-form';
-import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton                           from 'material-ui/FlatButton';
-import RaisedButton                         from 'material-ui/RaisedButton';
-
+// payload forms
 import RGBForm           from './payload/RGBForm';
 import MultispectralForm from './payload/MultispectralForm';
 import HyperspectralForm from './payload/HyperspectralForm';
 import LidarForm         from './payload/LidarForm';
 import ThermalForm       from './payload/ThermalForm';
-
+// helpers
+import LogbookTextField from '../helpers/LogbookTextField';
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 
 const PAGE_NAME = 'payload_';
@@ -129,18 +128,8 @@ class Payload extends React.Component {
           />
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

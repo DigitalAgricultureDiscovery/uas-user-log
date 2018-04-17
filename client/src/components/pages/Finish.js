@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { reduxForm, getFormValues } from 'redux-form';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton                           from 'material-ui/FlatButton';
 import RaisedButton                         from 'material-ui/RaisedButton';
-
+// helpers
 import { saveAs } from 'file-saver';
-
+import { ClearButton, PrevButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 
 class IOSHelp extends React.Component {
@@ -104,12 +103,7 @@ class Finish extends React.Component {
           {this.checkIOS() ? <IOSHelp /> : null}
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
+          <PrevButton onClick={previousPage} />
           <RaisedButton
             className="saveCopy"
             label="Save Copy"
@@ -117,13 +111,7 @@ class Finish extends React.Component {
             disabled={pristine || submitting}
             onClick={this.handleClick}
           />
-          <RaisedButton
-            className="clearReturn"
-            label="Clear Form"
-            labelPosition="before"
-            onClick={clearAndReturn}
-            backgroundColor="#AD1F65"
-          />
+          <ClearButton clearAndReturn={clearAndReturn} />
         </CardActions>
       </form>
     )

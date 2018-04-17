@@ -1,28 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
-import LogbookSelectField from '../helpers/LogbookSelectField';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton                           from 'material-ui/FlatButton';
-import RaisedButton                         from 'material-ui/RaisedButton';
 import Subheader                            from 'material-ui/Subheader';
-
-import validate from '../helpers/validate';
-
-import VisibleTable       from './processed/VisibleTable';
-// import InfraredTable      from './processed/InfraredTable';
-// import MultispectralTable from './processed/MultispectralTable';
-// import RadarTable         from './processed/RadarTable';
+// processed forms
+import VisibleTable from './processed/VisibleTable';
+// helpers
+import LogbookSelectField         from '../helpers/LogbookSelectField';
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
+import validate                   from '../helpers/validate';
 
 const PAGE_NAME = 'processed_';
 
 const SENSORS = [
   {value: 1, name: 'Visible'},
-  // {value: 2, name: 'Infrared'},
-  // {value: 3, name: 'Multispectral'},
-  // {value: 4, name: 'Radar'},
-]
+];
 
 class NIIRSStatement extends React.Component {
   render() {
@@ -75,27 +68,6 @@ class Processed extends React.Component {
             />
           </div>
         );
-      // case 2:
-      //   return (
-      //     <div>
-      //       <Subheader>Infrared NIIRS - Select one or more applicable ratings</Subheader>
-      //       <InfraredTable />
-      //     </div>
-      //   );
-      // case 3:
-      //   return (
-      //     <div>
-      //       <Subheader>Multispectral NIIRS - Select one or more applicable ratings</Subheader>
-      //       <MultispectralTable />
-      //     </div>
-      //   );
-      // case 4:
-      //   return (
-      //     <div>
-      //       <Subheader>Radar NIIRS - Select one or more applicable ratings</Subheader>
-      //       <RadarTable />
-      //     </div>
-      //   );
       default:
         return <div>Unknown sensor selected</div>;
     }
@@ -123,18 +95,8 @@ class Processed extends React.Component {
           </p>
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD125"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { TextField } from 'redux-form-material-ui';
+// material-ui elements
+import { CardActions, CardTitle, CardText } from 'material-ui/Card';
+// helpers
 import LogbookSelectField from '../helpers/LogbookSelectField';
 import LogbookTextField from '../helpers/LogbookTextField';
-// material-ui elements
-import { TextField }                         from 'redux-form-material-ui';
-import { CardActions, CardTitle, CardText }   from 'material-ui/Card';
-import FlatButton                             from 'material-ui/FlatButton';
-import RaisedButton                           from 'material-ui/RaisedButton';
-
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 
 const PAGE_NAME = 'crop_';
@@ -80,18 +79,8 @@ class Crop extends React.Component {
           { currentLifeCycle ? (currentLifeCycle === 1 ? <AnnualSubForm /> : <PerennialSubForm />) : null }
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

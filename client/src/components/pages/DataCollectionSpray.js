@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 // material-ui elements
 import { CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+// helpers
 import LogbookSelectField from '../helpers/LogbookSelectField';
 import LogbookTextField from '../helpers/LogbookTextField';
-
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 
 const PAGE_NAME = 'dataCollection_';
@@ -276,18 +275,8 @@ class DataCollectionSpray extends React.Component {
           />
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )

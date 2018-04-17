@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FieldArray, reduxForm, formValueSelector } from 'redux-form';
-import LogbookSelectField from '../helpers/LogbookSelectField';
-import LogbookTextField from '../helpers/LogbookTextField';
 // material-ui elements
 import { CardActions, CardTitle, CardText }         from 'material-ui/Card';
-import FlatButton                                   from 'material-ui/FlatButton';
 import IconButton                                   from 'material-ui/IconButton';
 import RaisedButton                                 from 'material-ui/RaisedButton';
 // material-ui icons
@@ -13,7 +10,10 @@ import DeleteForeverIcon  from 'material-ui/svg-icons/action/delete-forever';
 import DeveloperBoardIcon from 'material-ui/svg-icons/hardware/developer-board';
 // material-ui colorsz
 import {red500} from 'material-ui/styles/colors';
-
+// helpers
+import LogbookSelectField from '../helpers/LogbookSelectField';
+import LogbookTextField from '../helpers/LogbookTextField';
+import { PrevButton, NextButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 import communitySensors from '../helpers/communitySensors';
 
@@ -311,18 +311,8 @@ class DataCollectionResearch extends React.Component {
           />
         </CardText>
         <CardActions>
-          <FlatButton
-            className="previous"
-            label="Previous"
-            onClick={previousPage}
-            backgroundColor="#BAA892"
-          />
-          <RaisedButton
-            className="next"
-            label="Next"
-            type="submit"
-            backgroundColor="#FFD100"
-          />
+          <PrevButton onClick={previousPage} />
+          <NextButton />
         </CardActions>
       </form>
     )
