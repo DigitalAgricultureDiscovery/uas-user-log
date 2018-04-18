@@ -9,17 +9,19 @@ import { saveAs } from 'file-saver';
 import { ClearButton, PrevButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
 
-class IOSHelp extends React.Component {
-  render() {
-    return (
-      <p>
-        iOS users, if you need help saving a copy of your form, please refer to&nbsp;
-        <a href="https://support.apple.com/en-us/HT206481" target="_blank" rel="noopener noreferrer">
-        these instructions.</a>
-      </p>
-    )
-  }
-}
+const IOSHelp = () => (
+  <p>
+    iOS users, if you need help saving a copy of your form, please refer to&nbsp;
+    <a href="https://support.apple.com/en-us/HT206481" target="_blank" rel="noopener noreferrer">
+    these instructions.</a>
+  </p>
+);
+
+const ShareSensorError = () => (
+  <p className="error-msg">
+    Unable to share sensors at this time.
+  </p>
+);
 
 async function saveSensor(sensor) {
   const response = await fetch('/api/save', {
@@ -37,6 +39,9 @@ async function saveSensor(sensor) {
 class Finish extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      shareSensorError: false,
+    };
     this.handleClick = this.handleClick.bind(this);
     this.checkIOS = this.checkIOS.bind(this);
   }
@@ -74,7 +79,7 @@ class Finish extends React.Component {
               // console.log(data);
             })
             .catch(err => {
-              console.log(err.message);
+              this.setState({shareSensorError: true});
             });
         }
       });
@@ -100,6 +105,7 @@ class Finish extends React.Component {
             Click the Clear button to erase your current form selections and return
             to the beginning of the form.
           </p>
+          {this.state.shareSensorError ? <ShareSensorError /> : null}
           {this.checkIOS() ? <IOSHelp /> : null}
         </CardText>
         <CardActions>
