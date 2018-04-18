@@ -134,6 +134,7 @@ class LogbookForm extends React.Component {
       pageIndex: 0,
       planningType: 2,
       resetStatus: true,
+      serviceWorkerAlreadyAlerted: 0,
     };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
@@ -142,28 +143,37 @@ class LogbookForm extends React.Component {
     this.updatePlanningType = this.updatePlanningType.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.store.serviceWorkerStatus) {
+      const swStatus = nextProps.store.serviceWorkerStatus;
+      if (swStatus === "REGISTERED" || swStatus === "UPDATED" || swStatus === "ERROR") {
+        this.setState({serviceWorkerAlreadyAlerted: this.state.serviceWorkerAlreadyAlerted + 1});
+      }
+    }
+  }
+
   nextPage() {
     window.scrollTo(0, 0);
     this.setState({pageIndex: this.state.pageIndex + 1});
-  };
+  }
 
   previousPage() {
     window.scrollTo(0, 0);
     this.setState({pageIndex: this.state.pageIndex - 1});
-  };
+  }
 
   clearAndReturn() {
     this.setState({pageIndex: 0});
     this.props.dispatch(reset('logbook'));
-  };
+  }
 
   stepperChangePage(pageIndex) {
     this.setState({pageIndex: pageIndex});
-  };
+  }
 
   updatePlanningType(index) {
     this.setState({'planningType': index});
-  };
+  }
 
   render() {
     const { pageIndex } = this.state;
@@ -311,9 +321,9 @@ class LogbookForm extends React.Component {
             </Card>
           </div>
           {(this.state.planningType !== 3 && pageIndex > 0) ? <HorizontalNonLinearStepper pageIndex={pageIndex} changePage={this.stepperChangePage} /> : null}
-          {(this.props.store.serviceWorkerStatus === ServiceWorkerStatuses.REGISTERED ? <ServiceWorkerRegistered /> : null)}
-          {(this.props.store.serviceWorkerStatus === ServiceWorkerStatuses.UPDATED ? <ServiceWorkerUpdated /> : null)}
-          {(this.props.store.serviceWorkerStatus === ServiceWorkerStatuses.ERROR ? <ServiceWorkerError /> : null)}
+          {(this.props.store.serviceWorkerStatus === ServiceWorkerStatuses.REGISTERED && this.state.serviceWorkerAlreadyAlerted < 2 ? <ServiceWorkerRegistered /> : null)}
+          {(this.props.store.serviceWorkerStatus === ServiceWorkerStatuses.UPDATED && this.state.serviceWorkerAlreadyAlerted < 2 ? <ServiceWorkerUpdated /> : null)}
+          {(this.props.store.serviceWorkerStatus === ServiceWorkerStatuses.ERROR && this.state.serviceWorkerAlreadyAlerted < 2 ? <ServiceWorkerError /> : null)}
         </div>
       </MuiThemeProvider>
     )
