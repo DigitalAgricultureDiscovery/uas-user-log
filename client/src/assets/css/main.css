@@ -2,6 +2,15 @@ body {
   margin: 0;
 }
 
+/* Remove steps from date inputs */
+input[type=date]::-webkit-inner-spin-button {
+  margin-top: 23px;
+}
+
+input[type=time]::-webkit-inner-spin-button {
+  margin-top: 23px;
+}
+
 /* Processed table */
 .processed-table > tr > td > ul {
   padding-left: 0;
