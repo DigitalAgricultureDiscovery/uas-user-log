@@ -16,7 +16,8 @@
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
-    "redux-form-material-ui": "^4.3.3"
+    "redux-form-material-ui": "^4.3.3",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "react-scripts start",
