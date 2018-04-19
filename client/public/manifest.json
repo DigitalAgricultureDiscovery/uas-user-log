@@ -1,7 +1,7 @@
 {
   "name": "UAS User Log",
   "short_name": "UAS User Log",
-  "start_url": "/",
+  "start_url": "https://www.uasuserlog.org",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#000000",
