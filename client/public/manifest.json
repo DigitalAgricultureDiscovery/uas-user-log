@@ -8,49 +8,49 @@
   "description": "An interactive digital logbook for recording unmanned aircraft systems (UAS) operations under a common protocol.",
   "icons": [
     {
-      "src": "homescreen-48x48.png",
+      "src": "./images/homescreen/homescreen-48x48.png",
       "type": "image/png",
-      "sizes": "48x48",
+      "sizes": "48x48"
     },
     {
-      "src": "homescreen-72x72.png",
+      "src": "./images/homescreen/homescreen-72x72.png",
       "type": "image/png",
-      "sizes": "72x72",
+      "sizes": "72x72"
     },
     {
-      "src": "homescreen-96x96.png",
+      "src": "./images/homescreen/homescreen-96x96.png",
       "type": "image/png",
-      "sizes": "96x96",
+      "sizes": "96x96"
     },
     {
-      "src": "homescreen-144x144.png",
+      "src": "./images/homescreen/homescreen-144x144.png",
       "type": "image/png",
-      "sizes": "144x144",
+      "sizes": "144x144"
     },
     {
-      "src": "homescreen-168x168.png",
+      "src": "./images/homescreen/homescreen-168x168.png",
       "type": "image/png",
-      "sizes": "168x168",
+      "sizes": "168x168"
     },
     {
-      "src": "homescreen-192x192.png",
+      "src": "./images/homescreen/homescreen-192x192.png",
       "type": "image/png",
-      "sizes": "192x192",
+      "sizes": "192x192"
     },
     {
-      "src": "homescreen-256x256.png",
+      "src": "./images/homescreen/homescreen-256x256.png",
       "type": "image/png",
-      "sizes": "256x256",
+      "sizes": "256x256"
     },
     {
-      "src": "homescreen-384x384.png",
+      "src": "./images/homescreen/homescreen-384x384.png",
       "type": "image/png",
-      "sizes": "384x384",
+      "sizes": "384x384"
     },
     {
-      "src": "homescreen-512x512.png",
+      "src": "./images/homescreen/homescreen-512x512.png",
       "type": "image/png",
-      "sizes": "512x512.png",
-    },
+      "sizes": "512x512.png"
+    }
   ]
 }
