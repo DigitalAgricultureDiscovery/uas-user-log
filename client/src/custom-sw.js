@@ -11,7 +11,7 @@ if (workbox) {
 
   // Queue /api/save requests if offline
   workbox.routing.registerRoute(
-    'https://uas-user-log-dev.herokuapp.com/api/save',
+    'https://www.uasuserlog.org/api/save',
     workbox.strategies.networkOnly({
       plugins: [bgSyncPlugin]
     }),
