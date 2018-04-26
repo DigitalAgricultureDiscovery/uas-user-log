@@ -19,18 +19,26 @@ const IOSHelp = () => (
 
 const ShareSensorError = () => (
   <p className="error-msg">
-    Unable to share sensors at this time.
+    Unable to share sensor specs. If you are offline, this request will be
+    attempted again once network connectivity is detected.
   </p>
 );
 
-async function saveSensor(sensor) {
-  const response = await fetch('/api/save', {
+const ShareSensorSuccess = (props) => (
+  <p className="success-msg">
+    Thank you for sharing {props.sensorCount} sensor specs. The sensor specs
+    will be added to the community sensors once a review has been conducted.
+  </p>
+);
+
+async function saveSensor(sharedSensors) {
+  const response = await fetch('https://uas-user-log-dev.herokuapp.com/api/save', {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(sensor),
+    body: JSON.stringify({sensors: sharedSensors}),
   });
   const data = await response.json();
   return data;
@@ -41,6 +49,8 @@ class Finish extends React.Component {
     super(props);
     this.state = {
       shareSensorError: false,
+      shareSensorSuccess: false,
+      shareSensorCount: 0,
     };
     this.handleClick = this.handleClick.bind(this);
     this.checkIOS = this.checkIOS.bind(this);
@@ -67,22 +77,36 @@ class Finish extends React.Component {
   }
 
   handleClick(event) {
+    // Reset any status messages
+    this.setState({shareSensorCount: 0});
+    this.setState({shareSensorSuccess: false});
+    this.setState({shareSensorError: false});
     // Check for saved sensors and send to server
     if (this.props.formValues.payload_Sensors && this.props.formValues.payload_Sensors.length > 0) {
+      let sharedSensors = [];
       this.props.formValues.payload_Sensors.forEach((sensor, index) => {
         if (sensor.RGBSave || sensor.MultiSave || sensor.HyperSave || sensor.LidarSave || sensor.ThermalSave) {
-          // Append sensor type
+          // Add sensor type
           sensor.sensorType = this.props.formValues.dataCollection_Sensors[index].Type;
-          // Send to server
-          saveSensor(sensor)
-            .then(data => {
-              // console.log(data);
-            })
-            .catch(err => {
-              this.setState({shareSensorError: true});
-            });
+          // Add sensors marked save to array
+          sharedSensors.push(sensor);
         }
       });
+      if (sharedSensors.length > 0) {
+        // Update count of shared sensors
+        this.setState({shareSensorCount: sharedSensors.length});
+        saveSensor(sharedSensors)
+          .then(response => {
+            if (response.status === 1) {
+              this.setState({shareSensorSuccess: true});
+            } else {
+              this.setState({shareSensorError: true});
+            }
+          })
+          .catch(err => {
+            this.setState({shareSensorError: true});
+          });
+      }
     }
     // Save form data in json file
     const blob = new Blob([JSON.stringify(this.props.formValues)], {type: 'application/json;charset=utf-8'});
@@ -105,6 +129,7 @@ class Finish extends React.Component {
             Click the Clear button to erase your current form selections and return
             to the beginning of the form.
           </p>
+          {this.state.shareSensorSuccess ? <ShareSensorSuccess sensorCount={this.state.shareSensorCount} /> : null}
           {this.state.shareSensorError ? <ShareSensorError /> : null}
           {this.checkIOS() ? <IOSHelp /> : null}
         </CardText>

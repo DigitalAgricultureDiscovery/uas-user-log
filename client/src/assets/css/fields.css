@@ -4,6 +4,12 @@
   font-size: 12;
 }
 
+/* Success messages */
+.success-msg {
+  color: rgb(29, 184, 1);
+  font-size: 12;
+}
+
 /* Required */
 .required > label:after, .required > div > label:after {
   content: " *";
