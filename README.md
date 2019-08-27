@@ -41,7 +41,7 @@ This work is supported by Hatch project 1012501 (project # S1069) from the USDA 
     Make a copy of ```client/.env``` and rename it to ```client/.env.local```. Inside the new file, replace the example values with the feedback email address and a Google Analytics Tracking ID.  
 6. Run locally
 
-    From the project's root directory, run ```npm run dev``` to start the Express server and React frontend.
+    From the project's root directory, run ```npm run dev``` to start the Express server and React client.
 7. Run on Heroku
 
     UAS User Log is ready to run on Heroku. Follow along with this [guide](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up) to help you get started. Do not forget to set up your environment variables on Heroku.
