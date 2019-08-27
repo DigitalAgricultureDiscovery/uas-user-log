@@ -11,7 +11,7 @@ if (workbox) {
 
   // Queue /api/save requests if offline
   workbox.routing.registerRoute(
-    'https://www.uasuserlog.org/api/save',
+    '/api/save',
     workbox.strategies.networkOnly({
       plugins: [bgSyncPlugin]
     }),

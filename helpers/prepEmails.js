@@ -119,4 +119,4 @@ module.exports = {
     sensorHTML += '</table>';
     return sensorHTML;
   }
-}
+};

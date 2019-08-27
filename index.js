@@ -5,7 +5,6 @@ const numCPUs = require('os').cpus().length;
 const sslRedirect = require('heroku-ssl-redirect');
 const nodemailer = require('nodemailer');
 const compression = require('compression');
-// const mongoose = require('mongoose');
 
 const keys = require('./config/keys');
 const weatherAPI = require('./helpers/weather');
@@ -34,18 +33,20 @@ if (cluster.isMaster) {
   // Compression middleware
   app.use(compression());
 
-  // Connect with database
-  // mongoose.connect(keys.mongoURI);
-
   // Configure transporter
+  const auth = {
+    type: 'OAuth2',
+    user: keys.smtpUser,
+    clientId: keys.smtpClientId,
+    clientSecret: keys.smtpClientSecret,
+    refreshToken: keys.smtpRefreshToken
+  };
+
   const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
+    host: keys.smtpHost,
+    port: keys.smtpPort,
     secure: true,
-    auth: {
-      user: keys.gmailUser,
-      pass: keys.gmailPass,
-    }
+    auth: auth
   });
 
   // Support JSON-encoded bodies
@@ -64,8 +65,8 @@ if (cluster.isMaster) {
 
   function sendMail(sensorHTML) {
     const mailOptions = {
-      from: '"UAS User Log Admin" <uasuserlog@gmail.com>',
-      to: 'uasuserlog@gmail.com',
+      from: `"UAS User Log Admin" ${keys.smtpUser}`,
+      to: keys.smtpRecipients,
       subject: 'UAS User Log - Add sensor request',
       html: sensorHTML,
     };

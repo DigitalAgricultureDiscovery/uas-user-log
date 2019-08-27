@@ -32,7 +32,7 @@ const ShareSensorSuccess = (props) => (
 );
 
 async function saveSensor(sharedSensors) {
-  const response = await fetch('https://www.uasuserlog.org/api/save', {
+  const response = await fetch('/api/save', {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',

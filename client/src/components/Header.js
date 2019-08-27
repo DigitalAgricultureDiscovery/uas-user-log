@@ -13,7 +13,7 @@ class Header extends React.Component {
           <address>
             <RaisedButton
               backgroundColor="#C28E0E"
-              href="mailto:uasuserlog@gmail.com?Subject=User%20feedback"
+              href={`mailto:${process.SMTP_USER}?Subject=User%20feedback`}
               target="_top"
               label="Feedback"
               style={{display: 'inline-block', margin: 5}}
