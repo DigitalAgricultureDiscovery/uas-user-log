@@ -6,6 +6,5 @@ module.exports = {
   smtpClientId: process.env.SMTP_CLIENT_ID,
   smtpClientSecret: process.env.SMTP_CLIENT_SECRET,
   smtpRefreshToken: process.env.SMTP_REFRESH_TOKEN,
-  smtpAccessToken: process.env.SMTP_ACCESS_TOKEN,
   smtpRecipients: process.env.SMTP_RECIPIENTS,
 };
