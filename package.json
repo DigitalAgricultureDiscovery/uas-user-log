@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The UAS User Log is a server-based, digital logbook that is accessible through any web browser on internet-connected devices.​",
   "engines": {
-    "node": "8.9.x"
+    "node": ">=10.15 <11"
   },
   "scripts": {
     "start": "node index.js",
