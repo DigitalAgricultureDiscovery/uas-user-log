@@ -20,10 +20,10 @@ This work is supported by Hatch project 1012501 (project # S1069) from the USDA 
     ```cd client/```
     
     ```npm install```
-5. Setup environmental variables:
+5. Setup environmental variables on server:
 
     Make a copy of ```config/dev.example.js``` and rename it to ```config/dev.js```. Inside ```config/dev.js``` several environment variables will need to be set.
-    
+
     [Apixu](https://www.apixu.com/) is the API used to fetch weather data. It is free to use if calls remain under 10,000 per month. The forecast data is limited to 7 days with the free version. Sign up and provide ```apixuKey``` with your API key.
     
     [Nodemailer](https://nodemailer.com/about/) is used to handle emails. Currently, it is set up to transport emails over Gmail's SMTP server. The following variables need to be set:
@@ -36,9 +36,12 @@ This work is supported by Hatch project 1012501 (project # S1069) from the USDA 
     * ```smtpRecipients``` - Comma separated email addresses that will receive the emails.
 
      This [guide](https://medium.com/@RistaSB/use-expressjs-to-send-mails-with-gmail-oauth-2-0-and-nodemailer-d585bba71343) can help you obtain the above OAuth credentials. Refer to the nodemailer documentation for instructions on configuring it with other email providers.
- 6. Run locally
+6. Setup environmental variables on client:
+
+    Make a copy of ```client/.env``` and rename it to ```client/.env.local```. Inside the new file, replace the example values with the feedback email address and a Google Analytics Tracking ID.  
+6. Run locally
 
     From the project's root directory, run ```npm run dev``` to start the Express server and React frontend.
- 7. Run on Heroku
+7. Run on Heroku
 
     UAS User Log is ready to run on Heroku. Follow along with this [guide](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up) to help you get started. Do not forget to set up your environment variables on Heroku.

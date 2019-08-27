@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme                  from 'material-ui/styles/getMuiTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Disclaimer from './Disclaimer';
 import Header from './Header';
 import Footer from './Footer';
@@ -23,7 +23,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.trackPage = this.trackPage.bind(this);
-    ReactGA.initialize('UA-78284792-5');
+    ReactGA.initialize(process.env.REACT_APP_FEEDBACK_EMAIL);
   }
 
   trackPage(pageName) {
