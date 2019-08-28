@@ -6,6 +6,7 @@
     "node": "^10.15.3"
   },
   "scripts": {
+    "start": "node index.js",
     "server": "node index.js",
     "client": "cd client/ && yarn run start",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
