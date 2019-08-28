@@ -14,12 +14,14 @@ This work is supported by Hatch project 1012501 (project # S1069) from the USDA 
     ```git clone https://github.com/hancocb/uas-user-log.git```
 3. Install server dependencies:
 
-    ```npm install```
+    ```cd uas-user-log```
+    
+    ```yarn install```
 4. Install client dependencies:
 
     ```cd client/```
     
-    ```npm install```
+    ```yarn install```
 5. Setup environmental variables on server:
 
     Make a copy of ```config/dev.example.js``` and rename it to ```config/dev.js```. Inside ```config/dev.js``` several environment variables will need to be set.
@@ -41,7 +43,7 @@ This work is supported by Hatch project 1012501 (project # S1069) from the USDA 
     Make a copy of ```client/.env``` and rename it to ```client/.env.local```. Inside the new file, replace the example values with the feedback email address and a Google Analytics Tracking ID.  
 6. Run locally
 
-    From the project's root directory, run ```npm run dev``` to start the Express server and React client.
+    From the project's root directory, run ```yarn run dev``` to start the Express server and React client.
 7. Run on Heroku
 
     UAS User Log is ready to run on Heroku. Follow along with this [guide](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up) to help you get started. Do not forget to set up your environment variables on Heroku.

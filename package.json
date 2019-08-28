@@ -6,9 +6,8 @@
     "node": "^10.15.3"
   },
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js",
-    "client": "yarn run start --prefix client",
+    "server": "node index.js",
+    "client": "cd client/ && yarn run start",
     "dev": "concurrently \"yarn run server\" \"yarn run client\"",
     "heroku-postbuild": "cd client/ && yarn install && yarn run build"
   },
