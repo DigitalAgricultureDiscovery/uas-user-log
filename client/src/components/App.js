@@ -23,7 +23,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.trackPage = this.trackPage.bind(this);
-    ReactGA.initialize(process.env.REACT_APP_FEEDBACK_EMAIL);
+    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
   }
 
   trackPage(pageName) {
