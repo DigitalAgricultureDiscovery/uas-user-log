@@ -1,5 +1,5 @@
 module.exports = {
-  apixuKey: process.env.APIXU_KEY,
+  weatherstackKey: process.env.WEATHERSTACK_KEY,
   smtpHost: process.env.SMTP_HOST,
   smtpPort: process.env.SMTP_PORT,
   smtpUser: process.env.SMTP_USER,
