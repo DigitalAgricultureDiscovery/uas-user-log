@@ -23,7 +23,7 @@
     "express": "^4.14.1",
     "heroku-ssl-redirect": "0.0.4",
     "node-fetch": "^2.1.1",
-    "nodemailer": "^4.6.4"
+    "nodemailer": "^6.4.16"
   },
   "keywords": [
     "node",
