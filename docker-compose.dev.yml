@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  uul-server:
+    container_name: uul-server-dev
+    build:
+      context: ./server
+    command: yarn start
+    volumes:
+      - ./server:/app
+    ports:
+      - 5000:5000
+    restart: always
+    env_file: ./.dev.env
+  uul-client:
+    container_name: uul-client-dev
+    build:
+      context: ./client
+    command: yarn start
+    volumes:
+      - ./client:/app
+    depends_on:
+      - uul-server
+    restart: always
+    ports:
+      - 3000:3000
