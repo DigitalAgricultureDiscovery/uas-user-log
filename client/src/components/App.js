@@ -12,10 +12,10 @@ import LogbookForm from './LogbookForm';
 const muiTheme = getMuiTheme({
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    accent1Color: "#AD1F65",
-    pickerHeaderColor: "#4D4038",
-    primary1Color: "#C28E0E",
-    primary2Color: "#916A0A"
+    accent1Color: '#AD1F65',
+    pickerHeaderColor: '#4D4038',
+    primary1Color: '#C28E0E',
+    primary2Color: '#916A0A',
   },
 });
 
@@ -38,9 +38,23 @@ class App extends React.Component {
             <MuiThemeProvider muiTheme={muiTheme}>
               <Header />
             </MuiThemeProvider>
-            <Route exact path="/" render={()=><LogbookForm dispatch={this.props.dispatch} trackPage={this.trackPage} muiTheme={muiTheme} />} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <LogbookForm
+                  dispatch={this.props.dispatch}
+                  trackPage={this.trackPage}
+                  muiTheme={muiTheme}
+                />
+              )}
+            />
             <MuiThemeProvider muiTheme={muiTheme}>
-              <Route exact path="/disclaimer" render={()=><Disclaimer trackPage={this.trackPage} />} />
+              <Route
+                exact
+                path="/disclaimer"
+                render={() => <Disclaimer trackPage={this.trackPage} />}
+              />
             </MuiThemeProvider>
           </div>
           <MuiThemeProvider muiTheme={muiTheme}>
@@ -48,7 +62,7 @@ class App extends React.Component {
           </MuiThemeProvider>
         </div>
       </BrowserRouter>
-    )
+    );
   }
 }
 

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import WebFont from 'webfontloader';
-// import { setServiceWorkerStatus } from './actions';
+import { setServiceWorkerStatus } from './actions';
 import rootReducer from './reducers';
 import App from './components/App';
 import './assets/css/main.css';
@@ -15,6 +15,10 @@ const store = (
     ? window.devToolsExtension()(createStore)
     : createStore
 )(rootReducer);
+
+export const updateServiceWorkerStatus = (status) => {
+  store.dispatch(setServiceWorkerStatus(status));
+};
 
 // Load Roboto font
 WebFont.load({
@@ -29,5 +33,5 @@ ReactDOM.render(
   </Provider>,
   document.querySelector('#root')
 );
-// registerServiceWorker(updateServiceWorkerStatus);
+
 serviceWorkerRegistration.register();

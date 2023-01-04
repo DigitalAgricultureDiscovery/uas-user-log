@@ -2,12 +2,9 @@ version: '3.9'
 services:
   app:
     container_name: uul-app-prod
-    build:
-      context: .
-    command: yarn start
-    volumes:
-      - ./server:/app
+    build: .
+    command: yarn start-prod
     ports:
       - 5000:5000
     restart: always
-    env_file: ./.dev.env
+    env_file: ./.env.prod

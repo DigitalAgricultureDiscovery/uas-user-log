@@ -6,7 +6,8 @@
     "node": "^16"
   },
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start-dev": "nodemon ./src/index.js",
+    "start-prod": "node ./src/index.js"
   },
   "cacheDirectories": [
     "node_modules",

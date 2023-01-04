@@ -24,7 +24,7 @@
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
-    "build": "react-scripts build && cra-append-sw ./src/custom-sw.js",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

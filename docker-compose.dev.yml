@@ -4,20 +4,20 @@ services:
     container_name: uul-server-dev
     build:
       context: ./server
-    command: yarn start
+    command: yarn start-dev
     volumes:
       - ./server:/app
     ports:
       - 5000:5000
     restart: always
-    env_file: ./.dev.env
+    env_file: ./.env.dev
   uul-client:
     container_name: uul-client-dev
     build:
       context: ./client
     command: yarn start
     volumes:
-      - ./client:/app
+      - ./client:/app/client
     depends_on:
       - uul-server
     restart: always
