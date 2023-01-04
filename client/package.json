@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "cra-append-sw": "^2.6.1",
     "file-saver": "^2.0.2",
     "http-proxy-middleware": "^2.0.6",
     "material-ui": "^0.20.2",
@@ -18,11 +17,9 @@
     "redux": "^4.0.4",
     "redux-form": "^8.2.6",
     "redux-form-material-ui": "^4.3.4",
-    "source-map-explorer": "^2.0.1",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
