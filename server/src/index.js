@@ -1,10 +1,12 @@
-const express = require('express');
-const path = require('path');
-const nodemailer = require('nodemailer');
 const compression = require('compression');
+const express = require('express');
+const morgan = require('morgan');
+const nodemailer = require('nodemailer');
+const path = require('path');
+const winston = require('./config/winston');
 
-const weatherAPI = require('./helpers/weather');
 const prepEmails = require('./helpers/prepEmails');
+const weatherAPI = require('./helpers/weather');
 
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
@@ -14,6 +16,9 @@ const app = express();
 
 // Compression middleware
 app.use(compression());
+
+// Log using morgan and winston
+app.use(morgan('combined', { stream: winston.stream }));
 
 // Configure transporter
 const auth = {
@@ -34,12 +39,6 @@ const transporter = nodemailer.createTransport({
 
 // Support JSON-encoded bodies
 app.use(express.json());
-
-// Log all requests
-app.use((req, res, next) => {
-  console.log(req.path);
-  next();
-});
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../client/build')));
@@ -98,6 +97,26 @@ app.post('/api/save', function (req, res) {
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
+
+// error handler
+app.use((err, req, res, next) => {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // include winston logging
+  winston.error(
+    `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${
+      req.method
+    } - ${req.ip}`
+  );
+  res.status(err.status || 500);
+  if (!err.redirect) {
+    res.send(err.clientMessage ? err.clientMessage : { error: err.message });
+  } else {
+    res.redirect('/');
+  }
 });
 
 app.listen(PORT, function () {
