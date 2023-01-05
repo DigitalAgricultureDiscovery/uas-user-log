@@ -23,7 +23,7 @@ This work is supported by Hatch project 1012501 (project # S1069) from the USDA 
 
 3. Setup environmental variables on server:
 
-   Make a copy of `example.env.dev` and rename it to `.env.dev`. Inside `.env.dev` several environment variables will need to be set.
+   Make a copy of `server/example.env` and rename it to `server/.env`. Inside `server/.env` several environment variables will need to be set.
 
    The [National Weather Service (NWS) API](https://www.weather.gov/documentation/services-web-api) is the API used to fetch weather forecast data. It is free to use and requires no API key. There is an undisclosed rate limit.
 
@@ -58,7 +58,7 @@ This work is supported by Hatch project 1012501 (project # S1069) from the USDA 
 
    **Production version**
 
-   Repeat Step 3 for `example.env.prod` instead of `example.env.dev`. `.env.prod` contains one additional environmental variable - `PORT`. Set it to the port the application will be using in the production environment.
+   Change `NODE_ENV` value from `development` to `production` in the root folder `.env`.
 
    To build the production container, run
 

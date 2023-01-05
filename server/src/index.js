@@ -1,20 +1,16 @@
 const express = require('express');
 const path = require('path');
-const sslRedirect = require('heroku-ssl-redirect');
 const nodemailer = require('nodemailer');
 const compression = require('compression');
 
 const weatherAPI = require('./helpers/weather');
 const prepEmails = require('./helpers/prepEmails');
 
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-
-// Redirect to https
-if (process.env.NODE_ENV === 'production') {
-  app.use(sslRedirect());
-}
 
 // Compression middleware
 app.use(compression());

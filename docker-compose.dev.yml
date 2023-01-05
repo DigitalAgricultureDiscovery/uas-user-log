@@ -11,7 +11,6 @@ services:
     ports:
       - 5000:5000
     restart: always
-    env_file: ./.env.dev
   uul-client:
     container_name: uul-client-dev
     build:
