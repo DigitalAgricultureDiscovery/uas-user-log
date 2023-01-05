@@ -15,37 +15,56 @@ export default class LogbookTextField extends React.Component {
   }
 
   render() {
-    const form = this.props.type ?
+    const form = this.props.type ? (
       // Number type
       <Field
         name={this.props.fieldName}
         floatingLabelText={this.props.fieldLabel}
-        floatingLabelShrinkStyle={this.props.floatingLabelShrinkStyle ? this.props.floatingLabelShrinkStyle : null}
-        className={this.props.required ? "required" : null}
+        floatingLabelShrinkStyle={
+          this.props.floatingLabelShrinkStyle
+            ? this.props.floatingLabelShrinkStyle
+            : null
+        }
+        className={this.props.required ? 'required' : null}
         hintText={this.props.hintText ? this.props.hintText : null}
         component={TextField}
         type={this.props.type}
         step={this.props.step}
-        min={this.props.min ? this.props.min : "0"}
+        min={this.props.min ? this.props.min : '0'}
         onChange={this.props.handleChange ? this.props.handleChange : null}
         style={this.props.style ? this.props.style : null}
-      /> :
+      />
+    ) : (
       // String type
       <Field
         name={this.props.fieldName}
         floatingLabelText={this.props.fieldLabel}
-        floatingLabelShrinkStyle={this.props.floatingLabelShrinkStyle ? this.props.floatingLabelShrinkStyle : null}
-        className={this.props.required ? "required" : null}
+        floatingLabelShrinkStyle={
+          this.props.floatingLabelShrinkStyle
+            ? this.props.floatingLabelShrinkStyle
+            : null
+        }
+        className={this.props.required ? 'required' : null}
+        hintText={this.props.hintText ? this.props.hintText : null}
         component={TextField}
         onChange={this.props.handleChange ? this.props.handleChange : null}
         multiLine={this.props.multiLine ? true : false}
-        rows={this.props.multiLine ? this.props.rows ? this.props.rows : null : 1}
+        rows={
+          this.props.multiLine ? (this.props.rows ? this.props.rows : null) : 1
+        }
         style={this.props.style ? this.props.style : null}
-      />;
+      />
+    );
     return (
-      <div style={this.props.containerStyle ? this.props.containeStyle : {containerStyle}}>
+      <div
+        style={
+          this.props.containerStyle
+            ? this.props.containeStyle
+            : { containerStyle }
+        }
+      >
         {form}
       </div>
-    )
+    );
   }
 }

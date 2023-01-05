@@ -52,7 +52,7 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.get('/api/weather', function (req, res) {
   res.set('Content-Type', 'application/json');
   weatherAPI
-    .getForecast(process.env.WEATHERSTACK_KEY, req.query.location.toString())
+    .getForecast(req.query.location.toString())
     .then((data) => res.send(data))
     .catch((err) => res.send(err.message));
 });

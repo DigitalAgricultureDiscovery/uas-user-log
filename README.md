@@ -25,7 +25,7 @@ This work is supported by Hatch project 1012501 (project # S1069) from the USDA 
 
    Make a copy of `example.env.dev` and rename it to `.env.dev`. Inside `.env.dev` several environment variables will need to be set.
 
-   [weatherstack](https://weatherstack.com/) is the API used to fetch real-time weather data. It is free to use if calls remain under 250 per month. Sign up and provide `WEATHERSTACK_KEY` with your API key.
+   The [National Weather Service (NWS) API](https://www.weather.gov/documentation/services-web-api) is the API used to fetch weather forecast data. It is free to use and requires no API key. There is an undisclosed rate limit.
 
    [Nodemailer](https://nodemailer.com/about/) is used to handle emails. Currently, it is set up to transport emails over Gmail's SMTP server. The following variables need to be set:
 

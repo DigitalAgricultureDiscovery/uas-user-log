@@ -14,6 +14,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import LogbookTextField from '../helpers/LogbookTextField';
 import { PrevButton, NextButton } from '../helpers/LogbookButtons';
 import validate from '../helpers/validate';
+import { GridList, GridTile } from 'material-ui/GridList';
+import Subheader from 'material-ui/Subheader';
 
 const PAGE_NAME = 'weather_';
 
@@ -55,6 +57,7 @@ class NoFlightWarningText extends React.Component {
 async function fetchWeatherData(location) {
   const response = await fetch('/api/weather?location=' + location);
   const data = await response.json();
+
   return data;
 }
 
@@ -82,7 +85,7 @@ class UpdateLocation extends React.Component {
         <LogbookTextField
           fieldName={`${PAGE_NAME}Location`}
           fieldLabel="Location"
-          hintText="Lat,Lon; US zip; UK postcode, etc."
+          hintText="Lat,Lon (e.g., 40.4258,-86.9081"
           style={UNIT_STYLE}
         />
         <RaisedButton label="Update location" onClick={this.handleClick} />
@@ -93,87 +96,113 @@ class UpdateLocation extends React.Component {
 
 class CurrentCard extends React.Component {
   render() {
-    const weather = this.props.currentWeather;
+    const weather = this.props.currentWeather.periods[0];
+    const updateTime =
+      this.props.currentWeather.updateTime.split('T')[0] +
+      this.props.currentWeather.updateTime.split('T')[1].split('+')[0];
+
     return (
       <Card style={{ backgroundColor: '#E7F4F5' }}>
         <CardHeader
-          title={`${weather.location.name}, ${weather.location.region}`}
-          subtitle={weather.current.observation_time}
-          avatar={weather.current.weather_icons[0]}
+          title={this.props.locationName}
+          subtitle={`Last updated: ${updateTime}`}
+          avatar={weather.icon}
         />
         <CardText>
-          <p>
-            <div
-              style={{
-                color: '#085C11',
-                gridColumn: 1,
-                gridRow: 1,
-                fontSize: 22,
-                fontWeight: 600,
-              }}
-            >
-              {weather.current.temperature}&#176; F
-            </div>
-            <div
-              style={{
-                color: '#849E2A',
-                gridColumn: 1,
-                gridRow: 2,
-                fontSize: 14,
-                fontWeight: 550,
-              }}
-            >
-              <em>Feels like {weather.current.feelslike}&#176; F</em>
-            </div>
-          </p>
-          <p style={{ fontSize: 16, fontWeight: 500 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                <strong>Wind:</strong>
-              </div>
-              <div>
-                {weather.current.wind_speed} mph {weather.current.wind_dir}{' '}
-                {weather.current.wind_degree}&#176;
-              </div>
-            </div>
+          <div
+            style={{
+              color: '#085C11',
+              gridColumn: 1,
+              gridRow: 1,
+              fontSize: 22,
+              fontWeight: 600,
+            }}
+          >
+            {weather.temperature} &#176;{weather.temperatureUnit}
+          </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                <strong>Precipitation:</strong>
-              </div>
-              <div>{weather.current.precip} in</div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginBottom: 15,
+            }}
+          >
+            <div>{weather.detailedForecast} in</div>
+          </div>
+          <div style={{ display: 'flex' }}>
+            <div>
+              <strong>Current wind conditions:</strong> {weather.windSpeed}{' '}
+              {weather.windDirection}
             </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                <strong>Cloud cover:</strong>
-              </div>
-              <div>{weather.current.cloudcover}%</div>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                <strong>Visibility:</strong>
-              </div>
-              <div>{weather.current.visibility} miles</div>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                <strong>Humidity:</strong>
-              </div>
-              <div>{weather.current.humidity}%</div>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                <strong>Pressure:</strong>
-              </div>
-              <div>{weather.current.pressure} mb</div>
-            </div>
-          </p>
+            <div></div>
+          </div>
         </CardText>
       </Card>
+    );
+  }
+}
+
+const renderForecastGridTiles = (forecastTileData) => (
+  <GridList style={styles.gridList} cols={2} padding={0} cellHeight={215}>
+    {forecastTileData.map((tile, i) => (
+      <GridTile
+        key={i}
+        title={tile.title}
+        titleStyle={styles.titleStyle}
+        titleBackground="none"
+        style={styles.gridTile}
+      >
+        <div style={{ minWidth: 100, textAlign: 'center' }}>
+          <span style={{ display: 'block', marginBottom: 5 }}>{tile.temp}</span>
+          <span style={{ display: 'block', marginBottom: 5 }}>{tile.wind}</span>
+          <img
+            src={tile.img}
+            alt={tile.detailedForecast}
+            title={tile.detailedForecast}
+          />
+          <br />
+          <span style={{ fontSize: 10 }}>{tile.condition}</span>
+          <br />
+        </div>
+      </GridTile>
+    ))}
+  </GridList>
+);
+
+class ForecastTable extends React.Component {
+  formatData(forecastData) {
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let tilesData = [];
+
+    forecastData.forEach(function (day, i) {
+      if (day.isDaytime) {
+        tilesData.push({
+          img: day.icon,
+          title:
+            days[new Date(day.startTime).getUTCDay()] +
+            ' ' +
+            (new Date(day.startTime).getUTCMonth() + 1) +
+            '/' +
+            new Date(day.startTime).getUTCDate().toString(),
+          condition: day.shortForecast,
+          detailedForecast: day.detailedForecast,
+          temp: `${day.temperature} ${day.temperatureUnit}`,
+          tempTrend: day.temperatureTrend,
+          wind: day.windSpeed + ' ' + day.windDirection,
+        });
+      }
+    });
+    return tilesData;
+  }
+
+  render() {
+    const forecastData = this.formatData(this.props.forecastData);
+    return (
+      <div style={styles.root}>
+        <Subheader>Upcoming weather</Subheader>
+        {renderForecastGridTiles(forecastData)}
+      </div>
     );
   }
 }
@@ -183,6 +212,7 @@ class WeatherDisplay extends React.Component {
     super(props);
     this.state = {
       currentData: null,
+      forecastData: null,
       error: null,
     };
   }
@@ -191,7 +221,9 @@ class WeatherDisplay extends React.Component {
     this.setState({ error: null });
     fetchWeatherData(location)
       .then((data) => {
-        this.setState({ currentWeather: data });
+        this.setState({ currentWeather: data.properties });
+        this.setState({ forecastData: data.properties.periods.slice(2) }); // skip today
+        this.setState({ locationName: data.location });
       })
       .catch((err) => {
         this.setState({ error: err.message });
@@ -211,12 +243,21 @@ class WeatherDisplay extends React.Component {
   }
 
   render() {
-    if (this.state.currentWeather) {
+    if (this.state.currentWeather && this.state.forecastData) {
       return (
         <div>
           <div>
-            <CurrentCard currentWeather={this.state.currentWeather} />
+            <CurrentCard
+              currentWeather={this.state.currentWeather}
+              locationName={this.state.locationName}
+            />
             <br />
+          </div>
+          <div>
+            <ForecastTable
+              forecastData={this.state.forecastData}
+              locationName={this.state.locationName}
+            />
           </div>
         </div>
       );
