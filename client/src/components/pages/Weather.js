@@ -144,7 +144,7 @@ class CurrentCard extends React.Component {
 }
 
 const renderForecastGridTiles = (forecastTileData) => (
-  <GridList style={styles.gridList} cols={2} padding={0} cellHeight={215}>
+  <GridList style={styles.gridList} cols={2} padding={5} cellHeight={215}>
     {forecastTileData.map((tile, i) => (
       <GridTile
         key={i}
@@ -154,8 +154,12 @@ const renderForecastGridTiles = (forecastTileData) => (
         style={styles.gridTile}
       >
         <div style={{ minWidth: 100, textAlign: 'center' }}>
-          <span style={{ display: 'block', marginBottom: 5 }}>{tile.temp}</span>
-          <span style={{ display: 'block', marginBottom: 5 }}>{tile.wind}</span>
+          <span style={{ display: 'block', marginBottom: 5 }}>
+            <span style={{ fontSize: 18, fontWeight: 500 }}>{tile.temp}</span>{' '}
+            &#176;
+            {tile.tempUnit}
+          </span>
+          <span style={{ display: 'block', fontSize: 12 }}>{tile.wind}</span>
           <img
             src={tile.img}
             alt={tile.detailedForecast}
@@ -187,7 +191,8 @@ class ForecastTable extends React.Component {
             new Date(day.startTime).getUTCDate().toString(),
           condition: day.shortForecast,
           detailedForecast: day.detailedForecast,
-          temp: `${day.temperature} ${day.temperatureUnit}`,
+          temp: `${day.temperature}`,
+          tempUnit: day.temperatureUnit,
           tempTrend: day.temperatureTrend,
           wind: day.windSpeed + ' ' + day.windDirection,
         });
