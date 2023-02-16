@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="UAS User Log is a logbook protocol for unmanned aircraft systems (UAS) operation for purposes such as research/production, spray application, and any other activity of interest. It ​uses simple user interactions to create records of UAS missions and can also serve to enhance your flight and maintenance experience.​"
@@ -12,10 +15,10 @@
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <!-- Force Safari to show startup image -->
-    <link rel="apple-touch-startup-image" href="homescreen-192x192.png">
+    <link rel="apple-touch-startup-image" href="homescreen-192x192.png" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -29,10 +32,22 @@
     <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" /> -->
     <title>UAS User Log</title>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GTAG%"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', '%REACT_APP_GTAG%');
+  </script>
   <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
     <div id="root"></div>
     <!--
       This HTML file is a template.

@@ -42,7 +42,7 @@ This work is supported by Hatch project 1012501 (project # S1069) from the USDA 
 
 4. Setup environmental variables on client:
 
-   Make a copy of `client/example.env` and rename it to `client/.env`. Inside the new file, replace the example values with the feedback email address and a Google Analytics Tracking ID.
+   Make a copy of `client/example.env` and rename it to `client/.env`. Inside the new file, replace the example values with the feedback email address and a Google tag.
 
 5. Build the containers and start the application:
 
